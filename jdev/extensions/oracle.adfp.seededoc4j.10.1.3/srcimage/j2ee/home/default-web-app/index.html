@@ -1,0 +1,534 @@
+<html>
+
+
+
+<head>
+
+<meta http-equiv="Content-Language" content="en-us">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+
+<meta name="ProgId" content="FrontPage.Editor.Document">
+
+<title>WebCenter Preconfigured OC4J</title>
+
+
+
+<STYLE>
+
+
+
+      A:link { 
+
+        COLOR: #663300; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff 
+
+      }
+
+
+
+      A:active {
+
+        COLOR: #ff6600; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A:visited {
+
+        COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A.navigation:link {
+
+        FONT-SIZE: 65%; COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A.navigation:active {
+
+        FONT-SIZE: 65%; COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A.navigation:visited {
+
+        FONT-SIZE: 65%; COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      BODY {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      P {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      LI {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      UL {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      OL {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H1 {
+
+        BORDER-RIGHT: #cccc99 0px solid; 
+
+        BORDER-TOP: #cccc99 0px solid; 
+
+        FONT-SIZE: 170%; 
+
+        BORDER-LEFT: #cccc99 0px solid; 
+
+        WIDTH: 100%; 
+
+        COLOR: #336699; 
+
+        BORDER-BOTTOM: #cccc99 2px solid; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H2 {
+
+        BORDER-RIGHT: #cccc99 0px solid; 
+
+        BORDER-TOP: #cccc99 0px solid; 
+
+        FONT-SIZE: 130%; 
+
+        BORDER-LEFT: #cccc99 0px solid; 
+
+        WIDTH: 100%; 
+
+        COLOR: #336699; 
+
+        BORDER-BOTTOM: #cccc99 2px solid; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H3 {
+
+        FONT-SIZE: 110%; 
+
+        WIDTH: 100%; 
+
+        COLOR: #336699; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H4 {
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 11pt; 
+
+        WIDTH: 100%; 
+
+        COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      .CODE {
+
+        COLOR: #336699; 
+
+        FONT-FAMILY: "Courier New", "Courier", "monospace"
+
+      }
+
+
+
+      CODE.nocolor {
+
+        FONT-FAMILY: "Courier New", "Courier", "monospace"
+
+      }
+
+  
+
+      P.indent {
+
+        TEXT-INDENT: 9%
+
+      }
+
+
+
+      TABLE.borders {
+
+        BORDER-RIGHT: medium none; 
+
+        BORDER-TOP: medium none; 
+
+        BORDER-LEFT: medium none; 
+
+        BORDER-BOTTOM: medium none
+
+      }
+
+
+
+      TR {
+
+        VERTICAL-ALIGN: top; 
+
+        TEXT-ALIGN: left
+
+      }
+
+
+
+      TH {
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 11pt; 
+
+        COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      TD {
+
+        FONT-SIZE: 11pt; 
+
+        COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      .mediumtext { FONT-SIZE: 80% }
+
+      .smalltext { FONT-SIZE: 75% }
+
+      .tinytext { FONT-SIZE: 70% }
+
+
+
+      P.RelatedTopics {
+
+        DISPLAY: block; 
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 125%; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffcc
+
+      }
+
+
+
+      P.note {
+
+        DISPLAY: block; 
+
+        FONT-SIZE: 95%; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+
+      }
+
+
+
+      P.warning {
+
+        DISPLAY: block; 
+
+        FONT-SIZE: 95%; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+
+      }
+
+
+
+      PRE {
+
+        FONT-SIZE: 95%; 
+
+        FONT-FAMILY: "Courier New", Courier, mono
+
+      }
+
+ 
+
+      UL {
+
+        LIST-STYLE-POSITION: outside
+
+      }
+
+  
+
+      OL {
+
+        LIST-STYLE-POSITION: outside
+
+      }
+
+
+
+      .GUITag {
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 95%; 
+
+        FONT-STYLE: normal; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+
+      }
+
+
+
+      .PropertyName {
+
+        FONT-STYLE: normal; 
+
+        FONT-FAMILY: "Courier New", Courier, mono
+
+      }
+
+
+
+      .GlossaryItem {
+
+        COLOR: #008080; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      P.RelatedTopics:unknown {
+
+        content: "Related Topics"
+
+      }
+
+
+
+      P.note:unknown {
+
+        content: "Note"
+
+      }
+
+
+
+      P.warning:unknown {
+
+        content: "Warning"
+
+      }
+
+    </STYLE>
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+    <!-- =========================== -->
+
+    <!-- =========================== -->
+
+    <!-- ====== Title Section ====== -->
+
+    <!-- =========================== -->
+
+    <!-- =========================== -->
+
+
+
+    <h1><A name=top></A>WebCenter Preconfigured OC4J </h1>
+    <h3>OC4J 10.1.3.3.0 Preconfigured for Oracle WebCenter 10.1.3.3.0</h3>
+    <!-- Document Versioning Section -->
+    <p align="center"><a href="#Producers">Preconfigured Portlet Producers</a> | <a href="#MoreInfo">Additional Information</a> </p>
+    <h3>Congratulations!</h3>
+    <p>Your server is up and running. This server is preconfigured for Oracle WebCenter, and contains the following components:</p>
+    <ul>
+      <li>Stand-alone OC4J 10.1.3.3.0</li>
+      <li>Oracle Portlet Container (JSR 168/WSRP) 10.1.3.2.0 </li>
+      <li>Oracle PDK-Java 10.1.3.2.0</li>
+      <li>  PortalTools 10.1.3.2.0
+        <ul>
+          <li>OmniPortlet</li>
+          <li>Web Clipping</li>
+        </ul>
+      </li>
+      <li>Rich Text Portlet 10.1.3.2.0</li>
+      <li>JSF-Portlet Bridge 10.1.3.2.0</li>
+      <li>ADF Runtime Libraries 10.1.3.3.0</li>
+    </ul>
+    <h2><a name="Producers"></a>Preconfigured Portlet Producers</h2>
+    <p>This server contains the following preconfigured portlet producers:</p>
+    <h3>WSRP Portlet Producers</h3>
+    <ul>
+      <li><a href="/richtextportlet/info">Rich Text Portlet Producer</a></li>
+      <li><a href="/portletapp/info">Sample Portlets</a></li>
+    </ul>
+    <h3>PortalTools Portlet Producers</h3>
+    <ul>
+      <li><a href="/portalTools">PortalTools Welcome Page</a></li>
+      <li><a href="/portalTools/omniPortlet/providers/omniPortlet">OmniPortlet Producer</a><br>
+        <strong>Note</strong>: 
+
+
+ To access data through a firewall, you need to configure a proxy by using the <span class="CODE">&lt;proxyInfo&gt;</span> tag in OmniPortlet's <span class="CODE">provider.xml</span> file. For more information refer to the 
+
+
+ Oracle WebCenter Framework Developer's Guide. </li>
+      <li><a href="/portalTools/webClipping/providers/webClipping">Web Clipping Portlet Producer</a><br>
+      <strong>Note</strong>: To access data through a firewall, you need to configure a proxy by using the <span class="CODE">&lt;proxyInfo&gt;</span> tag in Web Clipping's <span class="CODE">provider.xml</span> file. For more information refer to the 
+
+
+ Oracle WebCenter Framework Developer's Guide.</li>
+    </ul>
+    <h3>PDK-Java Portlet producers</h3>
+    <ul>
+      <li><a href="/jpdk/providers">PDK-Java Sample Producer</a></li>
+      <li><a href="/pdkstruts/providers">PDK-Java Struts Sample Producer</a></li>
+    </ul>
+    <h2><a name="MoreInfo"></a>Additional Information</h2>
+    <p> For more information on OC4J, refer to <a href="http://otn.oracle.com/tech/java/oc4j">Oracle Containers for J2EE page </a> on the Oracle Technology Center.</p>
+    <p> For more information on the PDK, refer to the <a href="http://www.oracle.com/technology/products/ias/portal/pdk.html">Oracle Portal Developer Kit page </a> on Portal Center. </p>
+    <p> For more information on the installation of this preconfigured OC4J, refer to <a href="readme.html">WebCenter Preconfigured OC4J readme page</a></p>
+    <p> For more information on this release of Portal Tools (OmniPortlet and Web Clipping), refer to <a href="portaltools.release.notes.10132.html">Portal Tools 10.1.3.2.0 Release Notes</a></p>
+</BODY>
+
+
+
+
+
+</html>
+

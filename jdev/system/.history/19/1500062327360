@@ -1,0 +1,89 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class DescControlValues {
+
+	private List descValuesCollection;
+	private ValueHolderInterface coreDescTerms;
+	private ValueHolderInterface descTerms;
+	private ValueHolderInterface projects;
+	private ValueHolderInterface coreDescControlValues;
+	private Long descCvidPk;
+
+public DescControlValues() {
+	super();
+	this.descValuesCollection = new ArrayList();
+	this.coreDescTerms = new ValueHolder();
+	this.descTerms = new ValueHolder();
+	this.projects = new ValueHolder();
+	this.coreDescControlValues = new ValueHolder();
+}
+
+public void addDescValues(DescValues aDescValues) {
+	this.descValuesCollection.add(aDescValues);
+	aDescValues.setDescControlValues(this);
+}
+
+public void addDescValues(int index, DescValues aDescValues) {
+	this.descValuesCollection.add(index, aDescValues);
+	aDescValues.setDescControlValues(this);
+}
+
+public CoreDescControlValues getCoreDescControlValues() {
+	return (CoreDescControlValues) this.coreDescControlValues.getValue();
+}
+
+public CoreDescTerms getCoreDescTerms() {
+	return (CoreDescTerms) this.coreDescTerms.getValue();
+}
+
+public Long getDescCvidPk() {
+	return this.descCvidPk;
+}
+
+public DescTerms getDescTerms() {
+	return (DescTerms) this.descTerms.getValue();
+}
+
+public List getDescValuesCollection() {
+	return this.descValuesCollection;
+}
+
+public Projects getProjects() {
+	return (Projects) this.projects.getValue();
+}
+
+public void removeDescValues(DescValues aDescValues) {
+	this.descValuesCollection.remove(aDescValues);
+	aDescValues.setDescControlValues(null);
+}
+
+public void setCoreDescControlValues(CoreDescControlValues coreDescControlValues) {
+	this.coreDescControlValues.setValue(coreDescControlValues);
+}
+
+public void setCoreDescTerms(CoreDescTerms coreDescTerms) {
+	this.coreDescTerms.setValue(coreDescTerms);
+}
+
+public void setDescCvidPk(Long descCvidPk) {
+	this.descCvidPk = descCvidPk;
+}
+
+public void setDescTerms(DescTerms descTerms) {
+	this.descTerms.setValue(descTerms);
+}
+
+public void setDescValuesCollection(List descValuesCollection) {
+	this.descValuesCollection = descValuesCollection;
+}
+
+public void setProjects(Projects projects) {
+	this.projects.setValue(projects);
+}
+
+}

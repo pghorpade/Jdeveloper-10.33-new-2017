@@ -1,0 +1,146 @@
+<!-- ================  Chart Text Description Page =================== -->
+
+<page xmlns="http://bali.us.oracle.com/cabo/baja"
+      xmlns:baja="http://bali.us.oracle.com/cabo/baja"
+      xmlns:marlin="http://bali.us.oracle.com/cabo/marlin"
+      xmlns:html="http://www.w3.org/TR/REC-html40"
+      xmlns:uix="http://bali.us.oracle.com/cabo/marlin"
+      xmlns:data="http://bali.us.oracle.com/cabo/marlin">
+
+  <!-- Title -->
+  <baja:head xmlns="http://bali.us.oracle.com/cabo/marlin"
+             xmlns:uix="http://bali.us.oracle.com/cabo/marlin"
+             xmlns:html="http://www.w3.org/TR/REC-html40">
+
+  </baja:head>
+
+  <baja:content xmlns="http://bali.us.oracle.com/cabo/marlin">
+    <dataScope>
+      <contents>
+
+        <pageLayout>
+          <mediumAdvertisement>
+            <include baja:node="./oemBanner" />
+          </mediumAdvertisement>
+
+          <globalButtons>
+            <include baja:node="./globalButtonBar" />
+          </globalButtons>
+
+          <tabs>
+            <include baja:node="./globalTabs" />
+          </tabs>
+
+          <pageHeader>
+            <include baja:node="./globalHeader" />
+          </pageHeader>
+
+          <copyright>
+            <include baja:node="./copyright" />
+          </copyright>
+
+          <contents>
+
+            <header data:text="pageHeaderText@chartDataSource" >
+              <contents>
+                <header data:text="CHART_PROPERTIES@chartBundle" >
+                  <contents>
+                    <stackLayout>
+                      <contents>
+
+                        <tableLayout hAlign="left">
+                          <contents>
+
+                            <rowLayout>
+                              <contents>
+                                <cellFormat hAlign="right">
+                                  <contents>
+                                    <styledText styleClass="OraPromptText" data:text="TITLE@chartBundle"/>
+                                  </contents>
+                                </cellFormat>
+                                <spacer width="8"/>
+                                <styledText styleClass="OraDataText" data:text="title@chartDataSource" />
+                              </contents>
+                            </rowLayout>
+
+                            <rowLayout>
+                              <contents>
+                                <cellFormat hAlign="right">
+                                  <contents>
+                                    <styledText styleClass="OraPromptText" data:text="SUBTITLE@chartBundle"/>
+                                  </contents>
+                                </cellFormat>
+                                <spacer width="8"/>
+                                <styledText styleClass="OraDataText" data:text="subTitle@chartDataSource" />
+                              </contents>
+                            </rowLayout>
+
+                            <rowLayout>
+                              <contents>
+                                <cellFormat hAlign="right">
+                                  <contents>
+                                    <styledText styleClass="OraPromptText" data:text="CHART_TYPE@chartBundle"/>
+                                  </contents>
+                                </cellFormat>
+                                <spacer width="8"/>
+                                <styledText styleClass="OraDataText" data:text="chartType@chartDataSource" />
+                              </contents>
+                            </rowLayout>
+
+                            <rowLayout>
+                              <contents>
+                                <cellFormat hAlign="right">
+                                  <contents>
+                                    <styledText styleClass="OraPromptText" data:text="ORIENTATION@chartBundle"/>
+                                  </contents>
+                                </cellFormat>
+                                <spacer width="8"/>
+                                <styledText styleClass="OraDataText" data:text="orientation@chartDataSource" />
+                              </contents>
+                            </rowLayout>
+
+                          </contents>
+                        </tableLayout>
+
+                      </contents>
+                    </stackLayout>
+
+                  </contents>
+                </header>
+
+                <header data:text="CHART_DATA@chartBundle" >
+
+                  <contents>
+			<switcher data:childName = "dataAvailable@chartDataSource">
+			<case name="true">
+	                    <include data:node="chartDataTable@chartDataSource"/>      
+			</case>
+			<case name="false">
+                            <styledText styleClass="OraPromptText" data:text="5001@chartBundle"/>	      
+			</case>
+			</switcher>
+                  </contents>
+                </header>
+              </contents>
+            </header>
+          </contents>
+        </pageLayout>
+      </contents>
+
+      <!-- ======================= Providers ========================== -->
+      <provider>
+        <data name="chartDataSource">
+          <method class="oracle.sysman.emSDK.chart.EmChartBean" method="getChartDataTable"/>
+        </data>
+	<data name="chartBundle">
+	  <bundle class="oracle.sysman.emSDK.chart.ChartMsg"/>
+	</data>
+      </provider>
+    </dataScope>
+  </baja:content>
+</page>
+
+
+
+
+

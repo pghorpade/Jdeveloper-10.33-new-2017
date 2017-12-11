@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<orion-web-app
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/orion-web-10_0.xsd" 
+  schema-major-version="10" schema-minor-version="0"
+  deployment-version="2.0.0.0"
+  jsp-cache-directory="./persistence"
+  servlet-webdir="/servlet/"
+  temporary-directory="./temp"
+>
+
+  <security-role-mapping name="jmsRouter">
+     <group name="oc4j-administrators" />
+  </security-role-mapping>
+
+</orion-web-app>

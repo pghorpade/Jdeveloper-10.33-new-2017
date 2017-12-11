@@ -1,0 +1,6 @@
+#Wed Jul 18 11:02:10 PDT 2012
+javac.debug=on
+oracle.home=../../../../
+output.dir=classes
+javac.deprecation=on
+javac.nowarn=off

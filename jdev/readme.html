@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD html 4.0 transitional//EN">
+<html><head>
+
+<link rel="stylesheet" href="jdeveloper.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><!-- #BeginEditable "doctitle" --><title>Release Notes</title><!-- #EndEditable --></head>
+
+<body bgcolor="#ffffff">
+<br>
+<h1>Oracle JDeveloper </h1>
+<p>Release Notes </p>
+<p>Version 10.1.3.3.0</p>
+<p>February 2007</p>
+<p>&nbsp;</p>
+<h2>Content</h2>
+<ul>
+  <li><a href="#intro">Introduction</a></li>
+  <li><a href="#ide">General IDE Issues</a></li>
+  <ul>
+    <li><a href="#ide1">Incompatibility between internal CVS client and CVSNT 
+      server (5362113)</a></li>
+  </ul>
+  <li><a href="#dep">Deployment Issues</a></li>
+  <ul>
+    <li><a href="#dep1">EJB web service fails to deploy to JDeveloper's embedded 
+      server (5132396)</a></li>
+    <li><a href="#dep2">ADF web application with EJB3 model project dependency 
+      fails to deploy (5237303)</a></li>
+    <li><a href="#dep3">Deploying JDeveloper deployment profiles to archive files 
+      on the file system </a></li>
+  </ul>
+  <li><a href="#db">Database Issues</a></li>
+  <ul>
+    <li><a href="#db1">Entity created only for first table in entity beans from 
+      tables in Oracle Lite (5251201)</a></li>
+  </ul>
+  <li><a href="#mod">Modeling Issues</a></li>
+  <ul>
+    <li><a href="#mod1">Refactoring context menu and UML (4463153)</a></li>
+    <li><a href="#mod2">Java modeler accessibility (4541424)</a></li>
+  </ul>
+  <li><a href="#tl">Toplink Issues</a></li>
+  <ul>
+    <li><a href="#tl1">Importing tables with multibyte characters (5254287)</a></li>
+  </ul>
+  <li><a href="#ejb">EJB Issues</a></li>
+  <ul>
+    <li><a href="#ejb1">EJB 3.0 application migration issue (10.1.3 -&gt; 10.1.3.1)</a></li>
+    <li><a href="#ejb2">Running EJB 3.0 applications (5524015)</a></li>
+  </ul>
+  <li><a href="#ws">Web Services Issues</a></li>
+  <ul>
+    <li><a href="#ws1">Top-down SOAP 1.2 services changed to SOAP 1.1 after editing 
+      (5499466)</a></li>
+    <li><a href="#ws2">Top-down service with one-way operations changed to two-way 
+      methods after editing (5499473)</a></li>
+    <li><a href="#ws3">Top-down web services generated with enumerated types fail 
+      validation (4740097)</a></li>
+    <li><a href="#ws4">Deleting Init Param or Header in a web service handler 
+      causes an error (4696318)</a></li>
+    <li><a href="#ws5">Web service proxy fails when running with reliability settings 
+      (4644877)</a></li>
+    <li><a href="#ws6">'Invoke' button not present in EM for testing EJB3.0 web 
+      service on external OC4J (4769395)</a></li>
+    <li><a href="#ws7">Invalid web service endpoint in generated proxy for multi-port 
+      WSDLs (4867854)</a></li>
+    <li><a href="#ws8">Runtime exception when more than one web service exists 
+      in a project (4861145)</a></li>
+    <li><a href="#ws9">Using the 'class' attribute in Ant build scripts to specify 
+      JAX-RPC web service handlers (5646640)</a></li>
+    <li><a href="#ws10">Intermittent failure when using WS-I testing tools</a></li>
+    <li><a href="#ws11">Cannot delete last node in design view of the WSDL editor 
+      (5516003)</a></li>
+  </ul>
+  <li><a href="#jsf">JavaServer Faces (JSF) Issues</a></li>
+  <ul>
+    <li><a href="#jsf1">In JSF 1.1_02 pages under /WEB-INF fail to load</a></li>
+  </ul>
+  <li><a href="#sec">Security Issues</a> 
+    <ul>
+      <li><a href="#sec1">Configuring ADF security to use a file-based repository</a></li>
+      <li><a href="#sec2">Using JAZNMigrationTool with JDeveloper</a></li>
+      <li><a href="#sec3">Enable JAAS mode when using ADF with LDAP identity management</a></li>
+    </ul>
+  <li><a href="#misc">Miscellaneous Issues</a> 
+    <ul>
+      <li><a href="#misca">SOA Suite documentation</a></li>
+      <li><a href="#misc2">Running ADF installer against Application Server 10.1.2 
+        instance (4897250)</a></li>
+      <li><a href="#miscbc4j">Restore option does not restore bc4j.ear</a></li>
+    </ul>
+  </li>
+</ul>
+<h2><a name="intro"></a>Introduction</h2>
+<p>Oracle JDeveloper 10g is a complete and integrated development environment 
+  for standards-based SOA applications. The Oracle JDeveloper 10g Release 3 (10.1.3) 
+  version adds many new features including a new look and feel, a greatly improved 
+  coding environment with extensive refactoring options, support for the latest 
+  Java standards (J2SE 5.0, J2EE 1.4, EJB 3.0), and visual JSF development. A 
+  visual and declarative approach and the improved Oracle Application Development 
+  Framework (Oracle ADF) work together to simplify application development and 
+  reduce mundane coding tasks, offering developers unparalleled productivity regardless 
+  of their choice of technology stacks and deployment platforms.</p>
+<p>Oracle JDeveloper (10.1.3.1.0) extends the IDE features from the previous release 
+  by adding integrated SOA development tools to provide an Integrated Service 
+  Environment workbench. In particular, BPEL (Business Process Execution Language) 
+  and ESB (Enterprise Service Bus) tooling is now fully integrated into JDeveloper. 
+  In addition, JDeveloper's core IDE features for EJB 3 and JPA (Java Persistence 
+  API) have been extended, and made fully up to date with the final EJB 3 specification.</p>
+<p>Oracle JDeveloper 10.1.3.2.0 completes the picture by further extending the 
+  IDE with the WebCenter Extension for JDeveloper. The WebCenter Framework capabilities 
+  and resources are seamlessly integrated and exposed in JDeveloper; for example, 
+  WebCenter components are readily accessible from a catalog of resources available 
+  on the Components and Data Control palettes. Additionally, the WebCenter extension 
+  provides several wizards to help you with essential development tasks such as 
+  building a portlet, consuming an existing portlet, creating a data control to 
+  a content repository, and securing your application. </p>
+
+<p>Please review the <a href="http://www.oracle.com/technology/products/jdev/htdocs/10.1.3.2/index.html">Oracle 
+  JDeveloper Release Notes Addendum</a> for additional information not available 
+  at the time of this document's publication. For more information and technical 
+  resources for JDeveloper, visit the JDeveloper product center on the Oracle 
+  Technology Network. (<a href="http://www.oracle.com/technology/products/jdev/101">http://www.oracle.com/technology/products/jdev/101</a>)</p>
+<h2><a name="ide"></a>General IDE Issues</h2>
+<h3><a name="ide1"></a>Incompatibility between internal CVS client and CVSNT server 
+  (5362113)</h3>
+<p>In some cases binary files can become corrupted when using JDeveloper's internal 
+  CVS client against a CVSNT server. The workaround is to use CVSNT's client within 
+  JDeveloper. This can be configured on the Versioning |CVS panel of IDE preferences.</p>
+<h2><a name="dep"></a>Deployment Issues</h2>
+<h3><a name="dep1"></a>EJB web service fails to deploy to JDeveloper's embedded 
+  server (5132396)</h3>
+<p>JDeveloper may exceed the length of the path names permitted by Windows when 
+  you compile an EJB session bean with a web service annotation. The path name 
+  JDeveloper generates for the web service class file is concatenated from three 
+  elements: the path to the application-deployment folders (set by system and 
+  not editable), the path to the web service source folder (also set by system), 
+  and the path to the class file specified by its package name (set by user and 
+  must be as short as possible).</p>
+<p>For example, the following path would be created for a web service class file, 
+  where the user-specified portion of the path name is based on the package name 
+  <code>com.oracle.myapp.ejb.webservice.test</code>. </p>
+  <p><code>&lt;JDev_Install&gt;jdev\system\oracle.j2ee.10.1.3.37.58\embedded-oc4j\application-deployments\\current-workspace-app\MyApplication_MyProject\ws-src\com\oracle\myapp\ejb\webservice\test</code></p>
+<p>and results in the exception:</p>
+<code>
+oracle.j2ee.ws.common.tools.api.SeiValidationException: Interface 
+&lt;classname&gt;.SessionEJBBeanPortType: The class could not be loaded from 
+the class path.</code>
+<p>You can workaround this limitation by shortening the name of the package you 
+  enter when you create the EJB session bean. For example, instead of <code>com.oracle.myapp.ejb.webservice.test</code>, 
+  as shown in the above example, the package name <code>com.oracle.myapp</code> 
+  will result in a legal class path length.</p>
+<h3><a name="dep2"></a>ADF web application with EJB3 model project dependency 
+  fails to deploy (5237303)</h3>
+  
+<p> When you deploy an ADF web application WAR file to Standalone OC4J you may 
+  encounter the following error due to multiple persistence unit definitions resulting 
+  from an EJB3 model project dependency:</p>
+  
+<code> DeployerRunnable.run[application1:ejb3_mdnav_adffaces] - Multiple persistence 
+units with name "model" are defined at the same scope.oracle.oc4j.admin.internal.DeployerException: 
+[application1:ejb3_mdnav_adffaces] - Multiple persistence units with name "model" 
+are defined at the same scope.</code> 
+<p>To avoid this error, update the ViewController project settings to remove the 
+  dependency on the Model project before deploying the ADF web application to 
+  Standlone OC4J.</p>
+<h3><a name="dep3"></a>Deploying JDeveloper deployment profiles to archive files 
+  on the file system </h3>
+  
+<p>When deploying JDeveloper deployment profiles to an archive file the default 
+  behavior is to deploy the archive as standard J2EE. In order to deploy an archive 
+  to a file for a specific application server platform to incorporate platform 
+  specific descriptor handling, the user must set the Target Connection in the 
+  Deployment Profiles - Platform page. The Target Connection can only be set to 
+  something other than the default (J2EE) after creating an application server 
+  connection in the connection navigator.</p>
+<h2><a name="db"></a>Database Issues</h2>
+<h3><a name="db1"></a>Entity created only for first table in entity beans from 
+  tables in Oracle Lite (5251201)</h3>
+<p>Oracle Lite version 10.2.0.2 does not support standard JDBC metadata for column 
+  definitions, resulting in an inability to create EJB entities. We expect this 
+  to be fixed in Oracle Lite 10.2.0.3.</p>
+<h2><a name="mod"></a>Modeling Issues</h2>
+<h3><a name="mod1"></a>Refactoring context menu and UML (4463153)</h3>
+<p>From the App Navigator context menu the refactoring submenu is visible for 
+  navigator packages containing UML artifacts. However, refactoring the package 
+  will NOT cause UML artifact to be refactored, though Java and other types will 
+  be refactored as expected.</p>
+<h3><a name="mod2"></a>Java modeler accessibility (4541424)</h3>
+<p>The Java Modeler's popup code editor is not currently accessible when using 
+  JAWS screen reader. The workaround is to invoke 'Go To Source' instead of 'Edit' 
+  for Java elements on the diagram, which will invoke the main code editor.</p>
+<h2><a name="tl"></a>Toplink Issues</h2>
+<h3><a name="tl1"></a>Importing tables with multibyte characters (5254287)</h3>
+<p>When importing database tables named with multibyte characters, you must change 
+  the JDeveloper encoding to UTF-8.</p>
+<ol>
+  <li>Select Tools > Preferences > Environment.</li>
+  <li>Change Encoding to UTF-8.</li>
+  <li>Restart JDeveloper, then import the tables.</li>
+</ol>
+<h2><a name="ejb"></a>EJB Issues</h2>
+<h3><a name="ejb1"></a>EJB 3.0 application migration issue (10.1.3 -&gt; 10.1.3.1)</h3>
+<p>In 10.1.3.1 the lifespan of an entity's Persistence Context is strictly tied 
+  to the lifespan of its associated transaction, since by default, a PersistenceContext's 
+  type is PersistenceContextType.TRANSACTION. </p>
+<p>This requirement was relaxed in 10.1.3, and some applications were found to 
+  be dependent on this requirement not being met.</p>
+<p>To operate under the stricter requirement in 10.1.3.1, EJB 3.0 Stateless Session 
+  beans migrated from JDev 10.1.3 and interacting with web clients may need to 
+  be changed to Stateful Session beans. </p>
+<p>In addition to this change, the generated:</p>
+<pre>
+
+@Resource
+EntityManager em;
+</pre>
+<p>statement should be changed to:</p>
+<pre>
+
+@PersistenceContext(type=PersistenceContextType.EXTENDED)
+EntityManager em;
+</pre>
+<p>to allow web clients to perform additional operations on entities returned from the (newly Stateful) Session bean.</p>
+<h3><a name="ejb2" id="ejb2"></a>Running EJB 3.0 applications (5524015)</h3>
+<p>EJB 3.0 runtime is different between JDeveloper release 10.1.3 and JDeveloper 
+  release 10.1.3.1. An EJB 3.0 application created in JDeveloper 10.1.3 will only 
+  work with AS 10.1.3, and an EJB 3.0 application created in JDeveloper 10.1.3.1 
+  will only work with SOA 10.1.3.1. </p>
+<p>You can migrate EJB 3.0 applications from JDeveloper 10.1.3 to JDeveloper 10.1.3.1 
+  following the instructions in the online help topic Getting Started with Oracle 
+  JDeveloper &gt; Migrating to Oracle JDeveloper 10g &gt; Migrating EJB 3.0 Applications 
+  from Oracle JDeveloper 10g Release 10.1.3 to 10.1.3.1.</p>
+
+<h2><a name="ws"></a>Web Services Issues</h2>
+<h3><a name="ws1" id="ws1"></a>Top-down SOAP 1.2 services changed to SOAP 1.1 
+  after editing (5499466)</h3>
+<p>If you create a web service top-down from a WSDL that contains SOAP 1.2 bindings, 
+  then modify that service in the web service editor, the bindings are changed 
+  to SOAP 1.1.</p>
+<p>The workaround is in the Web Services Editor dialog, manually deselect SOAP 
+  1.1 Binding and select SOAP 1.2 Binding instead.</p>
+<h3><a name="ws2" id="ws2"></a>Top-down service with one-way operations changed 
+  to two-way methods after editing (5499473)</h3>
+<p>If you create a top-down web service that has one-way operations, then use 
+  the Web Service Editor to change the service or invoke Regenerate Web Service 
+  from Source, the one-way operations are changed to two-way operations. </p>
+<p>The workaround is in the Web Services Editor dialog, manually check the Create 
+  One-Way Operations From Void Methods checkbox.</p>
+  
+<h3><a name="ws3" id="ws3"></a>Top-down web services generated with enumerated 
+  types fail validation (4740097)</h3>
+<p>When you generate a top-down web service a WSDL with enumerated types, subsequent 
+  changes made to the service in the Web Service Editor cannot be committed due 
+  to an error in validation.</p>
+<h3> <a name="ws4" id="ws4"></a>Deleting Init Param or Header in a web service 
+  handler causes an error (4696318)</h3>
+<p>If you have created a web service handler that uses an Init Param and/or a 
+  Header, and you subsequently edit the handler to remove the Init Param or the 
+  Header, JDeveloper displays an error message.</p>
+<p> The workaround is to remove the handler, then recreate it without the initial 
+  parameter.</p>
+<h3><a name="ws5" id="ws5"></a>Web service proxy fails when running with reliability 
+  settings (4644877)</h3>
+<p>When you run a proxy to a web service that has reliability enabled you may 
+  find that it fails, and on examination with the HTTP Analyzer the SOAP message 
+  returned from the server has an empty body. This can occur because the default 
+  value of Expiry Time on the Operation Settings tab of the proxy reliability 
+  wizard is 1 second.</p>
+<p>The workaround is to increase the expiry time to 2 seconds or more.</p>
+  
+<h3><a name="ws6" id="ws6"></a>'Invoke' button not present in EM for testing EJB3.0 
+  web service on external OC4J (4769395)</h3>
+<p>If you deploy an EJB3.0 web service to external OC4J, and try to test it from
+  Oracle Enterprise Manager, the Invoke button is not always present. There is
+  no workaround.</p>
+<h3> <a name="ws7" id="ws7"></a>Invalid web service endpoint in generated proxy 
+  for multi-port WSDLs (4867854)</h3>
+<p>When you create a proxy to a web service with more than one port, the proxy
+  may be generated with an invalid endpoint for the web service.</p>
+<p> The workaround is to examine the WSDL to find the correct endpoint URL, and
+  paste this into the generated proxy class.</p>
+<h3><a name="ws8" id="ws8"></a>Runtime exception when more than one web service 
+  exists in a project (4861145)</h3>
+<p>If you create two or more web services in a project that use the same mapping
+  file, you will get a runtime exception.<br>
+  The workaround is:</p>
+<ul>
+  <li> For bottom-up web service generation, specify a serviceName argument value 
+    that does not already exist for the second web service.</li>
+  <li>For top-down web service generation, make sure the web services are each 
+    in a different WAR for deployment so that the same deployment descriptor is 
+    not used.</li>
+</ul>
+<h3><a name="ws9" id="ws8"></a>Using the 'class' attribute in Ant build scripts 
+  to specify JAX-RPC web service handlers (5646640)</h3>
+<p>If you edit a build.xml file that defines web service handlers in an Ant task, 
+  the handler code allows you to specify the handler class name using either the 
+  'class' or 'handlerClass' attributes. However, if you use handlerClass to specify 
+  the class name in JDeveloper, the editor will display a red line under handlerClass 
+  and incorrectly indicate that it is not defined on the handler element. This 
+  occurs because XML schema that is registered with JDeveloper does not recognize 
+  the handlerClass attribute.</p>
+<p>To avoid this error, use the class attribute to specify the handler class name. 
+</p>
+<h3><a name="ws10" id="ws8"></a>Intermittent failure when using WS-I testing tools</h3>
+  
+<p>You may find that the WS-I testing tool fails to run from time to time. When 
+  JDeveloper exits abnormally, the default work directory (where <code>/mywork </code>
+  folder is created) may be stored incorrectly. When you next run the WS-I testing 
+  tools, JDeveloper attempts to write the WS-I tester's launch script to the default 
+  work directory, and if this directory does not exist WS-I testing tools fail.</p>
+<p>The workaround is to to try one or both of the following: </p>
+<ul>
+  <li>Recreate the missing directory.</li>
+  <li>Delete the <i>&lt;jdev_install&gt;</i>/jdev/system/oracle.jdeveloper.<i>nnnnn</i>/system.sys 
+    configuration file, which records the location of the work directory.</li>
+</ul>
+<h3><a name="ws11" id="ws8"></a>Cannot delete last node in design view of the 
+  WSDL editor (5516003)</h3>
+<p>In the design view of the WSDL editor you cannot delete the last node in any 
+  of the four columns. Instead, you must delete the node from the Structure window, 
+  or from the code view of the WSDL editor.</p>
+<h2><a name="jsf"></a>JavaServer Faces (JSF) Issues</h2>
+<h3><a name="jsf1"></a>In JSF 1.1_02 pages under /WEB-INF fail to load</h3>
+<p>JDeveloper 10.1.3.1 upgrades to the JavaServer Faces reference implementation 
+  version 1.1_02. This maintenance release of the JSF runtime from Sun introduces 
+  a new restriction preventing the processing of any JSF page located in the ./WEB-INF 
+  directory (or subdirectory thereof). If your JSF applications contain pages 
+  in the WEB-INF directory, you will need to move those pages to another directory 
+  under the web root other than WEB-INF for them to function correctly. If your 
+  JSF pages use ADF Model data binding, after moving the JSP/JSPX pages from ./WEB-INF 
+  (or subdirectory) to a new directory under your web root, you will need to reflect 
+  the change in the &quot;path&quot; value inside the &lt;pageMap&gt; section 
+  of your DataBindings.cpx file. For example, if your page previously had a &quot;path&quot; 
+  value of &quot;/WEB-INF/page/Test.jspx&quot; and you moved this Test.jspx page 
+  to ./public_html/page/Test.jspx -- where ./public_html is the HTML root directory 
+  of your view controller project -- then you must edit the value of the path 
+  and change it from &quot;/WEB-INF/page/Test.jspx&quot; to &quot;/page/Test.jspx&quot;.</p>
+<h2><a name="sec"></a>Security Issues</h2>
+<h3><a name="sec1"></a>Configuring ADF security to use a file-based repository</h3>
+<p>OC4J works exclusively with the user repository defined in the system-jazn-data.xml 
+  file for Embedded OC4J. If you select Application Repository in the ADF Security 
+  wizard, you must migrate user, role, and policy information from the wizard-generated 
+  jazn-data.xml file to either the system-jazn-data.xml file or, in the case of 
+  a production application, to Oracle Internet Directory (OID). For details, see 
+  the release note topic &quot;Using JAZNMigrationTool with JDeveloper.
+</p>
+<h3><a name="sec2"></a>Using JAZNMigrationTool with JDeveloper</h3>
+<p>The JAZNMigrationTool provides a way to migrate the contents of one store to 
+  another that can then be loaded to the LDAP directory. The command to be used 
+  is:</p>
+<pre><code>
+
+java JAZNMigrationTool -D binddn -w passwd [-h ldaphost] [-p ldapport]
+				[-sf filename] [-df LDIF_filename]
+				[-sr source_realm] [-dr dest_realm]
+				[-m policy|realm|all] 
+				[-help]</code>
+								
+</pre>
+								  
+  
+<p>Below is an example of migrating all users, roles, and JAAS policies from embedded-oc4j\config\system-jazn-data.xml 
+  to j2ee\home\config\system-jazn-data.xml</p>
+<pre><code>
+
+set CLASSPATH=JDEV_HOME\j2ee\home\jazn.jar;%CLASSPATH%</code></pre>
+<pre><code>
+
+JDEV_HOME\jdk\bin\Java oracle.security.jazn.tools.JAZNMigrationTool -w welcome 
+-sf JDEV_HOME\jdev\system\oracle.j2ee.<i>xxxx</i>\embedded-oc4j\config\system-jazn-data.xml 
+-df JDEV_HOME\j2ee\home\config\system-jazn-data.xml -dt xml 
+</code></pre>
+<p>Note that JDEV_HOME should be the directory where they install JDeveloper. 
+  XXXX represents the final build number.</p>
+<p>For more information see Java JAZNMigrationTool -help.</p>
+<h3><a name="sec3"></a>Enable JAAS mode when using ADF with LDAP identity management</h3>
+<p>When using ADF with LDAP-based identity management, make sure to enable JAAS 
+  mode. Please refer to Oracle Containers for J2EE Security Guide for details 
+  on how to enable JAAS mode.</p>
+<p>JAAS mode can be enabled by adding the following line in orion-application.xml: 
+</p>
+<pre>
+
+&lt;orion-application ... &gt;
+	...
+	&lt;jazn provider=&quot;XML&quot; jaas-mode=&quot;doAsPrivileged&quot; /&gt;
+	...
+&lt;/orion-application&gt; 
+</pre>
+<h2><a name="misc"></a>Miscellaneous Issues </h2>
+<h3><a name="misca"></a>SOA Suite documentation</h3>
+  
+<p>Please refer to the Oracle Application Server documentation library for the 
+  most up-to-date documentation available for BPEL Process Manager and Enterprise 
+  Service Bus.</p>
+<h3><a name="misc2"></a>Running ADF installer against Application Server 10.1.2 
+  instance (4897250)</h3>
+<p>When running the ADF installer within JDeveloper (Tools--&gt; ADF Installer) 
+  against an Application Server 10.1.2 instance, the user may encounter the error 
+  &quot;Cannot finish the installation&quot; even if the server is shut down. 
+  In addition to stopping the Application Server instance, the user must also 
+  shut down the Application Server Control Manager(EM) service before running 
+  the ADF Installer against the Application Server 10.1.2 instance. </p>
+<h3><a name="miscbc4j"></a>Restore option does not restore bc4j.ear</h3>
+<p>Use of the restore facility does not redeploy bc4j.ear to the 10.1.3.0.0 application 
+  server. This should not affect functionality, as datatags.ear is exactly the 
+  same as bc4j.ear. However, if required bc4j.ear must be manually deployed using 
+  the EM console.</p>
+<p>The &lt;JDev_Install&gt;/BC4J/redist/ folder contains the renamed datatags.ear 
+  file. In previous releases this file was the bc4j.ear file. The new name more 
+  accurately reflects the contents of this file and it's limited role to provide 
+  web application images and CSS support for the deprecated BC4J JSP Datatag library.</p>
+<table border="0" width="100%">
+    <tbody> 
+    <tr valign="top"> 
+      <td width="33%"> 
+        <p><font size="1">Oracle Corporation<br>
+          World Headquarters<br>
+          500 Oracle Parkway<br>
+          Redwood Shores, CA 94065, USA<br>
+          <a href="custom:external:http://www.oracle.com">http://www.oracle.com</a> 
+ </font></p>
+      </td>
+      <td width="33%"> 
+        <p><font size="1"> Worldwide Inquiries:<br>
+          1-800-ORACLE1<br>
+          Fax 650.506.7200 </font></p>
+      </td>
+      
+    <td width="33%"> 
+      <p><font size="1">Copyright © 2006, Oracle. All Rights Reserved.</font></p>
+      </td>
+    </tr>
+    </tbody> 
+  </table>
+</body></html>

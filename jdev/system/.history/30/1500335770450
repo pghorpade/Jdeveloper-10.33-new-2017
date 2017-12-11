@@ -1,0 +1,320 @@
+package edu.ucla.library.digital.dlcs.util;
+
+import edu.ucla.library.digital.dlcs.exception.DataAccessException;
+import edu.ucla.library.digital.dlcs.model.CoreDescQualifiers;
+import edu.ucla.library.digital.dlcs.model.CoreDescTerms;
+import edu.ucla.library.digital.dlcs.model.DescQualifiers;
+import edu.ucla.library.digital.dlcs.model.DescTerms;
+import edu.ucla.library.digital.dlcs.model.Projects;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import oracle.toplink.exceptions.DatabaseException;
+import oracle.toplink.expressions.Expression;
+import oracle.toplink.expressions.ExpressionBuilder;
+import oracle.toplink.queryframework.ReadAllQuery;
+import oracle.toplink.sessions.Session;
+import oracle.toplink.sessions.UnitOfWork;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+/**
+ * The <code>QualifierManager</code> utility is used to add qualifiers to DLCS and to projects.
+ *
+ * @author Curtis Fornadley
+ * @since 4/29/2010 - Refactor the code. -hc
+ * @note: DO NOT USE this class in your webapp. Use the QualifierDAO instead. -hc
+ */
+public class QualifierManager {
+    private static Logger logger = LoggerFactory.getLogger(QualifierManager.class);
+    private static DBUtil sessionFactory = DBUtil.getInstance(); 
+
+    public QualifierManager() {
+    }
+
+    /**
+     * Add new core descriptive qualifier.
+     *
+     * @param aCoreDescQualifier new core descriptive qualifier
+     * @return true if added. Otherwise, false.
+     * @throws DataAccessException
+     */
+    private boolean addCoreDescQualifier(final CoreDescQualifiers aCoreDescQualifier) throws DataAccessException {
+        if (logger.isTraceEnabled()) {
+            logger.trace("Entering addCoreDescQualifier(aCoreDescQualifier)");
+        }
+        
+        boolean added = false;
+        
+        try {
+            UnitOfWork uow = sessionFactory.acquireUnitOfWork();
+            uow.registerObject(aCoreDescQualifier);
+            uow.commit();
+            added = true;
+        } catch (DatabaseException dbe) {
+            if (logger.isErrorEnabled()) {
+                logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+            }
+            throw new DataAccessException(dbe);
+        }
+        
+        if (logger.isDebugEnabled()) {
+            if (added) {
+                logger.debug("The new core descriptive qualifier has been added.");
+            } else {
+                logger.debug("Failed to add the specified core descriptive qualifier.");
+            }
+        }
+        
+        if (logger.isTraceEnabled()) {
+            logger.trace("Leaving addCoreDescQualifier(aCoreDescQualifier)");
+        }
+        
+        return added;
+    }
+
+    /**
+     * Add core descriptive qualifiers to the specified project.
+     *
+     * @param coreQualifierList list of of core descriptive qualifiers
+     * @param aProject project to add core descriptive qualifiers
+     * @return true if added. Otherwise, false.
+     * @throws DataAccessException
+     */
+    public boolean addQualifiersToProject(final List coreQualifierList, final Projects aProject) throws DataAccessException {
+        if (logger.isTraceEnabled()) {
+            logger.trace("Entering addQualifiersToProject(coreQualifierList,aProject)");
+        }
+        
+        boolean added = false;
+        
+        try {
+            UnitOfWork uow = sessionFactory.acquireUnitOfWork();
+            uow.registerObject(aProject);
+            Iterator iter = coreQualifierList.iterator();
+
+            while (iter.hasNext()) {
+                DescQualifiers descQualifier = new DescQualifiers();
+                descQualifier.setProjects(aProject);
+
+                CoreDescQualifiers coreDescQualifier = (CoreDescQualifiers)iter.next();
+                /** get core Qualifier from DB. add it if it is not present */
+                if (isCoreDescQualifierInDlcs(coreDescQualifier) == true) {
+                    coreDescQualifier = getCoreDescQualifier(coreDescQualifier);
+                } else {
+                    addCoreDescQualifier(coreDescQualifier);
+                    coreDescQualifier = getCoreDescQualifier(coreDescQualifier);
+                }
+                CoreDescQualifiers coreDescQualifiersClone = (CoreDescQualifiers)uow.readObject(coreDescQualifier);
+                uow.registerObject(coreDescQualifiersClone);
+                //CoreDescQualifiers coreDescQualifiersClone = (CoreDescQualifiers)uow.readObject(coreDescQualifier);
+                descQualifier.setCoreDescQualifiers(coreDescQualifiersClone);
+
+                /** get the desc term that will uses the Qualifier */
+                CoreDescTerms coreTerm = coreDescQualifier.getCoreDescTerms();
+                DescTerms descTerm = getDescTerm(aProject, coreTerm);
+                DescTerms descTermClone = (DescTerms) uow.readObject(descTerm);
+                uow.registerObject(descTermClone);
+                descQualifier.setDescTerms(descTermClone);
+
+                uow.registerObject(descQualifier);
+
+            }
+            uow.commit();
+            added = true;
+        } catch (DatabaseException dbe) {
+            if (logger.isErrorEnabled()) {
+                logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+            }
+            throw new DataAccessException(dbe);
+        }
+        
+        if (logger.isDebugEnabled()) {
+            if (added) {
+                logger.debug("The core descriptive qualifiers have been added to the specified project.");
+            } else {
+                logger.debug("Failed to add core descriptive qualifiers to the specified project.");
+            }
+        }
+        
+        if (logger.isTraceEnabled()) {
+            logger.trace("Leaving addQualifiersToProject(coreQualifierList,aProject)");
+        }
+        
+        return added;
+    }
+
+
+    /**
+     * Add core descriptive qualifier to the specified project.
+     * 
+     * @param aCoreDescQualifier core descriptive qualifier
+     * @param project project to add core descriptive qualifier
+     * @return true if added. Otherwise, false.
+     * @throws DataAccessException
+     */
+    public boolean addQualifierToProject(final CoreDescQualifiers aCoreDescQualifier, final Projects project) throws DataAccessException {
+        List list = new ArrayList();
+        list.add(aCoreDescQualifier);
+        return addQualifiersToProject(list, project);
+    }
+
+    /**
+     * Retrieves a core descriptive qualifier (case-insensitive).
+     *
+     * @param aCoreDescQualifier core descriptive qualifier
+     * @return CoreDescQualifiers core descriptive qualifier object
+     * @throws DataAccessException
+     */
+    private CoreDescQualifiers getCoreDescQualifier(final CoreDescQualifiers aCoreDescQualifier) throws DataAccessException {
+        if (logger.isTraceEnabled()) {
+            logger.trace("Entering getCoreDescQualifier(aCoreDescQualifier)");
+        }
+        
+        CoreDescQualifiers cdq = null;
+        Session session = sessionFactory.acquireSession();
+        
+        try {            
+            ExpressionBuilder builder = new ExpressionBuilder();
+            Expression expression = builder.getField("desc_qualifier").equalsIgnoreCase(aCoreDescQualifier.getDescQualifier()).and(builder.getField("core_desc_termid_fk").equal(aCoreDescQualifier.getCoreDescTerms().getCoreDescTermidPk()));
+            ReadAllQuery query = new ReadAllQuery(CoreDescQualifiers.class, expression);
+            query.dontMaintainCache();
+            
+            List list = (List)session.executeQuery(query);
+            
+            Iterator resultsIter = list.iterator();            
+            while (resultsIter.hasNext()) {
+                cdq = (CoreDescQualifiers)resultsIter.next();
+            }
+            
+            if (logger.isDebugEnabled() && cdq == null) {
+                logger.debug("Core descriptive qualifier not found.");
+            }
+            
+            if (!list.isEmpty()) {
+                list.clear();
+            }
+            
+        } catch (DatabaseException dbe) {
+            if (logger.isErrorEnabled()) {
+                logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+            }
+            throw new DataAccessException(dbe.getMessage());
+        } finally {
+            session.release();
+        }
+        
+        if (logger.isTraceEnabled()) {
+            logger.trace("Leaving getCoreDescQualifier(aCoreDescQualifier)");
+        }
+        
+        return cdq;
+    }
+
+    /**
+     * Check if the specified core descriptive qualifier exist (case-insensitive).
+     * 
+     * @param cdq core descriptive qualifier
+     * @return true if found. Otherwise, false.
+     * @throws DataAccessException
+     */
+    private boolean isCoreDescQualifierInDlcs(final CoreDescQualifiers cdq) throws DataAccessException {
+        if (logger.isTraceEnabled()) {
+            logger.trace("Entering isCoreDescQualifierInDlcs(aCoreDescQualifier)");
+        }
+        
+        boolean found = false;
+        Session session = sessionFactory.acquireSession();
+        
+        try {            
+            ExpressionBuilder builder = new ExpressionBuilder();
+            // case-insensitive
+            Expression expression = builder.getField("desc_qualifier").equalsIgnoreCase(cdq.getDescQualifier()).and(builder.getField("core_desc_termid_fk").equal(cdq.getCoreDescTerms().getCoreDescTermidPk()));
+            ReadAllQuery query = new ReadAllQuery(CoreDescQualifiers.class, expression);
+            query.dontMaintainCache();
+            
+            List list = (List)session.executeQuery(query);
+            
+            if (list.size() > 0) {
+                found = true;
+            }
+            
+            if (logger.isDebugEnabled()) {
+                if (found) {
+                    logger.debug("Core descriptive qualifier exist.");
+                } else {
+                    logger.debug("Core descriptive qualifier not found.");
+                }
+            }
+            
+        } catch (DatabaseException dbe) {
+            if (logger.isErrorEnabled()) {
+                logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+            }
+            throw new DataAccessException(dbe);
+        } finally {
+            session.release();
+        }
+               
+        if (logger.isTraceEnabled()) {
+            logger.trace("Leaving isCoreDescQualifierInDlcs(aCoreDescQualifier)");
+        }
+        
+        return found;
+    }
+
+    /**
+     * Retrieve the descriptive term for the specified parameters.
+     * 
+     * @param aProject project
+     * @param aCoreDescTerm core descriptive term
+     * @return DescTerms descriptive term object
+     * @throws DataAccessException
+     */
+    private DescTerms getDescTerm(final Projects aProject, final CoreDescTerms aCoreDescTerm) throws DataAccessException {
+        if (logger.isTraceEnabled()) {
+            logger.trace("Entering getDescTerm(aProject,aCoreDescTerm)");
+        }
+        
+        DescTerms descTerm = null;
+        Session session = sessionFactory.acquireSession();
+        
+        try {       
+            ExpressionBuilder builder = new ExpressionBuilder();
+            Expression expression = builder.getField("PROJECTID_FK").equal(aProject.getProjectidPk()).and(builder.getField("CORE_DESC_TERMID_FK").equal(aCoreDescTerm.getCoreDescTermidPk()));
+            ReadAllQuery query = new ReadAllQuery(DescTerms.class, expression);
+            query.dontMaintainCache();
+            
+            List list = (List)session.executeQuery(query);
+            
+            Iterator resultsIter = list.iterator();            
+            while (resultsIter.hasNext()) {
+                descTerm = (DescTerms)resultsIter.next();
+            }
+            
+            if (logger.isDebugEnabled() && descTerm == null) {
+                logger.debug("Descriptive term not found.");
+            }
+            
+        } catch (DatabaseException dbe) {
+            if (logger.isErrorEnabled()) {
+                logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+            }
+            throw new DataAccessException(dbe);
+        } finally {
+            session.release();
+        }
+               
+        if (logger.isTraceEnabled()) {
+            logger.trace("Leaving getDescTerm(aProject,aCoreDescTerm)");
+        }
+        
+        return descTerm;
+    }
+}
+
+

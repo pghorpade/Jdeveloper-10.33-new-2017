@@ -1,0 +1,310 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="headerData">
+     <method class="oracle.ifs.admin.em.ias.uix.ViewWorkflowData"
+             method="getPageHeaderData"/>
+    </data>
+
+    <data name="viewWorkflowData">
+     <method class="oracle.ifs.admin.em.ias.uix.ViewWorkflowData"
+             method="getViewWorkflowData" />
+    </data>
+
+    <!-- data provider for workflow parameters table -->
+    <data name="wfParamTableColumnHeaderData">
+     <inline>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_NAME_COLUMN_HEADER@strings" sort="yes" value="name"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_DESCRIPTION_COLUMN_HEADER@strings" sort="yes" value="description"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_FINAL_COLUMN_HEADER@strings" sort="yes" value="final"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_REQUIRED_COLUMN_HEADER@strings" sort="yes" value="required"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_TYPE_COLUMN_HEADER@strings" sort="yes" value="type"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings" sort="no" value="default_value"/>
+     </inline>
+    </data>
+
+    <data name="detailData">
+     <method class="oracle.ifs.admin.em.ias.uix.HideShowDetailData"
+             method="getDetailDiscloseData"/>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout data:title="pageHeader@headerData"
+                           initialFocusComponentId="OKBUTTON">
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button id="OKBUTTON" data:text="OK@strings"
+                ctrl:event="cancel" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <spacer height="10" />
+   
+      <!-- .......... General .......... -->
+
+      <header data:text="GENERAL@strings">
+       <contents>
+        <labeledFieldLayout vAlign="top" width="60%">
+         <contents>
+
+	  <!-- DESCRIPTION -->
+          <messageTextInput name="DESCRIPTION"
+              rows="3"
+              columns="60"
+              data:prompt="DESCRIPTION@strings"
+              data:shortDesc="DESCRIPTION@strings"
+              data:text="DESCRIPTION@viewWorkflowData"
+	      readOnly="true"/>
+
+	  <!-- START EVENT -->
+          <messageStyledText 
+              data:prompt="NEW_WORKFLOW_START_EVENT_ATTR_NAME@strings"
+              data:text="STARTEVENT@viewWorkflowData"
+              styleClass="OraDataText"/>
+
+	  <!-- CANCEL EVENT -->
+          <messageStyledText
+              data:prompt="NEW_WORKFLOW_CANCEL_EVENT_ATTR_NAME@strings"
+              data:text="CANCELEVENT@viewWorkflowData"
+              styleClass="OraDataText"/>
+
+          <!-- BLOCKING -->
+          <messageCheckBox name="BLOCKING"
+                           value="true"
+                           readOnly="true"
+                           data:text="NEW_WORKFLOW_BLOCKING_ATTR_NAME@strings" 
+                           data:checked="IS_BLOCKING@viewWorkflowData"/>
+
+          <!-- APPROVERS REQUIRED -->
+          <messageCheckBox name="APPROVERS_REQ"
+                     value="true"
+                     readOnly="true"
+                     data:text="NEW_WORKFLOW_APPROVERS_REQ_ATTR_NAME@strings" 
+                     data:checked="IS_APPR_REQ@viewWorkflowData"/>
+
+         </contents>
+        </labeledFieldLayout>
+       </contents>
+      </header>
+
+      <!-- ....... Workflor Parameters Table ....... -->
+
+      <header data:text="VIEW_WORKFLOW_PARAMETERS_HEADER@strings">
+       <contents>
+       
+       <!-- Table Filter -->
+        <dataScope>
+         <provider>
+          <data name="tableIdData">
+           <inline tableId="table_ViewWfParamTable"/>
+          </data>
+         </provider>
+         <contents>
+          <include ctrl:node="include/TableFilterPPR"/>
+          <formValue name="table_level" value="inner"/>
+         </contents>
+        </dataScope>
+
+        <table name="ViewWfParamTable"
+               id="table_ViewWfParamTable"
+               partialRenderMode="self"
+               width="100%"
+               allDetailsEnabled="true"
+               data:summary="WORKFLOW_PARAM_TABLE_SUMMARY@strings"
+               data:alternateText="NO_ITEMS_FOUND@strings"
+               data:tableData="paramsTableData@viewWorkflowData"
+               data:detailDisclosure="details@detailData"
+               data:columnHeaderData="column@wfParamTableColumnHeaderData"
+               data:value="startingCount@viewWorkflowData"
+               data:maxValue="totalCount@viewWorkflowData"
+               data:blockSize="blockSize@viewWorkflowData"
+               formSubmitted="true">
+
+         <columnHeaderStamp>
+          <sortableHeader data:text="text" data:value="value">
+           <boundAttribute name="sortable">
+            <defaulting>
+              <dataObject data:select="value" source="sortColumnHeader"/>
+              <dataObject data:source="(value)@sortColumnHeader"/>
+              <dataObject select="sort"/>
+            </defaulting>
+           </boundAttribute>
+          </sortableHeader>
+         </columnHeaderStamp>
+
+         <columnFormats>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="iconButtonFormat"/>
+          <columnFormat columnDataFormat="iconButtonFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+         </columnFormats>
+
+         <tableFormat tableBanding="rowBanding"/>
+
+	 <!-- Hide/Show type option details -->
+         <detail>
+          <rowLayout width="100%" vAlign="top">
+           <contents>
+
+            <switcher childName="rangeType"
+                      data:childName="optionsType">
+   
+             <case name="rangeType">
+              <header data:text="VIEW_WORKFLOW_PARAM_OPTIONS_HEADER@strings">
+               <contents>
+                <labeledFieldLayout labelWidth="20%" 
+                                    filedWidth="80%">
+                 <contents>
+                  <messageStyledText 
+                     data:prompt="NEW_WORKFLOW_PARAM_MIN_VALUE_ATTR_NAME@strings"
+                     data:text="minValue"
+                     styleClass="OraDataText"/>
+                  <messageStyledText 
+                     data:prompt="NEW_WORKFLOW_PARAM_MAX_VALUE_ATTR_NAME@strings"
+                     data:text="maxValue"
+                     styleClass="OraDataText"/>
+                 </contents>
+                </labeledFieldLayout>
+               </contents>
+              </header>
+             </case>
+
+             <case name="enumType">
+              <header data:text="VIEW_WORKFLOW_PARAM_OPTIONS_HEADER@strings">
+               <contents>
+                <labeledFieldLayout labelWidth="20%" 
+                                    filedWidth="80%">
+                 <contents>
+                  <messageChoice
+                     name="stringEnum"
+                     data:prompt="VIEW_WORKFLOW_PARAM_ENUM_OPTION@strings">
+                   <contents data:childData="enumValues">
+                    <option data:text="optionTextString" 
+                            data:value="optionValueString"/>
+                   </contents>
+                  </messageChoice>
+                 </contents>
+                </labeledFieldLayout>
+               </contents>
+              </header>
+             </case>
+
+             <case name="unsupported">
+             </case>
+            </switcher>
+
+            <formValue name="disclosed" value="1"/>
+  
+           </contents>
+          </rowLayout>
+         </detail>
+
+	 <!-- Top-level table data -->
+         <contents>
+          <styledText data:text="paramName" />
+
+          <styledText data:text="paramDesc" />
+ 
+          <image data:source="finalTrueIcon"
+                 data:shortDesc="TRUE@strings"
+                 data:rendered="paramFinal"/>
+
+          <image data:source="requiredTrueIcon"
+                 data:shortDesc="TRUE@strings"
+                 data:rendered="paramRequired"/>
+
+          <styledText data:text="paramType" />
+
+          <styledText data:text="paramDefValue" />
+
+          <formValue name="hiddenParamName"
+                     data:value="paramName" />
+         </contents>
+        </table>
+
+       </contents>
+      </header>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewWorkflowData"
+           method="doLoad"/>
+  </event>
+
+  <event name="cancel">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewWorkflowData"
+           method="doCancel"/>
+  </event>
+
+  <event name="hide">
+   <method class="oracle.ifs.admin.em.ias.uix.HideShowDetailData" 
+           method="doHideShowEvent" /> 
+  </event>
+
+  <event name="show">
+   <method class="oracle.ifs.admin.em.ias.uix.HideShowDetailData" 
+           method="doHideShowEvent" /> 
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewWorkflowData"
+           method="doLoad"/>
+  </event>
+
+  <!-- default -->
+  <event name="*">
+   <null/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewWorkflowData"
+           method="doSearch"/>
+  </event>
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+
+ </ctrl:handlers>
+
+</ctrl:page>

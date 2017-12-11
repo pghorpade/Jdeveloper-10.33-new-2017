@@ -1,0 +1,79 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class DescQualifiers {
+
+	private List descValuesCollection;
+	private ValueHolderInterface descTerms;
+	private ValueHolderInterface coreDescQualifiers;
+	private ValueHolderInterface projects;
+	private Long descQualifieridPk;
+
+public DescQualifiers() {
+	super();
+	this.descValuesCollection = new ArrayList();
+	this.descTerms = new ValueHolder();
+	this.coreDescQualifiers = new ValueHolder();
+	this.projects = new ValueHolder();
+}
+
+public void addDescValues(int index, DescValues aDescValues) {
+	this.descValuesCollection.add(index, aDescValues);
+	aDescValues.setDescQualifiers(this);
+}
+
+public void addDescValues(DescValues aDescValues) {
+	this.descValuesCollection.add(aDescValues);
+	aDescValues.setDescQualifiers(this);
+}
+
+public CoreDescQualifiers getCoreDescQualifiers() {
+	return (CoreDescQualifiers) this.coreDescQualifiers.getValue();
+}
+
+public Long getDescQualifieridPk() {
+	return this.descQualifieridPk;
+}
+
+public DescTerms getDescTerms() {
+	return (DescTerms) this.descTerms.getValue();
+}
+
+public List getDescValuesCollection() {
+	return this.descValuesCollection;
+}
+
+public Projects getProjects() {
+	return (Projects) this.projects.getValue();
+}
+
+public void removeDescValues(DescValues aDescValues) {
+	this.descValuesCollection.remove(aDescValues);
+	aDescValues.setDescQualifiers(null);
+}
+
+public void setCoreDescQualifiers(CoreDescQualifiers coreDescQualifiers) {
+	this.coreDescQualifiers.setValue(coreDescQualifiers);
+}
+
+public void setDescQualifieridPk(Long descQualifieridPk) {
+	this.descQualifieridPk = descQualifieridPk;
+}
+
+public void setDescTerms(DescTerms descTerms) {
+	this.descTerms.setValue(descTerms);
+}
+
+public void setDescValuesCollection(List descValuesCollection) {
+	this.descValuesCollection = descValuesCollection;
+}
+
+public void setProjects(Projects projects) {
+	this.projects.setValue(projects);
+}
+
+}

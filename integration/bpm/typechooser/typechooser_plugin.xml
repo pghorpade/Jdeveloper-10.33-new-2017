@@ -1,0 +1,6 @@
+<TypeChooser_Plugin>
+	<ExternalSource name="ESB Browser"
+	        class="oracle.tip.tools.ide.pm.datasources.esb.ESBDataSourceContainer"
+		enable="true">
+	</ExternalSource>
+</TypeChooser_Plugin> 

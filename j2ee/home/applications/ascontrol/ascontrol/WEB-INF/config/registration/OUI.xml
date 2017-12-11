@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<logs xmlns="http://www.oracle.com/iAS/EMComponent/ojdl">
+    <log path="cfgtoollogs/configtools%*%.log" componentId="OUI">
+        <logviewer ComponentName="ID_VLOGS_OUI@ResourceBundle" LogType="EVENT">
+            <property name="SEARCH_DISABLED" value="true"/>
+            <property name="LOGS_FOLDER" value="ID_VLOGS_OUI_LOGNAME@ResourceBundle"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_NAME%/%LOGS_FOLDER%/%LOG_NAME%"/>
+        </logviewer>
+    </log>    
+    <log path="cfgtoollogs/install.log" componentId="OUI">
+        <logviewer ComponentName="ID_VLOGS_OUI@ResourceBundle" LogType="EVENT">
+            <property name="SEARCH_DISABLED" value="true"/>
+        </logviewer>
+    </log>
+</logs>

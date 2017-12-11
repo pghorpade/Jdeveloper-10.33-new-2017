@@ -1,0 +1,111 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+  <dataScope>
+
+   <provider>
+    <data name="hsmData">
+     <method class="oracle.ifs.admin.em.ias.uix.HsmData"
+             method="getHsmData"/>
+    </data>
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+    <data name="hsmChoiceData">
+     <inline>
+      <option data:text="HSM_CENTERA@strings" value="EMC Centera"/>
+      <option data:text="HSM_SNAPLOCK@strings" value="Network Appliance SnapLock"/>
+     </inline>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout
+     data:title="HSM_LINK@strings"
+     initialFocusComponentId="TYPEMSGCHOICE">
+
+     <pageStatus>
+      <styledText data:text="HSM_INSTRUCTION@strings"
+                  styleClass="OraInstructionText"/>
+     </pageStatus>
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="REVERT@strings"
+                ctrl:event="revert" />
+        <submitButton data:text="APPLY@strings"
+                ctrl:event="doSubmit" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+       <html:span id="username_target">     
+         <spacer height="5" />
+         <labeledFieldLayout labelWidth="25%" fieldWidth="75%">
+         <contents>
+           <messageChoice id="TYPEMSGCHOICE" name="hsmType"
+                          data:prompt="HSM_TYPE@strings"
+                          data:selectedValue="selectedStorageValue@hsmData">
+            <primaryClientAction>
+              <firePartialAction event="changeDeviceType" targets="username_target" /> 
+            </primaryClientAction>
+            <contents data:childData="option@hsmChoiceData">
+             <option data:text="text" 
+                     data:value="value"/>
+            </contents>
+           </messageChoice>
+           <messageTextInput name="username"
+                             data:prompt="HSM_USERNAME_TEXT@strings"
+                             data:text="username@hsmData"/>
+           <messageTextInput name="newPassword"
+                             secret="true"
+                             data:prompt="HSM_PASSWORD_TEXT@strings"
+                             data:text="newPassword@hsmData"/>           
+           <messageTextInput name="confirmNewPassword" 
+                             secret="true"
+                             data:prompt="HSM_CONFIRM_PASSWORD_TEXT@strings"
+                             data:text="confirmNewPassword@hsmData"/>
+          </contents>
+        </labeledFieldLayout>
+       </html:span>
+      </contents>
+     </ifsemui:oemPageLayout>
+    </contents>
+   </dataScope>
+  </ctrl:content>
+
+  <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+   <event name="null">
+    <method class="oracle.ifs.admin.em.ias.uix.HsmData"
+            method="doLoad"/>
+   </event>
+   <event name="doLoad">
+    <method class="oracle.ifs.admin.em.ias.uix.HsmData"
+            method="doLoad"/>
+   </event>
+   <event name="changeDeviceType">
+    <method class="oracle.ifs.admin.em.ias.uix.HsmData"
+            method="changeDeviceType"/>
+   </event>
+   <event name="revert">
+    <method class="oracle.ifs.admin.em.ias.uix.HsmData"
+            method="doRevert"/>
+   </event>
+   <event name="doSubmit">
+    <method class="oracle.ifs.admin.em.ias.uix.HsmData"
+            method="doSubmit"/>
+   </event>
+  </ctrl:handlers>
+
+</ctrl:page>

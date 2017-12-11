@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<tools class="java.util.ArrayList" xmlns="http://xmlns.oracle.com/jdeveloper/905/externaltools">
+   <Item class="oracle.adfdtinternal.seededoc4j.StartOc4jExtTool">
+      <arguments>"C:\Program Files (x86)\Java\jdk1.6.0_27\jre/.." "C:\jdevstudio10133\" "C:\jdevstudio10133\jdev\\extensions\oracle.adfp.seededoc4j.10.1.3" -start </arguments>
+      <availability>0</availability>
+      <availabilityExpression/>
+      <availableTypes class="java.util.ArrayList"/>
+      <caption>Start WebCenter Preconfigured OC4J</caption>
+      <executable>C:\jdevstudio10133\jdev\\extensions\oracle.adfp.seededoc4j.10.1.3/bin/adfp_oc4j.cmd</executable>
+      <iconURL path="../../extensions/oracle.adfp.seededoc4j.10.1.3/srcimage/j2ee/home/default-web-app/start.gif"/>
+      <integrationMask>9</integrationMask>
+      <reloadBuffers>false</reloadBuffers>
+      <runDirectory>C:\jdevstudio10133\jdev\\extensions\oracle.adfp.seededoc4j.10.1.3/bin</runDirectory>
+      <scannerTag/>
+      <toolTipText/>
+   </Item>
+   <Item class="oracle.adfdtinternal.seededoc4j.StopOc4jExtTool">
+      <arguments>"C:\Program Files (x86)\Java\jdk1.6.0_27\jre/.." "C:\jdevstudio10133\" "C:\jdevstudio10133\jdev\\extensions\oracle.adfp.seededoc4j.10.1.3" -shutdown -port 22667 -password welcome</arguments>
+      <availability>0</availability>
+      <availabilityExpression/>
+      <availableTypes class="java.util.ArrayList"/>
+      <caption>Stop WebCenter Preconfigured OC4J</caption>
+      <executable>C:\jdevstudio10133\jdev\\extensions\oracle.adfp.seededoc4j.10.1.3/bin/adfp_oc4j.cmd</executable>
+      <iconURL path="../../extensions/oracle.adfp.seededoc4j.10.1.3/srcimage/j2ee/home/default-web-app/stop.gif"/>
+      <integrationMask>9</integrationMask>
+      <reloadBuffers>false</reloadBuffers>
+      <runDirectory>C:\jdevstudio10133\jdev\\extensions\oracle.adfp.seededoc4j.10.1.3/bin</runDirectory>
+      <scannerTag/>
+      <toolTipText/>
+   </Item>
+</tools>

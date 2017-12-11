@@ -1,0 +1,37 @@
+<?xml version="1.0" standalone='yes'?>
+
+<jms
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://www.oracle.com/technology/oracleas/schema/jms-server-10_1.xsd"
+  schema-major-version="10"
+  schema-minor-version="1"
+>
+
+  <jms-server port="9168">
+
+    <!-- Queue bindings, these queues will be bound to their respective
+       JNDI path for later retrieval -->
+    <queue name="Demo Queue" location="jms/demoQueue">
+      <description>A dummy queue</description>
+    </queue>
+
+    <!-- Topic bindings, these topic will be bound to their respective
+         JNDI path for later retrieval -->
+    <topic name="Demo Topic" location="jms/demoTopic">
+      <description>A dummy topic</description>
+    </topic>
+
+    <!-- path to the log-file where JMS-events/errors are stored -->
+    <log>
+      <file path="../log/jms.log" />
+      <!-- Uncomment this if you want to use ODL logging capabilities
+      <odl path="../log/jms/" max-file-size="1000" max-directory-size="10000"/>
+      -->
+    </log>
+
+    <queue name="jms/RAExceptionQueue" location="jms/RAExceptionQueue">
+      <description>ResourceAdapter Exception Queue SYSTEM DESTINATION - DO NOT DELETE</description>
+    </queue>
+  </jms-server>
+
+</jms>

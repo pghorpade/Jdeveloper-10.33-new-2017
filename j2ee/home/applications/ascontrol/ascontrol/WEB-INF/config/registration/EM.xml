@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<logs xmlns='http://www.oracle.com/iAS/EMComponent/ojdl'
+      helpIDLogs='http://otn.oracle.com/pls/as1013/as1013.to_xlink?xlink=ASADM601'>
+
+<!-- This is the Log Config document for Enterprise Manager Logs -->
+
+  <!-- Agent Logs -->
+
+  <log path='sysman/log/emagent.trc.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+  <log path='sysman/log/emagent.trc' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+  <log path='sysman/log/emagent_perl.trc' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+ <log path='sysman/log/emagent_perl.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+  <log path='sysman/log/emagentfetchlet.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+  <log path='sysman/log/emagentfetchlet.trc' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+  <log path='sysman/log/emagentfetchlet.log.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+  <log path='sysman/log/emagentfetchlet.trc.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+  <log path='sysman/log/emagent_%EM_AGENT_PID%.trc.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+  <log path='sysman/log/emagent_%EM_AGENT_PID%.trc' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+    <log path='sysman/log/emagent.log.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+    <log path='sysman/log/emagent.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+  <log path='sysman/log/emagent_%EM_AGENT_PID%.log.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+  <log path='sysman/log/emagent_%EM_AGENT_PID%.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+   <!-- Agent stdout & stderr  -->
+
+   <log path='sysman/log/emagent.nohup' componentId='EM'>
+    <logviewer  ComponentName='ID_VLOGS_EM_AGENT@ResourceBundle'
+                LogType='SERVER'
+                LogName='ID_VLOGS_REDIRECT_OUTPUT@ResourceBundle'/>
+  </log>
+
+    <!-- iAS Standalone Console -->
+  
+  <!-- error log in ODL format -->
+  <log path='sysman/log' componentId='EM'>
+    <logreader type='ODL'/>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_CONSOLE@ResourceBundle' 
+               LogType='ERROR' /> 
+  </log> 
+
+  <log path='sysman/log/emias.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_CONSOLE@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+     <!-- standalone console trace log -->
+  <log path='sysman/log/emias.trc' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_CONSOLE@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+<log path='sysman/log/emias.log.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_CONSOLE@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+     <!-- standalone console trace log -->
+  <log path='sysman/log/emias.trc.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_CONSOLE@ResourceBundle'
+     LogType='TRACE' />
+  </log>
+
+    <!-- standalone console oc4j app log -->
+  <log path='sysman/log/em-application.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_APP_LOG@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+    <!-- standalone console oc4j web site log -->
+  <log path='sysman/log/em-web-access.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_LISTENER@ResourceBundle'
+     LogType='ACCESS' />
+  </log>
+
+    <!-- standalone console rmi log -->
+  <log path='sysman/log/rmi.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_RMI@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+    <!-- standalone console server log -->
+  <log path='sysman/log/server.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_SERVER_LOG@ResourceBundle'
+     LogType='ERROR' />
+  </log>
+
+    <!-- standalone console stdout & stderr log  -->
+  <log path='sysman/log/em.nohup' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_CONSOLE@ResourceBundle'
+                      LogType='SERVER'
+                      LogName='ID_VLOGS_REDIRECT_OUTPUT@ResourceBundle'/>
+  </log>
+
+  <!-- standalone console Win Service log  -->
+  <log path='sysman/log/Oracle%*%EMWebsitesrvc.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_STANDALONE_CONSOLE@ResourceBundle'
+                      LogType='SERVER'
+		      LogName='ID_VLOGS_SERVICE_OUTPUT@ResourceBundle'/>
+  </log>
+
+    <!-- Central Console Logs -->
+
+    <!-- central console error log -->
+  <log path='sysman/log/emoms.log.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_CENTRAL_CONSOLE@ResourceBundle'
+                      LogType='ERROR' />
+  </log>
+
+    <log path='sysman/log/emoms.log' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_CENTRAL_CONSOLE@ResourceBundle'
+                      LogType='ERROR' />
+  </log>
+
+  <!-- central console trace log -->
+   <log path='sysman/log/emoms.trc.%LOG_SEGMENT_ID%' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_CENTRAL_CONSOLE@ResourceBundle'
+                      LogType='TRACE' />
+  </log>
+
+    <log path='sysman/log/emoms.trc' componentId='EM'>
+    <logviewer ComponentName='ID_VLOGS_EM_CENTRAL_CONSOLE@ResourceBundle'
+                      LogType='TRACE' />
+</log>
+
+<!-- 10.1.3 Console -->
+  
+  <!-- error log in ODL format -->
+  <log path='j2ee/%OC4J%/log/ascontrol' componentId='EM'>
+    <logreader type='ODL'/>
+    <logviewer  ComponentName='Application Server Control' 
+                ComponentType='Enterprise Manager'
+                LogType='ERROR'>
+     <property name='category' value='diagnostic|management'/> 
+   </logviewer>                 
+  </log> 
+
+    <log path='j2ee/%OC4J%/log/ascontrol.log' componentId='EM'> 
+        <logreader class='oracle.core.ojdl.reader.TextLogReaderFactory'>                     
+            <property name='MessageFormat' value='{0,time,yyyy-MM-dd hh:mm:ss,SSS} [{1}] {2} {3} {4} - {5}'/> 
+            <property name='MessageTypeMap' 
+                      value='FATAL=INTERNAL_ERROR:1,ERROR=ERROR:1,WARN=WARNING:1,INFO=NOTIFICATION:1,DEBUG=TRACE:1'/> 
+            <property name='MessageFields' 
+                      value='TSTZ_ORIGINATING, PROCESS_ID, MSG_TYPE, MODULE_ID, , MSG_TEXT'/> 
+            <property name='ComponentId' value='EM'/> 
+        </logreader> 
+         <logviewer  ComponentName='Application Server Control'
+                     ComponentType='Enterprise Manager'
+                     LogType='ERROR'>
+            <property name='category' value='diagnostic|management'/> 
+         </logviewer>    
+    </log> 
+
+    <log path='j2ee/%OC4J%/log/ascontrol.log.%LOG_SEGMENT_ID%' componentId='EM'> 
+        <logreader class='oracle.core.ojdl.reader.TextLogReaderFactory'>           
+            <property name='MessageFormat' value='{0,time,yyyy-MM-dd hh:mm:ss,SSS} [{1}] {2} {3} {4} - {5}'/> 
+            <property name='MessageTypeMap' 
+                      value='FATAL=INTERNAL_ERROR:1,ERROR=ERROR:1,WARN=WARNING:1,INFO=NOTIFICATION:1,DEBUG=TRACE:1'/> 
+            <property name='MessageFields' 
+                      value='TSTZ_ORIGINATING, PROCESS_ID, MSG_TYPE, MODULE_ID, MSG_TEXT'/> 
+            <property name='ComponentId' value='EM'/> 
+        </logreader> 
+         <logviewer  ComponentName='Application Server Control'
+                     ComponentType='Enterprise Manager'
+                     LogType='ERROR'>
+            <property name='category' value='diagnostic|management'/> 
+         </logviewer>    
+    </log> 
+
+</logs>
+

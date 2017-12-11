@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://xmlns.oracle.com/jdeveloper/hooks/urlfilesystem"
+           xmlns:ext="http://jcp.org/jsr/198/extension-manifest"
+           targetNamespace="http://xmlns.oracle.com/jdeveloper/hooks/urlfilesystem"
+           elementFormDefault="qualified">
+  <xs:import namespace="http://jcp.org/jsr/198/extension-manifest"
+             schemaLocation="extension.xsd"/>
+  <xs:element name="urlfilesystem-hook" substitutionGroup="ext:custom-hook"
+              type="urlfilesystemHookType">
+    <xs:annotation>
+      <xs:documentation>
+        Defines a hook into the IDE's URLFileSystem, which provides a filesystem
+        layer between the IDE and URLs.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  
+    <xs:complexType name="urlfilesystemHookType">
+    <xs:complexContent>
+      <xs:extension base="ext:customHookType">
+        <xs:choice>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="streamfactory">
+            <xs:annotation>
+              <xs:documentation>
+                Registers a streamfactory with the IDE for handling a custom
+                protocol.
+              </xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:attribute name="class" use="required" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>
+                    The class name of the stream factory. This should be a
+                    public implementation of java.net.URLStreamHandlerFactory
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="fshelper">
+            <xs:complexType>
+              <xs:attribute name="protocol" use="required" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>
+                    The protocol to register a helper for
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="class" use="required" type="ext:className">
+                <xs:annotation>
+                  <xs:documentation>
+                    The class name of the helper to register. This should be a
+                    public instance of oracle.ide.net.URLFileSystemHelper
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

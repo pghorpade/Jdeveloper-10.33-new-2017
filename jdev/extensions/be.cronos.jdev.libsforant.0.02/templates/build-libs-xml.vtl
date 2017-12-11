@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<project name="$projectName" default="" basedir=".">
+#set( $antFileNamePrefix1 = "$" )
+#set( $antFileNamePrefix2 = "{ant.file." )
+#set( $antFileNameSuffix1 = "}" )
+#set( $antFileName = "$antFileNamePrefix1$antFileNamePrefix2${projectName}$antFileNameSuffix1" )
+  <dirname property="${projectName}.basedir" file="$antFileName"/>
+  <path id="${projectName}.srcpath">
+#foreach( $relativeSourcePathEntry in $relativeSourcePathList )
+    <pathelement location="$relativeSourcePathEntry"/>
+#end
+  </path>
+  <!-- to accommodate the Ant copy/fileset element in "Apache Ant version 1.6.5 compiled on June 2 2005" bundled with JDeveloper 10.1.3.2 -->
+  <property name="${projectName}.srcpath.first" value="$relativeSourcePathList.get(0)"/>
+  <property name="${projectName}.outputdir" value="$relativeOutputDirectory"/>
+#foreach( $relativeLibrary in $relativeLibraryList )
+  <path id="${projectName}.library.$relativeLibrary.name">
+#foreach( $classPathEntry in $relativeLibrary.classPath )
+    <pathelement location="$classPathEntry"/>
+#end
+  </path>
+#end
+  <path id="${projectName}.classpath">
+#foreach( $dependencyRelativeOutputDirectory in $dependencyRelativeOutputDirectoryList )
+    <pathelement location="$dependencyRelativeOutputDirectory"/>
+#end
+#foreach( $relativeLibrary in $relativeLibraryList )
+    <path refid="${projectName}.library.$relativeLibrary.name"/>
+#end
+  </path>
+</project>

@@ -1,0 +1,1076 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="aclData">
+     <method class="oracle.ifs.admin.em.ias.uix.SystemAclData"
+             method="getAclData" />
+    </data>
+
+    <!-- hidden for AS 10.1.3
+    .. data provider for log formats ..
+    <data name="logFormatOptionData">
+     <inline>
+      <option data:text="LOG_FORMAT_TEXT@strings" value="text"/>
+      <option data:text="LOG_FORMAT_XML@strings" value="xml"/>
+     </inline>
+    </data>
+
+    .. data provider for ROOT log levels (no empty option) ..
+    <data name="rootLogLevelOptionData">
+     <inline>
+      <option data:text="LEVEL_SEVERE@strings" value="SEVERE"/>
+      <option data:text="LEVEL_WARNING@strings" value="WARNING"/>
+      <option data:text="LEVEL_IMPORTANT@strings" value="IMPORTANT"/>
+      <option data:text="LEVEL_INFO@strings" value="INFO"/>
+      <option data:text="LEVEL_FINE@strings" value="FINE"/>
+      <option data:text="LEVEL_FINER@strings" value="FINER"/>
+      <option data:text="LEVEL_FINEST@strings" value="FINEST"/>
+     </inline>
+    </data>
+
+    .. data provider for all other log levels ..
+    <data name="logLevelOptionData">
+     <inline>
+      <option data:text="LEVEL_SEVERE@strings" value="SEVERE"/>
+      <option data:text="LEVEL_WARNING@strings" value="WARNING"/>
+      <option data:text="LEVEL_IMPORTANT@strings" value="IMPORTANT"/>
+      <option data:text="LEVEL_INFO@strings" value="INFO"/>
+      <option data:text="LEVEL_FINE@strings" value="FINE"/>
+      <option data:text="LEVEL_FINER@strings" value="FINER"/>
+      <option data:text="LEVEL_FINEST@strings" value="FINEST"/>
+      <option text="" value=""/>
+     </inline>
+    </data>
+
+    <data name="logGridData">
+     <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+             method="getLoggerGridData" />
+    </data>
+
+    <data name="hgridProxy">
+     <method class="oracle.ifs.admin.em.ias.uix.HGridData"
+             method="getHGridProxy"/>
+    </data>
+    -->
+
+    <!-- data provider for general info -->
+    <data name="pageData">
+     <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+             method="getGeneralData" />
+    </data>
+        
+    <!-- data provider for services table -->
+    <data name="serviceTableColumnHeaderData">
+     <inline>
+      <column data:value="NAME@strings"/>
+      <column data:value="CONFIGURATION@strings"/>
+      <column data:value="ACTIVE@strings"/>
+     </inline>
+    </data>
+    <data name="serviceTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+             method="getServiceTableData" />
+    </data>
+
+    <!-- data provider for servers table -->
+    <data name="serverTableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="CONFIGURATION@strings" sort="yes" value="configuration_text"/>
+      <column data:text="ACTIVE@strings" sort="yes" value="active"/>
+      <column data:text="SERVICE@strings" sort="yes" value="server_service"/>
+      <column data:text="INITIAL_PRIORITY@strings" sort="yes" value="initial_priority"/>
+      <column data:text="INITIALLY_STARTED@strings" sort="yes" value="initially_started"/>
+     </inline>
+    </data>
+    <data name="serverTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+             method="getServerTableData" />
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout quickLinksShown="true">
+     <!-- hidden for AS 10.1.3
+     <boundAttribute name="initialFocusComponentId">
+      <if>
+       <or>
+        <dataObject select="TYPE" source="pageData"/>
+        <not>
+         <dataObject select="isLocal" source="pageData"/>
+        </not>
+       </or>
+       <fixed text="HOSTMSGINPUT"/>
+       <fixed text="NAMEMSGINPUT"/>
+      </if>
+     </boundAttribute>
+     -->                  
+     <boundAttribute name="title">
+      <if>
+       <dataObject select="isNew" source="pageData"/>
+       <dataObject select="CREATE_NON_HTTP_NODE"
+                   source="strings"/>
+       <messageFormat data:format="EDIT_HEADER@strings"
+                      fast="true">
+        <dataObject select="NAME" source="pageData"/>
+       </messageFormat>
+      </if>
+     </boundAttribute>
+
+     <pageStatus>
+      <styledText styleClass="OraInstructionText">
+       <boundAttribute name="text">
+        <if>
+         <dataObject select="isNew" source="pageData"/>
+         <dataObject select="NEW_OBJECT_INSTRUCTION"
+                     source="strings"/>
+         <dataObject select="EDIT_OBJECT_INSTRUCTION"
+                     source="strings"/>
+        </if>
+       </boundAttribute>
+      </styledText>
+     </pageStatus>
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancel" />
+
+        <!-- FIXME Revert and Apply for editing cases -->
+
+        <switcher data:childName="isNew@pageData">
+         <case name="true">
+          <submitButton data:text="OK@strings"
+                        ctrl:event="newNodeConfig"/>
+         </case>
+         <case name="false">
+          <submitButton data:text="OK@strings"
+                        ctrl:event="updateNodeConfig"/>
+         </case>
+        </switcher>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+      <tableLayout width="100%">
+       <contents>
+        <rowLayout width="100%" vAlign="top">
+         <contents>
+
+          <!-- .......... General .......... -->
+ 
+          <cellFormat width="50%" vAlign="top">
+           <contents>
+            <header data:text="GENERAL@strings">
+             <contents>
+              <labeledFieldLayout labelWidth="10%" fieldWidth="90%">
+               <contents>
+                <messageTextInput id="NAMEMSGINPUT"
+                                  name="NAME" columns="30" required="yes"
+                                  data:rendered="isNew@pageData"
+                                  data:prompt="NAME@strings"
+                                  data:text="NAME@pageData"/>
+                <messageTextInput id="NAMEMSGINPUT"
+                                  name="DISPLAY_NAME" columns="30"
+                                  required="yes" maximumLength="4096"
+                                  data:prompt="DISPLAY_NAME@strings"
+                                  data:text="DISPLAY_NAME@pageData"
+                                  data:tip="NODE_DISPLAY_NAME_TIP@strings">
+                 <!-- hidden for AS 10.1.3
+                 <boundAttribute name="message">
+                  <if>
+                   <dataObject select="NO_OPMN" source="pageData"/>
+                   <dataObject select="NODE_DISPLAY_NAME_WARNING_TIP"
+                               source="strings"/>
+                   <null/>
+                  </if>
+                 </boundAttribute>
+                 <boundAttribute name="messageType">
+                  <if>
+                   <dataObject select="NO_OPMN" source="pageData"/>
+                   <fixed text="error"/>
+                   <fixed text="none"/>
+                  </if>
+                 </boundAttribute>
+                 -->
+                 <boundAttribute name="readOnly">
+                  <or>
+                   <dataObject select="TYPE" source="pageData"/>
+                   <not>
+                     <dataObject select="isLocal" source="pageData"/>
+                   </not>
+                  </or>
+                 </boundAttribute>
+                 <boundAttribute name="styleClass">
+                  <if>
+                   <or>
+                    <dataObject select="TYPE" source="pageData"/>
+                    <not>
+                     <dataObject select="isLocal" source="pageData"/>
+                    </not>
+                   </or>
+                   <fixed text="OraDataText"/>
+                   <fixed text="OraFieldText"/>
+                  </if>
+                 </boundAttribute>
+                </messageTextInput>
+                <!-- hidden for AS 10.1.3
+                <messageTextInput  id="HOSTMSGINPUT" name="HOST_NAME"
+				   data:prompt="HOST@strings"
+                                   required="yes"
+                                   data:text="HOST_NAME@pageData">
+                 <boundAttribute name="readOnly">
+                  <not>
+                   <dataObject select="isLocal" source="pageData"/>
+                  </not>
+                 </boundAttribute>
+                 <boundAttribute name="styleClass">
+                  <if>
+                   <not>
+                    <dataObject select="isLocal" source="pageData"/>
+                   </not>
+                   <fixed text="OraDataText"/>
+                   <fixed text="OraFieldText"/>
+                  </if>
+                 </boundAttribute>
+                </messageTextInput>
+                -->
+                <messageStyledText data:prompt="MIDDLE_TIER@strings"
+                                   data:text="MIDDLE_TIER@pageData"
+                                   styleClass="OraDataText"/>
+                <messageStyledText data:prompt="TYPE@strings"
+                                   styleClass="OraDataText">
+                 <boundAttribute name="text">
+                  <if>
+                   <dataObject select="TYPE" source="pageData"/>
+                   <dataObject select="HTTP_NODE" source="strings"/>
+                   <dataObject select="NON_HTTP_NODE" source="strings"/>
+                  </if>
+                 </boundAttribute>
+                </messageStyledText>
+                <!-- hidden for AS 10.1.3
+                <messageStyledText data:prompt="OC4J_INSTANCE@strings"
+                                   data:text="OC4J_INSTANCE@pageData"
+                                   data:destination="OC4J_HOME_PAGE@pageData">
+                 <boundAttribute name="rendered">
+                  <and>
+                   <not>
+                    <dataObject select="isNew" source="pageData"/>
+                   </not>
+                   <dataObject select="TYPE" source="pageData"/>
+                  </and>
+                 </boundAttribute>
+                 <boundAttribute name="styleClass">
+                  <if>
+                   <dataObject select="isLocal" source="pageData"/>
+                   <fixed text="OraLinkText"/>
+                   <fixed text="OraDataText"/>
+                  </if>
+                 </boundAttribute>
+                </messageStyledText>
+                -->
+                <messageTextInput name="DESCRIPTION" rows="3" columns="30"
+                                  data:prompt="DESCRIPTION@strings"
+                                  data:shortDesc="DESCRIPTION@strings"
+                                  data:text="DESCRIPTION@pageData"/>
+                <messageChoice name="ACCESS_CONTROL"
+                               data:prompt="ACCESS_CONTROL@strings"
+                               data:selectedValue="ACCESS_CONTROL@pageData">
+                 <contents data:childData="acls@aclData">
+                  <option data:text="optionText" 
+                          data:value="optionValue"/>
+                 </contents>
+                </messageChoice>
+                <messageCheckBox name="ACTIVE"
+                                 data:text="ACTIVE@strings"
+                                 data:checked="ACTIVE@pageData"
+                                 value="true">
+                 <boundAttribute name="message">
+                  <if>
+                   <dataObject select="STATUS_MISMATCHED" source="pageData"/>
+                   <dataObject select="STATUS_MISMATCHED_MESSAGE"
+                               source="pageData"/>
+                   <null/>
+                  </if>
+                 </boundAttribute>
+                 <boundAttribute name="messageType">
+                  <if>
+                   <dataObject select="STATUS_MISMATCHED" source="pageData"/>
+                   <fixed text="warning"/>
+                   <fixed text="none"/>
+                  </if>
+                 </boundAttribute>
+                 <!-- fix for 4433331
+                 <boundAttribute name="readOnly">
+                  <not>
+                   <dataObject select="isLocal" source="pageData"/>
+                  </not>
+                 </boundAttribute>
+                 -->
+                 <!-- hidden for AS 10.1.3
+                 <primaryClientAction>
+                  <fireAction event="displayDeactivate"/>
+                 </primaryClientAction>
+                 -->
+                 <boundMessage data:select="ACTIVE@strings"/>
+                </messageCheckBox>
+               </contents>
+              </labeledFieldLayout>
+
+              <!-- hidden for AS 10.1.3
+              ........... OPMN Configuration ............
+              <header data:text="OPMN_CONFIGURATION_HEADER@strings">
+               <boundAttribute name="rendered">
+                <and>
+                 <dataObject select="isLocal" source="pageData"/>
+		 <not>
+		  <dataObject select="NO_OPMN" source="pageData"/>
+		 </not>
+                </and>
+               </boundAttribute>
+               <contents>
+                <labeledFieldLayout labelWidth="10%" fieldWidth="90%">
+                 <contents>
+                  <messageTextInput name="NODE_MANAGER_PORT_RANGE" columns="30"
+                   data:prompt="NODE_MANAGER_PORT_RANGE@strings"
+                   data:text="NODE_MANAGER_PORT_RANGE@pageData">
+                   <boundAttribute name="readOnly">
+                    <not>
+                     <dataObject select="isLocal" source="pageData"/>
+                    </not>
+                   </boundAttribute>
+                   <boundAttribute name="styleClass">
+                    <if>
+                     <dataObject select="isLocal" source="pageData"/>
+                     <fixed text="OraFieldText"/>
+                     <fixed text="OraDataText"/>
+                    </if>
+                   </boundAttribute>
+                  </messageTextInput>
+                  <messageTextInput name="NODE_JAVA_BIN" columns="30"
+                   data:prompt="NODE_JAVA_BIN@strings"
+                   data:text="NODE_JAVA_BIN@pageData">
+                   <boundAttribute name="rendered">
+                    <not>
+                     <dataObject select="TYPE" source="pageData"/>
+                    </not>
+                   </boundAttribute>
+                   <boundAttribute name="readOnly">
+                    <not>
+                     <dataObject select="isLocal" source="pageData"/>
+                    </not>
+                   </boundAttribute>
+                   <boundAttribute name="styleClass">
+                    <if>
+                     <dataObject select="isLocal" source="pageData"/>
+                     <fixed text="OraFieldText"/>
+                     <fixed text="OraDataText"/>
+                    </if>
+                   </boundAttribute>
+                  </messageTextInput>
+                  <messageTextInput name="NODE_JAVA_PARAMETERS"
+                   columns="30" rows="3"
+                   data:prompt="NODE_JAVA_PARAMETERS@strings"
+                   data:text="NODE_JAVA_PARAMETERS@pageData">
+                   <boundAttribute name="rendered">
+                    <not>
+                     <dataObject select="TYPE" source="pageData"/>
+                    </not>
+                   </boundAttribute>
+                   <boundAttribute name="readOnly">
+                    <not>
+                     <dataObject select="isLocal" source="pageData"/>
+                    </not>
+                   </boundAttribute>
+                  </messageTextInput>
+                 </contents>
+                </labeledFieldLayout>
+               </contents>
+              </header>
+              -->
+
+              <!-- FDK properties was here, moved to right column in AS 10.1.3 -->
+             </contents>
+            </header>
+
+            <dataScope>
+             <contents>
+              <formValue name="ISNEW"
+                         data:value="isNew@pageData"/>
+              <formValue name="NAME"
+                         data:value="NAME@pageData">
+               <boundAttribute name="rendered">
+                <not>
+                 <dataObject select="isNew" source="pageData"/>
+                </not>
+               </boundAttribute>
+              </formValue>
+              <formValue name="DISPLAY_NAME"
+                         data:value="DISPLAY_NAME@pageData">
+               <boundAttribute name="rendered">
+                <or>
+                 <dataObject select="TYPE" source="pageData"/>
+                 <not>
+                  <dataObject select="isLocal" source="pageData"/>
+                 </not>
+                </or>
+               </boundAttribute>
+              </formValue>
+              <formValue name="NO_OPMN"
+                         data:value="NO_OPMN@pageData"/>
+              <formValue name="STATUS_MISMATCHED"
+                         data:value="STATUS_MISMATCHED@pageData"/>
+              <formValue name="PROCESS_TYPE_STATUS"
+                         data:value="PROCESS_TYPE_STATUS@pageData"/>
+              <!-- hidden for AS 10.1.3
+              <formValue name="HOST_NAME"
+                         data:value="HOST_NAME@pageData">
+               <boundAttribute name="rendered">
+                <not>
+                 <dataObject select="isLocal" source="pageData"/>
+                </not>
+               </boundAttribute>
+              </formValue>
+              -->
+              <formValue name="MIDDLE_TIER"
+                         data:value="MIDDLE_TIER@pageData"/>
+              <formValue name="TYPE"
+                         data:value="TYPE@pageData"/>
+              <formValue name="ISLOCAL"
+                         data:value="isLocal@pageData"/>
+              <formValue name="OC4J_INSTANCE"
+                         data:value="OC4J_INSTANCE@pageData">
+               <boundAttribute name="rendered">
+                <and>
+                 <not>
+                  <dataObject select="isNew" source="pageData"/>
+                 </not>
+                 <dataObject select="TYPE" source="pageData"/>
+                </and>
+               </boundAttribute>
+              </formValue>
+              <formValue name="OC4J_HOME_PAGE"
+                         data:value="OC4J_HOME_PAGE@pageData">
+               <boundAttribute name="rendered">
+                <and>
+                 <not>
+                  <dataObject select="isNew" source="pageData"/>
+                 </not>
+                 <dataObject select="TYPE" source="pageData"/>
+                </and>
+               </boundAttribute>
+              </formValue>
+              <!-- fix for 4433331
+              <formValue name="ACTIVE"
+                         data:value="ACTIVE@pageData">
+               <boundAttribute name="rendered">
+                <not>
+                 <dataObject select="isLocal" source="pageData"/>
+                </not>
+               </boundAttribute>
+              </formValue>
+              -->
+              <formValue name="NODE_MANAGER_PORT_RANGE"
+                         data:value="NODE_MANAGER_PORT_RANGE@pageData">
+               <boundAttribute name="rendered">
+                <not>
+                 <dataObject select="isLocal" source="pageData"/>
+                </not>
+               </boundAttribute>
+              </formValue>
+              <formValue name="NODE_JAVA_BIN"
+                         data:value="NODE_JAVA_BIN@pageData">
+               <boundAttribute name="rendered">
+                <and>
+                 <not>
+                  <dataObject select="TYPE" source="pageData"/>
+                 </not>
+                 <not>
+                  <dataObject select="isLocal" source="pageData"/>
+                 </not>
+                </and>
+               </boundAttribute>
+              </formValue>
+              <formValue name="NODE_JAVA_PARAMETERS"
+                         data:value="NODE_JAVA_PARAMETERS@pageData">
+               <boundAttribute name="rendered">
+                <and>
+                 <not>
+                  <dataObject select="TYPE" source="pageData"/>
+                 </not>
+                 <not>
+                  <dataObject select="isLocal" source="pageData"/>
+                 </not>
+                </and>
+               </boundAttribute>
+              </formValue>
+             </contents>
+            </dataScope>
+
+           </contents>
+          </cellFormat>
+
+          <cellFormat width="50%" vAlign="top">
+           <contents>
+             <!-- move FDK properties to right column for AS 10.1.3 -->
+              <!-- ........... FDK Properties ............. -->
+              <header data:text="PROPERTIES_HEADER@strings">
+               <contents>
+                <labeledFieldLayout labelWidth="80%" fieldWidth="20%">
+                 <contents>
+                  <messageTextInput name="MAXIMUM_SESSIONS_PER_USER" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_MAXIMUM_SESSIONS_PER_USER@strings"
+                   data:text="MAXIMUM_SESSIONS_PER_USER@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput name="MAXIMUM_CONCURRENT_REQUESTS_PER_USER" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_MAXIMUM_CONCURRENT_REQUESTS_PER_USER@strings"
+                   data:text="MAXIMUM_CONCURRENT_REQUESTS_PER_USER@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput name="TRANSACTION_TIMEOUT" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_TRANSACTION_TIMEOUT@strings"
+                   data:text="TRANSACTION_TIMEOUT@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput name="TRANSACTION_TIMEOUT_CHECK_INTERVAL" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_TRANSACTION_TIMEOUT_CHECK_INTERVAL@strings"
+                   data:text="TRANSACTION_TIMEOUT_CHECK_INTERVAL@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput name="GUEST_SESSION_POOL_TARGET_SIZE" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_GUEST_SESSION_POOL_TARGET_SIZE@strings"
+                   data:text="GUEST_SESSION_POOL_TARGET_SIZE@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput name="GUEST_SESSION_POOL_MAXIMUM_SIZE" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_GUEST_SESSION_POOL_MAXIMUM_SIZE@strings"
+                   data:text="GUEST_SESSION_POOL_MAXIMUM_SIZE@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput name="SYSTEM_SESSION_POOL_TARGET_SIZE" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_SYSTEM_SESSION_POOL_TARGET_SIZE@strings"
+                   data:text="SYSTEM_SESSION_POOL_TARGET_SIZE@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput name="SYSTEM_SESSION_POOL_MAXIMUM_SIZE" columns="5"
+                   data:prompt="NODE_FDK_PROPERTY_SYSTEM_SESSION_POOL_MAXIMUM_SIZE@strings"
+                   data:text="SYSTEM_SESSION_POOL_MAXIMUM_SIZE@pageData">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                 </contents>
+                </labeledFieldLayout>
+               </contents>
+              </header>
+
+            <!-- hidden for AS 10.1.3
+
+            ............ Logging ............
+
+            <header data:text="LOGGING_HEADER@strings">
+             <contents>
+              <labeledFieldLayout labelWidth="10%" fieldWidth="90%">
+               <contents>
+                <messageTextInput name="LOG_FILENAME" rows="3"
+                                  readOnly="true"
+                                  data:prompt="NODE_LOG_BASE_LOG_FILE@strings"
+                                  data:shortDesc="NODE_LOG_BASE_LOG_FILE@strings"
+                                  data:text="LOG_FILENAME@pageData">
+                 <boundAttribute name="rendered">
+                  <and>
+                   <not>
+                    <dataObject select="isNew" source="pageData"/>
+                   </not>
+                   <not>
+                    <dataObject select="TYPE" source="pageData"/>
+                   </not>
+                  </and>
+                 </boundAttribute>
+                </messageTextInput>
+                <messageChoice name="LOG_FORMAT"
+                               data:prompt="NODE_LOG_FORMAT@strings"
+                               data:selectedValue="LOG_FORMAT@pageData">
+                 <contents data:childData="option@logFormatOptionData">
+                  <option data:text="text" 
+                          data:value="value"/>
+                 </contents>
+                 <boundAttribute name="rendered">
+                  <not>
+                   <dataObject select="TYPE" source="pageData"/>
+                  </not>
+                 </boundAttribute>
+                </messageChoice>
+               </contents>
+              </labeledFieldLayout>
+
+              .. Logging: All Loggers ..
+
+              <header data:text="NODE_LOG_ALL_LOGGERS@strings">
+               <contents>
+                <hGrid id="virtualLoggerGrid" 
+                       width="100%"
+                       data:alternateText="NODE_LOG_NO_DATA@strings" 
+                       partialRenderMode="self"
+                       data:treeData="@logGridData"
+                       data:proxy="virtualLoggerGrid@hgridProxy"
+                       data:summary="LOG_LEVEL_HGRID_SUMMARY@strings"
+                       formSubmitted="true">
+                 <nodeStamp>
+                  <column>
+                   <columnFormat width="100%"/> 
+                   <columnHeader>
+                     <text data:text="NAME@strings"/>
+                   </columnHeader>
+                   <contents>
+                    <text data:text="text"/>
+                   </contents>
+                  </column>
+                 </nodeStamp>
+
+                 <columnFormats>
+                  <columnFormat/>
+                 </columnFormats>
+
+                 <columnHeaderStamp>
+                  <text data:text="text"/>
+                 </columnHeaderStamp>
+
+                 <columnHeaderData>
+                  <col data:text="NODE_LOG_HGRID_LEVEL_COL_HEADER@strings"/>
+                 </columnHeaderData>
+
+                 <contents>
+                  <messageChoice name="LOGGER_LEVEL"
+                          data:prompt="NODE_LOG_HGRID_LEVEL_COL_HEADER@strings"
+                          data:selectedValue="level">
+                   <boundAttribute name="childData">
+                    <if>
+                     <dataObject select="isRootLogger"/>
+                     <dataObject select="option" 
+                                 source="rootLogLevelOptionData"/>
+                     <dataObject select="option" 
+                                 source="logLevelOptionData"/>
+                    </if>
+                   </boundAttribute>
+                   <contents>
+                    <option data:text="text" 
+                            data:value="value"/>
+                   </contents>
+                  </messageChoice>
+
+                  <formValue name="hiddenLoggerName"
+                             data:value="text"/>
+	
+                 </contents>
+                </hGrid>
+               </contents>
+              </header>
+
+              .. Logging: Log Rotation ..
+
+              <header data:text="NODE_LOG_LOG_ROTATION_HEADER@strings">
+               <boundAttribute name="rendered">
+                <not>
+                 <dataObject select="TYPE" source="pageData"/>
+                </not>
+               </boundAttribute>
+               <contents>
+                <labeledFieldLayout labelWidth="10%" fieldWidth="90%">
+                 <contents>
+                  <messageTextInput columns="3"
+                      name="MAX_LOG_FILE_SIZE"
+                      data:prompt="NODE_LOG_MAX_FILE_SIZE@strings"
+                      data:text="MAX_LOG_FILE_SIZE@pageData"
+                      data:tip="MAX_LOG_FILE_SIZE_TIP@strings">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2047"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput columns="3"
+                      name="LOG_ROTATION_INTERVAL"
+                      data:prompt="NODE_LOG_ROTATION_INTERVAL@strings"
+                      data:text="LOG_ROTATION_INTERVAL@pageData"
+                      data:tip="LOG_ROTATION_INTERVAL_TIP@strings">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="596"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                  <messageTextInput columns="3"
+                      name="MAX_LOG_FILES"
+                      data:prompt="NODE_LOG_MAX_FILES@strings"
+                      data:text="MAX_LOG_FILES@pageData"
+		      data:tip="MAX_LOG_FILES_TIP@strings">
+                   <onSubmitValidater>
+                    <decimal maxScale="0" minValue="0" maxValue="2147483647"/>
+                   </onSubmitValidater>
+                  </messageTextInput>
+                 </contents>
+                </labeledFieldLayout>
+               </contents>
+              </header>                
+             </contents>
+            </header>
+
+            <dataScope>
+             <contents>
+              <formValue name="LOG_FILENAME"
+                         data:value="LOG_FILENAME@pageData">
+               <boundAttribute name="rendered">
+                <and>
+                 <not>
+                  <dataObject select="isNew" source="pageData"/>
+                 </not>
+                 <not>
+                  <dataObject select="TYPE" source="pageData"/>
+                 </not>
+                </and>
+               </boundAttribute>
+              </formValue>
+             </contents>
+            </dataScope>
+            -->
+
+           </contents>
+          </cellFormat>
+         </contents>
+        </rowLayout>
+       </contents>
+      </tableLayout>
+
+      <!-- ................... Services Table ................. -->
+
+      <header data:text="SERVICES@strings">
+       <contents>
+
+        <!-- no paging for services table -->
+
+        <table name="NodeConfigServicesTable"
+               id="table_NodeConfigServicesTable"
+               partialRenderMode="self"
+               width="100%"
+               data:summary="NODE_CONFIGURATION_SERVICES_TABLE_SUMMARY@strings"
+               data:alternateText="NO_ITEMS_FOUND@strings"
+               data:tableData="row@serviceTableData"
+               data:columnHeaderData="column@serviceTableColumnHeaderData"
+               formSubmitted="true">
+
+         <columnHeaderStamp>
+          <boundText select="value"/>
+         </columnHeaderStamp>
+
+         <columnFormats>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="iconButtonFormat"/>
+         </columnFormats>
+
+         <tableFormat tableBanding="rowBanding"/>
+
+         <tableSelection>
+          <singleSelection data:shortDesc="SELECT@strings"
+			   selectedIndex="0">
+           <contents>
+            <submitButton data:text="REMOVE@strings"
+                          ctrl:event="removeService" />
+           </contents>
+          </singleSelection>
+         </tableSelection>
+                          
+         <tableActions>
+          <submitButton data:text="ADD@strings"
+                        ctrl:event="addService"/>
+         </tableActions>
+
+         <contents>
+          <link data:text="serviceName">
+           <primaryClientAction>
+            <fireAction event="clickEditService">
+             <parameters>
+              <parameter key="ServiceName" data:value="serviceName"/>
+             </parameters>
+            </fireAction>
+           </primaryClientAction>
+          </link>
+          <styledText data:text="serviceConfig"/>
+          <image data:source="serviceActiveIcon"
+                 data:shortDesc="serviceActiveIconTip"/>
+          <formValue name="hiddenServiceName"
+                     data:value="serviceName"/>
+         </contents>
+        </table>
+
+       </contents>
+      </header>
+
+      <!-- ................... Servers Table ................. -->
+  
+      <header data:text="SERVERS@strings">
+       <contents>
+        <styledText data:text="NEED_ACTIVE_SERVICE_INSTRUCTION@strings"
+                    styleClass="OraInstructionText"
+                    rendered="false">
+         <boundAttribute name="rendered">
+          <not>
+           <dataObject select="hasActiveService"
+                       source="serviceTableData"/>
+          </not>
+         </boundAttribute>
+        </styledText>
+
+        <!-- Table Filter -->
+         <dataScope>
+         <provider>
+          <data name="tableIdData">
+           <inline tableId="table_NodeConfigServersTable"/>
+          </data>
+         </provider>
+         <contents>
+          <include ctrl:node="include/TableFilterPPR"/>
+          <formValue name="table_level" value="inner"/>
+         </contents>
+        </dataScope>
+
+        <table name="NodeConfigServersTable"
+               id="table_NodeConfigServersTable"
+               partialRenderMode="self"
+               width="100%"
+               data:summary="NODE_CONFIGURATION_SERVERS_TABLE_SUMMARY@strings"
+               data:alternateText="NO_ITEMS_FOUND@strings"
+               data:tableData="row@serverTableData"
+               data:columnHeaderData="column@serverTableColumnHeaderData"
+               data:value="startingCount@serverTableData"
+               data:maxValue="totalCount@serverTableData"
+               data:blockSize="blockSize@serverTableData"
+               showAll="yes"
+               formSubmitted="true">
+
+         <columnHeaderStamp>
+          <sortableHeader data:text="text" data:value="value">
+           <boundAttribute name="sortable">
+            <defaulting>
+             <dataObject data:select="value" source="sortColumnHeader"/>
+             <dataObject data:source="(value)@sortColumnHeader"/>
+             <dataObject select="sort"/>
+            </defaulting>
+           </boundAttribute>
+          </sortableHeader>
+         </columnHeaderStamp>
+
+         <columnFormats>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="iconButtonFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>              
+          <columnFormat columnDataFormat="numberFormat"/>              
+          <columnFormat columnDataFormat="iconButtonFormat"/>              
+         </columnFormats>
+
+         <tableFormat tableBanding="rowBanding"/>
+
+         <tableSelection>
+          <singleSelection data:shortDesc="SELECT@strings"
+			   selectedIndex="0">
+           <contents>
+            <submitButton data:text="REMOVE@strings"
+                          ctrl:event="removeServer" />
+           </contents>
+          </singleSelection>
+         </tableSelection>
+                          
+         <tableActions>
+          <flowLayout>
+           <contents>
+            <submitButton data:text="ADD@strings"
+                          ctrl:event="addServer">
+             <boundAttribute name="disabled">
+              <not>
+               <dataObject select="hasActiveService"
+                           source="serviceTableData"/>
+              </not>
+             </boundAttribute>
+            </submitButton>
+            <submitButton data:text="ACTIVATE_DEACTIVATE@strings"
+                          ctrl:event="activateInactivateServers">
+             <boundAttribute name="disabled">
+              <not>
+               <dataObject select="hasActiveService"
+                           source="serviceTableData"/>
+              </not>
+             </boundAttribute>
+            </submitButton>
+           </contents>
+          </flowLayout>
+         </tableActions>
+
+         <contents>
+          <link data:text="serverName">
+           <primaryClientAction>
+            <fireAction event="clickEditServer">
+             <parameters>
+              <parameter key="ServerName" data:value="serverName"/>
+             </parameters>
+            </fireAction>
+           </primaryClientAction>
+          </link>
+          <styledText data:text="serverConfig"/>
+          <image data:source="serverActiveIcon"
+                 data:shortDesc="serverActiveIconTip"/>
+          <styledText data:text="serverService"/>
+          <styledText data:text="serverInitialPriority"/>
+          <image data:source="serverInitiallyStartedIcon"
+                 data:shortDesc="serverInitiallyStartedIconTip"/>
+          <formValue name="hiddenServerName"
+                     data:value="serverName"/>
+         </contents>
+        </table>
+
+       </contents>
+      </header>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="null">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="cancel">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doCancel"/>
+  </event>
+
+  <!-- hidden for AS 10.1.3
+  <event name="newNodeConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="newNodeConfig"/>
+  </event>
+  -->
+
+  <event name="updateNodeConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="updateNodeConfig"/>
+  </event>
+
+  <event name="addService">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doServiceEvent"/>
+  </event>
+
+  <event name="clickEditService">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doServiceEvent"/>
+  </event>
+
+  <event name="removeService">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doServiceEvent"/>
+  </event>
+
+  <event name="addServer">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doServerEvent"/>
+  </event>
+
+  <event name="clickEditServer">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doServerEvent"/>
+  </event>
+
+  <event name="removeServer">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doServerEvent"/>
+  </event>
+
+  <event name="activateInactivateServers">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doServerEvent"/>
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="doSearch"/>
+  </event>
+
+  <!-- hidden for AS 10.1.3
+  <event name="displayDeactivate">
+   <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+           method="displayDeactivateWarning"/>
+  </event>
+  -->
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+
+  <!-- Loggers -->
+  <!-- hidden for AS 10.1.3
+  <event name="expand expandAll collapseAll focus">
+   <compound>
+    <method class="oracle.ifs.admin.em.ias.uix.NodeConfigurationData"
+            method="doSaveFormData"/>
+    <method class="oracle.ifs.admin.em.ias.uix.HGridData"
+            method="doHGridEvent"/>
+   </compound>
+  </event>
+  -->
+
+ </ctrl:handlers>
+
+</ctrl:page>

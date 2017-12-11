@@ -1,0 +1,115 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class FileGroups {
+
+    /**Map linkAdminGroupsCollection <-> edu.ucla.library.digital.dlcs.model.LinkAdminGroups
+     * @associates <{edu.ucla.library.digital.dlcs.model.LinkAdminGroups}>
+     */
+    private List linkAdminGroupsCollection;
+
+    /**Map projects <-> edu.ucla.library.digital.dlcs.model.Projects
+     * @associates <{edu.ucla.library.digital.dlcs.model.Projects}>
+     */
+    private ValueHolderInterface projects;
+
+    /**Map contentFilesCollection <-> edu.ucla.library.digital.dlcs.model.ContentFiles
+     * @associates <{edu.ucla.library.digital.dlcs.model.ContentFiles}>
+     */
+    private List contentFilesCollection;
+    private Long fileGroupidPk;
+    private String fileGroupTitle;
+    private String description;
+
+    public FileGroups() {
+        super();
+        this.linkAdminGroupsCollection = new ArrayList();
+        this.projects = new ValueHolder();
+        this.contentFilesCollection = new ArrayList();
+    }
+
+    public void addContentFiles(int index, ContentFiles aContentFiles) {
+        this.contentFilesCollection.add(index, aContentFiles);
+        aContentFiles.setFileGroups(this);
+    }
+
+    public void addContentFiles(ContentFiles aContentFiles) {
+        this.contentFilesCollection.add(aContentFiles);
+        aContentFiles.setFileGroups(this);
+    }
+
+    public void addLinkAdminGroups(int index, 
+                                   LinkAdminGroups aLinkAdminGroups) {
+        this.linkAdminGroupsCollection.add(index, aLinkAdminGroups);
+        aLinkAdminGroups.setFileGroups(this);
+    }
+
+    public void addLinkAdminGroups(LinkAdminGroups aLinkAdminGroups) {
+        this.linkAdminGroupsCollection.add(aLinkAdminGroups);
+        aLinkAdminGroups.setFileGroups(this);
+    }
+
+    public List<ContentFiles> getContentFilesCollection() {
+        return this.contentFilesCollection;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getFileGroupTitle() {
+        return this.fileGroupTitle;
+    }
+
+    public Long getFileGroupidPk() {
+        return this.fileGroupidPk;
+    }
+
+    public List<LinkAdminGroups> getLinkAdminGroupsCollection() {
+        return this.linkAdminGroupsCollection;
+    }
+
+    public Projects getProjects() {
+        return (Projects)this.projects.getValue();
+    }
+
+    public void removeContentFiles(ContentFiles aContentFiles) {
+        this.contentFilesCollection.remove(aContentFiles);
+        aContentFiles.setFileGroups(null);
+    }
+
+    public void removeLinkAdminGroups(LinkAdminGroups aLinkAdminGroups) {
+        this.linkAdminGroupsCollection.remove(aLinkAdminGroups);
+        aLinkAdminGroups.setFileGroups(null);
+    }
+
+    public void setContentFilesCollection(List<ContentFiles> contentFilesCollection) {
+        this.contentFilesCollection = contentFilesCollection;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setFileGroupTitle(String fileGroupTitle) {
+        this.fileGroupTitle = fileGroupTitle;
+    }
+
+    public void setFileGroupidPk(Long fileGroupidPk) {
+        this.fileGroupidPk = fileGroupidPk;
+    }
+
+    public void setLinkAdminGroupsCollection(List<LinkAdminGroups> linkAdminGroupsCollection) {
+        this.linkAdminGroupsCollection = linkAdminGroupsCollection;
+    }
+
+    public void setProjects(Projects projects) {
+        this.projects.setValue(projects);
+    }
+
+}

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpConfiguration version="2.0" xmlns="http://xmlns.oracle.com/help/web/config">
+
+<!-- Specify the branding information.  You can specify
+     brandingText or brandingImage, if both are specified
+     brandingText will be used -->
+
+  <brandings>
+    <branding text="Oracle Enterprise Manager Online Help" />
+  </brandings>
+
+<!-- OHW automatically uses the system default Locale and
+     the default encoding for that Locale for Locale
+     sensitive operations.  You can override this behavior
+     by filling out the localeSettings. Note that the encoding
+     for the content HTML files is specified in those files
+     directly.
+     
+     Within each local definition specify the set of books for that locale. 
+     The books element can contain any number of helpBook objects, helpSet 
+     objects or a mixture of both.
+
+ -->
+ 
+ 
+ <!-- note that the non-context sensitive helpsets are in English for all
+      locales other than Japanese (info as of AS10.1.3) -->
+
+  <locales>
+    <locale language="en" country="US">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="de">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_de.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_de.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help_de.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_de.jar" location="jpsm_cs.hs"/>
+      </books>    
+    </locale>
+    <locale language="es">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_es.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_es.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help_es.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_es.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="es" country="ES">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_es_ES.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_es_ES.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help_es_ES.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_es_ES.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="fr">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_fr.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_fr.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help_fr.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_fr.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="fr" country="CA">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_fr_CA.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_fr_CA.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help_fr_CA.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_fr_CA.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="it">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_it.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_it.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help_it.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_it.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="ja">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help_ja.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_ja.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help_ja.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_ja.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help_ja.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_ja.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="ko">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_ko.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_ko.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_ko.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="pt" country="BR">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_pt_BR.jar" location="oc_4jstand_cs.hs"/>
+ 	<helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_pt_BR.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_pt_BR.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="zh" country="CN">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_zh_CN.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_zh_CN.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_zh_CN.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+    <locale language="zh" country="TW">
+      <books>
+        <helpSet id="oc_4jstand" jar="oc_4jstand/oc_4jstand_help.jar" location="oc_4jstand.hs"/>
+        <helpSet id="oc_4jstand_cs" jar="oc_4jstand_cs/oc_4jstand_cs_help_zh_TW.jar" location="oc_4jstand_cs.hs"/>
+        <helpSet id="content" jar="content/content_help.jar" location="content.hs"/>
+        <helpSet id="content_cs" jar="content_cs/content_cs_help_zh_TW.jar" location="content_cs.hs"/>
+        <helpSet id="jpsm" jar="jpsm/jpsm_help.jar" location="jpsm.hs"/>
+        <helpSet id="jpsm_cs" jar="jpsm_cs/jpsm_cs_help_zh_TW.jar" location="jpsm_cs.hs"/>
+      </books>
+    </locale>
+  </locales>
+
+  <!-- Navigator aliases - to allow for legacy navigator names. -->
+  <navigatorAliases>
+    <alias name="oracle.help.navigator.tocNavigator.TOCNavigator" 
+           value="oracle.help.web.navigator.tocNavigator.TOCTreeNavigator" />
+  </navigatorAliases>
+
+<!-- The maxSearchThreads parameter determines the maximum
+     number of threads that will be spawned for searching.
+     This will be the maximum number of simultaneous
+     searches that OHW can perform.  This value should be
+     carefully tuned to correspond to the estimated load
+     on the servlet.
+     
+     Specify the merging behavior by providing values for the 
+     combineBooks and useLabelInfo attributes.     
+-->
+
+  <parameters>
+    <combineBooks>true</combineBooks>
+    <useLabelInfo>false</useLabelInfo>
+    <maxSearchThreads>10</maxSearchThreads>
+    <defaultHomeID>myTopicID</defaultHomeID>
+  </parameters>
+
+</helpConfiguration>

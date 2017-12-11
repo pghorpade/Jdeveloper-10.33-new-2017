@@ -1,0 +1,37 @@
+<messageBox xmlns="http://xmlns.oracle.com/uix/ui"
+            xmlns:ui="http://xmlns.oracle.com/uix/ui" 
+            xmlns:ctrl="http://xmlns.oracle.com/uix/controller" 
+            xmlns:data="http://xmlns.oracle.com/uix/ui"
+            rendered="false">
+<!--
+ <boundAttribute name="message">
+  <defaulting>
+   <dataObject select="message" source="ui:messageData"/>
+   <dataObject select="message" source="ifsMessageData"/>
+  </defaulting>
+ </boundAttribute>
+-->
+ <boundAttribute name="messageType">
+  <defaulting>
+   <dataObject select="messageType" source="ui:messageData"/>
+   <dataObject select="messageType" source="ifsMessageData"/>
+  </defaulting>
+ </boundAttribute>
+ <boundAttribute name="rendered">
+  <defaulting>
+   <dataObject select="rendered" source="ui:messageData"/>
+   <dataObject select="rendered" source="ifsMessageData"/>
+  </defaulting>
+ </boundAttribute>
+
+ <contents>
+  <formattedText styleClass="OraPromptText">
+   <boundAttribute name="text">
+    <defaulting>
+     <dataObject select="message" source="ui:messageData"/>
+     <dataObject select="message" source="ifsMessageData"/>
+    </defaulting>
+   </boundAttribute>
+  </formattedText>           
+ </contents>
+</messageBox>

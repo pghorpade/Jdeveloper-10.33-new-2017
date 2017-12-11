@@ -1,0 +1,85 @@
+<?xml version="1.0" ?> 
+<creatorConfiguration xmlns="http://xmlns.oracle.com/adfdt/view/creatorConfiguration">
+
+  <prefixMappings>
+   <prefixMapping prefix="af" namespace="http://xmlns.oracle.com/adf/faces" /> 
+   <prefixMapping prefix="afh" namespace="http://xmlns.oracle.com/adf/faces/html" /> 
+   <prefixMapping prefix="h" namespace="http://java.sun.com/jsf/html" /> 
+   <prefixMapping prefix="f" namespace="http://java.sun.com/jsf/core" /> 
+  </prefixMappings>
+
+  <creatorInfos creatorMappings="oracle.adfdtinternal.view.faces.binding.creator.FacesCreatorMappings" resourceBundle="oracle.vcr.datacontrol.dt.resource.VCRCreatorBundle">
+
+<!-- ############## PRIMITIVE URI CREATORS ############### -->
+   
+    <creator
+      name="VCR_GOLINK_ADF_FACES"
+      bindingsTypes="vcrPrimitiveURI"
+      rank=".4f"
+      namespace="http://xmlns.oracle.com/adf/faces"
+      representativeNamespace="http://java.sun.com/jsf/html"
+      representativeLocalName="commandLink"
+      localName="goLink"
+      properties="readOnly rebindOnly">
+      <![CDATA[
+         #set ($uniqueId = $dt.generateUniqueIdForView("goLink"))
+         <af:goLink 
+           text="$uniqueId"
+           id="$uniqueId"
+           #if ($properties.get("primitive:baseExpression"))
+             destination="${model.createCurrentExpression($properties.get("primitive:baseExpression"))}"
+           #else
+             destination="${model.getCurrentExpression()}"
+           #end                    
+         />
+      ]]>
+    </creator>
+
+    <!-- TODO: Add this when bug 5527164 is fixed -->
+    <!-- 
+    <creator
+      name="VCR_GOBUTTON_ADF_FACES"
+      bindingsTypes="vcrPrimitiveURI"
+      rank=".4f"
+      namespace="http://xmlns.oracle.com/adf/faces"
+      representativeNamespace="http://java.sun.com/jsf/html"
+      representativeLocalName="commandButton"
+      localName="goButton"
+      properties="readOnly rebindOnly">
+      <![CDATA[
+         #set ($uniqueId = $dt.generateUniqueIdForView("goButton"))
+         <af:goButton 
+           text="$uniqueId"
+           id="$uniqueId"
+           #if ($properties.get("primitive:baseExpression"))
+             destination="${model.createCurrentExpression($properties.get("primitive:baseExpression"))}"
+           #else
+             destination="${model.getCurrentExpression()}"
+           #end                    
+         />
+      ]]>
+    </creator> -->
+
+    <creator
+      name="VCR_OBJECTIMAGE_ADF_FACES"
+      bindingsTypes="vcrPrimitiveURI"
+      rank=".8f"
+      namespace="http://xmlns.oracle.com/adf/faces"
+      representativeNamespace="http://java.sun.com/jsf/html"
+      representativeLocalName="graphicImage"
+      localName="objectImage"
+      properties="readOnly rebindOnly">
+      <![CDATA[
+        <af:objectImage 
+          #if ($properties.get("primitive:baseExpression"))
+           source="${model.createCurrentExpression($properties.get("primitive:baseExpression"))}"
+          #else
+            source="${model.getCurrentExpression()}"
+          #end                    
+        />
+      ]]>
+    </creator>
+
+  </creatorInfos>
+
+</creatorConfiguration>

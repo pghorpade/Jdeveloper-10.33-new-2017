@@ -1,0 +1,126 @@
+<!--
+This is the configuration file for Stand-Alone Console web application. It is
+read at web application startup time. Entries in this file are processed in the
+order they exist in this file. The entry name and attribute name are case
+sensitive.
+
+     Version 1.0
+
+   MODIFIED    (MM/DD/YY)
+      xiawu     08/27/05 - add ias domain
+      sourishi  08/10/05 - adding IntegratorsIntegration 
+      jtrichar  04/29/05 - add cluster pages 
+      xiawu     03/08/05 - Add configuration for JMX domains that are recognized by system mbean browser
+      jtrichar  07/08/04 - 
+      sparmesw  05/21/04 - Add TopLink integration 
+      xiawu     03/18/04 - Add integration for j2ee Browser 
+      jtrichar  02/03/04 - fix path 
+      echolank  01/27/04 - echolank_initial_oc4jstudio_checkin 
+      echolank  08/15/03 - merge from 401 to main 
+      zpan      05/27/03 - add dcm dependency
+      lyang     03/20/03 - 
+      lyang     02/21/03 - add back missing entries
+      skini     02/18/03 - skini_2771051_2_4.0.1
+      xshi      11/01/02 - add oid
+      lyang     08/14/02 -
+      jsutton   07/27/02 - jsutton_merge_903_phase2
+      jsutton   07/27/02 - create new file for standalone console
+
+-->
+
+<consoleConfig>
+<!--
+==============================================================================
+  Add integration classes.
+==============================================================================
+  An integration class is the bootstrap class for all integrations.
+  Attributes:
+    name: the name of the integrated component.
+    class: the Java class name of the integration class. It should be a
+           subclass of oracle.sysman.emSDK.intg.Integration.
+  <integration
+      name="myIntegration"
+      class="myPackage.MyClassName"/>
+-->
+  <integration name="base.console"
+      class="oracle.sysman.ias.studio.app.StudioConsoleIntg"/>
+  <integration name="ascontrol"
+      class="oracle.sysman.ias.studio.ProjectZIntegration"/>
+  <integration name="ascontrol.j2ee" 
+      class="oracle.sysman.ias.studio.j2ee.J2eeIntegration"/> 
+  <integration name="ascontrol.toplink" 
+      class="oracle.sysman.ias.studio.oc4j.toplink.TopLinkIntegration"/> 
+  <integration name="ascontrol.cluster" 
+      class="oracle.sysman.ias.studio.cluster.ClusterIntegration"/>
+  <integration name="ascontrol.integrators"
+      class="oracle.sysman.ias.studio.IntegratorsIntegration"/>
+
+<!--
+==============================================================================
+  Register the customized target homepage.
+==============================================================================
+  This will override the default homepage in Console. Console append the target
+  name and target type to the specified URL as the URL's query string.
+  Attributes:
+    targetType: the type of the target whose homepage is overridden.
+    url: the URL of the new homepage. This can be a relative URL or an
+         absolute URL.
+    encodeCharacter: whether the target name and target type should be encoded.
+         The default is true.
+  <targetHomePageURL
+      targetType="the_target_type"
+      url="theURL"
+      encodeCharacter="false"/>
+-->
+
+<!--
+==============================================================================
+  Add "Related Links" to a page.
+==============================================================================
+  This tag adds a related link to the page. The related links are displayed
+  in the page. It is linked to the specified URL. Once the link is clicked,
+  a new browser window will be brought up by default and the page specified by
+  "url" will be displayed.
+  <relatedLink
+      pageType="theTypeOfThePage"
+      text="My Link"
+      url="myPageURL"
+      newWindow="false"
+      encodeCharacter="false"/>
+-->
+
+<!--
+==============================================================================
+  Add a tab to the target's homepage.
+==============================================================================
+  This tag adds a tab to the target's homepage. The tag is displayed with a
+  link in the target's homepage. Once it is clicked, the content of the "url"
+  will be embedded in the target homepage.
+  <targetHomePageTab
+      targetType="the_target_type"
+      text="My Tab"
+      url="myPageURL"
+      encodeCharacter="false"/>
+-->
+
+<!--
+==============================================================================
+  Specify the domain name of JSR77 mbean domain 
+==============================================================================
+  This tag specifies the name of JSR77 mbean domain. 
+-->  
+  <j2eeMBeanDomain   name="oc4j" />
+  <j2eeMBeanDomain   name="ias" />
+
+<!--
+==============================================================================
+  Add additional JMX domains that are recognized by SystemMBeanBrowser.
+==============================================================================
+  This tag specifies the additional JMX Domains that are going to be recognized 
+  by SystemMbeanBrowser. 
+-->
+
+  <systemMBeanDomain name="java.lang" />
+  <systemMBeanDomain name="java.util.logging" />
+
+</consoleConfig>

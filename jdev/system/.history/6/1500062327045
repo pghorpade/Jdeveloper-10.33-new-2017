@@ -1,0 +1,164 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class DescTerms {
+
+	private List descValuesCollection;
+	private List descQualifiersCollection;
+	private List descControlValuesCollection;
+	private ValueHolderInterface coreDescTerms;
+	private ValueHolderInterface projects;
+	private Long descTermidPk;
+	private String termLabel;
+	private String controlValueFlag;
+	private String qualifierFlag;
+	private String repeatFlag;
+	private String requiredFlag;
+
+public DescTerms() {
+	super();
+	this.descValuesCollection = new ArrayList();
+	this.descQualifiersCollection = new ArrayList();
+	this.descControlValuesCollection = new ArrayList();
+	this.coreDescTerms = new ValueHolder();
+	this.projects = new ValueHolder();
+}
+
+public void addDescControlValues(DescControlValues aDescControlValues) {
+	this.descControlValuesCollection.add(aDescControlValues);
+	aDescControlValues.setDescTerms(this);
+}
+
+public void addDescControlValues(int index, DescControlValues aDescControlValues) {
+	this.descControlValuesCollection.add(index, aDescControlValues);
+	aDescControlValues.setDescTerms(this);
+}
+
+public void addDescQualifiers(int index, DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.add(index, aDescQualifiers);
+	aDescQualifiers.setDescTerms(this);
+}
+
+public void addDescQualifiers(DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.add(aDescQualifiers);
+	aDescQualifiers.setDescTerms(this);
+}
+
+public void addDescValues(int index, DescValues aDescValues) {
+	this.descValuesCollection.add(index, aDescValues);
+	aDescValues.setDescTerms(this);
+}
+
+public void addDescValues(DescValues aDescValues) {
+	this.descValuesCollection.add(aDescValues);
+	aDescValues.setDescTerms(this);
+}
+
+public String getControlValueFlag() {
+	return this.controlValueFlag;
+}
+
+public CoreDescTerms getCoreDescTerms() {
+	return (CoreDescTerms) this.coreDescTerms.getValue();
+}
+
+public List getDescControlValuesCollection() {
+	return this.descControlValuesCollection;
+}
+
+public List getDescQualifiersCollection() {
+	return this.descQualifiersCollection;
+}
+
+public Long getDescTermidPk() {
+	return this.descTermidPk;
+}
+
+public List getDescValuesCollection() {
+	return this.descValuesCollection;
+}
+
+public Projects getProjects() {
+	return (Projects) this.projects.getValue();
+}
+
+public String getQualifierFlag() {
+	return this.qualifierFlag;
+}
+
+public String getRepeatFlag() {
+	return this.repeatFlag;
+}
+
+public String getRequiredFlag() {
+	return this.requiredFlag;
+}
+
+public String getTermLabel() {
+	return this.termLabel;
+}
+
+public void removeDescControlValues(DescControlValues aDescControlValues) {
+	this.descControlValuesCollection.remove(aDescControlValues);
+	aDescControlValues.setDescTerms(null);
+}
+
+public void removeDescQualifiers(DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.remove(aDescQualifiers);
+	aDescQualifiers.setDescTerms(null);
+}
+
+public void removeDescValues(DescValues aDescValues) {
+	this.descValuesCollection.remove(aDescValues);
+	aDescValues.setDescTerms(null);
+}
+
+public void setControlValueFlag(String controlValueFlag) {
+	this.controlValueFlag = controlValueFlag;
+}
+
+public void setCoreDescTerms(CoreDescTerms coreDescTerms) {
+	this.coreDescTerms.setValue(coreDescTerms);
+}
+
+public void setDescControlValuesCollection(List descControlValuesCollection) {
+	this.descControlValuesCollection = descControlValuesCollection;
+}
+
+public void setDescQualifiersCollection(List descQualifiersCollection) {
+	this.descQualifiersCollection = descQualifiersCollection;
+}
+
+public void setDescTermidPk(Long descTermidPk) {
+	this.descTermidPk = descTermidPk;
+}
+
+public void setDescValuesCollection(List descValuesCollection) {
+	this.descValuesCollection = descValuesCollection;
+}
+
+public void setProjects(Projects projects) {
+	this.projects.setValue(projects);
+}
+
+public void setQualifierFlag(String qualifierFlag) {
+	this.qualifierFlag = qualifierFlag;
+}
+
+public void setRepeatFlag(String repeatFlag) {
+	this.repeatFlag = repeatFlag;
+}
+
+public void setRequiredFlag(String requiredFlag) {
+	this.requiredFlag = requiredFlag;
+}
+
+public void setTermLabel(String termLabel) {
+	this.termLabel = termLabel;
+}
+
+}

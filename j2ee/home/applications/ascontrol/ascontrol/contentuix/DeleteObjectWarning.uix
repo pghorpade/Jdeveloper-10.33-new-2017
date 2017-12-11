@@ -1,0 +1,65 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemMessagePageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+   <provider>
+    <data name="warningData">
+     <method 
+       class="oracle.ifs.admin.em.ias.uix.DeleteObjectWarningData"
+       method="getWarningData" />
+    </data>
+
+    <data name="strings">
+     <bundle 
+       class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemMessagePageLayout
+     data:title="WARNING@strings"
+     messageType="warning"
+     data:conciseMessage="warningMsg@warningData">
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="NO@strings"
+                data:destination="noDestination@warningData" />
+
+        <submitButton data:text="YES@strings"
+                      ctrl:event="deleteObject" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+    </ifsemui:oemMessagePageLayout>
+   </contents>
+
+  </dataScope>
+
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <null/>
+  </event>
+
+  <event name="deleteObject">
+   <method 
+     class="oracle.ifs.admin.em.ias.uix.DeleteObjectWarningData" 
+     method="doDelete" />
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

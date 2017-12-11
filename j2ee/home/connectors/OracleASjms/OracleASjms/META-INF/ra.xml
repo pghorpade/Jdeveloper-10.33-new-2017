@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<connector xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+     http://java.sun.com/xml/ns/j2ee/connector_1_5.xsd"
+ version="1.5">
+
+    <display-name>OracleASjms</display-name>
+    <vendor-name>Oracle Corporation</vendor-name>
+    <eis-type>OracleAS JMS</eis-type>
+    <resourceadapter-version>2.0</resourceadapter-version>
+
+<!-- resourceadapter -->
+
+    <resourceadapter>
+      <resourceadapter-class>oracle.j2ee.ra.jms.generic.JMSResourceAdapter</resourceadapter-class>
+      <config-property>
+        <config-property-name>lookupMethod</config-property-name>
+        <config-property-type>java.lang.String</config-property-type>
+        <config-property-value>resourceProvider</config-property-value>
+      </config-property>
+      <config-property>
+        <config-property-name>resourceProviderName</config-property-name>
+        <config-property-type>java.lang.String</config-property-type>
+        <config-property-value>oc4jjms</config-property-value>
+      </config-property>
+<!-- outbound configuration -->
+
+      <outbound-resourceadapter>
+        <!-- XA Queue Connection Factory -->
+        <connection-definition>
+          <managedconnectionfactory-class>
+              oracle.j2ee.ra.jms.generic.ManagedXAQueueConnectionFactoryImpl
+          </managedconnectionfactory-class>
+          <config-property>
+            <config-property-name>jndiLocation</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/XAQueueConnectionFactory</config-property-value>
+          </config-property>
+          <connectionfactory-interface>
+              javax.jms.XAQueueConnectionFactory
+          </connectionfactory-interface>
+          <connectionfactory-impl-class>
+              oracle.j2ee.ra.jms.generic.XAQueueConnectionFactoryWrapper
+          </connectionfactory-impl-class>
+          <connection-interface>javax.jms.XAConnection</connection-interface>
+          <connection-impl-class>
+              oracle.j2ee.ra.jms.generic.XAQueueConnectionWrapper
+          </connection-impl-class>
+
+        </connection-definition>
+
+        <!-- non-XA Queue Connection Factory -->
+        <connection-definition>
+          <managedconnectionfactory-class>
+              oracle.j2ee.ra.jms.generic.ManagedQueueConnectionFactoryImpl
+          </managedconnectionfactory-class>
+          <config-property>
+            <config-property-name>jndiLocation</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/QueueConnectionFactory</config-property-value>
+          </config-property>
+          <connectionfactory-interface>
+              javax.jms.QueueConnectionFactory
+          </connectionfactory-interface>
+          <connectionfactory-impl-class>
+              oracle.j2ee.ra.jms.generic.QueueConnectionFactoryWrapper
+          </connectionfactory-impl-class>
+          <connection-interface>javax.jms.Connection</connection-interface>
+          <connection-impl-class>
+              oracle.j2ee.ra.jms.generic.QueueConnectionWrapper
+          </connection-impl-class>
+
+        </connection-definition>
+
+        <!-- XA Topic Connection Factory -->
+        <connection-definition>
+          <managedconnectionfactory-class>
+              oracle.j2ee.ra.jms.generic.ManagedXATopicConnectionFactoryImpl
+          </managedconnectionfactory-class>
+          <config-property>
+            <config-property-name>jndiLocation</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/XATopicConnectionFactory</config-property-value>
+          </config-property>
+          <connectionfactory-interface>
+              javax.jms.XATopicConnectionFactory
+          </connectionfactory-interface>
+          <connectionfactory-impl-class>
+              oracle.j2ee.ra.jms.generic.XATopicConnectionFactoryWrapper
+          </connectionfactory-impl-class>
+          <connection-interface>javax.jms.XAConnection</connection-interface>
+          <connection-impl-class>
+              oracle.j2ee.ra.jms.generic.XATopicConnectionWrapper
+          </connection-impl-class>
+
+        </connection-definition>
+
+        <!-- non-XA Topic Connection Factory -->
+        <connection-definition>
+          <managedconnectionfactory-class>
+              oracle.j2ee.ra.jms.generic.ManagedTopicConnectionFactoryImpl
+          </managedconnectionfactory-class>
+          <config-property>
+            <config-property-name>jndiLocation</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/TopicConnectionFactory</config-property-value>
+          </config-property>
+          <connectionfactory-interface>
+              javax.jms.TopicConnectionFactory
+          </connectionfactory-interface>
+          <connectionfactory-impl-class>
+              oracle.j2ee.ra.jms.generic.TopicConnectionFactoryWrapper
+          </connectionfactory-impl-class>
+          <connection-interface>javax.jms.Connection</connection-interface>
+          <connection-impl-class>
+              oracle.j2ee.ra.jms.generic.TopicConnectionWrapper
+          </connection-impl-class>
+
+        </connection-definition>
+
+        <!-- XA Connection Factory -->
+        <connection-definition>
+          <managedconnectionfactory-class>
+              oracle.j2ee.ra.jms.generic.ManagedXAConnectionFactoryImpl
+          </managedconnectionfactory-class>
+          <config-property>
+            <config-property-name>jndiLocation</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/XAConnectionFactory</config-property-value>
+          </config-property>
+          <connectionfactory-interface>
+              oracle.j2ee.ra.jms.generic.XABackedConnectionFactory
+          </connectionfactory-interface>
+          <connectionfactory-impl-class>
+              oracle.j2ee.ra.jms.generic.XAConnectionFactoryWrapper
+          </connectionfactory-impl-class>
+          <connection-interface>javax.jms.XAConnection</connection-interface>
+          <connection-impl-class>
+              oracle.j2ee.ra.jms.generic.XAConnectionWrapper
+          </connection-impl-class>
+
+        </connection-definition>
+
+        <!-- non-XA Connection Factory -->
+        <connection-definition>
+          <managedconnectionfactory-class>
+              oracle.j2ee.ra.jms.generic.ManagedConnectionFactoryImpl
+          </managedconnectionfactory-class>
+          <config-property>
+            <config-property-name>jndiLocation</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/ConnectionFactory</config-property-value>
+          </config-property>
+          <connectionfactory-interface>
+              javax.jms.ConnectionFactory
+          </connectionfactory-interface>
+          <connectionfactory-impl-class>
+              oracle.j2ee.ra.jms.generic.ConnectionFactoryWrapper
+          </connectionfactory-impl-class>
+          <connection-interface>javax.jms.Connection</connection-interface>
+          <connection-impl-class>
+              oracle.j2ee.ra.jms.generic.ConnectionWrapper
+          </connection-impl-class>
+
+        </connection-definition>
+
+<!-- adapter settings, txn level, authentication, etc -->
+        <transaction-support>XATransaction</transaction-support>
+        <authentication-mechanism>
+            <authentication-mechanism-type>
+               BasicPassword
+            </authentication-mechanism-type>
+            <credential-interface>javax.resource.spi.security.PasswordCredential</credential-interface>
+        </authentication-mechanism>
+        <reauthentication-support>false</reauthentication-support>
+
+      </outbound-resourceadapter>
+
+<!-- inbound configuration -->
+     <inbound-resourceadapter>
+        <messageadapter>
+           <messagelistener>
+              <messagelistener-type>
+                 javax.jms.MessageListener
+              </messagelistener-type>
+              <activationspec>
+                 <activationspec-class>
+                    oracle.j2ee.ra.jms.generic.JMSActivationSpec
+                 </activationspec-class>
+                 <required-config-property>
+                    <config-property-name>ConnectionFactoryJndiName</config-property-name>
+                 </required-config-property>
+                 <required-config-property>
+                    <config-property-name>DestinationName</config-property-name>
+                 </required-config-property>
+                 <required-config-property>
+                    <config-property-name>DestinationType</config-property-name>
+                 </required-config-property>
+
+              </activationspec>
+           </messagelistener>
+        </messageadapter>
+     </inbound-resourceadapter>
+
+<!--  Admin Objects -->
+
+      <!--   Dynamically looked up Queue admin objects (via JNDI federation) -->
+      <adminobject>
+        <adminobject-interface>javax.jms.Queue</adminobject-interface>
+        <adminobject-class>oracle.j2ee.ra.jms.generic.AdminObjectQueueImpl</adminobject-class>
+          <config-property>
+            <config-property-name>resourceProviderName</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>oc4jjms</config-property-value>
+          </config-property>
+      </adminobject>
+
+      <!--   Queue admin object -->
+      <adminobject>
+        <adminobject-interface>javax.jms.Queue</adminobject-interface>
+        <adminobject-class>oracle.j2ee.ra.jms.generic.AdminObjectQueueImpl</adminobject-class>
+          <config-property>
+            <config-property-name>jndiName</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/demoQueue</config-property-value>
+          </config-property>
+          <config-property>
+            <config-property-name>resourceProviderName</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>oc4jjms</config-property-value>
+          </config-property>
+      </adminobject>
+
+      <!--   Dynamically looked up Topic admin objects (via JNDI federation) -->
+      <adminobject>
+        <adminobject-interface>javax.jms.Topic</adminobject-interface>
+        <adminobject-class>
+              oracle.j2ee.ra.jms.generic.AdminObjectTopicImpl
+        </adminobject-class>
+          <config-property>
+            <config-property-name>resourceProviderName</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>oc4jjms</config-property-value>
+          </config-property>
+      </adminobject>
+
+      <!--   Topic admin object -->
+      <adminobject>
+        <adminobject-interface>javax.jms.Topic</adminobject-interface>
+        <adminobject-class>
+              oracle.j2ee.ra.jms.generic.AdminObjectTopicImpl
+        </adminobject-class>
+          <config-property>
+            <config-property-name>jndiName</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>jms/demoTopic</config-property-value>
+          </config-property>
+          <config-property>
+            <config-property-name>resourceProviderName</config-property-name>
+            <config-property-type>java.lang.String</config-property-type>
+            <config-property-value>oc4jjms</config-property-value>
+          </config-property>
+      </adminobject>
+
+
+
+    </resourceadapter>
+</connector>

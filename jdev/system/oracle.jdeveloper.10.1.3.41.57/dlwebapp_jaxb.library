@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="false" xmlns="http://xmlns.oracle.com/jdeveloper/101303/jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../mywork/DLWebApp/jars/jaxb-api.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/jaxb-impl.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/jsr173_1.0_api.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath>
+      <entries class="[Ljava.net.URL;"/>
+   </docPath>
+   <locked>false</locked>
+   <name>dlwebapp_jaxb</name>
+   <sourcePath>
+      <entries class="[Ljava.net.URL;"/>
+   </sourcePath>
+</JLibraryNode>

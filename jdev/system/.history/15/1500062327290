@@ -1,0 +1,77 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class AdminQualifiers {
+
+	private ValueHolderInterface adminTerms;
+	private List adminValuesCollection;
+	private Integer adminQualifieridPk;
+	private String adminQualifier;
+	private Long qualifierTermId;
+
+public AdminQualifiers() {
+	super();
+	this.adminTerms = new ValueHolder();
+	this.adminValuesCollection = new ArrayList();
+}
+
+public void addAdminValues(int index, AdminValues anAdminValues) {
+	this.adminValuesCollection.add(index, anAdminValues);
+	anAdminValues.setAdminQualifiers(this);
+}
+
+public void addAdminValues(AdminValues anAdminValues) {
+	this.adminValuesCollection.add(anAdminValues);
+	anAdminValues.setAdminQualifiers(this);
+}
+
+public String getAdminQualifier() {
+	return this.adminQualifier;
+}
+
+public Integer getAdminQualifieridPk() {
+	return this.adminQualifieridPk;
+}
+
+public AdminTerms getAdminTerms() {
+	return (AdminTerms) this.adminTerms.getValue();
+}
+
+public List getAdminValuesCollection() {
+	return this.adminValuesCollection;
+}
+
+public Long getQualifierTermId() {
+	return this.qualifierTermId;
+}
+
+public void removeAdminValues(AdminValues anAdminValues) {
+	this.adminValuesCollection.remove(anAdminValues);
+	anAdminValues.setAdminQualifiers(null);
+}
+
+public void setAdminQualifier(String adminQualifier) {
+	this.adminQualifier = adminQualifier;
+}
+
+public void setAdminQualifieridPk(Integer adminQualifieridPk) {
+	this.adminQualifieridPk = adminQualifieridPk;
+}
+
+public void setAdminTerms(AdminTerms adminTerms) {
+	this.adminTerms.setValue(adminTerms);
+}
+
+public void setAdminValuesCollection(List adminValuesCollection) {
+	this.adminValuesCollection = adminValuesCollection;
+}
+
+public void setQualifierTermId(Long qualifierTermId) {
+	this.qualifierTermId = qualifierTermId;
+}
+
+}

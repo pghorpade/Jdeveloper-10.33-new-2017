@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<xsd:schema targetNamespace="http://xmlns.oracle.com/bpel/workflow/configuration"
+    xmlns:tns="http://xmlns.oracle.com/bpel/workflow/configuration"
+    xmlns:task="http://xmlns.oracle.com/bpel/workflow/task"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+    jaxb:version="1.0"
+    elementFormDefault="qualified"> 
+
+    <import namespace="http://xmlns.oracle.com/bpel/workflow/task"
+            schemaLocation="WorkflowTask.xsd"/>
+
+    <annotation>
+       <appinfo>
+          <jaxb:schemaBindings>
+             <jaxb:package name="oracle.bpel.services.workflow.metadata.config.model"/>
+          </jaxb:schemaBindings>
+       </appinfo>
+    </annotation>
+
+    <!-- Root Element -->
+    <element name="workflowConfiguration">
+       <complexType>
+           <sequence>
+               <element name="outcomes" type="tns:outcomesType" minOccurs="1" maxOccurs="1"/>
+               <element name="versionTracking" type="tns:versionTrackingType" minOccurs="0" maxOccurs="1"/>
+               <element name="restrictedActions" type="tns:restrictedActionsType" minOccurs="0" maxOccurs="1"/>
+               <element name="taskXMLSchemaDefinition" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+               <element name="payload" type="tns:payloadType" minOccurs="0" maxOccurs="1"/>
+               <element name="bpelEventListener" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+               <element name="security" type="tns:securityType" minOccurs="0" maxOccurs="1"/>
+               <element name="resourceBundle" type="tns:resourceBundleType" minOccurs="0" maxOccurs="1"/>
+           </sequence>
+           <attribute name="features" type="xsd:string"/>
+       </complexType>
+    </element>
+
+    <complexType name="outcomesType">
+        <sequence>
+            <element name="outcome" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="versionTrackingType">
+        <sequence>
+            <element name="attribute" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="restrictedActionsType">
+        <sequence>
+            <element name="action" type="tns:restrictedActionType" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <simpleType name="restrictedActionType">
+      <restriction base="task:taskActionEnum">
+        <enumeration value="ADHOC_ROUTE"/>
+        <enumeration value="DELEGATE"/>
+        <enumeration value="ESCALATE"/>
+        <enumeration value="INFO_REQUEST"/>
+        <enumeration value="PUSH_BACK"/>
+        <enumeration value="REASSIGN"/>
+        <enumeration value="RENEW"/>
+        <enumeration value="SKIP_CURRENT_ASSIGNMENT"/>
+        <enumeration value="SUSPEND"/>
+        <enumeration value="WITHDRAW"/>
+      </restriction>
+    </simpleType>
+
+    <complexType name="payloadType">
+        <sequence>
+            <element name="messageAttribute" type="tns:messageAttributeType" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+        <attribute name="xmlSchemaDefinition" type="xsd:string" use="required"/>
+    </complexType>
+
+    <complexType name="messageAttributeType">
+        <sequence/>
+        <attribute name="name" type="xsd:string" use="required"/>
+        <attribute name="attributeType" type="tns:messageAttributeTypeEnum" use="required"/>
+        <attribute name="type" type="xsd:string" use="required"/>
+        <attribute name="updatable" type="xsd:boolean" use="optional"/>
+    </complexType>
+
+    <complexType name="securityType">
+        <choice>
+            <element name="digitalSignature" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+            <element name="passwordRequired" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+        </choice>
+    </complexType>
+
+    <simpleType name="messageAttributeTypeEnum">
+        <restriction base="xsd:string">
+            <enumeration value="SIMPLE_TYPE"/>
+            <enumeration value="COMPLEX_TYPE"/>
+            <enumeration value="ELEMENT"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="resourceBundleType">
+        <sequence/>
+        <attribute name="name" type="xsd:string" use="required"/>
+        <attribute name="location" type="xsd:string" use="optional"/>
+    </complexType>
+
+</xsd:schema>
+

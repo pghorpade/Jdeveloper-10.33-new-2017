@@ -1,0 +1,217 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the (domain) property -->
+    <data name="propData">
+     <method class="oracle.ifs.admin.em.ias.uix.ViewDomainPropertyData"
+             method="getPropertyData" />
+    </data>
+
+    <data name="tableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="TYPE@strings" sort="yes" value="type"/>
+      <column data:text="VALUE@strings" sort="no" value="value"/>
+     </inline>
+    </data>
+
+    <data name="arrayTableColumnHeaderData">
+     <inline>
+      <column data:text="VALUE@strings" value="Value"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="OKBUTTON">
+     <boundAttribute name="title">
+      <messageFormat data:format="VIEW_HEADER@strings"
+                     fast="true">
+       <dataObject select="propName" source="propData"/>
+      </messageFormat>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button id="OKBUTTON" data:text="OK@strings"
+                data:destination="cancelDestination@propData"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+ 
+     <contents>
+
+      <formValue name="table_level" value="inner"/>
+
+      <!-- ........ Content Body ........ -->
+
+      <tableLayout width="100%">
+       <contents>
+
+        <rowLayout>
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+         </contents>
+        </rowLayout>
+
+        <switcher data:childName="viewType@propData"
+                  defaultCase="unsupportedview">
+
+         <case name="arrayview">
+          <rowLayout>
+           <contents>
+            <header data:text="VALUE@strings">
+             <contents>
+              <!-- Table for nested array value -->
+              <table name="ArrayValueTable"
+                     id="table_ArrayValueTable"
+                     partialRenderMode="self"
+                     width="80%"
+                     data:summary="SUB_STRINGS_TABLE_SUMMARY@strings"
+                     data:alternateText="NO_ITEMS_FOUND@strings"
+                     data:tableData="arrayData@propData"
+                     data:columnHeaderData="column@arrayTableColumnHeaderData"
+                     formSubmitted="true" >
+
+               <columnHeaderStamp>
+                 <text data:text="value" />
+               </columnHeaderStamp>
+
+               <tableFormat tableBanding="rowBanding"/>
+
+               <contents>
+                <styledText data:text="arrayElement" />
+               </contents>
+              </table>
+             </contents>
+            </header>
+           </contents>
+          </rowLayout>
+         </case>
+
+         <case name="bundleview">
+          <rowLayout>
+           <contents>
+            <header data:text="VALUE@strings">
+             <contents>
+              <!-- Table for nested propertybundle value -->
+
+              <table name="PropertyValueTable"
+                     id="table_PropertyValueTable"
+                     partialRenderMode="self"
+                     width="100%"
+                     data:summary="INNER_PROPERTIES_TABLE_SUMMARY@strings"
+                     data:alternateText="NO_ITEMS_FOUND@strings"
+                     data:tableData="bundleData@propData"
+                     data:columnHeaderData="column@tableColumnHeaderData"
+                     data:value="startingCount@propData"
+                     data:maxValue="totalCount@propData"
+                     data:blockSize="blockSize@propData"
+                     showAll="yes"
+                     formSubmitted="true" >
+
+               <columnHeaderStamp>
+                <sortableHeader data:text="text" data:value="value">
+                 <boundAttribute name="sortable">
+                  <defaulting>
+                   <dataObject data:select="value" source="sortColumnHeader"/>
+                   <dataObject data:source="(value)@sortColumnHeader"/>
+                   <dataObject select="sort"/>
+                  </defaulting>
+                 </boundAttribute>
+                </sortableHeader>
+               </columnHeaderStamp>
+
+               <tableFormat tableBanding="rowBanding"/>
+
+               <contents>
+                <styledText data:text="nestedPropName"/>
+
+                <styledText data:text="nestedPropType" />
+
+                <switcher data:childName="nestedViewType">
+                 <default>
+                  <styledText data:text="nestedPropValue" />
+                 </default>
+
+                 <case name="arrayview">
+                  <image data:source="detailsIcon"
+                         data:destination="detailsDestination"
+                         data:shortDesc="PROPERTYDETAILS_ICON_TOOLTIP@strings" />
+                 </case>
+                </switcher>
+               </contents>
+              </table>
+
+             </contents>
+            </header>
+           </contents>
+          </rowLayout>
+         </case>
+
+         <case name="unsupportedview">
+          <rowLayout>
+           <contents>
+            <messageStyledText data:prompt="VALUE@strings"
+                               data:text="UNSUPPORTED@strings"
+                               styleClass="OraErrorText"/>
+           </contents>
+          </rowLayout>
+         </case>
+
+        </switcher>
+       </contents>
+      </tableLayout>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewDomainPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewDomainPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

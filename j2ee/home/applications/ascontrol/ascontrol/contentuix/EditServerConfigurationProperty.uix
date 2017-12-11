@@ -1,0 +1,319 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the property -->
+    <data name="pageData">
+     <method class=
+             "oracle.ifs.admin.em.ias.uix.EditServerConfigurationPropertyData"
+             method="getPropertyData" />
+    </data>
+
+    <!-- data provider for datatype -->
+    <data name="typeData">
+     <method class="oracle.ifs.admin.em.ias.uix.PropertyDatatypeChoiceData"
+             method="getDatatypeData" />
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="VALUEMSGINPUT">
+     <boundAttribute name="title">
+      <if>
+       <dataObject select="isNew" source="pageData"/>
+       <dataObject select="EDIT_PROPERTY_FOR_NEW_SERVER_CONFIGURATION_HEADER"
+                   source="strings"/>
+       <messageFormat data:format="EDIT_PROPERTY_FOR_EDIT_HEADER@strings"
+                      fast="true">
+        <dataObject select="SCNAME" source="pageData"/>
+       </messageFormat>
+      </if>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+<!--
+        <button data:text="CANCEL@strings"
+                data:destination="cancelDestination@pageData"/>
+-->
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancelUpdate"/>
+        <submitButton data:text="OK@strings"
+                      ctrl:event="updateProperty"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <!-- .......... Shuttle Scripts .......... -->
+
+     <contents>
+
+      <script>
+       <boundAttribute name = "text">
+        <concat>
+         function addOption(inputName, shuttleName)
+         {
+           var shuttleProxy =
+             new ShuttleProxy(shuttleName,'iFSForm');
+           var inputField = 'this.document.iFSForm.'+inputName;
+           var inputString = inputField+'.value';
+           var newValue = eval(inputString);
+
+           if (newValue == '')
+           {
+             alert('<dataObject select="MUST_SPECIFY" source="strings"/>');
+           }
+           else
+           {
+             eval(inputString+'=""');
+             shuttleProxy.addItem(true,
+                                  shuttleProxy.getItemCount(true),
+                                  newValue);
+             eval(inputField+'.focus()');
+           }
+         }
+        </concat>
+       </boundAttribute>
+      </script>
+
+      <script>
+       <boundAttribute name = "text">
+        <concat>
+         function removeSelected(shuttleName)
+         {
+           var shuttleProxy =
+             new ShuttleProxy(shuttleName,'iFSForm');
+           shuttleProxy.deleteSelectedItems(true);
+         }
+        </concat>
+       </boundAttribute>
+      </script>
+
+      <!-- ...... Instruction Text ...... -->
+
+      <styledText styleClass="OraInstructionText"
+                  data:text="EDIT_OBJECT_INSTRUCTION@strings"/>
+
+      <spacer height="10" />
+
+      <!-- ........ Property Fields .......... -->
+
+      <switcher childName="textinput"
+                data:childName="INPUTTYPE@pageData">
+
+       <!-- for String datatype -->
+
+       <case name="textinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageTextInput id="VALUEMSGINPUT" name="VALUE" columns="60"
+                            data:prompt="VALUE@strings"
+                            data:text="VALUE@pageData"/>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for Integer, Long, Double datatypes -->
+
+       <case name="numberinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <switcher data:childName="TYPENAME@pageData"
+                    defaultCase="wholenumber">
+           <case name="DOUBLE">
+            <messageTextInput id="VALUEMSGINPUT" name="VALUE"
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="VALUE@pageData">
+             <onSubmitValidater>
+              <decimal />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+           <case name="wholenumber">
+            <messageTextInput id="VALUEMSGINPUT" name="VALUE"
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="VALUE@pageData">
+             <onSubmitValidater>
+              <decimal maxScale="0" />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+          </switcher>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for Boolean datatype -->
+
+       <case name="booleaninput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageChoice id="VALUEMSGINPUT" name="VALUE"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="VALUE@pageData">
+           <contents>
+            <option text="true" value="true"/>
+            <option text="false" value="false"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for String-Array datatype -->
+
+       <case name="arrayinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <styledText styleClass="OraPromptText"
+                      data:text="VALUE@strings" />
+          <shuttle name="editArray"
+                   reorderable="true">
+           <!-- ADD BUTTON -->
+           <filter>
+            <tableLayout>
+             <contents>
+              <rowLayout>
+               <contents>
+                <messageTextInput id="VALUEMSGINPUT" name="editStringArrayValue"
+                                  data:shortDesc="ADD_A_VALUE@strings"
+                                  columns="20"/>
+                <spacer width = "5"/>
+                <button data:text="ADD@strings">
+                 <boundAttribute name = "destination">
+                  <concat>
+                   javascript:addOption('editStringArrayValue',
+                                        'editArray')
+                  </concat>
+                 </boundAttribute>
+                </button>
+               </contents>
+              </rowLayout>
+             </contents>
+            </tableLayout>
+           </filter>
+
+           <!-- String Array list display -->
+           <leading>
+            <list multiple="true"
+                  data:shortDesc="ENUM_LIST@strings">
+             <contents data:childData="VALUE@pageData">
+              <option data:text="optionTextString"
+                      data:value="optionValueString" />
+             </contents>
+            </list>
+           </leading>
+
+           <!-- REMOVE BUTTON -->
+           <leadingFooter>
+            <button data:text = "REMOVE@strings">
+             <boundAttribute name = "destination">
+              <concat>
+               javascript:removeSelected('editArray')
+              </concat>
+             </boundAttribute>
+            </button>
+           </leadingFooter>
+          </shuttle>
+
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- everything else is unsupported -->
+
+       <case name="unsupportedinput">
+        <styledText styleClass="OraErrorText"
+                    data:text="UNSUPPORTED@strings" />
+       </case>
+
+      </switcher>
+
+      <formValue name="NAME" data:value="NAME@pageData"/>
+      <formValue name="TYPE" data:value="TYPE@pageData"/>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.EditServerConfigurationPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <event name="updateProperty">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.EditServerConfigurationPropertyData"
+           method="updateProperty"/>
+  </event>
+
+  <event name="cancelUpdate">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.EditServerConfigurationPropertyData"
+           method="cancelUpdate"/>
+  </event>
+
+  <!-- default -->
+  <event name="*">
+   <null/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

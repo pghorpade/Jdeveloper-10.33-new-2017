@@ -1,0 +1,145 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class AdminTerms {
+
+	private List adminQualifiersCollection;
+	private ValueHolderInterface adminTypes;
+	private List adminValuesCollection;
+	private List adminControlValuesCollection;
+	private Long adminTermidPk;
+	private String adminTerm;
+	private String controlValueFlag;
+	private String qualifierFlag;
+	private String repeatFlag;
+
+public AdminTerms() {
+	super();
+	this.adminQualifiersCollection = new ArrayList();
+	this.adminTypes = new ValueHolder();
+	this.adminValuesCollection = new ArrayList();
+	this.adminControlValuesCollection = new ArrayList();
+}
+
+public void addAdminControlValues(AdminControlValues anAdminControlValues) {
+	this.adminControlValuesCollection.add(anAdminControlValues);
+	anAdminControlValues.setAdminTerms(this);
+}
+
+public void addAdminControlValues(int index, AdminControlValues anAdminControlValues) {
+	this.adminControlValuesCollection.add(index, anAdminControlValues);
+	anAdminControlValues.setAdminTerms(this);
+}
+
+public void addAdminQualifiers(int index, AdminQualifiers anAdminQualifiers) {
+	this.adminQualifiersCollection.add(index, anAdminQualifiers);
+	anAdminQualifiers.setAdminTerms(this);
+}
+
+public void addAdminQualifiers(AdminQualifiers anAdminQualifiers) {
+	this.adminQualifiersCollection.add(anAdminQualifiers);
+	anAdminQualifiers.setAdminTerms(this);
+}
+
+public void addAdminValues(AdminValues anAdminValues) {
+	this.adminValuesCollection.add(anAdminValues);
+	anAdminValues.setAdminTerms(this);
+}
+
+public void addAdminValues(int index, AdminValues anAdminValues) {
+	this.adminValuesCollection.add(index, anAdminValues);
+	anAdminValues.setAdminTerms(this);
+}
+
+public List getAdminControlValuesCollection() {
+	return this.adminControlValuesCollection;
+}
+
+public List getAdminQualifiersCollection() {
+	return this.adminQualifiersCollection;
+}
+
+public String getAdminTerm() {
+	return this.adminTerm;
+}
+
+public Long getAdminTermidPk() {
+	return this.adminTermidPk;
+}
+
+public AdminTypes getAdminTypes() {
+	return (AdminTypes) this.adminTypes.getValue();
+}
+
+public List getAdminValuesCollection() {
+	return this.adminValuesCollection;
+}
+
+public String getControlValueFlag() {
+	return this.controlValueFlag;
+}
+
+public String getQualifierFlag() {
+	return this.qualifierFlag;
+}
+
+public String getRepeatFlag() {
+	return this.repeatFlag;
+}
+
+public void removeAdminControlValues(AdminControlValues anAdminControlValues) {
+	this.adminControlValuesCollection.remove(anAdminControlValues);
+	anAdminControlValues.setAdminTerms(null);
+}
+
+public void removeAdminQualifiers(AdminQualifiers anAdminQualifiers) {
+	this.adminQualifiersCollection.remove(anAdminQualifiers);
+	anAdminQualifiers.setAdminTerms(null);
+}
+
+public void removeAdminValues(AdminValues anAdminValues) {
+	this.adminValuesCollection.remove(anAdminValues);
+	anAdminValues.setAdminTerms(null);
+}
+
+public void setAdminControlValuesCollection(List adminControlValuesCollection) {
+	this.adminControlValuesCollection = adminControlValuesCollection;
+}
+
+public void setAdminQualifiersCollection(List adminQualifiersCollection) {
+	this.adminQualifiersCollection = adminQualifiersCollection;
+}
+
+public void setAdminTerm(String adminTerm) {
+	this.adminTerm = adminTerm;
+}
+
+public void setAdminTermidPk(Long adminTermidPk) {
+	this.adminTermidPk = adminTermidPk;
+}
+
+public void setAdminTypes(AdminTypes adminTypes) {
+	this.adminTypes.setValue(adminTypes);
+}
+
+public void setAdminValuesCollection(List adminValuesCollection) {
+	this.adminValuesCollection = adminValuesCollection;
+}
+
+public void setControlValueFlag(String controlValueFlag) {
+	this.controlValueFlag = controlValueFlag;
+}
+
+public void setQualifierFlag(String qualifierFlag) {
+	this.qualifierFlag = qualifierFlag;
+}
+
+public void setRepeatFlag(String repeatFlag) {
+	this.repeatFlag = repeatFlag;
+}
+
+}

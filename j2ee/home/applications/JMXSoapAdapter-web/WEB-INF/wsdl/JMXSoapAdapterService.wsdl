@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions
+     name="JMXSoapAdapterService"
+     targetNamespace="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+     xmlns:tns0="http://shared.soapadapter.remote.jmx.j2ee.oracle/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:tns1="http://service.soapadapter.remote.jmx.j2ee.oracle/"
+    >
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://shared.soapadapter.remote.jmx.j2ee.oracle/"
+             elementFormDefault="qualified" xmlns:tns="http://shared.soapadapter.remote.jmx.j2ee.oracle/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:soap12-enc="http://www.w3.org/2003/05/soap-encoding">
+            <import namespace="http://service.soapadapter.remote.jmx.j2ee.oracle/"/>
+            <complexType name="ComplexObjectBean">
+                <complexContent>
+                    <extension base="tns:GenericObject">
+                        <sequence>
+                            <element name="beans" type="tns:ObjectBean" nillable="true" minOccurs="0"
+                                 maxOccurs="unbounded"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="ObjectBean">
+                <complexContent>
+                    <extension base="tns:GenericObject">
+                        <sequence>
+                            <element name="properties" type="tns:ObjectBeanProperties" nillable="true"
+                                 minOccurs="0" maxOccurs="unbounded"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="ObjectBeanProperties">
+                <complexContent>
+                    <extension base="tns:GenericObject">
+                        <sequence>
+                            <element name="complexValue" type="tns:ComplexObjectBean" nillable="true"/>
+                            <element name="value" type="string" nillable="true"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="GenericObject">
+                <sequence>
+                    <element name="type" type="string" nillable="true"/>
+                    <element name="name" type="string" nillable="true"/>
+                </sequence>
+            </complexType>
+            <complexType name="ObjectBeanRow">
+                <complexContent>
+                    <extension base="tns:GenericObject">
+                        <sequence>
+                            <element name="column" type="tns:ComplexObjectBean" nillable="true" minOccurs="0"
+                                 maxOccurs="unbounded"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://service.soapadapter.remote.jmx.j2ee.oracle/"
+             elementFormDefault="qualified" xmlns:tns="http://service.soapadapter.remote.jmx.j2ee.oracle/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:soap12-enc="http://www.w3.org/2003/05/soap-encoding" xmlns:ns1="http://shared.soapadapter.remote.jmx.j2ee.oracle/">
+            <import namespace="http://shared.soapadapter.remote.jmx.j2ee.oracle/"/>
+            <element name="bulkInvokeElement">
+                <complexType>
+                    <sequence>
+                        <element name="objNamePattern" type="string" nillable="true"/>
+                        <element name="operationName" type="string" nillable="true"/>
+                        <element name="arguments" type="ns1:ComplexObjectBean" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="signature" type="string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="bulkInvokeResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ObjectBeanRow" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getAttributeElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="attributeName" type="string" nillable="true"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getAttributeResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getAttributesElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="attributeNames" type="string" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getAttributesResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getAttributesTableElement">
+                <complexType>
+                    <sequence>
+                        <element name="objNamePattern" type="string" nillable="true"/>
+                        <element name="attributeNames" type="string" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getAttributesTableResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ObjectBeanRow" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getDMSTableElement">
+                <complexType>
+                    <sequence>
+                        <element name="tableName" type="string" nillable="true"/>
+                        <element name="values" type="ns1:ObjectBeanProperties" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="contexts" type="ns1:ObjectBeanProperties" nillable="true"
+                             minOccurs="0" maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getDMSTableResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ObjectBeanRow" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getDMSTableNamesElement">
+                <complexType>
+                    <sequence>
+                        <element name="contexts" type="ns1:ObjectBeanProperties" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getDMSTableNamesResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getStatisticElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="statName" type="string" nillable="true"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getStatisticResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getStatisticsElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="statNames" type="string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getStatisticsResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getStatisticsTableElement">
+                <complexType>
+                    <sequence>
+                        <element name="objNamePattern" type="string" nillable="true"/>
+                        <element name="statNames" type="string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="getStatisticsTableResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ObjectBeanRow" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="invokeElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="operationName" type="string" nillable="true"/>
+                        <element name="arguments" type="ns1:ComplexObjectBean" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="signature" type="string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="invokeResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="isRegisteredElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="isRegisteredResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="queryDMSTableElement">
+                <complexType>
+                    <sequence>
+                        <element name="adml" type="string" nillable="true"/>
+                        <element name="tableName" type="string" nillable="true"/>
+                        <element name="values" type="ns1:ObjectBeanProperties" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="contexts" type="ns1:ObjectBeanProperties" nillable="true"
+                             minOccurs="0" maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="queryDMSTableResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ObjectBeanRow" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="queryNamesElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="queryExp" type="string" nillable="true"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="queryNamesResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="setAttributeElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="attributeName" type="string" nillable="true"/>
+                        <element name="attributeValue" type="ns1:ComplexObjectBean" nillable="true"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="setAttributeResponseElement">
+                <complexType>
+                    <sequence/>
+                </complexType>
+            </element>
+            <element name="setAttributesElement">
+                <complexType>
+                    <sequence>
+                        <element name="objectName" type="string" nillable="true"/>
+                        <element name="attributeNames" type="string" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                        <element name="attributeValues" type="ns1:ComplexObjectBean" nillable="true"
+                             minOccurs="0" maxOccurs="unbounded"/>
+                        <element name="languageCode" type="string" nillable="true"/>
+                        <element name="countryCode" type="string" nillable="true"/>
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="setAttributesResponseElement">
+                <complexType>
+                    <sequence>
+                        <element name="result" type="ns1:ComplexObjectBean" nillable="true" minOccurs="0"
+                             maxOccurs="unbounded"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </types>
+    <message name="JMXSoapAdapterServiceEndpoint_bulkInvoke">
+        <part name="parameters" element="tns1:bulkInvokeElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_bulkInvokeResponse">
+        <part name="parameters" element="tns1:bulkInvokeResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getAttribute">
+        <part name="parameters" element="tns1:getAttributeElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getAttributeResponse">
+        <part name="parameters" element="tns1:getAttributeResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getAttributes">
+        <part name="parameters" element="tns1:getAttributesElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getAttributesResponse">
+        <part name="parameters" element="tns1:getAttributesResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getAttributesTable">
+        <part name="parameters" element="tns1:getAttributesTableElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getAttributesTableResponse">
+        <part name="parameters" element="tns1:getAttributesTableResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getDMSTable">
+        <part name="parameters" element="tns1:getDMSTableElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getDMSTableResponse">
+        <part name="parameters" element="tns1:getDMSTableResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getDMSTableNames">
+        <part name="parameters" element="tns1:getDMSTableNamesElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getDMSTableNamesResponse">
+        <part name="parameters" element="tns1:getDMSTableNamesResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getStatistic">
+        <part name="parameters" element="tns1:getStatisticElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getStatisticResponse">
+        <part name="parameters" element="tns1:getStatisticResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getStatistics">
+        <part name="parameters" element="tns1:getStatisticsElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getStatisticsResponse">
+        <part name="parameters" element="tns1:getStatisticsResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getStatisticsTable">
+        <part name="parameters" element="tns1:getStatisticsTableElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_getStatisticsTableResponse">
+        <part name="parameters" element="tns1:getStatisticsTableResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_invoke">
+        <part name="parameters" element="tns1:invokeElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_invokeResponse">
+        <part name="parameters" element="tns1:invokeResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_isRegistered">
+        <part name="parameters" element="tns1:isRegisteredElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_isRegisteredResponse">
+        <part name="parameters" element="tns1:isRegisteredResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_queryDMSTable">
+        <part name="parameters" element="tns1:queryDMSTableElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_queryDMSTableResponse">
+        <part name="parameters" element="tns1:queryDMSTableResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_queryNames">
+        <part name="parameters" element="tns1:queryNamesElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_queryNamesResponse">
+        <part name="parameters" element="tns1:queryNamesResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_setAttribute">
+        <part name="parameters" element="tns1:setAttributeElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_setAttributeResponse">
+        <part name="parameters" element="tns1:setAttributeResponseElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_setAttributes">
+        <part name="parameters" element="tns1:setAttributesElement"/>
+    </message>
+    <message name="JMXSoapAdapterServiceEndpoint_setAttributesResponse">
+        <part name="parameters" element="tns1:setAttributesResponseElement"/>
+    </message>
+    <portType name="JMXSoapAdapterServiceEndpoint">
+        <operation name="bulkInvoke">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_bulkInvoke"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_bulkInvokeResponse"/>
+        </operation>
+        <operation name="getAttribute">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getAttribute"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getAttributeResponse"/>
+        </operation>
+        <operation name="getAttributes">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getAttributes"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getAttributesResponse"/>
+        </operation>
+        <operation name="getAttributesTable">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getAttributesTable"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getAttributesTableResponse"/>
+        </operation>
+        <operation name="getDMSTable">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getDMSTable"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getDMSTableResponse"/>
+        </operation>
+        <operation name="getDMSTableNames">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getDMSTableNames"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getDMSTableNamesResponse"/>
+        </operation>
+        <operation name="getStatistic">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getStatistic"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getStatisticResponse"/>
+        </operation>
+        <operation name="getStatistics">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getStatistics"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getStatisticsResponse"/>
+        </operation>
+        <operation name="getStatisticsTable">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_getStatisticsTable"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_getStatisticsTableResponse"/>
+        </operation>
+        <operation name="invoke">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_invoke"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_invokeResponse"/>
+        </operation>
+        <operation name="isRegistered">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_isRegistered"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_isRegisteredResponse"/>
+        </operation>
+        <operation name="queryDMSTable">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_queryDMSTable"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_queryDMSTableResponse"/>
+        </operation>
+        <operation name="queryNames">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_queryNames"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_queryNamesResponse"/>
+        </operation>
+        <operation name="setAttribute">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_setAttribute"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_setAttributeResponse"/>
+        </operation>
+        <operation name="setAttributes">
+            <input message="tns:JMXSoapAdapterServiceEndpoint_setAttributes"/>
+            <output message="tns:JMXSoapAdapterServiceEndpoint_setAttributesResponse"/>
+        </operation>
+    </portType>
+    <binding name="HttpSoap12Binding" type="tns:JMXSoapAdapterServiceEndpoint">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="bulkInvoke">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/bulkInvoke"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getAttribute">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getAttribute"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getAttributes">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getAttributes"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getAttributesTable">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getAttributesTable"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getDMSTable">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getDMSTable"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getDMSTableNames">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getDMSTableNames"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getStatistic">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getStatistic"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getStatistics">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getStatistics"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getStatisticsTable">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/getStatisticsTable"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="invoke">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/invoke"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="isRegistered">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/isRegistered"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="queryDMSTable">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/queryDMSTable"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="queryNames">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/queryNames"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="setAttribute">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/setAttribute"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="setAttributes">
+            <soap12:operation soapAction="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter/setAttributes"
+                 soapActionRequired="false"/>
+            <input>
+                <soap12:body use="literal"/>
+            </input>
+            <output>
+                <soap12:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="JMXSoapAdapterService">
+        <port name="HttpSoap12" binding="tns:HttpSoap12Binding">
+            <soap12:address location="REPLACE_WITH_ACTUAL_URL"/>
+        </port>
+    </service>
+</definitions>

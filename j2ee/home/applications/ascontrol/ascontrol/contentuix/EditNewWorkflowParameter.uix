@@ -1,0 +1,480 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="headerData">
+     <method class="oracle.ifs.admin.em.ias.uix.EditNewWorkflowParameterData"
+             method="getHeaderData"/>
+    </data>
+
+    <data name="editParameterData">
+     <method class="oracle.ifs.admin.em.ias.uix.EditNewWorkflowParameterData"
+             method="getEditParameterData"/>
+    </data>
+
+    <data name="typeData">
+     <method class="oracle.ifs.admin.em.ias.uix.AddNewWorkflowParameterData"
+             method="getValidatorTypeData" />
+    </data>
+
+    <!-- data provider for time denominators -->
+    <data name="timeDenomOptionData">
+     <inline>
+      <option data:text="UNIT_SECONDS@strings" value="Seconds"/>
+      <option data:text="UNIT_MINUTES@strings" value="Minutes"/>
+      <option data:text="UNIT_HOURS@strings" value="Hours"/>
+      <option data:text="UNIT_DAYS@strings" value="Days"/>
+     </inline>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout data:title="pageHeader@headerData"
+                           initialFocusComponentId="DESCMSGINPUT">
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancel" />
+        <submitButton data:text="OK@strings"
+                      ctrl:event="editParam" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <spacer height="10" />
+
+      <!-- ...... JavaScripts ...... -->   
+
+      <script>
+       <boundAttribute name = "text">
+        <concat>
+         function addOption(inputName, shuttleName)
+         {
+           var shuttleProxy = 
+             new ShuttleProxy(shuttleName,'iFSForm');
+           var inputField = 'this.document.iFSForm.'+inputName;
+           var inputString = inputField+'.value';
+	   var newValue = eval(inputString);
+        
+           if (newValue == '')
+           {
+             alert('<dataObject select="MUST_SPECIFY" source="strings"/>');
+           }
+           else
+           {
+             eval(inputString+'=""');
+             shuttleProxy.addItem(true, 
+                                  shuttleProxy.getItemCount(true), 
+                                  newValue);
+             eval(inputField+'.focus()');
+           }
+         }
+        </concat>
+       </boundAttribute>
+      </script>
+
+      <script>
+       <boundAttribute name = "text">
+        <concat>
+         function removeSelected(shuttleName)
+         {
+           var shuttleProxy = 
+             new ShuttleProxy(shuttleName,'iFSForm');
+           shuttleProxy.deleteSelectedItems(true);
+         }
+        </concat>
+       </boundAttribute>
+      </script>
+
+      <spacer height="2" />
+   
+      <!-- .......... Entry Information .......... -->
+   
+      <html:span id="validation-target">
+       <switcher childName="defaultInput"
+                 data:childName="INPUTTYPE@editParameterData">
+
+        <!-- for any type without defining more options -->
+ 
+        <case name="defaultInput">
+         <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+          <contents>
+           <messageStyledText data:prompt="NAME@strings"
+                              data:text="NAME@editParameterData"
+                              styleClass="OraDataText"/>
+           <messageTextInput id="DESCMSGINPUT" name="DESCRIPTION"
+               rows="3"
+               columns="60"
+               data:prompt="DESCRIPTION@strings"
+               data:text="DESCRIPTION@editParameterData"/>
+           <messageCheckBox name="FINAL"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_FINAL_ATTR_NAME@strings" 
+               data:tip="NEW_WORKFLOW_PARAM_FINAL_TIP@strings"
+               data:checked="IS_FINAL@editParameterData"/>
+           <messageCheckBox name="REQUIRED"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_REQUIRED_ATTR_NAME@strings" 
+               data:checked="IS_REQUIRED@editParameterData"/>
+           <messageChoice name="TYPE"
+               data:prompt="TYPE@strings"
+               required="yes"
+               data:selectedValue="TYPE@editParameterData">
+            <primaryClientAction>
+             <firePartialAction event="changeDatatype"
+                                targets="validation-target"
+                                triggerText="GO@strings"/>
+            </primaryClientAction>
+            <contents data:childData="choices@typeData">
+             <option data:text="optionTextString" 
+                     data:value="optionValueString"/>
+            </contents>
+           </messageChoice>
+          </contents>
+         </labeledFieldLayout>
+        </case>
+
+        <!-- for integer number type - require MIN and MAX options -->
+
+        <case name="integerNumberInput">
+         <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+          <contents>
+           <messageStyledText data:prompt="NAME@strings"
+                              data:text="NAME@editParameterData"
+                              styleClass="OraDataText"/>
+           <messageTextInput id="DESCMSGINPUT" name="DESCRIPTION"
+               rows="3"
+               columns="60"
+               data:prompt="DESCRIPTION@strings"
+               data:text="DESCRIPTION@editParameterData"/>
+           <messageCheckBox name="FINAL"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_FINAL_ATTR_NAME@strings" 
+               data:tip="NEW_WORKFLOW_PARAM_FINAL_TIP@strings"
+               data:checked="IS_FINAL@editParameterData"/>
+           <messageCheckBox name="REQUIRED"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_REQUIRED_ATTR_NAME@strings" 
+               data:checked="IS_REQUIRED@editParameterData"/>
+           <messageChoice name="TYPE"
+               data:prompt="TYPE@strings"
+               required="yes"
+               data:selectedValue="TYPE@editParameterData">
+            <primaryClientAction>
+             <firePartialAction event="changeDatatype"
+                                targets="validation-target"
+                                triggerText="GO@strings"/>
+            </primaryClientAction>
+            <contents data:childData="choices@typeData">
+             <option data:text="optionTextString" 
+                     data:value="optionValueString"/>
+            </contents>
+           </messageChoice>
+           <messageTextInput name="MIN_VALUE" 
+                 columns="10"
+                 data:prompt="NEW_WORKFLOW_PARAM_MIN_VALUE_ATTR_NAME@strings"
+                 data:text="MIN_VALUE@editParameterData">
+            <onSubmitValidater>
+             <decimal maxScale="0"/>
+            </onSubmitValidater>
+           </messageTextInput>
+           <messageTextInput name="MAX_VALUE" 
+                 columns="10"
+                 data:prompt="NEW_WORKFLOW_PARAM_MAX_VALUE_ATTR_NAME@strings"
+                 data:text="MAX_VALUE@editParameterData">
+            <onSubmitValidater>
+             <decimal maxScale="0"/>
+            </onSubmitValidater>
+           </messageTextInput>
+          </contents>
+         </labeledFieldLayout>
+        </case>
+
+        <!-- for decimal number type - require MIN and MAX options -->
+
+        <case name="decimalNumberInput">
+         <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+          <contents>
+           <messageStyledText data:prompt="NAME@strings"
+                              data:text="NAME@editParameterData"
+                              styleClass="OraDataText"/>
+           <messageTextInput id="DESCMSGINPUT" name="DESCRIPTION"
+               rows="3"
+               columns="60"
+               data:prompt="DESCRIPTION@strings"
+               data:text="DESCRIPTION@editParameterData"/>
+           <messageCheckBox name="FINAL"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_FINAL_ATTR_NAME@strings" 
+               data:tip="NEW_WORKFLOW_PARAM_FINAL_TIP@strings"
+               data:checked="IS_FINAL@editParameterData"/>
+           <messageCheckBox name="REQUIRED"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_REQUIRED_ATTR_NAME@strings" 
+               data:checked="IS_REQUIRED@editParameterData"/>
+           <messageChoice name="TYPE"
+               data:prompt="TYPE@strings"
+               required="yes"
+               data:selectedValue="TYPE@editParameterData">
+            <primaryClientAction>
+             <firePartialAction event="changeDatatype"
+                                targets="validation-target"
+                                triggerText="GO@strings"/>
+            </primaryClientAction>
+            <contents data:childData="choices@typeData">
+             <option data:text="optionTextString" 
+                     data:value="optionValueString"/>
+            </contents>
+           </messageChoice>
+           <messageTextInput name="MIN_VALUE" 
+                 columns="10"
+                 data:prompt="NEW_WORKFLOW_PARAM_MIN_VALUE_ATTR_NAME@strings"
+                 data:text="MIN_VALUE@editParameterData">
+            <onSubmitValidater>
+             <decimal />
+            </onSubmitValidater>
+           </messageTextInput>
+           <messageTextInput name="MAX_VALUE" 
+                 columns="10"
+                 data:prompt="NEW_WORKFLOW_PARAM_MAX_VALUE_ATTR_NAME@strings"
+                 data:text="MAX_VALUE@editParameterData">
+            <onSubmitValidater>
+             <decimal />
+            </onSubmitValidater>
+           </messageTextInput>
+          </contents>
+         </labeledFieldLayout>
+        </case>
+
+        <!-- for time period type - require MIN and MAX options -->
+
+        <case name="timePeriodInput">
+         <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+          <contents>
+           <messageStyledText data:prompt="NAME@strings"
+                              data:text="NAME@editParameterData"
+                              styleClass="OraDataText"/>
+           <messageTextInput id="DESCMSGINPUT" name="DESCRIPTION"
+               rows="3"
+               columns="60"
+               data:prompt="DESCRIPTION@strings"
+               data:text="DESCRIPTION@editParameterData"/>
+           <messageCheckBox name="FINAL"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_FINAL_ATTR_NAME@strings" 
+               data:tip="NEW_WORKFLOW_PARAM_FINAL_TIP@strings"
+               data:checked="IS_FINAL@editParameterData"/>
+           <messageCheckBox name="REQUIRED"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_REQUIRED_ATTR_NAME@strings" 
+               data:checked="IS_REQUIRED@editParameterData"/>
+           <messageChoice name="TYPE"
+               data:prompt="TYPE@strings"
+               required="yes"
+               data:selectedValue="TYPE@editParameterData">
+            <primaryClientAction>
+             <firePartialAction event="changeDatatype"
+                                targets="validation-target"
+                                triggerText="GO@strings"/>
+            </primaryClientAction>
+            <contents data:childData="choices@typeData">
+             <option data:text="optionTextString" 
+                     data:value="optionValueString"/>
+            </contents>
+           </messageChoice>
+           <messageTextInput 
+               name="MIN_VALUE" columns="10" maximumLength="25"
+	       data:text="MIN_VALUE@editParameterData"
+               data:prompt="NEW_WORKFLOW_PARAM_MIN_VALUE_ATTR_NAME@strings">
+            <onSubmitValidater>
+             <decimal maxScale="0" minValue="0" />
+            </onSubmitValidater>
+            <end>
+	     <flowLayout>
+              <contents>
+               <choice name="MIN_VALUE_DENOM"
+                       data:shortDesc="WORKFLOW_PARAM_TIME_UNIT@strings"
+                       data:selectedValue="MIN_VALUE_DENOM@editParameterData">
+                <contents data:childData="option@timeDenomOptionData">
+                 <option data:text="text" 
+                         data:value="value"/>
+                </contents>
+               </choice>
+              </contents>
+             </flowLayout>
+            </end>
+           </messageTextInput>
+           <messageTextInput 
+               name="MAX_VALUE" columns="10" maximumLength="25"
+	       data:text="MAX_VALUE@editParameterData"
+               data:prompt="NEW_WORKFLOW_PARAM_MAX_VALUE_ATTR_NAME@strings">
+            <onSubmitValidater>
+             <decimal maxScale="0" minValue="0" />
+            </onSubmitValidater>
+            <end>
+	     <flowLayout>
+              <contents>
+               <choice name="MAX_VALUE_DENOM"
+                       data:shortDesc="WORKFLOW_PARAM_TIME_UNIT@strings"
+                       data:selectedValue="MAX_VALUE_DENOM@editParameterData">
+                <contents data:childData="option@timeDenomOptionData">
+                 <option data:text="text" 
+                         data:value="value"/>
+                </contents>
+               </choice>
+              </contents>
+             </flowLayout>
+            </end>
+           </messageTextInput>
+          </contents>
+         </labeledFieldLayout>
+        </case>
+
+        <!-- for String-Array datatype -->
+
+        <case name="stringEnumInput">
+         <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+          <contents>
+           <messageStyledText data:prompt="NAME@strings"
+                              data:text="NAME@editParameterData"
+                              styleClass="OraDataText"/>
+           <messageTextInput id="DESCMSGINPUT" name="DESCRIPTION"
+               rows="3"
+               columns="60"
+               data:prompt="DESCRIPTION@strings"
+               data:text="DESCRIPTION@editParameterData"/>
+           <messageCheckBox name="FINAL"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_FINAL_ATTR_NAME@strings" 
+               data:tip="NEW_WORKFLOW_PARAM_FINAL_TIP@strings"
+               data:checked="IS_FINAL@editParameterData"/>
+           <messageCheckBox name="REQUIRED"
+               value="true"
+               data:text="NEW_WORKFLOW_PARAM_REQUIRED_ATTR_NAME@strings" 
+               data:checked="IS_REQUIRED@editParameterData"/>
+           <messageChoice name="TYPE"
+               data:prompt="TYPE@strings"
+               required="yes"
+               data:selectedValue="TYPE@editParameterData">
+            <primaryClientAction>
+             <firePartialAction event="changeDatatype"
+                                targets="validation-target"
+                                triggerText="GO@strings"/>
+            </primaryClientAction>
+            <contents data:childData="choices@typeData">
+             <option data:text="optionTextString" 
+                     data:value="optionValueString"/>
+            </contents>
+           </messageChoice>
+           <styledText styleClass="OraPromptText"
+                       text="" />
+           <shuttle name="newArray"
+                    reorderable="true">
+            <!-- ADD BUTTON -->
+            <filter>
+             <tableLayout>
+              <contents>
+               <rowLayout>
+                <contents>
+                 <textInput name="newStringArrayValue"
+                            data:shortDesc="ADD_A_VALUE@strings"
+                            columns="20"/>
+                 <spacer width = "5"/>
+                 <button data:text="ADD@strings">
+                  <boundAttribute name = "destination">
+                   <concat>
+                    javascript:addOption('newStringArrayValue',
+                                         'newArray')
+                   </concat>
+                  </boundAttribute>
+                 </button>
+                </contents>
+               </rowLayout>
+              </contents>
+             </tableLayout>
+            </filter>
+
+            <!-- String Array list dispay -->
+            <leading>
+             <list multiple="true"
+                   data:shortDesc="ENUM_LIST@strings">
+              <contents data:childData="ENUM_VALUES@editParameterData">
+               <option data:text="optionTextString"
+                       data:value="optionValueString" />
+              </contents>
+             </list>
+            </leading>
+
+            <!-- REMOVE BUTTON -->
+            <leadingFooter>
+             <button data:text = "REMOVE@strings">
+              <boundAttribute name = "destination">
+               <concat>
+                javascript:removeSelected('newArray')
+               </concat>
+              </boundAttribute>
+             </button>
+            </leadingFooter>
+           </shuttle>
+          </contents>
+         </labeledFieldLayout>
+        </case>
+
+        <!-- everything else is unsupported -->
+
+        <case name="unsupportedInput">
+         <styledText styleClass="OraErrorText"
+                     data:text="UNSUPPORTED@strings" />
+        </case>
+       </switcher>
+      </html:span>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="editParam">
+   <method 
+     class="oracle.ifs.admin.em.ias.uix.EditNewWorkflowParameterData"
+     method="doEditParameter"/>
+  </event>
+
+  <event name="cancel">
+   <method 
+     class="oracle.ifs.admin.em.ias.uix.EditNewWorkflowParameterData"
+     method="doCancel"/>
+  </event>
+
+  <event name="changeDatatype">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.EditNewWorkflowParameterData"
+           method="changeDatatype"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

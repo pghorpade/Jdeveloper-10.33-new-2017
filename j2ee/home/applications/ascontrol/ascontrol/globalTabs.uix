@@ -1,0 +1,50 @@
+<dataScope xmlns="http://bali.us.oracle.com/cabo/marlin" xmlns:data="http://bali.us.oracle.com/cabo/marlin">
+  <contents>
+   <rowLayout width="100%">
+    <contents>
+     <cellFormat hAlign="left" vAlign="bottom">
+      <contents>
+           <image data:source="image@brandingData"
+                  data:shortDesc="text@brandingData"
+                  data:destination="destination@brandingData"/>
+      </contents>
+     </cellFormat>
+     <cellFormat wrappingDisabled="true" hAlign="right" vAlign="bottom">
+      <contents>
+       <stackLayout>
+        <contents>
+          <globalButtonBar xmlns="http://bali.us.oracle.com/cabo/marlin">
+            <contents data:childData="globalButtons@buttonData">
+              <globalButton data:text="text"
+                data:destination="destination"
+                selected="false"
+                disabled="false"
+                data:selected="selected" />
+            </contents>
+          </globalButtonBar>
+         <spacer height="1"/>
+         <tabBar rendered="true" data:rendered="rendered@tabData"> 
+           <contents data:childData="globalTabs@tabData">
+             <link data:text="text" data:destination="destination" 
+                   data:selected="selected" data:rendered="rendered" />
+           </contents>
+         </tabBar>
+        </contents>
+       </stackLayout>
+      </contents>
+     </cellFormat>
+    </contents>
+   </rowLayout>
+  </contents>
+  <provider>
+    <data name="buttonData">
+      <method class="oracle.sysman.emSDK.nav.NavData" method="getGlobalButtons"/>
+    </data>
+    <data name="brandingData">
+      <method class="oracle.sysman.emSDK.nav.NavData" method="getProductBranding"/>
+    </data>
+    <data name="tabData">
+        <method class="oracle.sysman.emSDK.nav.NavData" method="getGlobalTabs"/>
+    </data>
+  </provider>
+</dataScope>

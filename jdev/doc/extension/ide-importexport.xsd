@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://xmlns.oracle.com/ide/1013/ide-importexport"
+           xmlns:ext="http://jcp.org/jsr/198/extension-manifest"
+           targetNamespace="http://xmlns.oracle.com/ide/1013/ide-importexport"
+           elementFormDefault="qualified">
+  <xs:import namespace="http://jcp.org/jsr/198/extension-manifest"
+             schemaLocation="extension.xsd"/>
+  <xs:element name="importexport-hook" substitutionGroup="ext:custom-hook"
+              type="importExportHookType">
+    <xs:annotation>
+      <xs:documentation>IDE import export hook</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  
+    <xs:complexType name="importExportHookType">
+    <xs:complexContent>
+      <xs:extension base="ext:customHookType">
+        <xs:choice>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="import" type="ext:className"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="export" type="ext:className"/>
+        </xs:choice>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

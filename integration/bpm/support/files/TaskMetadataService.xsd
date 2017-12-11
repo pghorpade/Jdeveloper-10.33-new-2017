@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://xmlns.oracle.com/bpel/workflow/taskMetadataService"
+     xmlns:tns="http://xmlns.oracle.com/bpel/workflow/taskMetadataService"
+     xmlns:taskmetadata="http://xmlns.oracle.com/bpel/workflow/taskMetadata"
+     xmlns:task="http://xmlns.oracle.com/bpel/workflow/task"
+     xmlns="http://www.w3.org/2001/XMLSchema" 
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+     elementFormDefault="qualified" blockDefault="#all">
+
+  <import namespace="http://xmlns.oracle.com/bpel/workflow/task"
+          schemaLocation="WorkflowTask.xsd"/>
+  <import namespace="http://xmlns.oracle.com/bpel/workflow/taskMetadata"
+          schemaLocation="WorkflowTaskMetadata.xsd"/>
+
+  <element name="getTaskDefinition" type="tns:metadataServiceContextTaskBaseType"/>
+
+  <element name="getTaskDefinitionById" type="tns:getTaskDefinitionByIdType"/>
+
+  <element name="listTaskMetadata" type="tns:listTaskMetadataType"/>
+
+  <element name="taskMetadataList" type="tns:taskMetadataListType"/>
+
+  <element name="getTaskDisplay" type="tns:getTaskDisplayType"/>
+
+  <element name="getOutcomes" type="tns:getOutcomesType"/>
+
+  <element name="getTaskDefinitionOutcomes" type="tns:getTaskDefinitionOutcomesType"/>
+
+  <element name="outcomes" type="tns:outcomesType"/>
+
+  <element name="getVersionTrackedAttrs" type="tns:metadataServiceContextTaskBaseType"/>
+
+  <element name="versionTrackedAttributes" type="tns:versionTrackedAttributesType"/>
+
+  <element name="getRestrictedActions" type="tns:metadataServiceContextTaskBaseType"/>
+
+  <element name="restrictedActions" type="tns:restrictedActionsType"/>
+
+  <element name="getTaskDisplayRegion" type="tns:getTaskDisplayRegionType"/>
+
+  <element name="taskDisplayRegion" type="tns:taskDisplayRegionType"/>
+
+  <element name="getResourceBundleInfo" type="tns:getResourceBundleInfoType"/>
+
+  <element name="resourceBundleInfo" type="tns:resourceBundleInfoType"/>
+
+  <element name="getTaskAttributes" type="tns:getTaskAttributesType"/>
+
+  <element name="getTaskAttributesForTaskDefinition" type="tns:getTaskAttributesForTaskDefinitionType"/>
+
+  <element name="workflowContext" type="xsd:string"/>
+
+  <element name="operationErroredFault" type="tns:faultMessageType"/>
+
+  <complexType name="listTaskMetadataType">
+    <sequence>
+      <element ref="tns:workflowContext"/>
+      <element name="keyword" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <element name="sortAttribute" type="tns:taskMetadataSortAttrType" minOccurs="1" maxOccurs="1"/>
+      <element name="sortOrder" type="tns:taskMetadataSortOrderType" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="taskMetadataListType">
+    <sequence>
+      <element ref="taskmetadata:taskMetadata" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <simpleType name="taskMetadataSortAttrType">
+    <restriction base="xsd:string">
+      <enumeration value="id"/>
+      <enumeration value="name"/>
+      <enumeration value="title"/>
+      <enumeration value="description"/>
+      <enumeration value="domainId"/>
+      <enumeration value="processId"/>
+      <enumeration value="processVersion"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="taskMetadataSortOrderType">
+    <restriction base="xsd:string">
+      <enumeration value="ASC"/>
+      <enumeration value="DESC"/>
+    </restriction>
+  </simpleType>
+
+  <complexType name="getTaskDefinitionByIdType">
+    <sequence>
+      <element ref="tns:workflowContext"/>
+      <element name="taskDefinitionId" type="xsd:string"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="outcomesType">
+    <sequence>
+      <element name="outcome" type="tns:outcomeType" 
+               minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="outcomeType">
+    <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="displayName" type="xsd:string"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="getOutcomesType">
+    <complexContent>
+      <extension base="tns:metadataServiceContextTaskBaseType">
+        <sequence>
+          <element name="locale" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="getTaskDefinitionOutcomesType">
+    <sequence>
+      <element ref="tns:workflowContext"/>
+      <element name="taskDefinitionId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <element name="locale" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="versionTrackedAttributesType">
+    <sequence>
+      <element name="attribute" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="restrictedActionsType">
+    <sequence>
+      <element name="action" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="getTaskDisplayType">
+    <complexContent>
+      <extension base="tns:metadataServiceContextTaskBaseType">
+        <sequence>
+          <element name="applicationName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="getTaskDisplayRegionType">
+    <complexContent>
+      <extension base="tns:metadataServiceContextTaskBaseType">
+        <sequence>
+          <element name="applicationName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <element name="regionName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="taskDisplayRegionType">
+    <sequence>
+      <element name="regionType" type="tns:regionType" minOccurs="1" maxOccurs="1"/>
+      <element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <element name="parameters" type="tns:parametersType" minOccurs="0" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="parametersType">
+    <sequence>
+      <element name="parameter" type="tns:parameterType" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="parameterType">
+    <sequence>
+      <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="getResourceBundleInfoType">
+    <complexContent>
+      <extension base="tns:metadataServiceContextTaskBaseType">
+        <sequence>
+          <element name="locale" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <complexType name="resourceBundleInfoType">
+    <sequence>
+      <element name="location" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="metadataServiceContextTaskBaseType">
+    <sequence>
+      <element ref="tns:workflowContext"/>
+      <element ref="task:task"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="faultMessageType">
+    <sequence>
+      <element name="faultInfo" type="xsd:string"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="getTaskAttributesType">
+    <sequence>
+      <element ref="tns:workflowContext"/>
+    </sequence>
+  </complexType>
+
+  <complexType name="getTaskAttributesForTaskDefinitionType">
+    <sequence>
+      <element ref="tns:workflowContext"/>
+      <element name="taskDefinitionId" type="xsd:string"/>
+    </sequence>
+  </complexType>
+
+  <simpleType name="regionType">
+    <restriction base="xsd:string">
+      <enumeration value="jsp"/>
+      <enumeration value="xsl"/>
+      <enumeration value="oaFramework"/>
+      <enumeration value="autoGeneratedJSP"/>
+    </restriction>
+  </simpleType>
+
+</schema>
+

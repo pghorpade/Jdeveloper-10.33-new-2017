@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java-wsdl-mapping xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+  http://www.ibm.com/webservices/xsd/j2ee_jaxrpc_mapping_1_1.xsd"
+  version="1.1">
+
+    <package-mapping>
+        <package-type>oracle.j2ee.jmx.remote.soapadapter.shared</package-type>
+        <namespaceURI>http://shared.soapadapter.remote.jmx.j2ee.oracle/</namespaceURI>
+    </package-mapping>
+    <package-mapping>
+        <package-type>oracle.j2ee.jmx.remote.soapadapter.service</package-type>
+        <namespaceURI>http://service.soapadapter.remote.jmx.j2ee.oracle/</namespaceURI>
+    </package-mapping>
+    <package-mapping>
+        <package-type>oracle.j2ee.jmx.remote.soapadapter.service</package-type>
+        <namespaceURI>http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter</namespaceURI>
+    </package-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_isRegistered_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}isRegisteredResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getDMSTableNames_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getDMSTableNamesResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getStatisticsTable_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getStatisticsTableResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.shared.GenericObject</java-type>
+        <anonymous-type-qname>{http://shared.soapadapter.remote.jmx.j2ee.oracle/}GenericObject</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>type</java-variable-name>
+            <xml-element-name>type</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>name</java-variable-name>
+            <xml-element-name>name</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBean</java-type>
+        <anonymous-type-qname>{http://shared.soapadapter.remote.jmx.j2ee.oracle/}ObjectBean</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>type</java-variable-name>
+            <xml-element-name>type</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>name</java-variable-name>
+            <xml-element-name>name</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>properties</java-variable-name>
+            <xml-element-name>properties</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_bulkInvoke_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}bulkInvokeResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</java-type>
+        <anonymous-type-qname>{http://shared.soapadapter.remote.jmx.j2ee.oracle/}ComplexObjectBean</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>type</java-variable-name>
+            <xml-element-name>type</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>name</java-variable-name>
+            <xml-element-name>name</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>beans</java-variable-name>
+            <xml-element-name>beans</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_setAttribute_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}setAttributeResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_queryDMSTable_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}queryDMSTableResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getAttributesTable_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getAttributesTableResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getAttributes_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getAttributesResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_setAttributes_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}setAttributesResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanRow</java-type>
+        <anonymous-type-qname>{http://shared.soapadapter.remote.jmx.j2ee.oracle/}ObjectBeanRow</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>type</java-variable-name>
+            <xml-element-name>type</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>name</java-variable-name>
+            <xml-element-name>name</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>column</java-variable-name>
+            <xml-element-name>column</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_queryNames_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}queryNamesResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getStatistics_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getStatisticsResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_invoke_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}invokeResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanProperties</java-type>
+        <anonymous-type-qname>{http://shared.soapadapter.remote.jmx.j2ee.oracle/}ObjectBeanProperties</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>type</java-variable-name>
+            <xml-element-name>type</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>name</java-variable-name>
+            <xml-element-name>name</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>complexValue</java-variable-name>
+            <xml-element-name>complexValue</xml-element-name>
+        </variable-mapping>
+        <variable-mapping>
+            <java-variable-name>value</java-variable-name>
+            <xml-element-name>value</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getAttribute_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getAttributeResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getStatistic_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getStatisticResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <java-xml-type-mapping>
+        <java-type>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint_getDMSTable_ResponseStruct</java-type>
+        <anonymous-type-qname>{http://service.soapadapter.remote.jmx.j2ee.oracle/}getDMSTableResponse</anonymous-type-qname>
+        <qname-scope>complexType</qname-scope>
+        <variable-mapping>
+            <java-variable-name>result</java-variable-name>
+            <xml-element-name>result</xml-element-name>
+        </variable-mapping>
+    </java-xml-type-mapping>
+    <service-interface-mapping>
+        <service-interface>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterService</service-interface>
+        <wsdl-service-name xmlns:serviceNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">serviceNS:JMXSoapAdapterService</wsdl-service-name>
+        <port-mapping>
+            <port-name>HttpSoap12</port-name>
+            <java-port-name>HttpSoap12</java-port-name>
+        </port-mapping>
+    </service-interface-mapping>
+    <service-endpoint-interface-mapping>
+        <service-endpoint-interface>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint</service-endpoint-interface>
+        <wsdl-port-type xmlns:portTypeNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">portTypeNS:JMXSoapAdapterServiceEndpoint</wsdl-port-type>
+        <wsdl-binding xmlns:bindingNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">bindingNS:HttpSoap12Binding</wsdl-binding>
+        <service-endpoint-method-mapping>
+            <java-method-name>bulkInvoke</java-method-name>
+            <wsdl-operation>bulkInvoke</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_bulkInvoke</wsdl-message>
+                    <wsdl-message-part-name>objNamePattern</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_bulkInvoke</wsdl-message>
+                    <wsdl-message-part-name>operationName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_bulkInvoke</wsdl-message>
+                    <wsdl-message-part-name>arguments</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_bulkInvoke</wsdl-message>
+                    <wsdl-message-part-name>signature</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>4</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_bulkInvoke</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>5</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_bulkInvoke</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanRow[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_bulkInvokeResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getAttribute</java-method-name>
+            <wsdl-operation>getAttribute</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttribute</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttribute</wsdl-message>
+                    <wsdl-message-part-name>attributeName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttribute</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttribute</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributeResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getAttributes</java-method-name>
+            <wsdl-operation>getAttributes</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributes</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributes</wsdl-message>
+                    <wsdl-message-part-name>attributeNames</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributes</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributes</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributesResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getAttributesTable</java-method-name>
+            <wsdl-operation>getAttributesTable</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributesTable</wsdl-message>
+                    <wsdl-message-part-name>objNamePattern</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributesTable</wsdl-message>
+                    <wsdl-message-part-name>attributeNames</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributesTable</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributesTable</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanRow[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getAttributesTableResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getDMSTable</java-method-name>
+            <wsdl-operation>getDMSTable</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTable</wsdl-message>
+                    <wsdl-message-part-name>tableName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanProperties[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTable</wsdl-message>
+                    <wsdl-message-part-name>values</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanProperties[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTable</wsdl-message>
+                    <wsdl-message-part-name>contexts</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTable</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>4</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTable</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanRow[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTableResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getDMSTableNames</java-method-name>
+            <wsdl-operation>getDMSTableNames</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanProperties[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTableNames</wsdl-message>
+                    <wsdl-message-part-name>contexts</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTableNames</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTableNames</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getDMSTableNamesResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getStatistic</java-method-name>
+            <wsdl-operation>getStatistic</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistic</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistic</wsdl-message>
+                    <wsdl-message-part-name>statName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistic</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistic</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatisticResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getStatistics</java-method-name>
+            <wsdl-operation>getStatistics</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistics</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistics</wsdl-message>
+                    <wsdl-message-part-name>statNames</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistics</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatistics</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatisticsResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>getStatisticsTable</java-method-name>
+            <wsdl-operation>getStatisticsTable</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatisticsTable</wsdl-message>
+                    <wsdl-message-part-name>objNamePattern</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatisticsTable</wsdl-message>
+                    <wsdl-message-part-name>statNames</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatisticsTable</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatisticsTable</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanRow[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_getStatisticsTableResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>invoke</java-method-name>
+            <wsdl-operation>invoke</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_invoke</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_invoke</wsdl-message>
+                    <wsdl-message-part-name>operationName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_invoke</wsdl-message>
+                    <wsdl-message-part-name>arguments</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_invoke</wsdl-message>
+                    <wsdl-message-part-name>signature</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>4</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_invoke</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>5</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_invoke</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_invokeResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>isRegistered</java-method-name>
+            <wsdl-operation>isRegistered</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_isRegistered</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_isRegistered</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_isRegistered</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_isRegisteredResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>queryDMSTable</java-method-name>
+            <wsdl-operation>queryDMSTable</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryDMSTable</wsdl-message>
+                    <wsdl-message-part-name>adml</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryDMSTable</wsdl-message>
+                    <wsdl-message-part-name>tableName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanProperties[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryDMSTable</wsdl-message>
+                    <wsdl-message-part-name>values</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanProperties[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryDMSTable</wsdl-message>
+                    <wsdl-message-part-name>contexts</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>4</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryDMSTable</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>5</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryDMSTable</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ObjectBeanRow[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryDMSTableResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>queryNames</java-method-name>
+            <wsdl-operation>queryNames</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryNames</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryNames</wsdl-message>
+                    <wsdl-message-part-name>queryExp</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryNames</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryNames</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_queryNamesResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>setAttribute</java-method-name>
+            <wsdl-operation>setAttribute</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttribute</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttribute</wsdl-message>
+                    <wsdl-message-part-name>attributeName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttribute</wsdl-message>
+                    <wsdl-message-part-name>attributeValue</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttribute</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>4</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttribute</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+        </service-endpoint-method-mapping>
+        <service-endpoint-method-mapping>
+            <java-method-name>setAttributes</java-method-name>
+            <wsdl-operation>setAttributes</wsdl-operation>
+            <wrapped-element />
+            <method-param-parts-mapping>
+                <param-position>0</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttributes</wsdl-message>
+                    <wsdl-message-part-name>objectName</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>1</param-position>
+                <param-type>java.lang.String[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttributes</wsdl-message>
+                    <wsdl-message-part-name>attributeNames</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>2</param-position>
+                <param-type>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean[]</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttributes</wsdl-message>
+                    <wsdl-message-part-name>attributeValues</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>3</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttributes</wsdl-message>
+                    <wsdl-message-part-name>languageCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <method-param-parts-mapping>
+                <param-position>4</param-position>
+                <param-type>java.lang.String</param-type>
+                <wsdl-message-mapping>
+                    <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttributes</wsdl-message>
+                    <wsdl-message-part-name>countryCode</wsdl-message-part-name>
+                    <parameter-mode>IN</parameter-mode>
+                </wsdl-message-mapping>
+            </method-param-parts-mapping>
+            <wsdl-return-value-mapping>
+                <method-return-value>oracle.j2ee.jmx.remote.soapadapter.shared.ComplexObjectBean[]</method-return-value>
+                <wsdl-message xmlns:wsdlMsgNS="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsdlMsgNS:JMXSoapAdapterServiceEndpoint_setAttributesResponse</wsdl-message>
+                <wsdl-message-part-name>result</wsdl-message-part-name>
+            </wsdl-return-value-mapping>
+        </service-endpoint-method-mapping>
+    </service-endpoint-interface-mapping>
+</java-wsdl-mapping>
+

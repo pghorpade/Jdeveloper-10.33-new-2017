@@ -1,0 +1,1457 @@
+<html>
+<head>
+<title>Oracle JDeveloper (10.1.3.3.0) Studio Edition Installation Guide</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="jdeveloper.css" type="text/css">
+<link rel="stylesheet" href="http://www.oracle.com/technology/products/jdev/tips/otn_new.css" type="text/css">
+</head>
+<body>
+<h1>Oracle JDeveloper (10.1.3.3.0) </h1>
+<p><strong>Installation Guide</strong></p>
+<p> Studio Version 10.1.3.3.0</p>
+<p>
+      April 2007</p>
+<p>Before you install JDeveloper, please review the content of this guide.</p>
+<h2><a name="top"></a>Table of Content</h2>
+
+<ul class="none">
+  <li>1.0  <A href="#system">JDeveloper System Requirements</A> 
+    <ul class="none">
+      <li>1.1 <A href="#recommended">Recommended CPU, Memory, Display, and Hard Drive 
+        Configurations</A>
+      <li>1.2 <A href="#teamdev">Support for Team Based Development Tools</A></li>
+    </ul>
+
+  <li>2.0 <A href="#install_start_windows">Installing and Starting JDeveloper on Windows</A>
+  <ul class="none">
+  <li>2.1 <A href="#installcomplete">Installing the Complete Version</A></li>
+  <li>2.2 <A href="#installbase">Installing JDeveloper Base</A></li>
+  <ul class="none">
+  <li>2.2.1 <A href="#add_ojvm">Installing OJVM</A></li>
+  </ul>
+  <li>2.3 <A href="#startwindows">Starting JDeveloper on Windows</A></li>
+  </ul>
+  <li>3.0  <A href="#installunixlinux">Installing and Starting JDeveloper on Linux and UNIX Platforms</A> 
+    <ul class="none">
+      <li>3.1 <A href="#java_sdk">Configuring Java SDK in JDeveloper</A> 
+      <li>3.2 <A href="#permissions">Modifying Permissions on Linux and UNIX Platforms</A>
+	  <li>3.3 <A href="#unixcursors">Cursor Problems</A>
+	  <li>3.4 <A href="#startunixlinux">Starting JDeveloper on Linux and UNIX Systems</A>
+    </ul>
+  <li>4.0 <A href="#macosx">Installing and Starting JDeveloper on Mac OS X Platforms</A>
+  <li>5.0 <A href="#migrating">Migrating User Settings from Previous Releases</A> 
+  <li>6.0  <A href="#extensions">Enabling JDeveloper Extensions</A>
+  <li>7.0  <A href="#homedirectory">Setting the User Home Directory</A>
+  	<ul class="none">
+		<li>7.1 <A href="#homedirectory_windows">Setting the Home Environment Variable on Windows</A>
+		<li>7.2 <A href="#homedirectory_linux">Setting the Home Environment Variable on Linux and UNIX</A>
+		<li>7.3 <A href="#homedirectory_macosx">Setting the Home Environment Variable on Mac OS X</A>
+	</ul>
+  <li>8.0 <A href="#multiuser">Using JDeveloper in a Multiuser Environment</A> 
+    <ul class="none">
+      <li>8.1 <A href="#citrix"> Installing JDeveloper on a Citrix MetaFrame Server 
+        or a Microsoft Terminal Server </A>
+      <li>8.2 <A href="#homedir">Configuring User Home Directories in a Multiuser 
+        Environment</A> 
+      <li>8.3 <A href="#terminalserver">Configuring Terminal Server Clients for Running 
+        JDeveloper</A></li>
+    </ul>
+
+  <li>9.0 <A href="#oc4j">Using OC4J with JDeveloper</A> 
+    <ul class="none">
+      <li>9.1 <A href="#oc4jmemory">OC4J Memory Requirements 
+        </A></li>
+    </ul>  
+  <li>10.0 <A href="#supported">Application Servers Supported by JDeveloper</A>
+  <li>11.0 <A href="#supported_db">Database Certification for JDeveloper</A>   
+  <li>12.0 <a href="#browsers">Web Browsers Supported by JDeveloper</a>
+  <li>13.0 <A href="#accessibility"> Finding JDeveloper Accessibility Information</A> 
+  <li>14.0 <A href="#accessbridge">Using a Screen Reader and Java Access Bridge 
+        with JDeveloper</A>
+	<ul class="none">
+	<li>14.1 <A href="#configjaws">Configuring JAWS 3.70 and Access Bridge  with JDeveloper</a></li>
+   </ul>
+ 
+  <li>15.0 <A href="#uninstall">Uninstalling JDeveloper</A> 
+  <li>16.0 <A href="#oracleweb">Oracle on the Web</A></li> 
+</ul>
+<h2><a name="system"></a>1.0 JDeveloper System Requirements</h2>
+<p>This release of JDeveloper is tested and supported on the specific versions Windows, Linux, and Mac OS X, as listed in Section 1.1 below. In addition, it is supported on any operating system that supports Sun Java SE Development Kit (JDK) 5.0 Update 6 or later.<br>
+</p>            
+
+
+
+
+<h3><a name="recommended"></a>1.1 Recommended CPU, Memory, Display, and Hard Drive 
+  Configurations</h3>
+
+
+
+<h4>Windows</h4>
+
+
+
+<P>
+      
+<blockquote> 
+
+  <TABLE BORDER="1" FRAME      ="hsides" RULES="groups" WIDTH="100%" summary="CPU, Memory, Display, and Hard Drive Requirements" CELLPADDING="3" CELLSPACING="0">
+    <THEAD> 
+    <tr align="left" valign="top"> 
+      <th id="resource" width="27%">Resource</th>
+      <th id="recommended" width="73%"> 
+        <p><STRONG>Recommended</STRONG></p>
+      </th>
+    </tr>
+    <tr> 
+      <td headers=resource width="27%"> 
+        <p>Operating System</p>
+      </td>
+      <td headers=recommended width="73%"> 
+        <p>Windows 2000-Service Pack 4<br>
+          Windows Server 2003 R2 <br>
+          Windows XP-Service 
+        Pack 2 </p>      </td>
+    </tr>
+    <tr> 
+      <td headers=resource width="27%"> 
+        <p>CPU Type and Speed&nbsp; </p>
+      </td>
+      <td headers=recommended width="73%"> 
+        <p> Pentium IV 2 GHz or faster</p>
+      </td>
+    </tr>
+    <tr> 
+      <td headers=resource width="27%"> 
+        <p> Memory </p>
+      </td>
+      <td headers=recommended width="73%"> 
+        <p> 1 GB RAM </p>
+      </td>
+    </tr>
+    <tr> 
+      <td headers=resource width="27%"> 
+        <p>Display&nbsp; </p>
+      </td>
+      <td headers=recommended width="73%"> 
+        <p>65536 colors, set to at least 1024 X 768 resolution</p>
+      </td>
+    </tr>
+    <tr> 
+      <td headers=resource width="27%"> 
+        <p>Hard Drive Space </p>
+      </td>
+      <td headers=recommended width="73%"> 
+        <p>Base Installation: 450 MB<br>
+          Complete Installation: 575 MB</p>
+      </td>
+    </tr>
+    <tr>
+      <td headers=resource width="27%">
+	  <p>Java SDK</p></td>
+      <td headers=recommended width="73%"> <p>JDK 5.0 Update 6  or later for Windows, 
+        available at: <a href="http://www.javasoft.com">http://www.javasoft.com</a>. (Included in the Complete Installation.)</p></td>
+    </tr>
+  </TABLE>
+
+  
+
+</blockquote>
+
+
+
+
+
+<h4>Linux</h4>
+
+
+
+<p>
+      
+<blockquote> 
+
+
+
+  <table border="1" frame      ="hsides" rules="groups" width="100%" summary="CPU, Memory, Display, and Hard Drive Requirements" cellpadding="3" cellspacing="0">
+
+    <thead> 
+
+    <tr align="left" valign="top"> 
+
+      <th id="resource" width="27%">Resource</th>
+
+      <th id="recommended" width="73%"> 
+
+        <p><strong>Recommended</strong></p>
+
+      </th>
+
+    </tr>
+
+     
+
+    <tr> 
+
+      <td headers=resource width="27%"> 
+
+        <p>Distribution</p>
+
+      </td>
+
+      <td headers=recommended width="73%"> 
+        <p>          Red Hat Enterprise Linux 3.0<br>
+		  </p>
+
+      </td>
+
+    </tr>
+
+    <tr> 
+
+      <td headers=resource width="27%"> 
+
+        <p>CPU Type and Speed&nbsp; </p>
+
+      </td>
+
+      <td headers=recommended width="73%"> 
+
+        <p> Pentium IV 2 GHz or faster</p>
+
+      </td>
+
+    </tr>
+
+    <tr> 
+
+      <td headers=resource width="27%"> 
+
+        <p> Memory </p>
+
+      </td>
+
+      <td headers=recommended width="73%"> 
+
+        <p> 1 GB RAM </p>
+
+      </td>
+
+    </tr>
+
+    <tr> 
+
+      <td headers=resource width="27%"> 
+
+        <p>Display&nbsp; </p>
+
+      </td>
+
+      <td headers=recommended width="73%"> 
+
+        <p>65536 colors, set to at least 1024 X 768 resolution</p>
+
+      </td>
+
+    </tr>
+
+    <tr> 
+
+      <td headers=resource width="27%"> 
+
+        <p>Hard Drive Space </p>
+
+      </td>
+
+      <td headers=recommended width="73%"> 
+
+        <p> Base Installation: 450 MB</p>
+
+      </td>
+
+    </tr>
+
+    <tr> 
+
+      <td headers=resource width="27%" height="26"> 
+        <p>Java SDK</p>
+
+      </td>
+
+      <td headers=recommended width="73%" height="26"> 
+        <p>JDK 5.0 Update 6 or later for Linux,  available at: <a href="http://www.javasoft.com">http://www.javasoft.com</a>.</p>
+
+      </td>
+
+    </tr>
+
+  </table>
+
+
+
+</blockquote>
+
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+  <tr> 
+    <td> 
+      <p><strong>Note:</strong> If you want to use JDeveloper in a multiuser 
+        UNIX environment, Oracle recommends a minimum of 1 GB RAM and 2 GB of 
+        swap space.</p>
+    </td>
+  </tr>
+</table>
+
+<h4>MAC OS X</h4>
+<blockquote>
+<table border="1" frame      ="hsides" rules="groups" width="100%" summary="CPU, Memory, Display, and Hard Drive Requirements" cellpadding="3" cellspacing="0">
+  <thead>
+    <tr align="left" valign="top">
+      <th id="resource" width="27%">Resource</th>
+      <th id="recommended" width="73%">
+        <p><strong>Recommended</strong></p></th>
+    </tr>
+    <tr>
+      <td headers=resource width="27%">
+        <p>Operating System</p></td>
+      <td headers=recommended width="73%">
+        <p>Apple Mac OS X Version 10.4.x </p></td>
+    </tr>
+    <tr>
+      <td headers=resource width="27%">
+        <p>CPU Type and Speed&nbsp; </p></td>
+      <td headers=recommended width="73%">
+        <p> Dual 1.25 GHz G4/G5 (1 GHz G4 minimum) </p></td>
+    </tr>
+    <tr>
+      <td headers=resource width="27%">
+        <p> Memory </p></td>
+      <td headers=recommended width="73%">
+        <p> 1.5 GB RAM (1 GB minimum)</p></td>
+    </tr>
+    <tr>
+      <td headers=resource width="27%">
+        <p>Display&nbsp; </p></td>
+      <td headers=recommended width="73%">
+        <p>"Thousands" of colors</p></td>
+    </tr>
+    <tr>
+      <td headers=resource width="27%">
+        <p>Hard Drive Space </p></td>
+      <td headers=recommended width="73%">
+        <p> Base Installation: 450 MB<br>
+          </p></td>
+    </tr>
+    <tr>
+      <td headers=resource width="27%">
+        <p>Java SDK</p></td>
+      <td headers=recommended width="73%">
+        <p> Sun J2SE 1.5 release 1 available at: <a href="http://www.apple.com/support/downloads/java2se50release1.html">http://www.apple.com/support/downloads/java2se50release1.html</a></td>
+    </tr>
+</table>
+</blockquote>
+<H3><a name="teamdev"></a>1.2 Support for Team Based Development Tools</H3>
+<P>JDeveloper provides integrated support for Concurrent Version Support (CVS):</P>
+<ul>
+		<li>CVS version 1.11.x</li>
+  		<li>CVSNT 2.5.02 &amp; 2.5.03</li>
+</ul>
+<P>Download extensions to integrate other source control systems in JDeveloper using the Check for Updates wizard. From the main menu choose <span class="GUITag">Help | Check for Updates</span> to launch the wizard.  JDeveloper provides extensions for the following: </P>
+<ul>
+	<li>ClearCase 
+	<ul>
+		<li>ClearCase 4.x</li>
+  		<li>ClearCase 5.x (including ClearCase 2002)</li>
+        <li>ClearCase - 2003.06.x</li>
+        <li><strong>Note:</strong> JDeveloper does not support ClearCase UCM</li>
+	</ul>
+<li>Dimension 9.1</li> 
+<li>Perforce 2005.1 and 2005.2</li> 
+<li>Subversion 1.3.1 and 1.3.2</li>
+<li>Team Foundation Server (VSTS) 2005 Production</li>
+</ul>
+<A href="#top">Back to TOC</A> 
+<h2><a name="install_start_windows"></a>2.0 Installing and Starting JDeveloper on Windows</h2>
+<p>JDeveloper does not require an installer. To install JDeveloper, you will need 
+  an unzip tool. You can download a free, cross-platform unzip tool, Info-Zip, 
+  available at: <a href="http://www.info-zip.org/"> http://www.info-zip.org/</a>.</p>
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+
+
+
+    <tr> 
+
+
+
+      
+
+    <td align="left" valign="top"> 
+
+      <p><strong><font color="#ff0000">Alert:</font></strong> Do not install this 
+
+        JDeveloper release into <em>any existing </em> <code>ORACLE_HOME</code>. 
+
+        You will not be able to uninstall it using Oracle Universal Installer.</p>
+
+
+
+    </td></tr>
+
+
+
+</table>
+
+
+
+<h3><a name="installcomplete"></a>2.1 Installing the Complete Version</h3>
+<p>The complete installation (<code>jdevstudio10133.zip</code>) includes the Windows version 
+  of JDK 5.0 Update 6  and the JDeveloper documentation.</p>
+
+
+
+<p class="StepIntro">To install JDeveloper from jdevstudio10133.zip, unzip <code>jdevstudio10133.zip </code>in the directory you want to install JDeveloper. Ensure that this directory does not contain spaces. For example, do not use <code>C:\Program Files</code> as the installation directory. 
+</p>
+
+
+
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+
+
+
+  <tr> 
+
+
+
+    <td align="left" valign="top"> 
+
+      <p><strong>Note:</strong> The remainder of this document uses <code><em>&lt;jdev_home&gt;</em></code> 
+        to represent the directory location in which JDeveloper was installed. 
+        For example, if JDeveloper was unzipped in <code>c:\jdeveloper</code>, the 
+        <code><em>&lt;jdev_home&gt;</em></code> directory would be <code>c:\jdeveloper</code>.</p>
+
+    </td>
+
+
+
+  </tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+<h3><a name="installbase"></a>2.2 Installing JDeveloper Base</h3>
+<p>For quicker download times, you can download the base installation (<code>jdevstudiobase10133.zip</code>). The base installation, by default, includes the JDeveloper documentation, but requires that you already have JDK 5.0 Update 6
+    on your machine because the SDK is not included.</p>
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+      <tr> 
+        <td align="left" valign="top"> 
+          <p><strong>Note:</strong> JDeveloper provides OJVM, 
+          and OJVM can be installed for use with JDeveloper, but this configuration is only supported for JDeveloper projects, not the JDeveloper IDE. </p>        </td>
+      </tr>
+</table>
+<p class="StepIntro">To install JDeveloper from jdevstudiobase10133.zip:</p>
+
+
+
+<ol>
+  <li> If you don't have JDK 5.0 Update 6 
+    installed, you can obtain it from: <a href="http://www.javasoft.com">http://www.javasoft.com</a>. 
+    <br>
+  
+  <li>Unzip <code>jdevstudiobase10133.zip</code> to the target directory. 
+  <li>Set the variable <code>SetJavaHome</code> in the file <code><em>&lt;jdev_home&gt;</em>\jdev\bin\jdev.conf</code> 
+    to the location of your SDK installation. Use an editor that recognizes UNIX 
+    end-of-line characters, such as WordPad. When you save the file, WordPad will 
+    warn you that it is about to save the file in text-only format. You can ignore 
+    this warning.<br>
+    <br>
+    For example, in a Windows environment, if the location of your JDK 5.0 Update 6 
+    is in a directory called jdk1.5.0_06 on your D: drive, your entry in <code>jdev.conf</code> 
+    would look like:<br>
+    <br>
+    <code>SetJavaHome d:\jdk1.5.0_06</code> </li>
+</ol>
+<ol start="4">
+  <li> In order to use the Profilers and CodeCoach, you will need to install OJVM, 
+    the specialized Oracle Java Virtual Machine for JDeveloper. The OJVM 
+    will also make the JDeveloper debugger run more quickly. See <A href="#add_ojvm">Installing 
+    OJVM</A> in the next section.<br>
+    <br>
+    <table border="1" width="80%" cellpadding="0" cellspacing="0">
+      <tr> 
+        <td align="left" valign="top"> 
+          <p><strong>Note:</strong> JDeveloper provides OJVM, 
+          and OJVM can be installed for use with JDeveloper, but this configuration is only supported for JDeveloper projects, not the JDeveloper IDE. </p>        </td>
+      </tr>
+    </table>
+</ol>
+<h4><a name="add_ojvm"></a>2.2.1 Installing OJVM</h4>
+
+
+
+<p>To use CodeCoach and the Profilers with a base installation you need to install 
+  OJVM, the specialized Oracle Java Virtual Machine for JDeveloper. 
+  OJVM will also increase the speed of the JDeveloper debugger, and provide automatic 
+  deadlock detection and memory debugging features. If you performed the complete 
+  installation using <code>jdevstudio10133.zip</code>, OJVM was installed 
+  automatically. </p>
+<p>If you perform the base installation using <code>jdevstudiobase10133.zip</code>, 
+    you are prompted to  install OJVM into your SDK. JDeveloper copies OJVM 
+    files into the specified SDK and updates the configuration of that SDK. The files 
+    are copied into a separate OJVM directory and will not overwrite 
+    any of the existing files in the SDK. You can install or update OJVM later if you decline the installation at startup.</p>
+<p class="StepIntro">To install or update OJVM with a base installation:</p>
+
+
+
+<ol>
+  <li>From the main menu select <span class="GUITag">Tools | Manage Libraries</span>.</li>
+  <li>Click  the <span class="GUITag">J2SE Definitions</span> tab.</li>
+  <li>In the Definitions list select the SDK into which OJVM is to be installed.</li>
+  <li>In the right pane,    <span class="GUITag">OJVM Successfully Installed/Updated</span> indicates whether or not OJVM is currently installed or updated with the most recent version. If it is not, the <span class="GUITag">Install</span> or <span class="GUITag">Update</span> button is active. Click to install or update OJVM. </li>
+</ol>
+
+<h3><a name="startwindows"></a>2.3 Starting JDeveloper on Windows</h3>
+<p>To start JDeveloper on Windows, run any of the following files:</p>
+    <ul>
+      <li><code><em>&lt;jdev_home&gt;</em>\jdev\bin\jdevw.exe</code></li>
+      <li><code><em>&lt;jdev_home&gt;</em>\jdev\bin\jdev.exe</code> (to display a console window for internal diagnostic information)</li>
+      <li><code><em>&lt;jdev_home&gt;</em>\jdeveloper.exe</code></li>
+  </ul>
+  
+</ul>
+
+<A href="#top">Back to TOC</A>
+<h2><a name="installunixlinux"></a>3.0 Installing and Starting JDeveloper on Linux and UNIX Platforms </h2>
+
+<p>This section provides additional instructions specific to installing JDeveloper 
+  on Linux and UNIX systems. </p>
+<p>JDeveloper does not require an installer. To install JDeveloper, you will need an unzip tool. You can download a free, cross-platform unzip tool, Info-Zip, available at: <a href="http://www.info-zip.org/"> http://www.info-zip.org/</a>.</p>
+<p><span class="StepIntro">To install JDeveloper on Linux and UNIX platforms, unzip <code>jdevstudiobase10133.zip </code>in the directory you want to install JDeveloper. Ensure that this directory does not contain spaces. For example, do not use <code>/home/jdoe/my apps</code> as the installation directory.</span></p>
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="left" valign="top"><p><strong><font color="#ff0000">Alert:</font></strong> Do not install this JDeveloper release into <em>any existing </em> <code>ORACLE_HOME</code>. You will not be able to uninstall it using Oracle Universal Installer.</p></td>
+  </tr>
+</table>
+<h3><a name="java_sdk"></a>3.1 Configuring  Java SDK in JDeveloper</h3>
+<p>The base installation (<code>jdevstudiobase10133.zip</code>) does not contain the Java J2SE SDK for running JDeveloper and creating projects. If you install JDeveloper on Linux or UNIX, perform 
+  the following steps to configure JDeveloper to use the appropriate SDK. </p>
+<ol>
+  <li> If you don't have JDK 5.0 Update 6 installed, install it. You 
+    can get a copy for many operating systems from <a href="http://www.javasoft.com">http://www.javasoft.com</a>, 
+    or check with your OS vendor where to obtain a copy. 
+  <li>Set the variable <code>SetJavaHome</code> in the file <code><em>&lt;jdev_home&gt;</em>/jdev/bin/jdev.conf</code> 
+    to the location of your Java installation. <br>
+    <p>For example, in a UNIX environment, if the location of your JDK 
+      is in a directory called <code>/usr/local/java</code>, your entry in <code>jdev.conf</code> 
+      would look like:<br>
+      <br>
+    <code>SetJavaHome /usr/local/java</code></p>
+  </li>
+</ol>
+  <h3><a name="permissions"></a>3.2 Modifying Permissions on Linux and UNIX Platforms</h3>
+  <p>All JDeveloper files must have read permissions which can be set by issuing: </p>
+  <p><code>chmod -R g+r &lt;jdev_home&gt;</code> </p>
+  <p>Users (or groups) must have write permissions for the following files (required for deployment): </p>
+  <table border="1" width="80%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td><p><strong>Note:</strong> <code>&lt;<em>jdev_home</em>&gt;/j2ee/home/application-deployments</code><em> </em>is not available until you run <code>java -jar oc4j.jar -install</code></p></td>
+    </tr>
+  </table>
+  <ul>
+    <li><code>&lt;<em>jdev_home</em>&gt;/j2ee/home/application-deployments</code>
+    <li><code>&lt;<em>jdev_home</em>&gt;/j2ee/home/applications </code>
+    <li><code>&lt;<em>jdev_home</em>&gt;/j2ee/home/config</code></li>
+  </ul>
+  <h3><a name="unixcursors"></a>3.3 Cursor Problems</h3>
+  <p>On UNIX or Linux platforms, the Java cursors may display large and opaque, creating 
+  difficulties when used for drag and drop operations. To address this problem 
+  JDeveloper provides a set of cursors to replace the default set. You must have 
+  write access to the Java SDK in order to replace the cursors. </p>
+  
+<p class="StepIntro">To replace the cursors:</p>
+  
+<ol>
+  <li>Make a back-up copy of the default cursors located in the SDK directory 
+    at: 
+    <p><code><em>&lt;jdk_install&gt;</em>/jre/lib/images/cursors</code></p>
+  <li>Extract the replacement cursors from the tar file  at: 
+    <p><code><em>&lt;jdev_home&gt;</em>/jdev/bin/clear_cursors.tar</code></p>
+  </li>
+</ol>
+<h3><a name="startunixlinux"></a>3.4 Starting JDeveloper on Linux and UNIX Systems</h3>
+
+
+<p>To start JDeveloper on Linux and UNIX, run the file <code><em>&lt;jdev_home&gt;</em>/jdev/bin/jdev</code>.</p>
+<p><A href="#top">Back to TOC</A>
+</p>
+<h2><a name="macosx"></a>4.0 Installing and Starting JDeveloper on Mac OS X Platforms</h2>
+<p>JDeveloper is provided as a self-contained application bundle. An installer is not required. </p>
+<p>You must update your Mac OS X SDK to Java Sun version 1.5 release 1  or later for use with  JDeveloper. Use Mac OS X Software Update or download from <a href="http://www.apple.com/support/downloads/java2se50release1.html">http://www.apple.com/support/downloads/java2se50release1.html</a> .</p>
+<p class="StepIntro">To install JDeveloper from jdevstudio10133.dmg:</p>
+<ol>
+<li>Mount the JDeveloper 10.1.3.3.0 Disk Image by double-clicking the .dmg file.</li>
+<li>Drag the JDeveloper application to a location on your hard drive; for example, <span class="GUITag">Applications</span>. </li>
+<li>Start JDeveloper by double-clicking the JDeveloper application.</li>
+<li>If starting JDeveloper for the first time answer:</li>
+<ul>
+<li><strong>Yes</strong> to create a JDeveloper user home.</li>
+<li><strong>No</strong> to migrate from a previous version.</li>
+</ul>
+<p>Note that by default JDeveloper files are stored under <code>/Users/<em>&lt;username&gt;</em>/jdevhome</code>.</p>
+</ol>
+<A href="#top">Back to TOC</A>
+<h2><a name="migrating"></a>5.0 Migrating User Settings from Previous Releases</h2>
+<p>User settings such as system settings, libraries, connections, and projects 
+  from the production release of JDeveloper 9.0.4.3 can be migrated to this release 
+  of JDeveloper. Oracle does not support direct migration from any release prior to JDeveloper 9.0.4.3. 
+  If you are running a newly installed version of JDeveloper for the first time 
+  you will be prompted with a Migrate User Settings dialog. You can use this dialog 
+  to migrate your user settings by selecting <strong>Yes</strong>. If you select 
+  <strong>No</strong>, any settings that you set on the first and subsequent runs 
+  will be overwritten if you later run JDeveloper with the<code> -migrate</code> 
+  flag. For information about 
+  migration issues, see the &quot;Migrating to JDeveloper 
+  10<i>g</i>&quot; topics in the online documentation, which you can access by choosing <span class="GUITag">Help 
+  | Table of Contents | Getting Started with JDeveloper</span> from the JDeveloper main menu.</p>     
+   
+<p class="StepIntro">To migrate user settings from previous installations of JDeveloper: 
+</p>
+
+<ol>
+  <li> 
+    <p>Start JDeveloper at a command line or shell prompt with the <code>-migrate</code> 
+      flag:</p>
+    <p><code>jdev -migrate</code>
+    </p>
+  <li>When the Migrate User Settings dialog appears, select a version of JDeveloper 
+    to migrate. If the <span class="GUITag">Version</span> dropdown list is empty, 
+    click <span class="GUITag">Browse</span>. 
+  <li>Browse for the location of the system directory of the source installation 
+    of JDeveloper, for example:<br>
+    <code><em>&lt;previous_jdev_home&gt;</em>/jdev/system9.0.4.3.1354</code> 
+    where <code>&lt;previous_jdev_home&gt;</code> is the root directory and 
+    <code>9.0.4.3.1354</code> represents the previous build version of the installation 
+    of JDeveloper you are migrating from. For UNIX users, any previous releases 
+    that are discovered will already be included in the dropdown list of the dialog. 
+  <li>Select the settings and customizations you want to migrate. Oracle recommends 
+    that you select all available options. 
+  <li> Click <span class="GUITag">OK</span>. Your user settings are migrated to 
+    your latest version of JDeveloper.</li>
+</ol>
+
+<br>
+<A href="#top">Back to TOC</A>
+<h2><a name="extensions"></a>6.0 Enabling JDeveloper Extensions</h2>
+
+
+
+<p>Before you can use an extension in JDeveloper, you first 
+need to download the extension from OTN. An example of available JDeveloper 
+Extensions is JUnit.</p>              
+            
+<p class="StepIntro">To automatically download and install a JDeveloper 
+  extension:</p>
+
+<ul>
+
+  <li>From the JDeveloper main menu, select <span class="GUITag">Help | Check 
+
+    for Updates</span>.<br>
+    This menu option lists extensions that you don't have, lists newer versions 
+    of ones you have, and downloads them after you select them. After you restart JDeveloper, you will be able to use the extension. </li>
+
+</ul>
+
+<p class="StepIntro">To manually download a JDeveloper Extension:</p>
+
+<ol>
+
+  <li>Go to <a href="http://www.oracle.com/technology/products/jdev/htdocs/partners/addins/exchange/index.html">http://www.oracle.com/technology/products/jdev/htdocs/partners/addins/exchange/index.html</a>. 
+  <li>Select a JDeveloper Extension. 
+  <li>Follow the instructions to download the zip file.</li>
+
+</ol>
+
+<p class="StepIntro">To manually install a JDeveloper extension:</p>
+
+<ol>
+
+   
+  <li>Verify if there are additional installation instructions in the extension 
+
+    archive. 
+
+  <li> From the JDeveloper main menu, select <span class="GUITag">Help</span> | <span class="GUITag">Check for Updates</span>.
+<li> On Step 1 of the wizard, select <span class="GUITag">Install from a Local File</span> and navigate to the ZIP file.</li>
+
+<li> Finish the wizard and restart JDeveloper. After you restart JDeveloper, you will be able to use the extension. </li>
+</ol>
+<p>For additional information,   see the &quot;Extending JDeveloper&quot; topics in the online documentation, which you can access by choosing <span class="GUITag">Help | Table of Contents </span>from the JDeveloper main menu.</p>
+<A href="#top">Back to TOC</A>
+<h2><a name="homedirectory"></a>7.0 Setting the User Home Directory</h2>
+<p class="StepIntro">This section provides instructions on how to define a user home environment variable and set its value for each user in order for JDeveloper to identify user home directories correctly.</p>
+<p class="StepIntro">The user home directory contains the user's preferences for JDeveloper (in the <code>system</code> subdirectory). It is also the default location for new projects (in the <code>mywork</code> subdirectory) as well as other configuration files that are specific to a given user.</p>
+
+<p class="StepIntro">To define the name of the user home environment variable: 
+  
+</p>
+<ol>
+
+  <li>Open the file <code><em>&lt;jdev_home&gt;</em>\jdev\bin\jdev.conf </code>in 
+
+    a text editor. Use an editor that recognizes UNIX end-of-line characters, 
+
+    such as WordPad.<br>
+
+  <li>Find the entry:<code><br>
+
+    <br>
+
+    SetUserHomeVariable JDEV_USER_DIR</code> <br>
+
+    <br>
+
+    This is 
+  the default variable that JDeveloper will look for at startup. As the terminal 
+  server administrator, you may change the name of this variable to follow 
+  your system's naming conventions. 
+
+  <li>Save the file. If you are using WordPad, it will warn you that it is about 
+
+    to save the file in text-only format. You can ignore this warning.</li>
+
+</ol>
+<h3><a name="homedirectory_windows"></a>7.1 Setting the Home Environment Variable on Windows</h3>
+<p class="StepIntro">To set the home environment variable on Windows systems:</p>
+
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+
+  <tr> 
+
+    <td> 
+
+      <p><strong>Note:</strong> Each user of JDeveloper on a multiuser system must 
+
+        follow these procedures.</p>
+
+    </td>
+
+  </tr>
+
+</table>
+
+<ol>
+  <li>From the Windows Start menu, choose <span class="GUITag">Control Panel | 
+    System</span>. 
+  <li>Select the <span class="GUITag">Advanced</span> tab, then click <span class="GUITag">Environment 
+    Variables</span>. 
+  <li>In the <span class="GUITag">User Variables</span> section, click <span class="GUITag">New</span>. 
+  <li>Add <code>JDEV_USER_DIR</code>, or the name you chose for the <code>SetUserHomeVariable</code>, 
+    as a user variable. 
+  <li>Set the value of this variable to your home directory (e.g., <code>N:\users\jdoe</code>), 
+  and click <span class="GUITag">OK</span>.
+  <li>To check your variable setting, open a command shell and enter:
+    
+    <p><code>set</code></p>
+    
+    You should see output similar to the following:
+    
+    <p><code>JDEV_USER_DIR=N:\users\jdoe</code></p>
+    
+  <li>Launch JDeveloper.  
+  <li>Choose <span class="GUITag"><u>H</u>elp | <u>A</u>bout</span> to verify 
+    that the value of <code>ide.user.dir</code> is set to your user home directory.</li>
+</ol>
+<p> By default, the user home directory on Windows is <code><em>&lt;jdev_home&gt;</em>\jdev</code>.</p>
+
+<h3> <a name="homedirectory_linux"></a>7.2 Setting the Home Environment Variable on Linux and UNIX</h3>
+<p>Follow the steps below to set the environment variable on Linux and UNIX systems. The examples and syntax provided refer to the C Shell.</p>
+<ol>
+	<li>In your startup configuration file (for example, <code>.cshrc</code>), set the environment variable to your preferred directory:
+	<p><code>setenv JDEV_USER_DIR $HOME/mydocs/jdevfiles</code></p>
+	</li>
+	<li>Source the file to make your changes take effect:
+	<p><code>source .cshrc</code></p>
+	</li>
+	<li>Display the environment variable to confirm the change:
+	  <p><code>echo $JDEV_USER_DIR</code></p>
+	
+	You should see output similar to the following:
+	
+	<p><code>/home/jdoe/mydocs/jdevfiles</code></p>
+	</li>
+	<li>Launch JDeveloper.</li>
+	<li>Choose <span class="GUITag"><u>H</u>elp | <u>A</u>bout</span> to confirm 
+    that the value of <code>ide.user.dir</code> is set to your user home directory.</li>
+
+</ol>
+<p>By default, the user home directory on Linux and UNIX is <code>$HOME/jdevhome</code>.</p>
+
+<h3> <a name="homedirectory_macosx"></a>7.3 Setting the Home Environment Variable on Mac OS X</h3>
+<p>Follow the steps below to set the environment variable on Mac OS X systems. The examples and syntax provided refer to the BASH shell.</p>
+<ol>
+	<li>In your startup configuration file (for example, <code>.bashrc</code>), set the environment variable to your preferred directory:
+	  <p><code>JDEV_USER_DIR=$HOME/mydocs/jdevfiles</code></p>
+  </li>
+	 <li>Export the new value of the environment variable:
+	   <p><code>export JDEV_USER_DIR</code></p>
+	 </li>
+	<li>Source the file to make your changes take effect:
+	  <p><code>. .profile</code></p>
+	</li>
+	<li>Display the environment variable to confirm the change:
+	  <p><code>echo $JDEV_USER_DIR</code></p>
+	
+	You should see output similar to the following:
+	
+	<p><code>/Users/jdoe/mydocs/jdevfiles</code></p>
+	</li>
+	<li>Launch JDeveloper.</li>
+	<li>Choose <span class="GUITag"><u>H</u>elp | <u>A</u>bout</span> to confirm 
+    that the value of <code>ide.user.dir</code> is set to your user home directory.</li>
+
+</ol>
+<p>By default, the user home directory on Mac OS X is <code>$HOME/jdevhome</code>.</p>
+<p><A href="#top">Back to TOC</A></p>
+
+<h2><a name="multiuser"></a>8.0 Using JDeveloper in a Multiuser Environment</h2>
+
+
+
+<p>If you are using JDeveloper on Linux or UNIX, you will have to 
+  set permissions on directories and files. See <A href="#permissions">Modifying Permissions on Linux and UNIX Platforms</A> for more information.</p>
+
+
+<p>You can install JDeveloper in Microsoft Terminal Server, Citrix MetaFrame and 
+
+  MetaFrame XP (for Windows), and MetaFrame 1.1 for UNIX environments. These environments allow 
+
+  many clients to access one installation of JDeveloper. In all cases, users can 
+
+  save their projects locally. </p>
+
+
+
+<p>When installing and configuring JDeveloper for a multiuser environment, you'll 
+
+  need to account for  resource planning, such as number of users and power 
+
+  of the server to deliver optimal performance for JDeveloper and your users.</p>
+
+<h3><a name="citrix"></a>8.1 Installing JDeveloper on a Citrix MetaFrame Server 
+  or a Microsoft Terminal Server </h3>
+
+<p>You need to have administrative privileges to install JDeveloper. </p>
+
+<p class="StepIntro">To Install JDeveloper on a Citrix MetaFrame or Microsoft 
+  Terminal Server:</p>
+
+<ol>
+  <li>Install JDeveloper as described in <A href="#install_start_windows">Installing and Starting JDeveloper on Windows</A>. 
+  <li>Define the user home directory environment variable (see below). </li>
+</ol>
+
+<h3><a name="homedir"></a>8.2 Configuring User Home Directories in a Multiuser 
+  Environment</h3>
+
+<p>Before you run JDeveloper in a terminal server environment, you must define 
+
+  the user home environment variable and set its value for each user in order 
+
+  for JDeveloper to identify user home directories correctly. If the variable 
+
+  is not defined and set, JDeveloper uses the <code><em>&lt;jdev_home&gt;</em>/jdev</code> 
+
+  as the home directory for all users. Using this directory may cause unstable 
+
+  behavior in JDeveloper with multiple users. See <A href="#homedirectory">Setting the User Home Directory</A> for instructions specific to configuring user home directory environment variables.</p>
+
+<h3><a name="terminalserver"></a>8.3 Configuring Terminal Server Clients for 
+  Running JDeveloper</h3>
+
+<p>These topics assume that you have already installed a Citrix MetaFrame or Microsoft 
+
+  Terminal Server client locally and that JDeveloper has been installed and configured 
+
+  by the system administrator. </p>
+
+<span class="StepIntro">To configure a terminal server client for running JDeveloper: 
+</span> 
+<ol>
+
+  <li>Verify that the color resolution of the terminal 
+  server client has been set to a minimum of 256 colors. This minimum resolution 
+  is required by Java JDK 5.0 Update 6. 
+
+  <li>Log on to your terminal server. 
+
+  <li>Verify that the user home environment variable has been defined: Ask your 
+
+    system administrator for the naming convention that is used on your system. 
+
+    The default variable is <code>JDEV_USER_DIR</code>. 
+
+  <li>Set the user home environment variable: from the Windows Start menu, choose <span class="GUITag">Control Panel | System</span>. 
+
+    <ol>
+
+      <li type="a">Select the <span class="GUITag">Advanced</span> tab, then click 
+
+        <span class="GUITag">Environment Variables</span>. 
+
+      <li type="a">In the <span class="GUITag">User Variables</span> section, click <span class="GUITag">New</span>.<br>
+
+      <li type="a">Add the variable to <span class="GUITag">User Variables</span> and click <strong class="GUITag">OK</strong>.<br>
+
+        For example, you can define <code>JDEV_USER_DIR</code> as the variable containing the 
+    path to the user's home directory. 
+      <li type="a">To check the correct variable settings, open a command shell and enter:<br>
+
+        <p><code>set</code></p>
+
+        You should see output similar to the following:
+
+        
+
+        <p><code>JDEV_USER_DIR=n:\users\jdoe </code> </p>
+
+    </ol>
+
+  <li>Launch JDeveloper. 
+
+  <li>JDeveloper will ask if you would like your user home directory to be created. 
+
+    Select <span class="GUITag">Yes</span>. 
+
+  <li>Choose <span class="GUITag"><u>H</u>elp | <u>A</u>bout</span> to verify 
+
+    that the value of <code>ide.user.dir</code> is set to your user home directory.</li>
+
+</ol>
+
+<p>If you run JDeveloper in a multiuser environment and you see the error </p>
+
+<blockquote> 
+
+  <p><code>The system DLL ole32.dll was relocated in memory. The application will 
+
+    not run properly. The relocation occurred because the DLL Dynamically Allocated 
+
+    Memory occupied an address range reserved for Windows NT system DLL's. The 
+
+    vendor supplying the DLL should be contacted for a new DLL.</code></p>
+
+</blockquote>
+
+<p>you'll need to update the <code><em>&lt;jdev_home&gt;</em>\jdev\bin\jdev.conf</code> 
+
+  file by uncommenting the line:</p>
+
+<blockquote> 
+
+  <p><code>AddVMOption -Xheapbase100000000</code></p>
+
+</blockquote>
+
+<p>Use an editor that recognizes UNIX end-of-line characters, such as WordPad. 
+
+  You may have to change the number upward or downward if you still get the error 
+
+  when starting JDeveloper. When you save the file, WordPad will warn you that 
+
+  it is about to save the file in text-only format. You can ignore this warning.</p>
+
+<p>In addition, you will need to set the same option with the same value in <span class="GUITag"><u>P</u>roject 
+
+  | D<u>e</u>fault Project Settings&nbsp;| Runner&nbsp;| <u>J</u>ava</span> options.<br>
+
+  <br>
+
+  To make this setting available to all users, the administrator should perform 
+
+  this change, exit JDeveloper and then copy the file: 
+  
+
+<blockquote> <code>&lt;userhome&gt;\system\DefaultWorkspace\Project1.jpr</code>. 
+
+</blockquote>
+
+to:<br>
+
+<blockquote> <code><em>&lt;jdev_home&gt;</em>\jdev\multi\system\DefaultWorkspace\Project1.jpr</code>.<br>
+
+</blockquote>
+<A href="#top">Back to TOC</A>
+<h2><a name="oc4j"></a>9.0 Using OC4J with JDeveloper</h2>
+
+<p>Included with JDeveloper is a fully functioning version of Oracle Application 
+  Server 10<i>g</i> Release 3 (10.1.3.3) Containers for J2EE (OC4J). The embedded server resides in the following location in the JDeveloper installation:</p>
+
+<code><em>&lt;JDEV_USER_DIR&gt;</em>/system/oracle.j2ee.10.1.3.xx.xx/embedded-oc4j</code>
+
+
+<p>If you are using JDeveloper 
+    to test your J2EE applications before deploying to a target application server, you will not have to make any modifications to your 
+    configuration.</p>
+<p>If you performed the base installation of JDeveloper and wish to deploy your 
+  application to OC4J in standalone mode, JDeveloper includes a copy of OC4J in <code><em>&lt;jdev_home&gt;</em>/j2ee/home/config</code>. To run OC4J in standalone mode you must set the <code>JAVA_HOME</code> variable to point to the full SDK. You must also modify <code>jdev.conf</code> to point to this SDK home. See <A href="#installbase">Installing JDeveloper 
+    Base</A> for more information.</p>
+<p> If you deploy your applications to standalone OC4J, make sure that you use the remote <code>admin.jar</code> file that was shipped with the remote OC4J. If you are using an <code>admin.jar</code> that doesn't match the version of OC4J to which you are deploying, deployment may fail. You can configure deployment to use the correct admin.jar for the OC4J standalone instance when you set up your connection using the JDeveloper Application Server Connection Wizard. To identify the standalone OC4J version that you are using, enter <code>java -jar oc4j.jar -version</code> from your OC4J installation directory. </p>
+<p>You can start and stop the OC4J server in standalone mode using the provided 
+  <code>start_oc4j.bat</code> and <code>stop_oc4j.bat</code> files and shell scripts 
+  located in <code><em>&lt;jdev_home&gt;</em>\jdev\bin\.</code> The <code>start_oc4j</code> 
+  batch file can be run either from Windows Explorer or the command line since 
+  no arguments are required; however the <code>stop_oc4j</code> batch file requires 
+  <code>&lt;admin&gt;</code> and <code>&lt;admin-password&gt;</code> on the command 
+  line. You can also run the following commands from the <code><em>&lt;jdev_home&gt;</em>\j2ee\home\</code> 
+  directory:</p>
+
+<p class="StepIntro">To start the OC4J server for use in  standalone mode:</p>
+
+<ol>
+
+  <li>Execute the following command:<br>
+
+    
+    <p><code>java -jar oc4j.jar</code></p>
+    
+
+  <li>Enter and confirm the administrator password.</li>
+
+</ol>
+
+<p class="StepIntro">To stop OC4J:</p>
+
+<ul>
+
+  <li>Execute the following command:<br>
+
+    <br>
+    <code> java -jar $j2ee_home/admin.jar ormi://localhost/ &lt;admin&gt; &lt;admin-password&gt; 
+    -shutdown</code>
+
+  </li>
+
+</ul>
+
+
+
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+
+  <tr> 
+
+    <td> 
+
+      <p><strong>Note:</strong> The server must be running when you deploy projects 
+
+        to it.</p>
+
+    </td>
+
+  </tr>
+
+</table>
+<p><A href="#top"></A></p>
+<h3><a name="oc4jmemory"></a>9.1 OC4J Memory Requirements</h3>
+
+<p> By default, OC4J preloads a large number of classes to improve performance. Because of this, you may get a <code>java.lang.OutOfMemoryError</code> when you attempt to deploy to OC4J or run an application after deploying. </p>
+<p>If you get a <code>java.lang.OutOfMemoryError</code>, you have two options: </p>
+<ul>
+  <li>If your machine lacks sufficient free memory to run OC4J with a larger maximum heap size, shut down the Java process that runs OC4J and restart it with the <code>-Doracle.j2ee.dont.use.memory.archive=true</code> flag to turn off class preloading, for example:
+      <p><code>Java -Doracle.j2ee.dont.use.memory.archive=true -jar oc4j.jar </code></p>
+  <li>If your machine has at least 512 MB of free memory, OC4J will run more quickly if you leave preloading enabled, but startup time will increase considerably. Shut down the Java process that runs OC4J, and restart it with a larger maximum heap size using the <code>-mx</code> flag, for example:
+      <p><code>Java -mx512M -jar oc4j.jar</code></p> 
+  </li>
+</ul>
+<p>For more information on fine tuning your OC4J server instance, see the OC4J documentation.</p>
+<p><A href="#top">Back to TOC</A></p>
+<h2><a name="supported"></a>10.0 Application Servers Supported by JDeveloper</h2>
+<p>A matrix associating JDeveloper versions with the application servers they 
+support for deployment is available on Oracle Technology Network (OTN) at: <a href="http://www.oracle.com/technology/products/jdev/collateral/papers/10g/as_supportmatrix.html">http://www.oracle.com/technology/products/jdev/collateral/papers/10g/as_supportmatrix.html</a>.</p>
+<p>For additional information, see the &quot;Deploying Applications &quot; topics in the online documentation, which you can access by choosing <span class="GUITag">Help | Table of Contents </span>from the JDeveloper main menu.</p>
+<p><A href="#top">Back to TOC</A></p>
+<h2><a name="supported_db"></a>11.0 Database Certification for JDeveloper</h2>
+<p>A matrix that associates Oracle and non-Oracle databases with the JDeveloper 
+  features they are certified against is available on Oracle Technology Network (OTN) at: 
+ <a href="http://www.oracle.com/technology/products/jdev/collateral/papers/10131/cert/database.html">http://www.oracle.com/technology/products/jdev/collateral/papers/10131/cert/database.html</a>
+</p>    
+
+<p>
+      <a href="#top">
+        Back to TOC
+      </a>
+</p>
+<h2><a name="browsers"></a>12.0 Web Browsers Supported by JDeveloper</h2>
+<p>JDeveloper supports the following web browsers:</p>
+<ul> 
+<li>IE 5.5 </li>
+<li>IE 6.0 (XP only) </li>
+<li>Netscape 7.2 </li>
+<li>Mozilla 1.7 </li>
+<li>Firefox 1.0.4</li>
+<li>Firefox 1.5 </li>
+<li>Firefox 2.0 </li>
+<li>Safari 2.x (Mac-Specific) </li> 
+</ul>
+<p>
+      <a href="#top">
+        Back to TOC
+      </a>
+</p>
+<h2><a name="accessibility"></a>13.0 Finding JDeveloper Accessibility Information</h2>
+
+<p>For the latest configuration information or for information on addressing accessibility 
+  and assistive technology issues, see the Oracle Accessibility FAQ at <a href="http://www.oracle.com/accessibility/faq.html">http://www.oracle.com/accessibility/faq.html</a>. 
+  Also, see the  help topics available by selecting the <span class="GUITag">JDeveloper Accessibility Information</span> node under <span class="GUITag">Getting Started with Oracle JDeveloper</span> in the online help table of contents. </p>
+<p><A href="#top">Back to TOC</a> </p>
+
+<h2><a name="accessbridge"></a>14.0 Using a Screen Reader and Java Access Bridge 
+  with JDeveloper</h2>
+
+<p>To make the best use of our accessibility features, Oracle Corporation recommends the following minimum technology stack: </p>
+<ul>
+  <li> Windows NT 4.0 (with Service Pack 6), Windows 2000, or 
+  Windows XP 
+  <li> Java Sun J2SE 1.5.0_05 
+  <li>Sun Java Access Bridge 1.2 or higher 
+  <li> JAWS 3.70.87 or 5.0.0.844+ 
+  <li> Microsoft Internet Explorer 5.5 or higher</li>
+</ul>
+    <p>Please refer to the following information to set up a screen reader and 
+      Java Access Bridge. If you are using JAWS  3.70.87, please refer to the additional configuration information provided below the procedure. </p>
+    <ol>
+      <li>
+        Install the screen reader, if it is not already installed.
+
+        <p>
+          Refer to the documentation for your screen reader for more 
+          information about installation.
+        </p>
+      <li>
+        Install JDeveloper.
+
+        <p>
+          Refer to the Installation Guide for more information about 
+          installing JDeveloper.
+        </p>
+      <li>
+        Download Java Access Bridge for Windows version 1.2. The file you will download is <code>
+        accessbridge-1_2.zip</code>. It is available from:<br>
+        <code>
+        http://java.sun.com/products/accessbridge</code>.
+
+        <p>
+          Refer to the Java Access Bridge documentation available from this 
+          web site for more information about installation and the Java Access 
+          Bridge.
+        </p>
+      <li>
+        After downloading the file, extract (unzip) the contents to a folder, for 
+        example, <code>accessbridge_home</code>. 
+      <li>
+        Install Java Access Bridge by running <code>Install.exe</code> from 
+        the <code>&lt;accessbridge_home&gt;\installer</code> folder.
+		<P>The installer first  checks the SDK version for compatibility, 
+		then the Available Java virtual machines dialog displays.</P>
+      <li>
+        Click <span class="GUITag">Search disks</span>. Then select to search only the
+		drive that contains the JDeveloper build and the SDK version in the program files 
+	  directory (if it exists). 
+	    <p>The search process can take a long time on a large disk with many instances of 
+	  SDK or JDeveloper, or when searching multiple disks.
+	  However, unless you complete an exhaustive search of your disk,  
+	  Access Bridge will not be optimally configured, and will not be  correctly installed  to 
+	  all of the Java VMs on your system.
+After selecting the disk to search, click <span class="GUITag">Search</span>. </p>
+
+      <li>
+        Confirm that you want to install the Java Access Bridge into each of 
+      the Java virtual machines displayed in the dialog, by clicking <span class="GUITag">Install in All</span>. 
+      <li>Click <span class="GUITag">
+  OK</span> 
+  when you see the Installation Completed message. 
+      <li>
+      Confirm that the following files have been installed in the <code> Winnt\System32</code> directory 
+	  (or the equivalent Windows 2000 or XP directory),
+	   or copy them  from <code> &lt;accessbridge_home&gt;\installer\installerFiles </code>
+	   as they must be in the system path in order to work with JDeveloper:
+       <p><code>JavaAccessBridge.dll</code><br>
+	   <code>JAWTAccessBridge.dll</code><br>
+	   <code>WindowsAccessBridge.dll</code>
+      </p>
+	  <p>Note that the system directory is required in the PATH system variable.</p>
+      <li>
+	   Confirm that the following files have been installed in the <code>&lt;jdev_home&gt;\jdk\jre\lib\ext </code>directory, or copy them  from<code>
+        &lt;accessbridge_home&gt;\installer\installerFiles</code>:
+
+        <p>
+          <code>access-bridge.jar</code><br>
+		  <code>jaccess-1_3.jar</code><br>
+		  <code>jaccess-1_4.jar</code><br>
+		  <code>JavaAccessBridge.dll</code><br>
+		  <code>JAWTAccessBridge.dll</code><br>
+		  <code>WindowsAccessBridge.dll</code>
+        </p>
+      <li>Confirm that the file <code>accessibility.properties</code> has been installed in the <code>&lt;jdev_home&gt;\jdk\jre\lib </code>directory, or copy it from<code> &lt;accessbridge_home&gt;\installer\installerFiles</code>. Confirm that the file <code>
+        accessibility.properties</code> 
+        includes the following three lines:
+        <p>
+          <code>assistive_technologies=com.sun.java.accessibility.AccessBridge<br>
+AWT.EventQueueClass=com.sun.java.accessibility.util.EventQueueMonitor<br>
+          AWT.assistive_technologies=com.sun.java.accessibility.AccessBridge </code>
+
+        </p>
+      <li>
+        Only if you are using JAWS version 3.7, do the following: modify the file <code>jdev.conf</code> located in the folder <code>
+        &lt;jdev_home&gt;\jdev\bin </code>to uncomment the <code>
+        AddVMOption line</code> as shown below:
+
+        <p>
+          <code>#<br># Prepend patches to the bootclasspath. Currently, 
+          rtpatch.jar contains a<br># patch that fixes the javax.swing.JTree 
+          accessibility problems.<br># Uncomment the line below if you need to 
+          run JDeveloper under JAWS.<br>#<br>AddVMOption 
+          -Xbootclasspath/p:../../jdk/jre/lib/patches/rtpatch.jar </code>
+        </p>
+
+      <li>
+        Start your screen reader. 
+      <li>
+        Start JDeveloper by running the file <code>jdev.exe</code> located in 
+        the folder <code>&lt;jdev_home&gt;\jdev\bin</code>.
+      </li>
+    </ol>
+    <p>
+      The steps above assume you are running Windows and using a Windows-based 
+      screen reader. A console window that contains error information (if any) 
+      will open first and then the main JDeveloper window will appear, once 
+      JDeveloper has started.
+Any messages that appear will not affect the functionality of JDeveloper. </p>
+    <h3><a name="configjaws"></a>14.1 Configuring JAWS 3.70 and Access Bridge  with JDeveloper</h3>
+    <p>The following combinations of  Access Bridge file versions are necessary to achieve optimal functionality with JAWS 3.70 since this version of the screen reader uses older Java technology than is used in JDeveloper 10.1.3.3.0.  There are two stacks of software technology listed below for those who want to use either version 1.0.3 or 1.0.4 of the Access Bridge.  Also required in the <code>system32</code> directory is a copy of the latest version of the Access Bridge jar file.</p>
+    <h4><strong>Access Bridge v. 1.0.3 Configuration for JDeveloper 10.1.3.3.0</strong></h4>
+    <p>Place the following files in the JDeveloper directory [<code>\jdk\jre\lib\ext</code>]: </p>
+    <table border="0" cellpadding="0" summary="Access BridgeV. 1.0.3 configuration " cellspacing="0">
+      <tr>
+        <td width="200"><p> access-bridge.jar </p></td>
+        <td width="100"><p> size: 27295 </p></td>
+        <td width="200"><p> version: access-bridge-1.0.4 </p></td>
+      </tr>
+      <tr>
+        <td><p> JAWTAccessBridge.dll </p></td>
+        <td><p> size: 28672 </p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+      <tr>
+        <td><p> jaccess-1_3.jar </p></td>
+        <td><p> size: 43584 </p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+      <tr>
+        <td><p> jaccess-1_4.jar </p></td>
+        <td><p> size: 46597 </p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+      <tr>
+        <td><p> JavaAccessBridge.dll </p></td>
+        <td><p> size: 139264 </p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+      <tr>
+        <td><p> WindowsAccessBridge.dll </p></td>
+        <td><p> size: 77824 </p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+    </table>
+    <p> Place the following file in the JDeveloper directory [<code>\jdk\jre\lib</code>]: </p>
+    <table border="0" cellpadding="0" summary="JDev directory file" cellspacing="0">
+      <tr>
+        <td width="200"><p> accessibility.properties</p></td>
+        <td width="100"><p> size: 353</p></td>
+        <td width="200"><p> version: AccessBridge-1.0.3</p></td>
+      </tr>
+    </table>
+    <p> Place the following files in the Windows system32 directory <code>[\winnt\system32</code>]: </p>
+    <table border="0" cellpadding="0" summary="Windows system32 files" cellspacing="0">
+      <tr>
+        <td width="200"><p> JavaAccessBridge.dll</p></td>
+        <td width="100"><p> size: 155648</p></td>
+        <td width="200"><p> version: AccessBridge_1_1_GA</p></td>
+      </tr>
+      <tr>
+        <td><p> WindowsAccessBridge.dll</p></td>
+        <td><p> size: 77824</p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+      <tr>
+        <td><p> JAWTAccessBridge.dll</p></td>
+        <td><p> size: 28672</p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+    </table>
+    <h4>Access Bridge v. 1.0.4 Configuration for JDeveloper 10.1.3.3.0</h4>
+    <p>Place the following files in the JDeveloper directory [<code>\jdk\jre\lib\ext</code>]: </p>
+    <table border="0" cellpadding="0" summary="Access BridgeV. 1.0.4 configuration" cellspacing="0">
+      <tr>
+        <td width="200"><p> access-bridge.jar </p></td>
+        <td width="100"><p> size: 27295 </p></td>
+        <td width="200"><p> version: access-bridge-1.0.4 </p></td>
+      </tr>
+      <tr>
+        <td><p> JAWTAccessBridge.dll </p></td>
+        <td><p> size: 
+  
+
+   32768</p></td>
+        <td><p> version: AccessBridge-1.0.4</p></td>
+      </tr>
+      <tr>
+        <td><p> jaccess-1_4.jar </p></td>
+        <td><p> size: 46573 </p></td>
+        <td><p> version: AccessBridge-1.0.4</p></td>
+      </tr>
+      <tr>
+        <td><p> JavaAccessBridge.dll </p></td>
+        <td><p> size: 139264 </p></td>
+        <td><p> version: AccessBridge-1.0.4</p></td>
+      </tr>
+      <tr>
+        <td><p> WindowsAccessBridge.dll </p></td>
+        <td><p> size: 77824 </p></td>
+        <td><p> version: AccessBridge-1.0.4</p></td>
+      </tr>
+    </table>
+    <p> Place the following file in the JDeveloper directory [<code>\jdk\jre\lib</code>]: </p>
+    <table border="0" cellpadding="0" summary="JDev directory file" cellspacing="0">
+      <tr>
+        <td width="200"><p> accessibility.properties</p></td>
+        <td width="100"><p> size: 153</p></td>
+        <td width="200"><p> version: AccessBridge-1.0.4</p></td>
+      </tr>
+    </table>
+    <p> Place the following files in the Windows system32 directory [<code>\winnt\system32</code>]: </p>
+    <table border="0" cellpadding="0" summary="Win32 file directory" cellspacing="0">
+      <tr>
+        <td width="200"><p> JavaAccessBridge.dll</p></td>
+        <td width="100"><p> size: 155648</p></td>
+        <td width="200"><p> version: AccessBridge_1_1_GA</p></td>
+      </tr>
+      <tr>
+        <td><p> WindowsAccessBridge.dll</p></td>
+        <td><p> size: 77824</p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+      <tr>
+        <td><p> JAWTAccessBridge.dll</p></td>
+        <td><p> size: 28672</p></td>
+        <td><p> version: AccessBridge-1.0.3 </p></td>
+      </tr>
+</table>
+    <br>
+    
+    <p><A href="#top">Back to TOC</A></p>
+    <h2><a name="uninstall"></a>15.0 Uninstalling JDeveloper</h2>
+
+    <p>Before you uninstall JDeveloper, you may want to backup your projects and files. 
+
+  By default, these files are in <code><em>&lt;jdev_home&gt;</em>\jdev\mywork</code>.</p>
+
+<p>To uninstall JDeveloper, remove the entire JDeveloper installation directory. 
+
+  No other actions are necessary.</p>
+<A href="#top">Back to TOC</A>
+<h2><a name="oracleweb"></a>16.0 Oracle on the Web</h2>
+
+<p> Oracle provides a number of resources on the Web. These are some sites you 
+
+  may find helpful: 
+
+<p>
+      
+<table border="1" frame="hsides" rules="groups" width="100%" cellpadding="3" cellspacing="0">
+  <thead> 
+  <tr align="left" valign="top"> 
+    <th id="description"> <strong>Description</strong>&nbsp;</th>
+    <th id="URL"> <strong> URL</strong>&nbsp;</th>
+  </tr>
+  <tr align="left" valign="top"> 
+    <td headers=description> 
+      <p>JDeveloper Home Page &nbsp; </p>
+    </td>
+    <td headers=URL> 
+      <p><a href="http://www.oracle.com/technology/products/jdev/">http://www.oracle.com/technology/products/jdev/</a>&nbsp; </p>
+    </td>
+  </tr>
+  <tr align="left" valign="top"> 
+    <td headers=description> 
+      <p>JDeveloper Discussion Forum  </p>
+    </td>
+    <td headers=URL> 
+      <p><a href="http://www.oracle.com/technology/discussionforums/jdev.html">http://www.oracle.com/technology/discussionforums/jdev.html</a>&nbsp; </p>
+    </td>
+  </tr>
+  <tr align="left" valign="top"> 
+    <td headers=description> 
+      <p>Corporate Site&nbsp; </p>
+    </td>
+    <td headers=URL> 
+      <p><a href="http://www.oracle.com/">http://www.oracle.com/ </a>&nbsp; </p>
+    </td>
+  </tr>
+  <tr align="left" valign="top"> 
+    <td headers=description> 
+      <p> Oracle Developer Suite-JDeveloper </p>
+    </td>
+    <td headers=URL> 
+      <p> <a href="http://www.oracle.com/tools/index.html">http://www.oracle.com/tools/index.html </a> </p>    </td>
+  </tr>
+  <tr align="left" valign="top"> 
+    <td headers=description> 
+      <p>Oracle Technology Network&nbsp; </p>
+    </td>
+    <td headers=URL> 
+      <p><a href="http://www.oracle.com/technology/">http://www.oracle.com/technology/ </a></p>
+    </td>
+    <tr align="left" valign="top"> 
+    <td headers=description> 
+      <p>Worldwide Customer Support&nbsp; </p>
+    </td>
+    <td headers=URL> 
+      <p><a href="http://www.oracle.com/support/">http://www.oracle.com/support/</a>&nbsp; 
+      </p>
+    </td>
+  </tr>
+  <tr align="left" valign="top">
+    <td headers=description><p>Oracle Accessibility Site</p></td>
+    <td headers=URL><p><a href="http://www.oracle.com/accessibility/">http://www.oracle.com/accessibility/</a></p></td>
+  </tr>
+</table>
+<p><A href="#top">Back to TOC</A></p>
+<table width="100%" border=0>
+  <tbody>
+    <tr valign="top">
+      <td width="33%">
+        <p><font size="1">Oracle Corporation<br>
+          World Headquarters<br>
+          500 Oracle Parkway<br>
+          Redwood Shores, CA 94065, USA<br>
+          <a href="http://www.oracle.com">http://www.oracle.com</a> </font></p></td>
+      <td width="33%">
+        <p><font size="1"> Worldwide Inquiries:<br>
+          1-800-ORACLE1<br>
+          Fax 650.506.7200 </font></p></td>
+      <td width="33%">
+        <p><font size="1">Copyright &copy; 2007, Oracle. All Rights Reserved.</font></p></td>
+    </tr>
+  </tbody>
+</table>
+<p>&nbsp;</p>
+</body>
+
+</html>
+

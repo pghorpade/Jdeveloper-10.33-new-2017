@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<logs>   
+  <suppl_attrs>
+      <attribute name='WEBSERVICE.name' 
+                 label='ID_SUPPL_ATTR_WS_NAME@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+      <attribute name='WEBSERVICE_PORT.name'
+                 label='ID_SUPPL_ATTR_WS_PORT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+  </suppl_attrs>
+
+   <log path='j2ee/%OC4J%/log/wsmgmt/auditing'>
+       <logreader type='ODL'/>
+       <logviewer LogType='AUDIT' ComponentName='%OC4J%' ComponentType='Web Services'>
+        <property name='COMPONENT_TYPE' value='OC4J'/>
+        <property name='COMPONENT_NAME' value='Web Services'/>
+        <property name='ODL_FOLDER_NAME' value='ID_WS_MSG_AUDITING@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>       
+        <property name='displayPath' value='/%COMPONENT_TYPE%/%OC4J%/%COMPONENT_NAME%/%ODL_FOLDER_NAME%/%LOG_NAME%'/>
+        <property name='category' value='webservices|audit'/> 
+        </logviewer>
+   </log>    
+
+ <log path='j2ee/%OC4J%/log/%OC4J%_%OPMN_PROCESS_SET%_%OPMN_PROCESS_ID%/wsmgmt/auditing'>
+       <logreader type='ODL'/>
+       <logviewer LogType='AUDIT' ComponentName='%OC4J%' ComponentType='Web Services'>
+        <property name='COMPONENT_TYPE' value='OC4J'/>
+        <property name='COMPONENT_NAME' value='Web Services'/>
+        <property name='ODL_FOLDER_NAME' value='ID_WS_MSG_AUDITING@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+        <property name="OC4J_DISPLAY" value="%OC4J%:%OPMN_PROCESS_ID%" /> 
+        <property name='displayPath' value='/%COMPONENT_TYPE%/%OC4J_DISPLAY%/%COMPONENT_NAME%/%ODL_FOLDER_NAME%/%LOG_NAME%'/>
+        <property name='category' value='webservices|diagnostic'/> 
+        </logviewer>
+   </log> 
+
+   <log path='j2ee/%OC4J%/log/wsmgmt/logging'>
+       <logreader type='ODL'/>
+       <logviewer LogType='ERROR' ComponentName='%OC4J%' ComponentType='Web Services'>
+        <property name='COMPONENT_TYPE' value='OC4J'/>
+        <property name='COMPONENT_NAME' value='Web Services'/>
+        <property name='ODL_FOLDER_NAME' value='ID_WS_MSG_TRACING@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/> 
+        <property name='displayPath' value='/%COMPONENT_TYPE%/%OC4J%/%COMPONENT_NAME%/%ODL_FOLDER_NAME%/%LOG_NAME%'/>
+        <property name='category' value='webservices|diagnostic'/> 
+        </logviewer>
+   </log> 
+
+ <log path='j2ee/%OC4J%/log/%OC4J%_%OPMN_PROCESS_SET%_%OPMN_PROCESS_ID%/wsmgmt/logging'>
+       <logreader type='ODL'/>
+       <logviewer LogType='TRACE' ComponentName='%OC4J%' ComponentType='Web Services'>
+        <property name='COMPONENT_TYPE' value='OC4J'/>
+        <property name='COMPONENT_NAME' value='Web Services'/>
+        <property name='ODL_FOLDER_NAME' value='ID_WS_MSG_TRACING@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+        <property name="OC4J_DISPLAY" value="%OC4J%:%OPMN_PROCESS_ID%" /> 
+        <property name='displayPath' value='/%COMPONENT_TYPE%/%OC4J_DISPLAY%/%COMPONENT_NAME%/%ODL_FOLDER_NAME%/%LOG_NAME%'/>
+        <property name='category' value='webservices|diagnostic'/> 
+        </logviewer>
+   </log> 
+
+</logs> 

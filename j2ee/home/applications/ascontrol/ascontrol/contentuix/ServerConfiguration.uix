@@ -1,0 +1,419 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="aclData">
+     <method class="oracle.ifs.admin.em.ias.uix.SystemAclData"
+             method="getAclData" />
+    </data>
+
+    <data name="parentData">
+     <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+             method="getInheritedServerConfigData" />
+    </data>
+
+    <!-- data provider for general info -->
+    <data name="pageData">
+     <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+             method="getGeneralData" />
+    </data>
+
+    <!-- data provider for properties table -->
+    <data name="scPropTableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="INHERITED@strings" sort="yes" value="inherited"/>
+      <column data:text="TYPE@strings" sort="yes" value="type"/>
+      <column data:text="VALUE@strings" sort="no" value="value"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="scPropTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+             method="getServerConfigPropertyTableData" />
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout quickLinksShown="true"
+                           initialFocusComponentId="NAMEMSGINPUT">
+     <boundAttribute name="title">
+      <if>
+       <dataObject select="isNew" source="pageData"/>
+       <dataObject select="NEW_SERVER_CONFIGURATION_HEADER"
+                   source="strings"/>
+       <messageFormat data:format="EDIT_HEADER@strings"
+                      fast="true">
+        <dataObject select="NAME" source="pageData"/>
+       </messageFormat>
+      </if>
+     </boundAttribute>
+
+     <pageStatus>
+      <styledText styleClass="OraInstructionText">
+       <boundAttribute name="text">
+        <if>
+         <dataObject select="isNew" source="pageData"/>
+         <dataObject select="NEW_OBJECT_INSTRUCTION"
+                     source="strings"/>
+         <dataObject select="EDIT_OBJECT_INSTRUCTION"
+                     source="strings"/>
+        </if>
+       </boundAttribute>
+      </styledText>
+     </pageStatus>
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancel" />
+
+        <!-- FIXME Revert and Apply for editing cases -->
+
+        <switcher data:childName="isNew@pageData">
+         <case name="true">
+          <submitButton data:text="OK@strings"
+                        ctrl:event="newServerConfig"/>
+         </case>
+         <case name="false">
+          <submitButton data:text="OK@strings"
+                        ctrl:event="updateServerConfig"/>
+         </case>
+        </switcher>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- .......... General .......... -->
+
+      <header data:text="GENERAL@strings">
+       <contents>
+        <labeledFieldLayout vAlign="top" width="60%">
+         <contents>
+          <messageTextInput id="NAMEMSGINPUT"
+                            name="NAME" columns="60" required="yes"
+                            data:rendered="isNew@pageData"
+                            data:prompt="NAME@strings"
+                            data:text="NAME@pageData"/>
+          <messageTextInput name="DESCRIPTION" rows="3" columns="60"
+                            data:prompt="DESCRIPTION@strings"
+                            data:text="DESCRIPTION@pageData"/>
+          <messageChoice name="ACCESS_CONTROL"
+                         data:prompt="ACCESS_CONTROL@strings"
+                         data:selectedValue="ACCESS_CONTROL@pageData">
+           <contents data:childData="acls@aclData">
+            <option data:text="optionText"
+                    data:value="optionValue"/>
+           </contents>
+          </messageChoice>
+          <messageCheckBox name="ABSTRACT"
+                           data:text="ABSTRACT@strings"
+                           data:checked="ABSTRACT@pageData"
+                           value="true"/>
+          <formValue name="NAME"
+                     data:value="NAME@pageData">
+           <boundAttribute name="rendered">
+            <not>
+             <dataObject select="isNew" source="pageData"/>
+            </not>
+           </boundAttribute>
+          </formValue>
+          <formValue name="ISNEW"
+                     data:value="isNew@pageData"/>
+         </contents>
+        </labeledFieldLayout>
+       </contents>
+      </header>
+
+      <!-- .......... Inherited Server Configuration .......... -->
+
+      <header data:text="INHERITED_SERVER_CONFIGURATIONS_HEADER@strings">
+       <contents>
+        <styledText
+          data:text="INHERITED_SERVER_CONFIGURATIONS_INSTRUCTION@strings"
+          styleClass="OraInstructionText"/>
+<!--
+         <switcher data:childName="isNew@pageData">
+          <case name="true">
+-->
+
+           <shuttle name="INHERITED_CONFIGURATIONS"
+                    reorderable="true"
+                    data:leadingHeader="AVAILABLE_CONFIGURATIONS@strings"
+                    data:trailingHeader="SELECTED_CONFIGURATIONS@strings"
+                    leadingDescShown="true"
+                    trailingDescShown="true"
+                    size="6">
+
+            <leading>
+             <list multiple="true"
+                   data:shortDesc="AVAILABLE_CONFIGURATIONS@strings">
+              <contents data:childData="availableConfigs@parentData">
+               <option data:text="optionText"
+                       data:value="optionValue"
+                       data:longDesc="optionLongDesc"/>
+              </contents>
+             </list>
+            </leading>
+
+            <trailing>
+             <list multiple="true"
+                   data:shortDesc="SELECTED_CONFIGURATIONS@strings">
+              <contents data:childData="selectedConfigs@parentData">
+               <option data:text="optionText"
+                       data:value="optionValue"
+                       data:longDesc="optionLongDesc"/>
+              </contents>
+             </list>
+            </trailing>
+           </shuttle>
+<!--
+          </case>
+
+          <case name="false">
+           <tableLayout>
+            <contents data:childData="inheritedConfigs@parentData">
+             <rowLayout hAlign="left">
+              <contents>
+               <styledText data:text="inheritedConfigName"
+                           data:destination="inheritedDestination"
+                           styleClass="OraInstructionText"/>
+              </contents>
+             </rowLayout>
+            </contents>
+           </tableLayout>
+          </case>
+         </switcher>
+-->
+        </contents>
+       </header>
+
+       <!-- ....... ServerConfiguration Properties Table ....... -->
+
+       <header data:text="PROPERTIES_HEADER@strings">
+        <contents>
+ 
+         <styledText
+           data:text="SERVER_CONFIGURATION_PROPERTIES_INSTRUCTION@strings"
+           styleClass="OraInstructionText"/>
+   
+         <!-- Table Filter -->
+         <dataScope>
+         <provider>
+          <data name="tableIdData">
+           <inline tableId="table_ServerConfigPropertiesTable"/>
+          </data>
+         </provider>
+         <contents>
+          <spacer height="10" />
+          <include ctrl:node="include/TableFilterPPR"/>
+          <formValue name="table_level" value="inner"/>
+         </contents>
+        </dataScope>
+
+         <table name="ServerConfigPropertiesTable"
+                id="table_ServerConfigPropertiesTable"
+                partialRenderMode="self"
+                width="100%"
+                data:summary="SERVER_CONFIGURATION_TABLE_SUMMARY@strings"
+                data:alternateText="NO_ITEMS_FOUND@strings"
+                data:tableData="row@scPropTableData"
+                data:columnHeaderData="column@scPropTableColumnHeaderData"
+                data:value="startingCount@scPropTableData"
+                data:maxValue="totalCount@scPropTableData"
+                data:blockSize="blockSize@scPropTableData"
+                showAll="yes"
+                formSubmitted="true">
+
+          <columnHeaderStamp>
+           <sortableHeader data:text="text" data:value="value">
+            <boundAttribute name="sortable">
+             <defaulting>
+              <dataObject data:select="value" source="sortColumnHeader"/>
+              <dataObject data:source="(value)@sortColumnHeader"/>
+              <dataObject select="sort"/>
+             </defaulting>
+            </boundAttribute>
+           </sortableHeader>
+          </columnHeaderStamp>
+
+          <columnFormats>
+           <columnFormat columnDataFormat="textFormat"/>
+           <columnFormat columnDataFormat="iconButtonFormat"/>
+           <columnFormat columnDataFormat="textFormat"/>
+           <columnFormat columnDataFormat="textFormat"/>
+          </columnFormats>
+
+          <tableFormat tableBanding="rowBanding"/>
+
+          <tableSelection>
+           <singleSelection data:shortDesc="SELECT@strings" 
+			    selectedIndex="0">
+            <boundAttribute name="disabled">
+             <dataObject select="inherited"/>
+            </boundAttribute>
+            <contents>
+             <submitButton data:text="REMOVE@strings"
+                           ctrl:event="removeProperty" />
+            </contents>
+           </singleSelection>
+          </tableSelection>
+
+          <tableActions>
+            <flowLayout>
+              <contents>
+                <submitButton data:text="SHOW_INHERITED_PROPERTIES@strings"
+                              ctrl:event="showAllProperties"/>
+                <submitButton data:text="ADD@strings"
+                              ctrl:event="addProperty"/>
+              </contents>
+            </flowLayout>
+          </tableActions>
+
+          <contents>
+           <switcher data:childName="inherited">
+            <case name="true">
+             <styledText data:text="propName" />
+            </case>
+            <case name="false">
+             <link data:text="propName">
+              <primaryClientAction>
+               <fireAction event="clickEditProperty">
+                <parameters>
+                 <parameter key="PropertyName" data:value="propName"/>
+                </parameters>
+               </fireAction>
+              </primaryClientAction>
+             </link>
+	    </case>
+           </switcher>
+           <image data:rendered="inherited"
+                  data:source="inheritedIcon"
+                  data:destination="inheritedDestination">
+            <boundAttribute name="shortDesc">
+             <messageFormat data:format="INHERITED_ICON_TOOLTIP@strings"
+                            fast="true">
+              <dataObject select="inheritedConfigName"/>
+             </messageFormat>
+            </boundAttribute>
+           </image>
+           <styledText data:text="propType" />
+           <switcher childName="scalarview"
+                     data:childName="viewType">
+            <case name="scalarview">
+             <styledText data:text="propValue" />
+            </case>
+            <case name="arrayview">
+             <image data:source="detailsIcon"
+                    data:destination="detailsDestination"
+                    data:shortDesc="PROPERTYDETAILS_ICON_TOOLTIP@strings" />
+            </case>
+            <case name="unsupportedview">
+             <styledText styleClass="OraErrorText"
+                         data:text="UNSUPPORTED@strings" />
+            </case>
+           </switcher>
+
+           <formValue name="hiddenPropName"
+                      data:value="propName"/>
+          </contents>
+         </table>
+
+        </contents>
+       </header>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="cancel">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="doCancel"/>
+  </event>
+
+  <event name="newServerConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="newServerConfig"/>
+  </event>
+
+  <event name="updateServerConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="updateServerConfig"/>
+  </event>
+
+  <event name="showAllProperties">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="showAllProperties"/>
+  </event>
+
+  <event name="addProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="doPropertyEvent"/>
+  </event>
+
+  <event name="clickEditProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="doPropertyEvent"/>
+  </event>
+
+  <event name="removeProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="doPropertyEvent"/>
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <!-- default -->
+  <event name="*">
+   <null/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.ServerConfigurationData"
+           method="doSearch"/>
+  </event>
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+
+ </ctrl:handlers>
+
+</ctrl:page>

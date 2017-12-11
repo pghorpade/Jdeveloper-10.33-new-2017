@@ -1,0 +1,111 @@
+#!/bin/sh
+
+#This script will add the Oracle JDeveloper 10g v10.1.3 Icon to the user's Desktop for
+# quick-launch
+#Script is enabled for the following OS's and Desktops:
+# OS: Linux
+# Desktops: KDE, GNOME
+#Script assumes $HOME points to the user's KDE or GNOME Desktop configuration
+# directories (KDesktop and .gnome-desktop, respectively)
+#Script will gracefully exit if executed on any non-supported OS or if the
+# supported Desktop configuration directory does not already exist
+
+create_gnome()
+{
+echo [Desktop Entry] > ~/.jdev_gnome
+echo Name=Oracle JDeveloper 10g >> ~/.jdev_gnome
+echo Comment=Oracle JDeveloper 10g >> ~/.jdev_gnome
+echo Name[en_US.ISO8859-1]=Oracle JDeveloper 10g >> ~/.jdev_gnome
+echo Comment[en_US.ISO8859-1]=Oracle JDeveloper 10g >> ~/.jdev_gnome
+echo Exec= >> ~/.jdev_gnome
+echo Icon= >> ~/.jdev_gnome
+echo Terminal=false >> ~/.jdev_gnome
+echo MultipleArgs=false >> ~/.jdev_gnome
+echo Type=Application >> ~/.jdev_gnome
+}
+
+create_kde()
+{
+echo [KDE Desktop Entry] > ~/.jdev_kde
+echo Comment[C]= >> ~/.jdev_kde
+echo SwallowExec= >> ~/.jdev_kde
+echo SwallowTitle= >> ~/.jdev_kde
+echo BinaryPattern= >> ~/.jdev_kde
+echo Name=Oracle JDeveloper 10g >> ~/.jdev_kde
+echo MimeType= >> ~/.jdev_kde
+echo Exec= >> ~/.jdev_kde
+echo Icon= >> ~/.jdev_kde
+echo TerminalOptions= >> ~/.jdev_kde
+echo Path= >> ~/.jdev_kde
+echo Type=Application >> ~/.jdev_kde
+echo Terminal=0 >> ~/.jdev_kde
+}
+
+change_kde()
+{
+ echo  sed \'s/^Exec=/Exec=sh $LOCS\\/jdev/g\'  $HOME/.jdev_kde   > ~/.$$ 
+ chmod +x ~/.$$
+ ~/.$$ > ~/.$$1
+ echo  sed \'s/^Icon=/Icon=$LOCS\\/coffee.png/g\' ~/.$$1 > ~/.$$ 
+ chmod +x ~/.$$
+ ~/.$$ > $HOME/KDesktop/"Oracle JDeveloper 10g.desktop"
+ rm -f ~/.$$
+ rm -f ~/.$$1
+ rm -f ~/.jdev_kde
+}
+
+change_gnome()
+{
+ echo  sed \'s/^Exec=/Exec=sh $LOCS\\/jdev/g\'  $HOME/.jdev_gnome > ~/.$$ 
+ chmod +x ~/.$$
+ ~/.$$ > ~/.$$1
+ echo  sed \'s/^Icon=/Icon=$LOCS\\/coffee.png/g\' ~/.$$1 > ~/.$$ 
+ chmod +x ~/.$$
+ ~/.$$ > $HOME/.gnome-desktop/"Oracle JDeveloper 10g.desktop"
+ rm -f ~/.$$
+ rm -f ~/.$$1
+ rm -f ~/.jdev_gnome
+}
+
+SYS=`uname -s`
+JDEV_URL=`dirname $0`
+cd $JDEV_URL
+LOC=`pwd`
+LOCS=`echo $LOC | sed 's/\//\\\\\//g' `
+
+if [ "X$SYS" = "XLinux" ]
+then
+ echo OS is Linux
+ if ( [ -d $HOME/KDesktop ] || [ -d $HOME/.gnome-desktop ] )
+ then
+  if [ -d $HOME/KDesktop ]
+  then
+   echo Adding Oracle JDeveloper 10g icon to KDE Desktop...
+   echo Adding \"$HOME/KDesktop/"Oracle JDeveloper 10g.desktop"\"...
+   create_kde
+   change_kde
+  fi
+  if [ -d $HOME/.gnome-desktop ]
+  then
+   echo Adding Oracle JDeveloper 10g icon to Gnome Desktop...
+   echo Adding \"$HOME/.gnome-desktop/"Oracle JDeveloper 10g.desktop"\"...
+   create_gnome
+   change_gnome
+  fi
+  echo If you do not see the Oracle JDeveloper 10g icon on your Desktop, please
+  echo either do a refresh or restart of your Desktop
+ else
+  echo No KDE or Gnome Desktop configuration directory detected
+  echo This script checks for the existance of either of the following
+  echo directories to confirm that you are running a Desktop:
+  echo \"$HOME/KDesktop\" \(for KDE\)
+  echo \"$HOME/.gnome-desktop\" \(for Gnome\)
+  echo Since neither directory was detected, you must not be running a Desktop
+  echo Exiting with no modifications performed
+ fi
+ exit 0
+else
+ echo Script not supported on this OS
+ echo Exiting with no modifications performed
+ exit 1
+fi

@@ -1,0 +1,59 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DlObjectTypes {
+
+    /**Map dlObjectsCollection <-> edu.ucla.library.digital.dlcs.model.DlObjects
+     * @associates <{edu.ucla.library.digital.dlcs.model.DlObjects}>
+     */
+    private List dlObjectsCollection;
+    private Integer objectTypeidPk;
+    private String objectType;
+
+    public DlObjectTypes() {
+        super();
+        this.dlObjectsCollection = new ArrayList();
+    }
+
+    public void addDlObjects(int index, DlObjects aDlObjects) {
+        this.dlObjectsCollection.add(index, aDlObjects);
+        aDlObjects.setDlObjectTypes(this);
+    }
+
+    public void addDlObjects(DlObjects aDlObjects) {
+        this.dlObjectsCollection.add(aDlObjects);
+        aDlObjects.setDlObjectTypes(this);
+    }
+
+    public List<DlObjects> getDlObjectsCollection() {
+        return this.dlObjectsCollection;
+    }
+
+    public String getObjectType() {
+        return this.objectType;
+    }
+
+    public Integer getObjectTypeidPk() {
+        return this.objectTypeidPk;
+    }
+
+    public void removeDlObjects(DlObjects aDlObjects) {
+        this.dlObjectsCollection.remove(aDlObjects);
+        aDlObjects.setDlObjectTypes(null);
+    }
+
+    public void setDlObjectsCollection(List<DlObjects> dlObjectsCollection) {
+        this.dlObjectsCollection = dlObjectsCollection;
+    }
+
+    public void setObjectType(String objectType) {
+        this.objectType = objectType;
+    }
+
+    public void setObjectTypeidPk(Integer objectTypeidPk) {
+        this.objectTypeidPk = objectTypeidPk;
+    }
+
+}

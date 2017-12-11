@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee">
+  <description>web.xml file for Java SSO Web Application</description>
+  <display-name>JavaSSO</display-name>
+  <servlet>
+    <servlet-name>SSOLogin</servlet-name>
+    <servlet-class>oracle.security.jazn.sso.app.SSOLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SSOLogout</servlet-name>
+    <servlet-class>oracle.security.jazn.sso.app.SSOLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SSOLogout</servlet-name>
+    <url-pattern>/SSOLogout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SSOLogin</servlet-name>
+    <url-pattern>/SSOLogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SSOLogin</servlet-name>
+    <url-pattern>/servlet/*</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  <mime-mapping>
+    <extension>html</extension>
+    <mime-type>text/html</mime-type>
+  </mime-mapping>
+  <mime-mapping>
+    <extension>txt</extension>
+    <mime-type>text/plain</mime-type>
+  </mime-mapping>
+  <welcome-file-list>
+     <welcome-file>/SSOLogin</welcome-file>
+  </welcome-file-list>
+  <jsp-config/>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Java SSO Application</web-resource-name>
+      <url-pattern>/SSOLogin</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>{{PUBLIC}}</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+      <form-login-page>/WEB-INF/login.jsp</form-login-page>
+      <form-error-page>/WEB-INF/loginerror.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+  <security-role>
+    <role-name>{{PUBLIC}}</role-name>
+  </security-role>
+</web-app>

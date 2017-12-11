@@ -1,0 +1,713 @@
+/*
+ * @(#)NewProjectSetup.java 1.0 12/11/2006
+ *
+ * Copyright © 2006 UCLA Digital Library
+ * 390 Powell, Los Angeles, CA 90095
+ * All Rights Reserved.
+ */
+package edu.ucla.library.digital.dlcs.tool;
+
+import edu.ucla.library.digital.dlcs.core.Item;
+import edu.ucla.library.digital.dlcs.exception.DLException;
+import edu.ucla.library.digital.dlcs.model.AdminGroups;
+import edu.ucla.library.digital.dlcs.model.CoreDescControlValues;
+import edu.ucla.library.digital.dlcs.model.CoreDescQualifiers;
+import edu.ucla.library.digital.dlcs.model.CoreDescTerms;
+import edu.ucla.library.digital.dlcs.model.DescTerms;
+import edu.ucla.library.digital.dlcs.model.DlObjectTypes;
+import edu.ucla.library.digital.dlcs.model.DlObjects;
+import edu.ucla.library.digital.dlcs.model.FileGroups;
+import edu.ucla.library.digital.dlcs.model.LinkAdminGroups;
+import edu.ucla.library.digital.dlcs.model.Projects;
+import edu.ucla.library.digital.dlcs.util.ControlValueManager;
+import edu.ucla.library.digital.dlcs.util.DBUtil;
+import edu.ucla.library.digital.dlcs.util.QualifierManager;
+
+import java.io.File;
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import oracle.toplink.exceptions.DatabaseException;
+import oracle.toplink.expressions.Expression;
+import oracle.toplink.expressions.ExpressionBuilder;
+import oracle.toplink.queryframework.ReadAllQuery;
+import oracle.toplink.queryframework.ReadObjectQuery;
+import oracle.toplink.sessions.Session;
+import oracle.toplink.sessions.UnitOfWork;
+
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+/**
+ * New Project Setup.
+ *
+ * This class provides the service of batch loading a new DL project
+ * into the DLCS system from an XML file following a defined template
+ *
+ *
+ * @author Curtis Fornadley
+ * @version 1.0
+ * @since Dec 19, 2006
+ */
+
+public class NewProjectSetup {
+  private static Logger logger = LoggerFactory.getLogger(NewProjectSetup.class);
+  private static DBUtil sessionFactory = DBUtil.getInstance();
+
+  private        String            filePath       = null; 
+  private        org.jdom.Document jDocXml        = null;
+  
+  /** Project Fields */
+
+  private Projects project = null;
+
+  /** Object Fields */  
+  private DlObjects dlObject;
+  private ArrayList objectList =  null;
+
+  /** Term Fields */  
+   private DescTerms descTerm;
+   private ArrayList termList =  null;
+   private CoreDescQualifiers coreDescQualifier;
+   private ArrayList coreQualifierList = null;
+  
+  /** Control Values */     
+  private CoreDescControlValues coreDescControlValue;
+  private ArrayList coreControlValueList = null;
+  //private DescControlValues descControlValue;
+  
+  
+  /** Admin File Groups */     
+  private FileGroups fileGroup = null;
+  private ArrayList fileGroupList = null;
+
+  
+  public NewProjectSetup(){
+  }
+  
+  /**
+   * run this is the main controller for this class
+   * @return 
+   */
+  public int run() throws DLException {
+  /** 1. Load the XML file and Load the parameters to variables */
+   loadXml();
+   processJDoc();
+   
+   /** 2. Verfy as valid -  ID Terms, Qualifiers etc. that are not valid that are not */
+   //verfiy(); TODO
+   
+
+   try {
+     //Session clientSession = SingletonSession.getServerSession().acquireClientSession();
+     Session clientSession = sessionFactory.acquireSession();
+     Projects projectClone = setProject(project, clientSession);
+
+     setObjectModel(projectClone, clientSession);
+
+     setDescTerms(projectClone, clientSession);
+     
+     /** Qualifier Manager handles adding new qualifiers to DLCS and existing and new Qualifiers to projects */
+     if(coreQualifierList.size() > 0 ){
+       QualifierManager qMan = new QualifierManager();
+       qMan.addQualifiersToProject(coreQualifierList,projectClone);
+     }
+      
+     /** Control Value Manager handles adding new Control Value to DLCS and existing and new Control Values to projects */
+    // if(coreControlValueList.size() > 0 ){
+    //   ControlValueManager cvMan = new ControlValueManager();
+    //   cvMan.addControlValuesToProject(coreControlValueList,projectClone);
+    // }       
+     
+     /** Define Admin file groups **/
+     setAdminSection(projectClone, clientSession);
+
+     /** Create root node of collection */
+     Item item = new Item();
+     item.setUsername("Henry");
+     item.addRootItem(projectClone); //send user object so we know who created this project item
+     
+     /** Create directories on file system if they do not exist TODO */
+
+     /** Add users? by default only admins will automatically have access to this new project TODO */
+
+
+   } catch (DatabaseException dbe) {
+       if (logger.isErrorEnabled()) {
+           logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+       }
+      throw new DLException(dbe.getMessage());
+   }
+   
+   return 1;
+  }
+  
+   /**
+     * setPathToTemplate
+     * @param pathToTemplate
+     * This must be set before you can call run() 
+     */
+    public void setPathToTemplate(String pathToTemplate) {
+        filePath = pathToTemplate;
+    }
+  
+  /**
+     * setProject
+     * @param project
+     * @param clientSession
+     * @return
+     * @throws DLException
+     */
+   private Projects setProject(Projects project, Session clientSession) throws DLException {
+      String webAppName = project.getWebappName(); //unique to each project
+      UnitOfWork  uow = clientSession.acquireUnitOfWork();
+      uow.registerObject(project);
+      uow.commit();
+
+       /**  get project object **/
+      ExpressionBuilder builder = new ExpressionBuilder();
+      Expression expression = builder.get("webappName").equal(webAppName);
+      ReadObjectQuery query = new ReadObjectQuery(Projects.class, expression);
+
+      Projects projectClone = (Projects)clientSession.executeQuery(query);
+      logger.debug("Found : " + projectClone.getProjectidPk() + " - " + projectClone.hashCode());   
+      return projectClone;
+   }
+
+   /**
+     * setObjectModel
+     * @param projectClone
+     * @param clientSession
+     * @throws DLException
+     */
+    private void setObjectModel(Projects projectClone, Session clientSession) throws DLException {
+        UnitOfWork  uow = clientSession.acquireUnitOfWork();
+        logger.debug("Start adding object model");
+        uow = clientSession.acquireUnitOfWork();
+        uow.registerObject(projectClone);
+        Iterator iter = objectList.iterator();
+        while (iter.hasNext()) {
+          DlObjects dlObject = (DlObjects)iter.next();
+          dlObject.setProjects(projectClone);
+          uow.registerObject(dlObject);
+          logger.debug("Added object successfully.");
+        }
+        uow.commit();
+    }  
+  
+    /**
+      * setAdminSection
+      * @param projectClone
+      * @param clientSession
+      * @throws DLException
+      */
+     private void setAdminSection(Projects projectClone, Session clientSession) throws DLException {
+         UnitOfWork  uow = clientSession.acquireUnitOfWork();
+         logger.debug("Start adding File groups and Admin links");
+         uow.registerObject(projectClone);
+         Iterator iter = fileGroupList.iterator();
+         /** add file groups */
+         while (iter.hasNext()) {
+           FileGroups fileGroupFromXml = (FileGroups)iter.next();
+           FileGroups newFileGroup = new FileGroups();
+           newFileGroup.setFileGroupTitle(fileGroupFromXml.getFileGroupTitle());
+           newFileGroup.setDescription(fileGroupFromXml.getDescription());
+           newFileGroup.setProjects(projectClone);
+           uow.registerObject(newFileGroup);
+
+//           List linkAdminGroupList = fileGroup.getLinkAdminGroupsCollection();
+//           Iterator iiter = linkAdminGroupList.iterator();
+//             while (iiter.hasNext()) {
+//                LinkAdminGroups linkAdmin = (LinkAdminGroups)iiter.next();
+//                linkAdmin.setFileGroups(fileGroup);
+//                uow.registerObject(linkAdmin);
+//                logger.debug("Added File group Admin Link successfully.");
+//             }
+           
+           logger.debug("Added File group successfully.");
+         }
+         uow.commit();
+        
+         /** link admin groups and file groups   
+          * It is done this way because if you include in the above loop the File Group PK will be null
+          * you have to get it back from the DB to have the PK
+          * */
+         iter = fileGroupList.iterator();
+         /** add admin links */
+         while (iter.hasNext()) {
+            FileGroups fileGroupFromXml = (FileGroups)iter.next(); // from the xml template
+            List linkAdminGroupList = fileGroupFromXml.getLinkAdminGroupsCollection();
+            fileGroupFromXml.setProjects(projectClone);
+            FileGroups fileGroupFromDb = getFileGroup(fileGroupFromXml); //from db
+            uow = clientSession.acquireUnitOfWork();
+            uow.registerObject(fileGroupFromDb);
+            Iterator iiter = linkAdminGroupList.iterator();
+            while (iiter.hasNext()) {
+               LinkAdminGroups linkAdmin = (LinkAdminGroups)iiter.next();
+               linkAdmin.setFileGroups(fileGroupFromDb);
+               uow.registerObject(linkAdmin);
+               logger.debug("Added File group Admin Link successfully.");
+            }
+            uow.commit();
+         }
+     }  
+  
+  
+    /**
+     * setDescTerms
+     * @param projectClone
+     * @param clientSession
+     * @throws DLException
+     */
+     private void setDescTerms(Projects projectClone, Session clientSession) throws DLException {
+         UnitOfWork  uow = clientSession.acquireUnitOfWork();
+         logger.debug("Adding Desc Terms");
+         uow = clientSession.acquireUnitOfWork();
+         uow.registerObject(projectClone);
+         Iterator iter = termList.iterator();
+         while (iter.hasNext()) {
+           DescTerms descTerm = (DescTerms)iter.next();
+           descTerm.setProjects(projectClone);
+           uow.registerObject(descTerm);
+           logger.debug("DescTerm Added successfully.");
+         }
+         uow.commit();
+     }  
+  
+   /**
+     * loadXml
+     * @throws DLException
+     */
+  private void loadXml() throws DLException {
+     SAXBuilder sb = new SAXBuilder();
+     try {
+        File templateFile = new File(filePath);
+        if(templateFile.exists()){
+           jDocXml = sb.build(templateFile);
+        }else{
+            logger.error("New project temple file does not exist");
+            throw new DLException("New project temple file does not exist");
+        }
+     } catch (JDOMException jdome) {
+        logger.error("JDOMException caught in loadXml {}", jdome.toString());
+        throw new DLException(jdome.getMessage());
+     } catch (IOException ioe) {
+        logger.error("IOException caught in loadXml {}", ioe.toString());
+        throw new DLException(ioe.getMessage());
+     }
+  }
+  
+  /**
+   * processJDoc()  Move the contents of the XML into DLCS objects
+   * project
+   * objectList
+   * termList
+   * coreQualifierList
+   * coreCvList
+   */
+  private void processJDoc() throws DLException {
+    Element projectSetupElement = jDocXml.getRootElement();
+    //Element headerElement;
+    Element projectElement;
+    Element objectModelElement;
+    Element termsElement;
+    Element controlValuesElement;
+    Element fileGroupsElement;
+   
+    /** populate the project object */
+    Iterator iterate = projectSetupElement.getChildren("project").iterator();
+    while (iterate.hasNext()) {
+      projectElement = (Element)iterate.next();
+      project = new Projects();
+      Iterator iterateChildren = projectElement.getChildren().iterator();
+
+      Element projectChildElement = null;
+      while (iterateChildren.hasNext()) {
+         projectChildElement = (Element)iterateChildren.next();
+
+         if(projectChildElement.getName().equals("projectTitle")){
+            project.setProjectTitle(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("projectManager")){
+            project.setProjectManager(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("department")){
+            project.setDepartment (projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("workingDir")){
+            project.setWorkingDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("webappName")){
+            project.setWebappName(projectChildElement.getText());
+         }              
+         if(projectChildElement.getName().equals("webappDir")){
+            project.setWebappDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("imageMastersDir")){
+            project.setImageMastersDir( projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("imageSubmastersDir")){
+            project.setImageSubmastersDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("thumbnailDir")){
+            project.setThumbnailDir(projectChildElement.getText());
+         }         
+         if(projectChildElement.getName().equals("audioMastersDir")){
+            project.setAudioMastersDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("audioSubmastersDir")){
+            project.setAudioSubmastersDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("videoMastersDir")){
+            project.setVideoMastersDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("videoSubmastersDir")){
+            project.setVideoSubmastersDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("textMastersDir")){
+            project.setTextMastersDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("textSubmastersDir")){
+            project.setTextSubmastersDir(projectChildElement.getText());
+         }         
+         if(projectChildElement.getName().equals("lobMastersDir")){
+             project.setLobMastersDir(projectChildElement.getText());
+         }
+         if(projectChildElement.getName().equals("lobSubmastersDir")){
+            project.setLobSubmastersDir(projectChildElement.getText());
+         }         
+         if(projectChildElement.getName().equals("websiteMastersDir")){
+            project.setWebsiteMastersDir(projectChildElement.getText());
+         }         
+         if(projectChildElement.getName().equals("setupFlag")){
+            project.setSetupFlag(projectChildElement.getText());
+         }         
+         if(projectChildElement.getName().equals("autoPublishFlag")){
+            project.setAutoPublishFlag(projectChildElement.getText());
+         }         
+         if(projectChildElement.getName().equals("dprAccessGroupid")){
+            project.setDprAccessGroupid(projectChildElement.getText());
+         }         
+         if(projectChildElement.getName().equals("itemOrderingFlag")){
+            project.setItemOrderingFlag(projectChildElement.getText());
+         }       
+         if(projectChildElement.getName().equals("oaiFlag")){
+             project.setOaiFlag(projectChildElement.getText());
+         }else{
+             project.setOaiFlag("no");
+         }
+
+      }
+        logger.debug("Project Title: " + project.getProjectTitle());
+//        logger.debug("Project Manager: " + project.getProjectManager());
+//        logger.debug("department: " + project.getDepartment());
+//        logger.debug("workingDir: " + project.getWorkingDir());
+//        logger.debug("webappName: " + project.getWebappName());
+//        logger.debug("webappDir: " + project.getWebappDir());
+//        logger.debug("imageMastersDir: " + project.getImageMastersDir());
+//        logger.debug("imageSubmastersDir: " + project.getImageSubmastersDir());
+//        logger.debug("thumbnailDir: " + project.getThumbnailDir());
+//        logger.debug("audioMastersDir: " + project.getAudioMastersDir());
+//        logger.debug("audioSubmastersDir: " + project.getAudioSubmastersDir());
+//        logger.debug("videoMastersDir: " + project.getVideoMastersDir());
+//        logger.debug("videoSubmastersDir: " + project.getVideoSubmastersDir());
+//        logger.debug("textMastersDir: " + project.getTextMastersDir());
+//        logger.debug("textSubmastersDir: " + project.getTextSubmastersDir());
+//        logger.debug("lobMastersDir: " + project.getLobMastersDir());
+//        logger.debug("lobSubmastersDir: " + project.getLobSubmastersDir());
+//        logger.debug("websiteMastersDir: " + project.getWebsiteMastersDir());
+//        logger.debug("setupFlag: " + project.getSetupFlag());
+//        logger.debug("autoPublishFlag: " + project.getAutoPublishFlag());
+//        logger.debug("dprAccessGroupid: " + project.getDprAccessGroupid());
+//        logger.debug("itemOrderingFlag: " + project.getItemOrderingFlag());
+    }
+    
+    /** populate the DlObjects object - Define object model */    
+    iterate = projectSetupElement.getChildren("objectModel").iterator();
+    while (iterate.hasNext()) {
+       objectModelElement = (Element)iterate.next();
+       Iterator iterateChildren = objectModelElement.getChildren().iterator();
+       
+       Element objectModelChildElement = null;
+       objectList = new ArrayList();
+       int numOfLevelOnes = 0;
+       DlObjectTypes dlObjectType = null; //hold core value of object types
+       while (iterateChildren.hasNext()) {
+          String objectLabel = null;
+          String objectLevel = null;
+          String objectType = null;
+          objectModelChildElement = (Element)iterateChildren.next();
+          if(objectModelChildElement.getName().equals("object")){
+            dlObject = new DlObjects();
+            objectType = objectModelChildElement.getChild("type").getText();
+            dlObjectType = getDlObjectType(objectType);
+            dlObject.setDlObjectTypes(dlObjectType);
+            objectLabel = objectModelChildElement.getChild("label").getText();
+            objectLevel = objectModelChildElement.getAttributeValue("level");
+            Integer intObjectLevel = null;
+            try { 
+               int i = Integer.parseInt(objectLevel);
+               if (i == 1) { numOfLevelOnes++; }
+               intObjectLevel = Integer.valueOf(i);
+            } catch(NumberFormatException nfe){
+               logger.error("Unable to set ItemSequence {}", nfe.toString());
+               throw new DLException(nfe.getMessage());
+            }
+            dlObject.setObjectLevel(intObjectLevel);
+            dlObject.setObjectLabel(objectLabel);
+            /** set the Core Object Type **/
+            dlObject.setDlObjectTypes(dlObjectType);
+          }
+          objectList.add(dlObject);
+          logger.debug("object: " + dlObject.getObjectLevel() + " object type " + dlObject.getDlObjectTypes().getObjectType());
+       }
+       if (numOfLevelOnes > 1) {
+         logger.error("Error in NewProjectSetup - number of level 1 objects > 1");
+         throw new DLException("Error in NewProjectSetup - number of level 1 objects > 1");
+       }
+    }
+    
+    /** populate the Terms object - Define object model */    
+    iterate = projectSetupElement.getChildren("terms").iterator();
+    while (iterate.hasNext()) {
+       termsElement = (Element)iterate.next();
+       Iterator iterateChildren = termsElement.getChildren().iterator();
+        
+       Element termElement = null;
+       termList = new ArrayList();
+       CoreDescTerms coreTerm;
+       coreQualifierList = new ArrayList();
+       while (iterateChildren.hasNext()) {
+          termElement = (Element)iterateChildren.next();
+          descTerm = new DescTerms();
+          Element termParamElement = termElement.getChild("coreTerm");
+          String strCoreTerm = termParamElement.getText();
+          logger.debug("coreDescTerm: " + strCoreTerm);
+          
+          coreTerm = getCoreTerm(strCoreTerm); 
+          descTerm.setCoreDescTerms(coreTerm);
+           
+          termParamElement = termElement.getChild("label");
+          descTerm.setTermLabel(termParamElement.getText());
+          termParamElement = termElement.getChild("hasControlValues");
+          descTerm.setControlValueFlag(termParamElement.getText()); 
+          termParamElement = termElement.getChild("hasQualifier");
+          descTerm.setQualifierFlag(termParamElement.getText());
+   
+          if(descTerm.getQualifierFlag().equals("yes")){
+             termParamElement = termElement.getChild("qualifiers");
+             Iterator iterateQualifier = termParamElement.getChildren("qualifier").iterator();
+             Element qualifierElement;
+             while (iterateQualifier.hasNext()) {
+                 qualifierElement = (Element)iterateQualifier.next();
+                 coreDescQualifier = new CoreDescQualifiers();
+                 coreDescQualifier.setDescQualifier(qualifierElement.getText());
+                 coreDescQualifier.setCoreDescTerms(coreTerm);
+                 coreQualifierList.add(coreDescQualifier);
+                 logger.debug("qualifier: " + coreDescQualifier.getDescQualifier() + ", Term via TL " + coreDescQualifier.getCoreDescTerms().getDescTerm());
+             }
+
+          }
+          termParamElement = termElement.getChild("canRepeat");
+          descTerm.setRepeatFlag(termParamElement.getText());
+          termParamElement = termElement.getChild("required");
+          descTerm.setRequiredFlag(termParamElement.getText());
+          
+
+          termList.add(descTerm);
+          logger.debug("term: " + descTerm.getTermLabel() + " Qual Flag " + descTerm.getQualifierFlag() );
+        }
+
+     }
+
+      /** populate the Control Value Objects */    
+      iterate = projectSetupElement.getChildren("controlValues").iterator();
+      while (iterate.hasNext()) {
+         controlValuesElement = (Element)iterate.next();
+         Iterator iterateChildren = controlValuesElement.getChildren().iterator();
+          
+         Element controlValueElement = null;
+         coreControlValueList = new ArrayList();
+         CoreDescTerms coreTerm;
+         while (iterateChildren.hasNext()) {
+            controlValueElement = (Element)iterateChildren.next();
+            coreDescControlValue = new CoreDescControlValues();
+            Element cvParamElement = controlValueElement.getChild("coreTerm");
+            String strCoreTerm = cvParamElement.getText();
+            logger.debug("CV - coreDescTerm: " + strCoreTerm);
+            
+            coreTerm = getCoreTerm(strCoreTerm);
+            coreDescControlValue.setCoreDescTerms(coreTerm);
+             
+            cvParamElement = controlValueElement.getChild("value");
+            coreDescControlValue.setCoreDescCv(cvParamElement.getText());
+            cvParamElement = controlValueElement.getChild("source");
+            coreDescControlValue.setCoreDescCvSource(cvParamElement.getText());
+            cvParamElement = controlValueElement.getChild("authority");
+            coreDescControlValue.setAuthorityRecordFlag(cvParamElement.getText());
+            cvParamElement = controlValueElement.getChild("recordNum");
+            coreDescControlValue.setCoreDescCvRecordNo(cvParamElement.getText());
+            cvParamElement = controlValueElement.getChild("type");
+            coreDescControlValue.setCoreDescCvType(cvParamElement.getText());
+            
+            coreControlValueList.add(coreDescControlValue);
+            logger.debug("CV: " + coreDescControlValue.getCoreDescCv() + " Source " + coreDescControlValue.getCoreDescCvSource() + " Term: " + coreDescControlValue.getCoreDescTerms().getDescTerm() );
+         }
+      }
+
+       /** populate the Administrative data */    
+       iterate = projectSetupElement.getChildren("fileGroups").iterator();
+       while (iterate.hasNext()) {
+          fileGroupsElement = (Element)iterate.next();
+          Iterator iterateChildren = fileGroupsElement.getChildren().iterator();
+           
+          Element fileGroupElement = null;
+          fileGroupList = new ArrayList();
+          //CoreDescTerms coreTerm;
+          while (iterateChildren.hasNext()) {
+             fileGroupElement = (Element)iterateChildren.next();
+             fileGroup = new FileGroups();
+             Element fgParamElement = fileGroupElement.getChild("title");
+             fileGroup.setFileGroupTitle(fgParamElement.getText());             
+             fgParamElement = fileGroupElement.getChild("description");
+             fileGroup.setDescription(fgParamElement.getText());             
+             
+             fgParamElement = fileGroupElement.getChild("adminTech");
+             String techAdminPK = fgParamElement.getText();
+             fgParamElement = fileGroupElement.getChild("adminRights");
+             String rightsAdminPK = fgParamElement.getText();
+
+             AdminGroups techAdminGroup = getAdminGroup(techAdminPK); 
+             LinkAdminGroups techLinkAdminGroup = new LinkAdminGroups();
+             techLinkAdminGroup.setAdminGroups(techAdminGroup);
+             fileGroup.addLinkAdminGroups(techLinkAdminGroup);
+
+             AdminGroups rightsAdminGroup = getAdminGroup(rightsAdminPK);             
+             LinkAdminGroups rightsLinkAdminGroup = new LinkAdminGroups();
+             rightsLinkAdminGroup.setAdminGroups(rightsAdminGroup);
+             fileGroup.addLinkAdminGroups(rightsLinkAdminGroup);
+           
+             fileGroupList.add(fileGroup);
+             logger.debug("File Group: " + fileGroup.getFileGroupTitle()+ " num of admin groups " + fileGroup.getLinkAdminGroupsCollection().size());
+          }
+       }
+
+
+   }
+
+  /**
+   * getCoreTerm() get coreTerm object from DB
+   */
+  private CoreDescTerms getCoreTerm(String strCoreTerm) throws DLException{
+      CoreDescTerms coreDescTerm = null;
+     try {
+  
+        Session session = sessionFactory.acquireSession();
+        //UnitOfWork  uow = clientSession.acquireUnitOfWork();
+          
+        // Use an expression to read in all the Objects for a specified project id
+        ExpressionBuilder builder = new ExpressionBuilder();
+        Expression expression = builder.getField("desc_term").equal(strCoreTerm);
+
+        ReadAllQuery query = new ReadAllQuery(CoreDescTerms.class, expression);
+        //query.addOrdering(query.getExpressionBuilder().get("coreDescTerms").get("coreDescTermidPk").ascending());
+        query.dontMaintainCache();
+        List list = (List) session.executeQuery(query);
+        //logger.debug("Read " + list.size() + " core descriptive terms.");
+        Iterator resultsIter = list.iterator();
+        while (resultsIter.hasNext()) {
+          coreDescTerm = (CoreDescTerms) resultsIter.next();
+        }
+        //uow.release();
+     } catch (DatabaseException dbe) {
+        logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+        throw new DLException(dbe.getMessage());
+     }
+     //logger.debug("core term value " + coreDescTerm.getDescTerm());
+     return coreDescTerm;
+  }
+ 
+    /**
+     * getDlObjectType() get DlObjectTypes object from DB
+     */
+    private DlObjectTypes getDlObjectType(String objectType) throws DLException{
+       DlObjectTypes dlObjectType = null;
+       try {
+          Session session = sessionFactory.acquireSession();
+          ExpressionBuilder builder = new ExpressionBuilder();
+          Expression expression = builder.getField("object_type").equal(objectType);
+          ReadAllQuery query = new ReadAllQuery(DlObjectTypes.class, expression);
+          query.dontMaintainCache();
+          List list = (List) session.executeQuery(query);
+          Iterator resultsIter = list.iterator();
+          while (resultsIter.hasNext()) {
+            dlObjectType = (DlObjectTypes) resultsIter.next();
+          }
+       } catch (DatabaseException dbe) {
+          logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+          throw new DLException(dbe.getMessage());
+       }
+       //logger.debug("dlObjectType " + dlObjectType.getObjectType());
+       return dlObjectType;
+    } 
+ 
+ 
+    /**
+     * getAdminGroup() get AdminGroup object from DB
+     */
+    private AdminGroups getAdminGroup(String adminGroupPK) throws DLException{
+       AdminGroups adminGroup = null;
+       try {
+          Session session = sessionFactory.acquireSession();
+          ExpressionBuilder builder = new ExpressionBuilder();
+          Expression expression = builder.getField("admin_groupid_pk").equal(adminGroupPK);
+          ReadAllQuery query = new ReadAllQuery(AdminGroups.class, expression);
+          query.dontMaintainCache();
+          List list = (List) session.executeQuery(query);
+          Iterator resultsIter = list.iterator();
+          while (resultsIter.hasNext()) {
+            adminGroup = (AdminGroups) resultsIter.next();
+          }
+       } catch (DatabaseException dbe) {
+          logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+          throw new DLException(dbe.getMessage());
+       }
+       logger.debug("admingroup " + adminGroup.getAdminGroupTitle());
+       return adminGroup;
+    } 
+ 
+    /**
+     * getFileGroup() get FileGroup object from DB
+     */
+    private FileGroups getFileGroup(FileGroups fileGroup) throws DLException{
+       FileGroups fileGroup_with_PK = null;
+       try {
+          Session session = sessionFactory.acquireSession();
+          ExpressionBuilder builder = new ExpressionBuilder();
+          Expression expression = builder.getField("projectid_fk").equal(fileGroup.getProjects().getProjectidPk())
+             .and(builder.getField("file_group_title").equal(fileGroup.getFileGroupTitle()));
+          ReadAllQuery query = new ReadAllQuery(FileGroups.class, expression);
+          query.dontMaintainCache();
+          List list = (List) session.executeQuery(query);
+          Iterator resultsIter = list.iterator();
+          while (resultsIter.hasNext()) {
+            fileGroup_with_PK = (FileGroups) resultsIter.next();
+          }
+       } catch (DatabaseException dbe) {
+          logger.error("EXCEPTION [TOPLINK - {} ]: {} ", dbe.getErrorCode(), dbe.getMessage());
+          throw new DLException(dbe.getMessage());
+       }
+       logger.debug("get filegroup " + fileGroup_with_PK.getFileGroupTitle());
+       return fileGroup_with_PK;
+    } 
+
+       
+}

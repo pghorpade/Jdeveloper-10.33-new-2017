@@ -1,0 +1,55 @@
+#!/bin/sh
+
+#set -v
+#set -x
+
+#
+# OJC Wrapper for Linux & Solaris
+#
+# Copyright 2005 Oracle Corporation.  All Rights Reserved
+#
+
+SetBaseDir()
+{
+	## set default value
+	JDEV_BASE_DIR=`dirname $0`
+	
+	## resolve links - $0 may be a link to  home
+	PRG=$0
+	progname=`basename $0`
+
+	while [ -h "$PRG" ] ; do
+		ls=`ls -ld "$PRG"`
+		link=`expr "$ls" : '.*-> \(.*\)$'`
+		if expr "$link" : '.*/.*' > /dev/null
+		then
+			PRG="$link"
+		else
+			PRG="`dirname $PRG`/$link"
+		fi
+	done
+
+	JDEV_BASE_DIR_1=`dirname "$PRG"`
+	if [ -d ${JDEV_BASE_DIR_1} ]
+	then
+		JDEV_BASE_DIR=${JDEV_BASE_DIR_1}
+	fi
+	cd ${JDEV_BASE_DIR}
+}
+
+OJC_PWD=`pwd`
+SetBaseDir
+
+. ${JDEV_BASE_DIR}/jdev.common
+SetConfigFiles
+ReadConfig
+if [ "X" = "X${JDEV_JAVA_HOME}" ]
+then
+  ReadJDevConfig
+ # echo "The value of the macro is: ${JDEV_JAVA_HOME}"
+fi
+CheckJDK
+
+cd ${OJC_PWD}
+${JAVA} -cp ${JDEV_BASE_DIR}/../lib/ojc.jar oracle.ojc.compiler.Main $@
+

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<orion-web-app
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/orion-web-10_0.xsd" 	deployment-version="10.1.3.3.0"
+	deployment-time="1258516598611"
+	jsp-cache-directory="./persistence"
+	jsp-cache-tlds="standard"
+	simple-jsp-mapping="false"
+	temporary-directory="./temp"
+	context-root="/ascontrol"
+ schema-major-version="10" schema-minor-version="0" >
+	<classpath path="../../../../../jlib/identitystore.jar" />
+	<classpath path="../../../../../BC4J/lib/adfshare.jar" />
+	<virtual-directory virtual-path="/cabo/images/cache" real-path="persistence/cabo/image-cache" />
+	<virtual-directory virtual-path="/cabo/styles/cache" real-path="persistence/cabo/style-cache" />
+	<web-app-class-loader search-local-classes-first="true" include-war-manifest-class-path="false" />
+	<security-role-mapping name="ascontrol_admin">
+	</security-role-mapping>
+	<security-role-mapping name="ascontrol_appadmin">
+	</security-role-mapping>
+	<security-role-mapping name="ascontrol_monitor">
+	</security-role-mapping>
+	<web-app>
+		<filter>
+			<filter-name>logonFilter</filter-name>
+			<display-name>logonFilter</display-name>
+			<filter-class>oracle.sysman.ias.studio.app.LogonFilter</filter-class>
+		</filter>
+		<filter-mapping>
+			<filter-name>logonFilter</filter-name>
+			<dispatcher>FORMAUTH</dispatcher>
+		</filter-mapping>
+	</web-app>
+</orion-web-app>

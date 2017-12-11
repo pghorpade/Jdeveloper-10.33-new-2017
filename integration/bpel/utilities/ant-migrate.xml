@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<project name="migrate" default="migrateprojects" basedir=".">
+
+    <property environment="env"/>    
+    <!-- Set bpel.home using developer prompt's environment variable 
+         BPEL_HOME -->
+    <condition property="bpel.home" value="${env.BPEL_HOME}">
+        <isset property="env.BPEL_HOME"/>
+    </condition>
+    <!-- If bpel.home is not yet using env.BPEL_HOME, set it for JDev -->    
+    <property name="bpel.home" value="${oracle.home}/integration/bpel"/>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${bpel.home}/lib/ant-contrib-1.0b2.jar"/>
+
+    <tstamp>
+        <format property="timestamp" pattern="yyMMdd-HHmm" locale="en"/>
+    </tstamp>
+
+    <target name="migrateproject">
+    <!--This target assumes either of 2 input property is passed but not both-->
+    <!--  project.dir: project directory(containing bpel.xml, *.bpel), or    -->
+    <!--  bpel.xml   : full path of bpel.xml under project's dir             -->
+        <if>
+            <isset property="bpel.xml"/>
+            <then>
+                <dirname property="migrateproject.dir" file="${bpel.xml}"/>
+            </then>
+            <else>
+                <property name="migrateproject.dir" value="${project.dir}"/>
+            </else>
+        </if>
+        <basename property="project.dirname" file="${migrateproject.dir}"/>
+
+        <!-- Define projects.diname if not called thru migrateprojects task -->
+        <property name="projects.diname" value="${project.dirname}"/>
+
+        <!-- property project.name can be overriden if project.name != project.dirname -->
+        <property name="project.name" value="${project.dirname}"/>
+
+        <if>
+            <not><available file="${migrateproject.dir}/bpel.xml"/></not>
+            <then>
+                <echo>
+ERROR: ${project.dir}/bpel.xml does not exist!!
+Usage:
+  ant -f ${ant.file} -Dproject.dir=XXX
+or,
+  ant -f ${ant.file} -Dbpel.xml=XXX/bpel.xml
+                </echo>
+            </then>
+            <else>
+                <if>
+                    <equals arg1="${project.dirname}" arg2="bpel"/>
+                    <then>
+                        <echo>
+INFO: Skipping migration under ${migrateproject.dir} as it is already migrated.
+                        </echo>
+                    </then>
+                    <else>
+                        <property name="project.bpel.dir" value="${migrateproject.dir}/bpel"/>
+                        <echo>INFO: Migrating project under directory ${migrateproject.dir}</echo>
+                        <if>
+                            <isset property="migration.log"/>
+                            <then>
+                              <!-- output is already being sent to log file -->
+                              <ant antfile="ant-migrate.xml" target="do_migrateproject"/>
+                            </then>
+                            <else>
+                              <!-- send output to log file -->
+                              <ant antfile="ant-migrate.xml" target="do_migrateproject"
+                                output="${project.dir}/${project.name}_migration_${timestamp}.log"/>
+                            </else>
+                        </if>
+                    </else>
+                </if>
+            </else>
+        </if>
+    </target>
+
+    <target name="save_projects"> 
+        <basename property="projects.dirname" file="${project.dir}"/>
+        <property name="project.zip" value="${project.dir}/../${projects.dirname}_bak_${timestamp}.zip"/>
+        <if>
+            <not><available file="${project.zip}"/></not>
+            <then>
+                <echo>INFO: Archiving existing project(s) in ${project.dir} to ${project.zip}</echo>
+                <zip destfile="${project.zip}">
+                    <fileset dir="${project.dir}/..">
+                        <include name="${projects.dirname}/**/*"/>
+                        <exclude name="${projects.dirname}/**/output"/>
+                        <exclude name="${projects.dirname}/*migration*.log"/>
+                    </fileset>
+                </zip>
+            </then>
+        </if>
+    </target>
+
+    <target name="do_migrateproject"> 
+        <antcall target="save_projects"/> <!-- save if not already saved -->
+
+        <!-- Set flag to indicate at least one project was migrated -->
+        <echo file="${java.io.tmpdir}/projects-migrated.txt">${project.bpel.dir}</echo>
+        <move todir="${project.bpel.dir}" failonerror="true">  
+            <fileset dir="${migrateproject.dir}">
+                <include name="*.*"/>
+                <include name="BPEL-INF/**/*"/>
+                <include name="testsuites/**/*"/>
+                <exclude name="*.jpr"/>
+                <exclude name="*.jpr.*"/>
+                <exclude name="${project.name}*.log"/>
+                <exclude name="*.txt"/>
+                <exclude name="*.pdf"/>
+            </fileset>
+        </move>
+        <move file="${project.bpel.dir}/build.xml.original" tofile="${project.bpel.dir}/build.xml.deprecated" failonerror="false"/>
+        <delete dir="${migrateproject.dir}/testsuites"/> <!-- leftover after move -->
+
+        <copy file="${bpel.home}/utilities/bpel_build_template.xml"
+            tofile="${migrateproject.dir}/build.xml"/>
+        <copy file="${bpel.home}/utilities/bpel_build_template.properties"
+            tofile="${migrateproject.dir}/build.properties"/>
+
+        <replace dir="${migrateproject.dir}">
+            <include name="build.xml" />
+            <include name="${project.name}.jpr" />
+            <replacefilter token="__BPEL_PROCESS_NAME" value="${project.name}" />
+        </replace>
+
+        <!-- migrate adapter specific Header WSDL files -->
+        <for param="wsdl" list="MQAdapterInboundHeader.wsdl,ftpAdapterInboundHeader.wsdl,MQAdapterOutboundHeader.wsdl,ftpAdapterOutboundHeader.wsdl,aqAdapterInboundHeader.wsdl,jmsAdapterInboundHeader.wsdl,aqAdapterOutboundHeader.wsdl,jmsAdapterOutboundHeader.wsdl,fileAdapterInboundHeader.wsdl,procedureAdapterHeader.wsdl,fileAdapterOutboundHeader.wsdl">
+            <sequential>
+                <if>
+                    <available file="${project.bpel.dir}/@{wsdl}"/>
+                    <then>
+                        <echo>Migrating @{wsdl}</echo>
+                        <copy overwrite="true"
+                          file="${bpel.home}/utilities/migration/@{wsdl}"
+                          todir="${project.bpel.dir}"/>
+                    </then>
+                </if>
+            </sequential>
+        </for>
+        <!-- bug-5484518: migrate wsil import url -->
+        <replace dir="${migrateproject.dir}">
+            <include name="bpel/bpel.xml" />
+            <include name="**/*.wsdl" />
+            <replacefilter token="/BPELConsole/wsil/adapters/" value="/orainfra/wsil/adapters/" />
+        </replace>
+    </target>
+
+    <target name="migrateprojects" depends="save_projects"> 
+        <delete file="${java.io.tmpdir}/projects-migrated.txt"/><!-- clear status -->
+        <property name="migration.log" value="${project.dir}/${projects.dirname}_migration_${timestamp}.log"/>
+        <echo>Logging command output to ${migration.log}</echo>
+        <ant antfile="${ant.file}" target="do.migrate.all"
+             output="${migration.log}"/>
+
+        <if>
+            <available file="${java.io.tmpdir}/projects-migrated.txt"/>
+            <then>
+                <echo file="${basedir}/READ-MIGRATION-NOTES.txt">
+Your Project *MAY NEED* further manual migration on files that
+were not automatically migrated. Please ensure that you have
+done this before you use the project based on the notes
+provided below.
+
+Notes:
+
+- All original files under ${project.dir} has been saved as zip file
+  ${project.zip} as a backup. You can remove this file once you 
+  are satisfied with the migration.
+
+- As part of migration to 10.1.3.1.0
+
+  * BPEL project and related files under the project folder have 
+    been moved into a sub-folder "bpel" to conform to the new
+    project structure in 10.1.3.
+
+  * Only project files(not folder) have been moved into "bpel"
+    sub-folder, so you may need to MANUALLY move all folders not
+    moved into "bpel" sub-folder by the migration or if required
+    you may need to edit the project for the folder(s) not moved
+    along with project files, which may contain relative paths of
+    the folder not moved.
+
+  * A new build.xml has been created under the project folder, 
+    while the original build.xml has been moved to "bpel" sub-folder 
+    as build.xml.deprecated. This file is no longer needed and
+    should not be used. 
+
+  * Build files (build.xml) that are unrelated to BPEL projects
+    have been left as-is but renamed to build.xml.original. These
+    files *WILL NEED* to be migrated manually and then renamed to
+    build.xml after testing and verification. 
+
+  * The new build.xml should *NOT* be edited. Any customization 
+    should be done by creating a new pre-build.xml and/or 
+    post-build.xml in the project folder. If you need a sample 
+    please refer to the LoanDemoPlus sample present in 
+    [OH]/bpel/samples/demos
+
+- If BPEL process(*.bpel file) contains "bpel:exec" extension element
+  containing language="Java" attribute(note Capital "J" in Java),
+  you need to manually change this to lowercase i.e. language="java".
+                </echo>
+                <echo>
+--------------------------------------------------------------
+Migration of all BPEL projects under ${project.dir} has been completed. 
+You may need to do further manual migration as mentioned in
+${basedir}/READ-MIGRATION-NOTES.txt
+Also check the log file ${migration.log} for details. 
+--------------------------------------------------------------
+                </echo>
+            </then>
+            <else>
+                <echo>
+No BPEL project was migrated.
+                </echo>
+            </else>
+        </if>
+    </target>
+
+    <target name="do.migrate.all"> 
+
+        <!-- In first pass, rename all build.xml files to build.xml.original -->
+        <for param="build.xml">
+            <path>
+                <fileset dir="${project.dir}" includes="**/build.xml"/>
+            </path>
+            <sequential>
+                <!-- Donot rename any migrated build.xml i.e. bpel/build.xml -->
+                <dirname property="build.xml.dir" file="@{build.xml}"/>
+                <if>
+                    <not><available file="${build.xml.dir}/bpel" type="dir"/></not>
+                    <then>
+                        <echo>Renaming @{build.xml} to build.xml.original</echo>
+                        <move file="@{build.xml}" tofile="@{build.xml}.original" failonerror="false"/>
+                    </then>
+                </if>
+            </sequential>
+        </for>
+
+        <!-- In second pass, migrate all BPEL prjects recursively -->
+        <for param="descriptor">
+            <path>
+                <fileset dir="${project.dir}" includes="**/bpel.xml"/>
+            </path>
+            <sequential>
+                <echo>
+--------------------------------------------------------------
+Found @{descriptor} for possible migration
+                </echo>
+                <antcall target="migrateproject">
+                    <param name="bpel.xml" value="@{descriptor}"/>
+                </antcall>
+            </sequential>
+        </for>
+
+    </target>
+
+    <target name="migrate.jpr.file"> 
+        <dirname property="descriptor.dir" file="${bpel.xml}"/>
+        <xmlproperty file="${bpel.xml}"/>
+        <property name="ProcessName" value="${BPELSuitcase.BPELProcess(id)}"/>
+        <delete quiet="true" verbose="false">
+            <fileset dir="${descriptor.dir}/.." includes="*.jpr">
+                <exclude name="FreeShippingPriceProvider.jpr"/>
+                <exclude name="DocumentReview.jpr"/>
+                <exclude name="LoanFlow.jpr"/>
+                <exclude name="LoanFlowPlus.jpr"/>
+                <exclude name="VacationRequest.jpr"/>
+                <exclude name="OrderApproval.jpr"/>
+                <exclude name="SelectManufacturing.jpr"/>
+                <exclude name="StarLoan.jpr"/>
+                <exclude name="UnitedLoan.jpr"/>
+                <exclude name="CreditRatingService.jpr"/>
+                <exclude name="File2Table.jpr"/>
+                <exclude name="SessionBeanSample.jpr"/>
+            </fileset>
+        </delete> 
+        <copy file="${bpel.home}/utilities/migration/bpel_jdev_template.jpr"
+            tofile="${descriptor.dir}/../${ProcessName}.jpr" overwrite="false" verbose="false"/>
+        <replace dir="${descriptor.dir}/..">
+            <include name="*.jpr" />
+            <replacefilter token="[ProcessName]" value="${ProcessName}" />
+        </replace>
+    </target>
+
+    <target name="migrate.jpr.files"> 
+        <echo>Migrating all .jpr files under ${project.dir}</echo>
+        <for param="descriptor">
+            <path>
+                <fileset dir="${project.dir}" includes="**/bpel.xml"/>
+            </path>
+            <sequential>
+                <echo>Migrating .jpr for descriptor @{descriptor}</echo>
+                <antcall target="migrate.jpr.file">
+                    <param name="bpel.xml" value="@{descriptor}"/>
+                </antcall>
+            </sequential>
+        </for>
+    </target>
+
+</project>

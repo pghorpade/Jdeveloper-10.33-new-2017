@@ -1,0 +1,74 @@
+<!-- For reference only:  
+sample login module configuration for an appliation callerInfo 
+associated with SunOne Directory. -->
+
+<jazn-loginconfig>
+	<application>
+		<name>callerInfo</name>
+		<login-modules>
+			<login-module>
+				<class>oracle.security.jazn.login.module.LDAPLoginModule</class>
+				<control-flag>required</control-flag>
+				<options>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.url</name>
+						<value>ldap://sunone.us.oracle.com:389</value>
+					</option>
+					<option>	
+						<name>oracle.security.jaas.ldap.provider.user</name>
+						<value>cn=Directory Manager</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.credential</name>
+						<value>!welcome1</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.type</name>
+						<value>iplanet</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.name.attribute</name>
+						<value>uid</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.object.class</name>
+						<value>inetOrgPerson</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.searchbase</name>
+						<value>dc=us,dc=oracle,dc=com</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.searchscope</name>
+						<value>onelevel</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.name.attribute</name>
+						<value>cn</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.object.class</name>
+						<value>groupOfUniqueNames</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.searchbase</name>
+						<value>dc=us,dc=oracle,dc=com; ou=groups,dc=us,dc=oracle,dc=com</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.searchscope</name>
+						<value>direct</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.member.attribute</name>
+						<value>uniquemember</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.membership.searchscope</name>
+						<value>direct</value>
+					</option>
+					
+				</options>
+			</login-module>
+		</login-modules>
+	</application>
+</jazn-loginconfig>

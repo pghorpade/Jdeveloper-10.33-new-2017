@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<orion-web-app
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/orion-web-10_0.xsd" 	deployment-version="2.0.0.0"
+	deployment-time="1258516598017"
+	jsp-cache-directory="./persistence"
+	jsp-cache-tlds="standard"
+	temporary-directory="./temp"
+	servlet-webdir="/servlet/"
+	context-root="/"
+ schema-major-version="10" schema-minor-version="0" >
+	<!-- Uncomment this element to control web application class loader behavior.
+		<web-app-class-loader search-local-classes-first="true"  include-war-manifest-class-path="true" />
+	-->
+	<security-role-mapping name="jmsRouter">
+		<group name="oc4j-administrators" />
+	</security-role-mapping>
+	<web-app>
+	</web-app>
+</orion-web-app>

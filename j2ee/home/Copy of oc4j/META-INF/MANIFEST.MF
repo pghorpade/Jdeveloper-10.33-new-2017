@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.6.5
+Created-By: 1.4.2 (Sun Microsystems, Inc.)
+Main-Class: oracle.oc4j.loader.boot.BootStrap
+Class-Path: lib/pcl.jar
+
+Name: Oracle Application Server Containers for J2EE 10g
+Implementation-Title: oracle.oc4j
+Implementation-Version: 10.1.3.3.0
+Implementation-Vendor: Oracle.
+

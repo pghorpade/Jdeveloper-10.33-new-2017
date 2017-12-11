@@ -1,0 +1,65 @@
+#!/bin/sh
+
+SetBaseDir()
+{
+	## set default value
+	JDEV_BASE_DIR=`dirname $0`
+	
+	## resolve links - $0 may be a link to  home
+	PRG=$0
+	progname=`basename $0`
+
+	while [ -h "$PRG" ] ; do
+		ls=`ls -ld "$PRG"`
+		link=`expr "$ls" : '.*-> \(.*\)$'`
+		if expr "$link" : '.*/.*' > /dev/null
+		then
+			PRG="$link"
+		else
+			PRG="`dirname $PRG`/$link"
+		fi
+	done
+
+	JDEV_BASE_DIR_1=`dirname "$PRG"`
+	if [ -d ${JDEV_BASE_DIR_1} ]
+	then
+		JDEV_BASE_DIR=${JDEV_BASE_DIR_1}
+	fi
+	cd ${JDEV_BASE_DIR}
+}
+
+ShowExtraHelp()
+{
+	echo ""
+	echo "Options passed directly to oc4j:"
+	echo "-install              Starts the configuration tool for the admin user"
+	exit 0;
+}
+
+LaunchOC4J()
+{
+	SetBaseDir
+	SetConfigFiles
+	PreProcessArgs "$@"
+	ReadConfig
+	ProcessArgs "$@"
+
+	CheckJDK
+
+	# If you get a core dump launching java, then remove the WorkaroundULimit line here
+	WorkaroundULimit
+
+	cd $JDEV_BASE_DIR/../../j2ee/home
+	EchoIfVerbose "Running Command: ${JAVA} $JDEV_VM_OPTS -jar oc4j.jar $JDEV_APP_OPTS"
+	${JAVA} $JDEV_VM_OPTS -jar oc4j.jar $JDEV_APP_OPTS
+}
+
+
+# ===========================================================================
+# Start of script.
+# ===========================================================================
+
+SetBaseDir
+. ${JDEV_BASE_DIR}/jdev.common
+LaunchOC4J "$@"
+

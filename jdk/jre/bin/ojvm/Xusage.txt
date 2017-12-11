@@ -1,0 +1,39 @@
+    -Xbootclasspath:<directories and zip/jar files separated by ;>
+                        set search path for system classes and resources
+    -Xms<size>          set initial Java heap size
+    -Xmx<size>          set maximum Java heap size
+    -Xverify[:all|remote|none]
+                        verify all, remote (default), or no classes
+    -Xss<size>          set maximum native stack size for any thread
+    -Xdebug             enable Sun's remote Java debugging
+
+    -XOd                no optimizations
+    -XO2                run optimizer
+    -Xnogengc           disable generational garbage collection
+    -Xgengc             force generational garbage collection
+    -Xmbb<size>         set initial big blocks heap size
+    -Xmrl<size>         set minimal free heap before expansion
+    -Xmrn<size>         set normal free heap
+    -Xmrh<size>         set maximum free heap before reduction
+    -Xnobugcompat       disable bug compatiblity with classic VM
+    -Xvtune             enable support for Intel's VTune
+
+    -XXdebug            enable OJVM's remote Java debugging
+    -XXdebug,port<port> set port for OJVM's remote Java debugging
+    -XXdebug,detached   do not wait for debugger connection
+    -XXdebug,quiet      do not print debugger connection messages
+    -XXtime,port<port>  Enable and set port for OJVM's remote profiling
+
+    -Xcodecoach         enable CodeCoach
+                        Must be specified before any -Xcc option
+
+    -Xcc:incl:<list>    list of classes/packages to codecoach
+    -Xcc:excl:<list>    list of classes/packages to exclude from codecoach
+			classes/packages are separated by ;
+
+    -Xcc:enable:<list>  list of codecoach advice to enable (default = ALL)
+    -Xcc:disable:<list> list of codecoach advice to disable
+                        advice are separated by ,
+                        multiple -Xcc:enable/disable are processed in order
+
+The -X options are non-standard and subject to change without notice.

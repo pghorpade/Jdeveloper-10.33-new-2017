@@ -1,0 +1,14 @@
+<dataScope xmlns="http://bali.us.oracle.com/cabo/marlin" xmlns:data="http://bali.us.oracle.com/cabo/marlin">
+  <contents>
+    <breadCrumbs>
+      <contents data:childData="breadCrumbs@navData">
+        <link data:text="text" data:destination="destination" data:rendered="rendered"/>
+      </contents>
+    </breadCrumbs>
+  </contents>
+  <provider>
+    <data name="navData">
+      <method class="oracle.sysman.emSDK.nav.NavData" method="getBreadCrumbs"/>
+    </data>
+  </provider>
+</dataScope>

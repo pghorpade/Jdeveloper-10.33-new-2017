@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<LogViewerConfig maxEntries="5000">
+
+<Components>
+    <Component id="EM" displayName="Enterprise Manager"/>
+    <Component id="TOPLINK" displayName="TopLink"/>
+    <Component id="WEBSERVICES" displayName="Web Services"/>  
+    <Component id="j2ee" displayName="OC4J"/>    
+    <Component id="CONTENT" displayName="Content Services"/>
+</Components>
+
+<Views>   
+    <View propertyID='webservices' 
+          displayName='ID_FILES_VIEW_WEBSERVICE_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>    
+    <View propertyID='management' 
+          displayName='ID_FILES_VIEW_MGMT_SYSTEM_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>              
+    <View propertyID='diagnostic' 
+          displayName='ID_VLOGS_VIEW_DIAG_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>              
+    <View propertyID='application' 
+          displayName='ID_FILES_VIEW_APP_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>          
+    <View propertyID='all' 
+          displayName='ID_FILES_VIEW_ALL_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>   
+</Views>
+
+
+<CharSets>
+    <CharSet name='ISO-8859-6' displayName='Arabic (ISO-8859-6)'/>
+    <CharSet name='Windows-1256' displayName='Arabic (Windows-1256)'/>
+    <CharSet name='ISO-8859-4' displayName='Baltic (ISO-8859-4)'/>
+    <CharSet name='Windows-1257' displayName='Baltic (Windows-1257)'/>
+    <CharSet name='' displayName='Central European (IBM852)'/>
+    <CharSet name='ISO-8859-2' displayName='Central European (ISO-8859-2)'/>
+    <CharSet name='Windows-1250' displayName='Central European (Windows-1250)'/>
+    <CharSet name='' displayName='Chinese Simplified (GB2312)'/>
+    <CharSet name='GBK' displayName='Chinese Simplified (GBK)'/>
+    <CharSet name='Big5' displayName='Chinese Simplified (Big5)'/>
+    <CharSet name='EUC-TW' displayName='Chinese Simplified (EUC-TW)'/>
+    <CharSet name='Windows-950' displayName='Chinese Simplified (Windows-950)'/>
+    <CharSet name='' displayName='Chinese (ISO-2022-CN)'/>
+    <CharSet name='' displayName='Cyrillic (IBM866)'/>
+    <CharSet name='ISO-8859-5' displayName='Cyrillic (ISO-8859-5)'/>
+    <CharSet name='KOI8-R' displayName='Cyrillic (KOI8-R)'/>
+    <CharSet name='Windows-1251' displayName='Cyrillic Alphabet (Windows-1251)'/>
+    <CharSet name='ISO-8859-7' displayName='Greek (ISO-8859-7)'/>
+    <CharSet name='Windows-1253' displayName='Greek (Windows-1253)'/>
+    <CharSet name='ISO-8859-8' displayName='Hebrew (ISO-8859-8)'/>
+    <CharSet name='Windows-1255' displayName='Hebrew (Windows-1255)'/>
+    <CharSet name='ISO-2022-JP' displayName='Japanese (ISO-2022-JP)'/>
+    <CharSet name='EUC-JP' displayName='Japanese (EUC-JP)'/>
+    <CharSet name='Shift_JIS' displayName='Japanese (SHIFT_JIS)'/>
+    <CharSet name='' displayName='Korean (KS_C_5601-1987)'/>
+    <CharSet name='ISO-2022-KR' displayName='Korean (ISO-2022-KR)'/>
+    <CharSet name='Windows-949' displayName='Korean (Windows-949)'/>
+    <CharSet name='ISO-8859-3' displayName='South European (ISO-8859-3)'/>
+    <CharSet name='TIS-620' displayName='Thai (TIS-620)'/>
+    <CharSet name='' displayName='Turkish (IBM857)'/>
+    <CharSet name='ISO-8859-9' displayName='Turkish (ISO-8859-9)'/>
+    <CharSet name='Windows-1254' displayName='Turkish (Windows-1254)'/>
+    <CharSet name='UTF-8' displayName='Unicode (UTF-8)'/>
+    <CharSet name='UTF-16' displayName='Unicode (UTF-16)'/>
+    <CharSet name='UTF-16BE' displayName='Unicode (UTF-16BE)'/>
+    <CharSet name='UTF-16LE' displayName='Unicode (UTF-16LE)'/>
+    <CharSet name='Windows-1258' displayName='Vietnamese (Windows-1258)'/>
+    <CharSet name='ISO-8859-1' displayName='Western (ISO-8859-1)'/>
+    <CharSet name='Windows-1252' displayName='Western (Windows-1252)'/>
+    <CharSet name='US-ASCII' displayName='Western (ASCII)'/>
+    <CharSet name='' displayName='Western (IBM850)'/>    
+</CharSets>
+
+<PathVars>
+<PathVar name='OPMN_PROCESS_SET'
+         displayName='ID_OPMN_PROCESS_SET@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='OPMN_PROCESS_ID'
+         displayName='ID_OPMN_PROCESS_ID@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='IFS_DOMAIN_TYPE'
+         displayName='ID_IFS_DOMAIN_TYPE@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='IFS_DOMAIN_NAME'
+         displayName='ID_IFS_DOMAIN_NAME@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='REPORTS_PID'
+         displayName='ID_REPORTS_PID@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='REPORTS_SERVER'
+         displayName='ID_REPORTS_SERVER@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='REPORTS_JOB_ID'
+         displayName='ID_REPORTS_JOB_ID@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='REPORTS_ENGINE_ID'
+         displayName='ID_REPORTS_ENGINE_ID@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='OC4J_ISLAND'
+         displayName='ID_OC4J_ISLAND@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='OC4J_ISLAND_PROC'
+         displayName='ID_OC4J_ISLAND_PROC@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='OC4J_APP'
+         displayName='ID_OC4J_APP@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='VMAILFAX_PID'
+         displayName='ID_VMAILFAX_PID@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='OID_INSTANCE'
+         displayName='ID_OID_INSTANCE@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='OID_PID'
+         displayName='ID_OID_PID@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='OID_PROFILE'
+         displayName='ID_OID_PROFILE@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='EM_AGENT_PID'
+         displayName='ID_EM_AGENT_PID@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='\d+'
+         visibleField='true'
+         />
+<PathVar name='RDBMS_INSTANCE'
+         displayName='ID_RDBMS_INSTANCE@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='COMPONENT_TYPE'
+         displayName='ID_COMPONENT_TYPE@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='COMPONENT_NAME'
+         displayName='ID_COMPONENT_NAME@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='LOG_NAME'
+         displayName='ID_LOG_NAME@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='LOG_TYPE'
+         displayName='ID_LOG_TYPE@oracle.sysman.ias.studio.logging.msg.LoggingMsg' 
+         expression='.+'
+         visibleField='true'
+         />
+<PathVar name='COMPONENT_ID'
+         displayName='' 
+         expression='.+'
+         visibleField='false'
+         />
+<PathVar name='*'
+         displayName='' 
+         expression='.+'
+         visibleField='false'
+         />
+<PathVar name='LOG_SEGMENT_ID'
+         displayName='' 
+         expression='\d+'
+         visibleField='false'
+         />
+<PathVar name='OC4J'
+         displayName='' 
+         expression='.+'
+         visibleField='false'
+         />
+</PathVars>
+</LogViewerConfig>

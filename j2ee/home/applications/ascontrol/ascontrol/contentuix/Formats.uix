@@ -1,0 +1,193 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="overviewData">
+     <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+             method="getOverviewData"/>
+    </data>
+
+    <data name="formatsTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+             method="getFormatsTableData"/>
+    </data>
+
+    <!-- data provider for Formats table -->
+    <data name="formatsTableColumnHeaderData">
+     <inline>
+      <column data:text="FORMAT_TABLE_NAME_COLUMN_HEADER@strings" sort="yes" value="name"/>
+      <column data:text="FORMAT_TABLE_MIMETYPE_COLUMN_HEADER@strings" sort="yes" value="mimeType"/>
+      <column data:text="FORMAT_TABLE_EXTENSION_COLUMN_HEADER@strings" sort="yes" value="extension"/>
+      <column data:text="FORMAT_TABLE_BINARY_COLUMN_HEADER@strings" sort="yes" value="binary"/>
+      <column data:text="FORMAT_TABLE_INDEXED_COLUMN_HEADER@strings" sort="yes" value="indexed"/>
+      <column data:text="FORMAT_TABLE_OMIT_VIRUS_SCAN_COLUMN_HEADER@strings" sort="yes" value="omitVirusScan"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="SEARCHINPUT"
+                           data:title="pageHeader@overviewData">
+
+     <pageStatus>
+      <include ctrl:node="../timestamp"/>
+     </pageStatus>
+
+     <contents>
+
+      <styledText data:text="FORMATS_INSTRUCTION_TEXT@strings"
+                  styleClass="OraInstructionText"/>
+       <!-- Table Filter -->
+
+      <include ctrl:node="include/TableFilter"/>
+
+      <formValue name="table_level" value="outer"/>
+
+
+      <!-- .......... Formats Table .......... -->
+
+      <table name="FormatsTable"
+             id="table_FormatsTable"
+             partialRenderMode="self"
+             width="100%"
+             data:summary="FORMATS_TABLE_SUMMARY@strings"
+             data:tableData="table@formatsTableData"
+             data:columnHeaderData="column@formatsTableColumnHeaderData"
+             data:value="startingCount@formatsTableData"
+             data:maxValue="totalCount@formatsTableData"
+             data:blockSize="blockSize@formatsTableData"
+             data:alternateText="NO_ITEMS_FOUND@strings"
+             showAll="yes"
+             formSubmitted="true" >
+
+       <columnHeaderStamp>
+        <sortableHeader data:text="text" data:value="value">
+         <boundAttribute name="sortable">
+          <defaulting>
+           <dataObject data:select="value" source="sortColumnHeader"/>
+           <dataObject data:source="(value)@sortColumnHeader"/>
+           <dataObject select="sort"/>
+          </defaulting>
+         </boundAttribute>
+        </sortableHeader>
+       </columnHeaderStamp>
+
+       <columnFormats>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="iconButtonFormat"/>
+        <columnFormat columnDataFormat="iconButtonFormat"/>
+        <columnFormat columnDataFormat="iconButtonFormat"/>
+       </columnFormats>
+
+       <tableFormat tableBanding="rowBanding"/>
+
+       <tableSelection>
+        <multipleSelection data:shortDesc="SELECT@strings"
+                           data:disabled="DISABLED">
+         <contents>
+          <submitButton data:text="DELETE@strings"
+                        name="event" value="deleteFormats" />
+         </contents>
+        </multipleSelection>               
+       </tableSelection>
+
+       <tableActions>
+         <submitButton data:text="NEW_FORMAT_BUTTON@strings"
+                        name="event" value="createFormat" />
+       </tableActions>
+
+       <contents>
+        <messageStyledText data:text="NAME" 
+                           data:destination="EDIT_FORMAT_DEST">
+         <boundAttribute name="tip">
+          <if>
+           <dataObject select="DISABLED"/>
+           <dataObject select="DISABLED_MESSAGE"/>
+           <null/>
+          </if>
+         </boundAttribute>
+        </messageStyledText>
+        <styledText data:text="MIMETYPE" />
+        <styledText data:text="EXTENSION" />
+        <image data:source="binaryTrueIcon"
+               data:shortDesc="TRUE@strings"
+               data:rendered="BINARY"/>
+         <image data:source="indexedTrueIcon"
+               data:shortDesc="TRUE@strings"
+               data:rendered="INDEXED"/>
+        <image data:source="omitScanTrueIcon"
+               data:shortDesc="TRUE@strings"
+               data:rendered="OMITVIRUSSCAN"/>
+        <formValue name="hiddenFormatId"
+                   data:value="ID" />
+       </contents>
+      </table>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="null">
+   <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+           method="doLoad"/>
+  </event>
+
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+           method="doLoad"/>
+  </event>
+
+  <event name="createFormat">
+   <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+           method="doCreateFormat"/>
+  </event>
+
+  <event name="deleteFormats">
+   <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+           method="doDelete"/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.FormatsData"
+           method="doSearch"/>
+  </event>
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+           method="doSortEvent"/>
+  </event>
+
+ </ctrl:handlers>
+
+</ctrl:page>

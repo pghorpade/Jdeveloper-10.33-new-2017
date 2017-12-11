@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="false" xmlns="http://xmlns.oracle.com/jdeveloper/101303/jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/apache-solr-solrj-3.5.0.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/commons-codec-1.5.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/commons-httpclient-3.1.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/commons-io-1.4.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/geronimo-stax-api_1.0_spec-1.0.1.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/jcl-over-slf4j-1.6.1.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/slf4j-api-1.6.1.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/slf4j-jdk14-1.6.1.jar" jar-entry=""/>
+         <Item path="../../mywork/sheetmusic2.0/jars/solrj/wstx-asl-3.2.7.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/jetty-util-6.1H.22.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/jetty-util-7.0.0.pre5.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/rome-1.0.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/fontbox-1.6.0.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/pdfbox-1.6.0.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/poi-3.8-beta4.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/poi-ooxml-3.8-beta4.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/poi-ooxml-schemas-3.8-beta4.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/poi-scratchpad-3.8-beta4.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/tika-core-0.10.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/solrj/tika/tika-parsers-0.10.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath>
+      <entries class="[Ljava.net.URL;"/>
+   </docPath>
+   <locked>false</locked>
+   <name>solrj3.5</name>
+   <sourcePath>
+      <entries class="[Ljava.net.URL;"/>
+   </sourcePath>
+</JLibraryNode>

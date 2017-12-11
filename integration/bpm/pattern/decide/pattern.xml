@@ -1,0 +1,45 @@
+<typedef pattern="com.oracle.bpel.pattern.notification.email" name="decideHeader"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpeld="http://schemas.oracle.com/bpel/eclipse/designer"
+         xmlns:picasso="http://schemas.oracle.com/bpel/eclipse/designer/picasso">
+    <!--  BPEL Fragment that is used as this pattern -->
+    <fragment>
+        <assign name="BPEL_Header">
+            <copy>
+                <from expression="'${serviceName}'"/>
+                <to variable="dsIn" part="payload"
+                    query="/${decisionPrefix}:${root}/@name"/>
+            </copy>
+            <copy>
+                <from expression="concat(${ora}:getProcessURL(), '/decisionservices.decs')"/>
+                <to variable="dsIn" part="payload"
+                    query="/${decisionPrefix}:${root}/${decisionPrefix}:configURL"/>
+            </copy>
+            <copy>
+                <from expression="${ora}:getProcessId()"/>
+                <to variable="dsIn" part="payload"
+                    query="/${decisionPrefix}:${root}/${decisionPrefix}:bpelInstance/${bpelPrefix}:processId"/>
+            </copy>
+            <copy>
+                <from expression="${ora}:getProcessVersion()"/>
+                <to variable="dsIn" part="payload"
+                    query="/${decisionPrefix}:${root}/${decisionPrefix}:bpelInstance/${bpelPrefix}:processVersion"/>
+            </copy>
+            <copy>
+                <from expression="${ora}:getDomainId()"/>
+                <to variable="dsIn" part="payload"
+                    query="/${decisionPrefix}:${root}/${decisionPrefix}:bpelInstance/${bpelPrefix}:domainId"/>
+            </copy>
+            <copy>
+                <from expression="${ora}:getProcessURL()"/>
+                <to variable="dsIn" part="payload"
+                    query="/${decisionPrefix}:${root}/${decisionPrefix}:bpelInstance/${bpelPrefix}:processURL"/>
+            </copy>
+            <copy>
+                <from expression="${ora}:getInstanceId()"/>
+                <to variable="dsIn" part="payload"
+                    query="/${decisionPrefix}:${root}/${decisionPrefix}:bpelInstance/${bpelPrefix}:instanceId"/>
+            </copy>
+        </assign>
+    </fragment>
+</typedef>

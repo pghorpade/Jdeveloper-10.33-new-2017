@@ -1,0 +1,534 @@
+ /*
+  * @(#)StringUtil.java 8/28/2006
+  *
+  * Copyright © 2006 UCLA Digital Library
+  * 390 Powell, Los Angeles, CA 90095
+  * All Rights Reserved.
+  */
+  package edu.ucla.library.digital.dlcs.util;
+
+import java.text.Normalizer;
+import java.text.StringCharacterIterator;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringEscapeUtils;
+
+
+/**
+ * The <code>StringUtil</code> class provides string manipulation methods.
+ *
+ * @author Henry Chiong
+ */
+ public abstract class StringUtil {
+     private StringUtil() {}
+     
+     public static void main(String[] args) {
+         // http://ha.ckers.org/xss.html
+         // http://www.owasp.org/index.php/Testing_for_Cross_site_scripting
+         // http://technet.microsoft.com/en-us/library/cc512662.aspx
+         System.out.println(getEscapeKeywords("Kom el-ahmar"));
+         System.out.println(getEscapeKeywords("Kom and el-ahmar"));
+         System.out.println(getEscapeKeywords("late period temples"));
+         System.out.println(getEscapeKeywords("Kom el-ahmar "));
+         System.out.println(getEscapeKeywords("\"Composer\" Graffiti"));
+         System.out.println(getEscapeKeywords("Tanis, Column of Osorkon II"));
+         System.out.println(getEscapeKeywords("Graffiti's (Figural)"));
+          String s1 = "<SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>";
+          String s2 = ">%22%27><img%20src%3d%22javascript:alert(%27XSS%27)%22>";
+          String s3 = "AK%22%20style%3D%22background:url(javascript:alert(%27XSS%27))%22%20OS%22";
+          String s4 = "<IMG SRC='vbscript:msgbox(\"XSS\")'>";
+          String s5 = "<a onmouseover=\"eval('s=document.createElement(\\'script\\'); document.body.appendChild(s); s.src=\\'badscript.js\\'')\">Mouse Over Me</a>";
+          String s6 = "<a href=\"javascript:eval('alert(\\'bad\\')');\">Click Me</a>";
+          String s7 = "index.html?id=%3Cscript%20src=%22http://baddomain.com/badscript.js%22%3E%3C/script%3E";
+          String s9 = "<a href=\"http://foobar.com/index.html?id=%3Cscript%20src=%22http://baddomain.com/badscript.js%22%3E%3C/script%3E\">See foobar</a>";
+          String s10 = "<A HREF=\"http://www.google.com/\">XSS</A>";
+         //s = s.replaceAll("([^A-Za-z0-9'\" _-])", "");
+         String text = "- “El Benjamin De Los Tenores”";
+         String text2 = "Can’t Give Anything But My Love";
+         String text3 = "*öpolkaö on some editions.  Arr De P. Bernal.";
+         String text4 = "ôTCBö";
+         String text5 = "‘Ta Benito";
+         String text6 = "Te Vivo So±ando";
+         String text7 = "IÆm In The Mood For Love";
+         String text8 = "Neu Pißo";
+         String creator = "\"Duran, Rogelio	\"";
+         String notes = "Pancho: Arpa Y VozRodolfo: VozIgnacio: RequintoPedro: Guitarra Y VozJorge: Bajo Y VozRafael: BateriaFrancisco (Kiko): Acordeon Y Voz* made in USA ";
+         //System.out.println(removeDiacriticalMarks(text2));
+         //System.out.println(text4.replaceAll("ô","").replaceAll("ö",""));
+         //String result = sanitize(s1);
+         //System.out.println("SANITIZED => " + result);
+         //System.out.println("SQL ESCAPE WORD => " + sqlEscapeWord(result));
+         //System.out.println(hightlight(text7, "Mood"));
+         //System.out.println(removeCtrlCharactersAndDoubleSpaces(notes.replace('*', ' ').trim()));
+        
+         System.out.println(getEscapeKeywords("Nikei AND 1935"));
+         System.out.println(getEscapeKeywords("Nikei 1935"));         
+         System.out.println(getEscapeKeywords("Nikei's 1935")); 
+     }
+
+
+     /**
+      * Sanitizes the specified string.
+      * @param s
+      * @return
+      */
+     public static String sanitize(String s) {
+       if (s == null) return s;
+           // (?i) make it case insensitive 
+           // case 1 : <script> are removed 
+           // case 2 : javascript: call are removed 
+           // case 3 : remove on* attributes like onLoad or onClick
+           // case 4 : remove HTML tags
+           // case 5 : remove non-alphanumeric characters
+           return s.replaceAll("(?i)<script.*?>.*?</script.*?>", "")   // case 1
+                   .replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "") // case 2
+                   .replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "")      // case 3
+                   .replaceAll("(?i)</?(HTML|SCRIPT|HEAD|CSS)\\b[^>]*>", "") // case 4
+                   .replaceAll("([^A-Za-z0-9'\" /_-])", "");            // case 5     
+     }
+     
+     /**
+      * Filters out unwanted characters to prevent cross-site scripting.
+      *
+      * @param s Unfiltered String
+      * @return Filtered String
+      */
+     public static String escapeBadChar(String s) {   
+      StringBuilder sb = new StringBuilder();
+
+      for (int i = 0; i < s.length(); i++) {
+          char ch = s.charAt(i);
+
+          switch (ch) {
+          case '<':
+              sb.append("\\<");
+
+              break;
+
+          case '>':
+              sb.append("\\>");
+
+              break;
+
+          case '&':
+              sb.append("\\&");
+
+              break;
+
+          case ',':
+              sb.append("\\,");
+
+              break;
+
+          case '?':
+              sb.append("\\?");
+
+              break;
+         case '-':
+              sb.append("\\-");
+
+                  break;
+          case '{':
+                  sb.append("\\{");
+
+                  break;
+         case '}':
+                  sb.append("\\}");
+
+                  break;
+          case '\\':
+                  sb.append("\\");
+
+                  break;
+         case '(':
+                  sb.append("\\(");
+
+                  break;
+          case ')':
+                  sb.append("\\)");
+
+                  break;
+         case '[':
+                  sb.append("\\[");
+
+                  break;
+          case ']':
+                  sb.append("\\]");
+
+                  break;
+         
+          case ';':
+                  sb.append("\\;");
+
+                  break;
+           case '~':
+                  sb.append("\\~");
+
+                  break;
+          case '|':
+                  sb.append("\\|");
+
+                  break;
+            case '!':
+                  sb.append("\\!");
+
+                  break;
+           case '*':
+                  sb.append("\\*");
+
+                  break;
+         case '%':
+                  sb.append("\\%");
+
+             break;
+          default:
+              sb.append(ch);
+          }
+      }
+
+      return sb.toString();
+     }
+     
+     /**
+      * Escapes '<', '>', '&', '"', ' '
+      *
+      * @param s HTML string to escape
+      * @return the equivalent HTML code.
+      */
+     public static String escapeHtmlString(final String s) {
+         StringBuilder sb = new StringBuilder();
+         for (int i = 0; i < s.length(); i++) {
+             char ch = s.charAt(i);
+
+             switch (ch) {
+             case '<':
+                 sb.append("&lt;");
+
+                 break;
+
+             case '>':
+                 sb.append("&gt;");
+
+                 break;
+
+             case '&':
+                 sb.append("&amp;");
+
+                 break;
+
+             case '"':
+                 sb.append("&quot;");
+
+                 break;
+
+             case ' ':
+                 sb.append("&nbsp;");
+
+                 break;
+
+             default:
+                 sb.append(ch);
+             }
+         }
+
+         return sb.toString();
+     }
+
+     /**
+      * Filters out unwanted characters to prevent cross-site scripting.
+      *
+      * @param s Unfiltered String
+      * @return Filtered String
+      */
+     public static String removeBadChar(final String s) {
+         String filter = "[<>{}\\[\\];\\&()]";
+         String tempInput = s.replaceAll(filter, " ");
+
+         return tempInput.trim();
+     }
+
+     /**
+      * Replaces the specified character with the desired text.
+      *
+      * @param s String
+      * @param c Unwanted character
+      * @param text Desired text
+      * @return The String without the unwanted character
+      */
+     public static String replaceCharWith(final String s, final char c, final String text) {
+         StringBuilder sb = new StringBuilder();
+         StringCharacterIterator iterator = new StringCharacterIterator(s);
+         char tempChar = iterator.current();
+
+         while (tempChar != StringCharacterIterator.DONE) {
+             if (tempChar == c) {
+                 sb.append(text);
+             } else {
+                 sb.append(tempChar);
+             }
+
+             tempChar = iterator.next();
+         }
+
+         return sb.toString().trim();
+     }
+
+     /**
+      * Modify search string to include "implied AND".
+      * 
+      * @param s words to escape
+      * @return escaped words
+      */
+     /*public static String sqlEscapeWord(final String s) {
+         if (s == null) return s;
+         
+         StringBuilder sb = new StringBuilder();
+         StringTokenizer st = new StringTokenizer(s);
+         int index = 0;
+         int tokenCount = st.countTokens();        
+         int reservedWordsCount = 0;
+         while (st.hasMoreTokens()) {
+             String word = st.nextToken();
+             index++;
+             
+             // last word or first word
+             if (index == tokenCount || index == 1) {
+                  // skip these words
+                  if ("AND".equalsIgnoreCase(word) || "OR".equalsIgnoreCase(word) || "NOT".equalsIgnoreCase(word)) {
+                      sb.append("");
+                      reservedWordsCount++;
+                  } else {
+                      sb.append(" {" + word + "} ");
+                  }
+             } else {
+                 // skip these words
+                  if ("AND".equalsIgnoreCase(word) || "OR".equalsIgnoreCase(word) || "NOT".equalsIgnoreCase(word)) {
+                     sb.append(" " + word + " ");
+                     reservedWordsCount++;
+                 } else {
+                     sb.append(" {" + word + "} ");
+                 }
+             }
+         }
+         if(reservedWordsCount == tokenCount){
+             return "";
+         }
+         return sb.toString().trim();
+     }*/
+     
+     /**
+      * Validates the specified email address.
+      * @param email
+      * @return true if valid. Otherwise, false.
+      */
+     public static boolean isValidEmailAddress(final String email) {
+         String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+         Matcher matcher = pattern.matcher(email.trim());
+         return matcher.matches();
+     }
+     
+     public static String encodeEscapes(String s) {
+         if (s == null) return s;
+         return s.replaceAll("&", "&amp;")
+                 .replaceAll("<", "&lt;")
+                 .replaceAll(">", "&gt;")
+                 .replaceAll("\"", "&quot;")
+                 .replaceAll("'", "&apos;");
+     }
+     
+     public static String decodeEscapes(String s) {
+          if (s == null) return s;
+          return s.replaceAll("&amp;", "&")
+                  .replaceAll("&lt;","<")               
+                  .replaceAll("&gt;", ">")
+                  .replaceAll("&quot;","\"")
+                  .replaceAll("&apos;", "'");
+      }
+
+     public static String removeControlCharacters(String s) {
+         if (s == null) return s;
+         return s.replaceAll("\\p{Cntrl}", " ");
+         /*return s.replaceAll("\\v", "")
+                 .replaceAll("\\f", "")               
+                 .replaceAll("\\n", "")
+                 .replaceAll("\\t", "")
+                 .replaceAll("\\r", ""); */
+     }
+     
+     public static String removeCtrlCharactersAndDoubleSpaces(String s) {
+         if (s == null) return s;
+         return s.replaceAll("\\p{Cntrl}", " ")
+                 .replaceAll("  ", " ");
+     }
+     
+     public static String removeDoublebeSpaces(String s) {
+          if (s == null) return s;
+          return s.replaceAll("  ", " ");
+     }
+         
+     public static String replaceSmartQuotes(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "[\\u0093\\u0094]", "\"" )
+                 .replaceAll("“", "\"")  // left double quoteation
+                 .replaceAll("”", "\""); // right double quotation 
+     }
+     
+     public static String removeQuotes(String s) {
+          if (s == null) return s;
+          return s.replaceAll( "[\\u0093\\u0094]", "" )
+                  .replaceAll("\"", "")
+                  .replaceAll("“", "")  // left double quoteation
+                  .replaceAll("”", ""); // right double quotation 
+     }
+     
+     public static String replaceSmallNtilde(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "\\u00F1", "ñ" ); 
+     }    
+     
+     public static String replaceSmallAacute(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "\\u00E1", "á" ); 
+     }
+     
+     public static String replaceSmallEacute(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "\\u00E9", "é" ); 
+     }
+     
+     public static String replaceSmallIacute(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "\\u00ED", "í" ); 
+     }
+     
+     public static String replaceSmallOacute(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "\\u00F3", "ó" ); 
+     }        
+     
+     public static String replaceSmallUacute(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "\\u00FA", "ú" ); 
+     }
+     
+     public static String removeDiacriticalMarks(String s) {
+         if (s == null) return s;
+         return Normalizer.normalize(s, Normalizer.Form.NFD)
+                          .replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); 
+     }
+          
+     public static String replaceSingleQuote(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "[\\u0091\\u0092]", "'" )
+                 .replaceAll("`", "'")
+                 .replaceAll("’", "'")
+                 .replaceAll("‘", "'")
+                 .replaceAll("Æ", "'");
+     }
+     
+     public static String replaceDash(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "[\\u0096\\u0097]", "-" ); 
+     }
+     
+     public static String replaceEllipsis(String s) {
+         if (s == null) return s;
+         return s.replaceAll( "\u0085", "..." ); 
+     }
+     
+     public static String hightlight(String s, String text) {
+         return hightlight(s, text, "<b>", "</b>");
+     }
+
+     public static String hightlight(String s, String text, String startTag, String endTag) {
+         if (s == null) return s;
+         
+         StringBuilder sb = new StringBuilder(" ");
+         StringTokenizer st = new StringTokenizer(s);
+         
+         while (st.hasMoreTokens()) {
+             String word = st.nextToken();
+             
+             if (word.equalsIgnoreCase(text)) {
+                 sb.append(startTag).append(word).append(endTag);
+             } else {
+                 sb.append(word);
+             }
+             
+             if (st.hasMoreTokens()) {
+                 sb.append(" ");
+             }
+         }
+         
+         return sb.toString();
+     }
+     
+    // Modify search string to include  "implied AND"
+    public static String getEscapeKeywords(String s) {
+        if (s == null || "".equals(s.trim())) return s;
+        
+        StringBuilder sb = new StringBuilder();
+        //StringCharacterIterator iterator = new StringCharacterIterator(s.trim());
+        char firstChar = s.charAt(0);
+    
+        //check first char for quotes
+        if ((firstChar != '\"') && (firstChar != '\'')) {
+            StringTokenizer st = new StringTokenizer(s);
+            List<String> wordList = new ArrayList<String>();
+    
+            while (st.hasMoreTokens()) {
+                String text = st.nextToken();
+                if ("AND".equalsIgnoreCase(text) || "OR".equalsIgnoreCase(text) || "NOT".equalsIgnoreCase(text)) {
+                    // Don't escape it.
+                    wordList.add(text);
+                } else {
+                    // escape it!
+                    wordList.add("{" + text + "}");
+                }
+            }
+    
+            int iNumOfWords = wordList.size();
+            int iNextIndex = 0;
+            boolean bLastWord = false;
+    
+            if (iNumOfWords > 1) {
+                for (int i = 0; i < iNumOfWords; i++) {
+                    sb.append((String) wordList.get(i));
+                    iNextIndex = i + 1;
+    
+                    if (iNextIndex == iNumOfWords) {
+                        bLastWord = true;
+                    }
+    
+                    if (!bLastWord) {
+                        String strNextWord = wordList.get(iNextIndex);
+    
+                        if (strNextWord.equalsIgnoreCase("AND") ||
+                            strNextWord.equalsIgnoreCase("OR") ||
+                            strNextWord.equalsIgnoreCase("NOT")) {
+                            sb.append(" "+ strNextWord + " ");
+                            i = i + 1; // move past this word in loop
+                        } else {
+                            sb.append(" AND ");
+                        }
+                    }
+                }
+    
+                s = sb.toString();
+            }
+            
+            else if (iNumOfWords == 1) {
+                s = wordList.get(0);
+            }
+        }
+    
+        return StringEscapeUtils.escapeSql(s);
+
+    }
+}

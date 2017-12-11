@@ -1,0 +1,476 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="linkDestinationData">
+     <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+             method="getLinkDestinationData"/>
+    </data>
+
+    <data name="newWorkflowData">
+     <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+             method="getNewWorkflowData" />
+    </data>
+
+    <!-- data provider for workflow parameters table -->
+    <data name="wfParamTableColumnHeaderData">
+     <inline>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_NAME_COLUMN_HEADER@strings" sort="yes" value="name"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_DESCRIPTION_COLUMN_HEADER@strings" sort="yes" value="description"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_FINAL_COLUMN_HEADER@strings" sort="yes" value="final"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_REQUIRED_COLUMN_HEADER@strings" sort="yes" value="required"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_TYPE_COLUMN_HEADER@strings" sort="yes" value="type"/>
+      <column data:text="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings" sort="no" value="default_value"/>
+     </inline>
+    </data>
+
+    <!-- data provider for boolean values -->
+    <data name="booleanOptionData">
+     <inline>
+      <option text="true" value="true"/>
+      <option text="false" value="false"/>
+     </inline>
+    </data>
+
+    <!-- data provider for time denominators -->
+    <data name="timeDenomOptionData">
+     <inline>
+      <option data:text="UNIT_SECONDS@strings" value="Seconds"/>
+      <option data:text="UNIT_MINUTES@strings" value="Minutes"/>
+      <option data:text="UNIT_HOURS@strings" value="Hours"/>
+      <option data:text="UNIT_DAYS@strings" value="Days"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout data:title="pageHeader@linkDestinationData"
+                           initialFocusComponentId="NAMEMSGINPUT">
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancel" />
+        <submitButton data:text="OK@strings"
+                      ctrl:event="newWorkflow"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ...... Instruction Text ...... -->
+
+      <styledText styleClass="OraInstructionText"
+                  data:text="instructions@linkDestinationData"/>
+            
+      <spacer height="10" />
+
+      <!-- .......... General .......... -->
+
+      <header data:text="GENERAL@strings">
+       <contents>
+        <labeledFieldLayout vAlign="top" width="60%">
+         <contents>
+
+	  <!-- NAME -->
+          <messageTextInput id="NAMEMSGINPUT" name="NAME" 
+              columns="60"
+              required="yes"
+              data:prompt="NAME@strings"
+              data:text="NAME@newWorkflowData"/>
+
+	  <!-- DESCRIPTION -->
+          <messageTextInput name="DESCRIPTION"
+              rows="3"
+              columns="60"
+              data:prompt="DESCRIPTION@strings"
+              data:text="DESCRIPTION@newWorkflowData"/>
+
+	  <!-- START EVENT -->
+          <messageTextInput name="STARTEVENT" 
+              columns="30"
+              maximumLength="30"
+              required="yes"
+              data:prompt="NEW_WORKFLOW_START_EVENT_ATTR_NAME@strings"
+              data:tip="WORKFLOW_PARAMETER_NAME_LENGTH_TIP@strings"
+              data:text="STARTEVENT@newWorkflowData"/>
+
+	  <!-- CANCEL EVENT -->
+          <messageTextInput name="CANCELEVENT" 
+              columns="30"
+              maximumLength="30"
+              required="yes"
+              data:prompt="NEW_WORKFLOW_CANCEL_EVENT_ATTR_NAME@strings"
+              data:tip="WORKFLOW_PARAMETER_NAME_LENGTH_TIP@strings"
+              data:text="CANCELEVENT@newWorkflowData"/>
+
+          <!-- BLOCKING -->
+          <messageCheckBox name="BLOCKING"
+                           value="true"
+                           data:text="NEW_WORKFLOW_BLOCKING_ATTR_NAME@strings" 
+                           data:tip="NEW_WORKFLOW_BLOCKING_TIP@strings"
+                           data:checked="IS_BLOCKING@newWorkflowData"/>
+
+          <!-- APPROVERS REQUIRED -->
+          <messageCheckBox name="APPROVERS_REQ"
+                     value="true"
+                     data:text="NEW_WORKFLOW_APPROVERS_REQ_ATTR_NAME@strings" 
+                     data:checked="IS_APPR_REQ@newWorkflowData"/>
+
+         </contents>
+        </labeledFieldLayout>
+       </contents>
+      </header>
+
+      <!-- ....... Workflor Parameters Table ....... -->
+
+      <header data:text="NEW_WORKFLOW_PARAMETERS_HEADER@strings">
+       <contents>
+       
+       <!-- Table Filter -->
+        <dataScope>
+         <provider>
+          <data name="tableIdData">
+           <inline tableId="table_NewWfParamTable"/>
+          </data>
+         </provider>
+         <contents>
+          <include ctrl:node="include/TableFilterPPR"/>
+          <formValue name="table_level" value="inner"/>
+         </contents>
+        </dataScope>
+
+        <table name="NewWfParamTable"
+               id="table_NewWfParamTable"
+               partialRenderMode="self"
+               width="100%"
+               data:summary="WORKFLOW_PARAM_TABLE_SUMMARY@strings"
+               data:alternateText="NO_ITEMS_FOUND@strings"
+               data:tableData="paramsTableData@newWorkflowData"
+               data:columnHeaderData="column@wfParamTableColumnHeaderData"
+               data:value="startingCount@newWorkflowData"
+               data:maxValue="totalCount@newWorkflowData"
+               data:blockSize="blockSize@newWorkflowData"
+               formSubmitted="true">
+
+         <columnHeaderStamp>
+          <sortableHeader data:text="text" data:value="value">
+           <boundAttribute name="sortable">
+            <defaulting>
+              <dataObject data:select="value" source="sortColumnHeader"/>
+              <dataObject data:source="(value)@sortColumnHeader"/>
+              <dataObject select="sort"/>
+            </defaulting>
+           </boundAttribute>
+          </sortableHeader>
+         </columnHeaderStamp>
+
+         <columnFormats>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="iconButtonFormat"/>
+          <columnFormat columnDataFormat="iconButtonFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+          <columnFormat columnDataFormat="textFormat"/>
+         </columnFormats>
+
+         <tableFormat tableBanding="rowBanding"/>
+
+         <tableSelection>
+          <singleSelection selectedIndex="0"
+                           data:shortDesc="SELECT@strings">
+           <contents>
+            <submitButton data:text="REMOVE@strings"
+                          name="event" value="removeParam" />
+           </contents>
+          </singleSelection>
+         </tableSelection>
+                   
+         <tableActions>
+          <submitButton data:text="ADD@strings"
+                        ctrl:event="addParam"/>
+         </tableActions>
+       
+         <contents>
+          <link data:text="paramName">
+           <primaryClientAction>
+	    <fireAction event="editParam">
+             <parameters>
+              <parameter key="ParameterName" data:value="paramName"/>
+             </parameters>
+            </fireAction>
+           </primaryClientAction>
+          </link>
+
+          <styledText data:text="paramDesc" />
+
+          <image data:source="finalTrueIcon"
+                 data:shortDesc="TRUE@strings"
+                 data:rendered="paramFinal"/>
+
+          <image data:source="requiredTrueIcon"
+                 data:shortDesc="TRUE@strings"
+                 data:rendered="paramRequired"/>
+
+          <styledText data:text="paramType" />
+
+          <switcher childName="defaultInput"
+                    data:childName="inputType">
+
+           <!-- for string, path, userId types -->
+            <case name="defaultInput">
+            <messageTextInput 
+               name="DEFAULT_VALUE" columns="20" maximumLength="50"
+	       data:text="defaultValue"
+               data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings"/>
+           </case>
+
+           <!-- for integer number type -->
+           <case name="integerNumberInput">
+            <stackLayout>
+             <contents>
+              <messageTextInput 
+                 name="DEFAULT_VALUE" columns="20" maximumLength="50"
+	         data:text="defaultValue"
+                 data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings">
+               <onSubmitValidater>
+                <decimal maxScale="0"/>
+               </onSubmitValidater>
+              </messageTextInput>
+              <rowLayout>
+	       <contents>
+                <styledText data:text="NEW_WORKFLOW_PARAM_MIN_VALUE_ATTR_NAME@strings"
+                            styleClass="OraPromptText"/>
+                <spacer width="10"/>
+                <styledText data:text="minValue"
+                            styleClass="OraDataText"/>
+               </contents>
+              </rowLayout>
+              <rowLayout>
+               <contents>
+                <styledText data:text="NEW_WORKFLOW_PARAM_MAX_VALUE_ATTR_NAME@strings"
+                            styleClass="OraPromptText"/>
+                <spacer width="10"/>
+                <styledText data:text="maxValue"
+                            styleClass="OraDataText"/>
+               </contents>
+              </rowLayout>
+             </contents>
+            </stackLayout>
+           </case>
+
+           <!-- for decimal number type -->
+           <case name="decimalNumberInput">
+            <stackLayout>
+             <contents>
+              <messageTextInput 
+                 name="DEFAULT_VALUE" columns="20" maximumLength="50"
+	         data:text="defaultValue"
+                 data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings">
+               <onSubmitValidater>
+                <decimal />
+               </onSubmitValidater>
+              </messageTextInput>
+              <rowLayout>
+	       <contents>
+                <styledText data:text="NEW_WORKFLOW_PARAM_MIN_VALUE_ATTR_NAME@strings"
+                            styleClass="OraPromptText"/>
+                <spacer width="10"/>
+                <styledText data:text="minValue"
+                            styleClass="OraDataText"/>
+               </contents>
+              </rowLayout>
+              <rowLayout>
+               <contents>
+                <styledText data:text="NEW_WORKFLOW_PARAM_MAX_VALUE_ATTR_NAME@strings"
+                            styleClass="OraPromptText"/>
+                <spacer width="10"/>
+                <styledText data:text="maxValue"
+                            styleClass="OraDataText"/>
+               </contents>
+              </rowLayout>
+             </contents>
+            </stackLayout>
+           </case>
+
+           <!-- for boolean type -->
+           <case name="booleanInput">
+            <messageChoice
+               name="DEFAULT_VALUE"
+	       data:selectedValue="defaultValue"
+               data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings">
+             <contents data:childData="option@booleanOptionData">
+              <option data:text="text" 
+                      data:value="value"/>
+             </contents>
+            </messageChoice>
+           </case>
+
+           <!-- for string enumeration type -->
+           <case name="stringEnumInput">
+            <messageChoice
+               name="DEFAULT_VALUE"
+	       data:selectedValue="defaultValue"
+               data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings">
+             <contents data:childData="enumList">
+              <option data:text="text" 
+                      data:value="value"/>
+             </contents>
+            </messageChoice>
+           </case>
+
+           <!-- for date type -->
+	   <case name="dateInput">
+            <messageDateField 
+               name="DEFAULT_VALUE" columns="20"
+               data:value="defaultValue"
+	       data:tip="DATE_PATTERN@strings"
+               data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings">
+             <onSubmitValidater>
+              <date dateStyle="long" pattern="MM/dd/yyyy" /> 
+             </onSubmitValidater>
+            </messageDateField>
+           </case>
+
+           <!-- for time period type -->
+           <case name="timePeriodInput">
+            <stackLayout>
+             <contents>
+              <rowLayout>
+               <contents>
+                <messageTextInput 
+                   name="DEFAULT_VALUE" columns="15" maximumLength="25"
+	           data:text="defaultValue"
+                   data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings">
+                 <onSubmitValidater>
+                  <decimal maxScale="0" minValue="0" />
+                 </onSubmitValidater>
+                </messageTextInput>
+                <messageChoice name="DEFAULT_VALUE_DENOM"
+                   data:selectedValue="defaultValueDenom"
+                   data:prompt="NEW_WORKFLOW_PARAM_TABLE_DEFAULT_VALUE_COLUMN_HEADER@strings">
+                 <contents data:childData="option@timeDenomOptionData">
+                  <option data:text="text" 
+                          data:value="value"/>
+                 </contents>
+                </messageChoice>
+               </contents>
+              </rowLayout>
+              <rowLayout>
+	       <contents>
+                <styledText data:text="NEW_WORKFLOW_PARAM_MIN_VALUE_ATTR_NAME@strings"
+                            styleClass="OraPromptText"/>
+                <spacer width="10"/>
+                <styledText data:text="minValue"
+                            styleClass="OraDataText"/>
+               </contents>
+              </rowLayout>
+              <rowLayout>
+               <contents>
+                <styledText data:text="NEW_WORKFLOW_PARAM_MAX_VALUE_ATTR_NAME@strings"
+                            styleClass="OraPromptText"/>
+                <spacer width="10"/>
+                <styledText data:text="maxValue"
+                            styleClass="OraDataText"/>
+               </contents>
+              </rowLayout>
+             </contents>
+            </stackLayout>
+           </case>
+
+          </switcher>
+
+          <formValue name="hiddenParamName"
+                     data:value="paramName" />
+         </contents>
+        </table>
+
+       </contents>
+      </header>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doLoad"/>
+  </event>
+
+  <event name="newWorkflow">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doNewWorkflow"/>
+  </event>
+
+  <event name="removeParam">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doRemoveParameter"/>
+  </event>
+
+  <event name="addParam">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doAddParameter"/>
+  </event>
+
+  <event name="editParam">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doEditParameter"/>
+  </event>
+
+  <event name="cancel">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doCancel"/>
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doLoad"/>
+  </event>
+
+  <!-- default -->
+  <event name="*">
+   <null/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.NewWorkflowData"
+           method="doSearch"/>
+  </event>
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+
+ </ctrl:handlers>
+
+</ctrl:page>

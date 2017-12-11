@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="false" xmlns="http://xmlns.oracle.com/jdeveloper/101303/jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../mywork/DLWebApp/jars/copyrightMD.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/mets.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/mix.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/mods.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/oaiDC.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/oaiIdentifier.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/OAIPMH.jar" jar-entry=""/>
+         <Item path="../../mywork/DLWebApp/jars/friends.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath>
+      <entries class="[Ljava.net.URL;"/>
+   </docPath>
+   <locked>false</locked>
+   <name>dlwebappMetadata</name>
+   <sourcePath>
+      <entries class="[Ljava.net.URL;"/>
+   </sourcePath>
+</JLibraryNode>

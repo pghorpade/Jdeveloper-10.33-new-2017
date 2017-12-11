@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!-- Check for updates installer manifest -->
+<update-bundle version="1.0" xmlns="http://xmlns.oracle.com/jdeveloper/updatebundle" xmlns:u="http://xmlns.oracle.com/jdeveloper/update">
+
+  <u:update id="oracle.bpm.modeler">
+	<u:name>BPEL Process Modeler</u:name>
+	<u:version>10.1.3.1.0.070615.0525</u:version>
+    <u:author>PCBPEL Team in Oracle Corporation</u:author>
+    <u:description>
+			Contains ESB and PCBPEL Modeler. Build: 
+    PCBPEL_10.1.3.3.0_GENERIC_070615.0525</u:description>
+    <u:destination>${oracle.home}</u:destination> 
+
+    <u:requirements>
+      <u:requires-extension id="oracle.jdeveloper" minVersion="10.1.3.39.00" maxVersion="10.1.4"/>
+    </u:requirements>
+  </u:update>
+</update-bundle>

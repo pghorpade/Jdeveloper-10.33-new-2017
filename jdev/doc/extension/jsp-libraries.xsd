@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://xmlns.oracle.com/jdeveloper/1013/jsp-hook"
+           xmlns:ext="http://jcp.org/jsr/198/extension-manifest"
+           targetNamespace="http://xmlns.oracle.com/jdeveloper/1013/jsp-hook"
+           elementFormDefault="qualified">
+  <xs:import namespace="http://jcp.org/jsr/198/extension-manifest"
+             schemaLocation="extension.xsd"/>
+  <xs:element name="jspLibraries" substitutionGroup="ext:custom-hook"
+              type="jspLibrariesType">
+    <xs:annotation>
+      <xs:documentation>JSP Libraries extension hook
+        </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="jspLibrariesType">
+    <xs:complexContent>
+      <xs:extension base="ext:customHookType">
+        <xs:sequence>
+          <xs:element name="jsplibrary" type="jspLibraryType"
+                      maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="jspLibraryType">
+    <xs:sequence>
+      <xs:element name="tldURL" type="xs:string"/>
+      <xs:element name="URI" type="xs:string"/>
+      <xs:element name="displayName" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:string"/>
+      <xs:choice>
+        <!-- location of the JAR file containing tag library classes -->
+        <xs:element name="classesURL" type="xs:string"/>
+        <!-- semi-colon seperated list of Java libraries -->
+        <xs:element name="libraries" type="xs:string"/>
+      </xs:choice>
+      <xs:element minOccurs="0" name="jspLibraries" type="xs:string"/>
+      <xs:element minOccurs="0" name="jspVersion" type="xs:string"/>
+      <xs:element minOccurs="0" name="technologyScope" type="xs:string"/>
+      <xs:element minOccurs="0" name="metadataAnnotation" type="xs:string"/>
+      <xs:element minOccurs="0" name="prefix" type="xs:string"/>
+      <xs:element minOccurs="0" name="runInEditor" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,9 @@
+#! /bin/sh
+#
+
+if [ -f $ORACLE_HOME/j2ee/home/ojspc.jar  ]
+then
+   java -Doracle.home=$ORACLE_HOME -jar $ORACLE_HOME/j2ee/home/ojspc.jar -extend com.orionserver.http.OrionHttpJspPage "$@"
+else
+  echo ERROR: \$ORACLE_HOME/j2ee/home/ojspc.jar not found.  Please set ORACLE_HOME to point to an OC4J or OracleAS instance and retry.
+fi

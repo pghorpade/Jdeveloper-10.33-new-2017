@@ -1,0 +1,623 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<breakpoints class="java.util.ArrayList" xmlns="http://xmlns.oracle.com/jdeveloper/101303/breakpoints">
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception>java.lang.Exception</exception>
+      <fieldName/>
+      <file/>
+      <groupName class="java.lang.String"/>
+      <line>0</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL/>
+      <passCount>1</passCount>
+      <persistent>true</persistent>
+      <pkg/>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>2</type>
+      <uncaught>true</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception>java.lang.AssertionError</exception>
+      <fieldName/>
+      <file/>
+      <groupName class="java.lang.String"/>
+      <line>0</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL/>
+      <passCount>1</passCount>
+      <persistent>true</persistent>
+      <pkg/>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>2</type>
+      <uncaught>true</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file/>
+      <groupName class="java.lang.String"/>
+      <line>0</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL/>
+      <passCount>1</passCount>
+      <persistent>true</persistent>
+      <pkg/>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>3</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>ArkMinter.java</file>
+      <groupName class="java.lang.String"/>
+      <line>36</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.util</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>ItemDetailsAction.java</file>
+      <groupName class="java.lang.String"/>
+      <line>52</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.controller.admin</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>ItemDetailsAction.java</file>
+      <groupName class="java.lang.String"/>
+      <line>58</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.controller.admin</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>NodeWorkAction.java</file>
+      <groupName class="java.lang.String"/>
+      <line>1191</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.controller.tree</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>Item.java</file>
+      <groupName class="java.lang.String"/>
+      <line>500</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.core</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>Item.java</file>
+      <groupName class="java.lang.String"/>
+      <line>331</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.core</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>NodeWorkAction.java</file>
+      <groupName class="java.lang.String"/>
+      <line>206</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.controller.tree</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>Item.java</file>
+      <groupName class="java.lang.String"/>
+      <line>159</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.core</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>NodeWorkAction.java</file>
+      <groupName class="java.lang.String"/>
+      <line>205</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.controller.tree</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>TreeDaoImpl.java</file>
+      <groupName class="java.lang.String"/>
+      <line>255</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.dao.toplink</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>TreeDaoImpl.java</file>
+      <groupName class="java.lang.String"/>
+      <line>254</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.dao.toplink</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>TreeDaoImpl.java</file>
+      <groupName class="java.lang.String"/>
+      <line>226</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.dao.toplink</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>NodeWorkAction.java</file>
+      <groupName class="java.lang.String"/>
+      <line>207</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.controller.tree</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>ItemClobBuilder.java</file>
+      <groupName class="java.lang.String"/>
+      <line>45</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.app</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>ProjectItemDaoImpl.java</file>
+      <groupName class="java.lang.String"/>
+      <line>552</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.dao.toplink</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>ProjectItemDaoImpl.java</file>
+      <groupName class="java.lang.String"/>
+      <line>550</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.dao.toplink</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+   <Item class="oracle.jdevimpl.runner.debug.BreakpointSettings">
+      <URL/>
+      <access>false</access>
+      <actionBeep>false</actionBeep>
+      <actionDisableOther class="java.lang.String"/>
+      <actionEnableOther class="java.lang.String"/>
+      <actionHalt>true</actionHalt>
+      <actionLog>true</actionLog>
+      <actionLogExpr class="java.lang.String"/>
+      <actionLogStack>false</actionLogStack>
+      <actionLogTag class="java.lang.String"/>
+      <caught>false</caught>
+      <className/>
+      <condition class="java.lang.String"/>
+      <enabled>true</enabled>
+      <exception/>
+      <fieldName/>
+      <file>ProjectItemDaoImpl.java</file>
+      <groupName class="java.lang.String"/>
+      <line>554</line>
+      <method/>
+      <modify>false</modify>
+      <ownerURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+      <passCount>1</passCount>
+      <persistent>false</persistent>
+      <pkg>edu.ucla.library.digital.dlcs.dao.toplink</pkg>
+      <threadName class="java.lang.String"/>
+      <threadNameNot class="java.lang.String"/>
+      <type>0</type>
+      <uncaught>false</uncaught>
+   </Item>
+</breakpoints>

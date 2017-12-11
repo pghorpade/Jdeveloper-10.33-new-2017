@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+
+<project name="deployapps">
+
+    <property file="${bpel.home}/utilities/ant-orabpel.properties"/>
+
+    <!-- Set appserver platform specific condition/property used for conditional target call -->
+    <condition property="isoc4j">
+       <equals arg1="${platform}" arg2="oc4j_10g"/>
+    </condition>
+    <condition property="isias_10gR2">
+        <and>
+            <contains string="${platform}" substring="ias_10g"/>
+            <not><contains string="${bpel.version}" substring="10.1.3"/></not>
+        </and>
+    </condition>
+    <condition property="isias_10gR3">
+        <and>
+            <contains string="${platform}" substring="ias_10g"/>
+            <contains string="${bpel.version}" substring="10.1.3"/>
+        </and>
+    </condition>
+    <condition property="isias">
+        <or>
+            <isset property="isias_10gR2"/>
+            <isset property="isias_10gR3"/>
+        </or>
+    </condition>
+    <condition property="isjboss">
+       <equals arg1="${platform}" arg2="jboss_3"/>
+    </condition>
+    <condition property="isweblogic">
+        <equals arg1="${platform}" arg2="weblogic_8"/>
+    </condition>
+    <condition property="isoraclej2ee">
+        <or>
+            <equals arg1="${platform}" arg2="oc4j_10g"/>                
+            <equals arg1="${platform}" arg2="ias_10g"/>
+        </or>
+    </condition>
+
+    <macrodef name="deployUI">
+        <!-- deployUI requires following 3 input parameter(s) -->
+        <attribute name="application" /> <!-- e.g. StarLoanUI -->
+
+        <!-- application.dir attribute is optional if relative path of UI/jsp is same as application name -->
+        <attribute name="application.dir" default="${basedir}/@{application}" />
+
+        <!-- wsdl.path attribute is location of process wsdl path e.g. ${basedir}/LoanFlow/LoanFlow.wsdl
+             if this optional attribute is passed, schemac generated Java classes included to war/ear
+         -->
+        <attribute name="wsdl.path" default="" />
+
+        <!-- parent is attribute optional and is needed only for StarLoanWithWFUI etc, -->
+        <!-- which uses hw_services instead of orabpel as parent                                                   -->
+        <attribute name="parent" default="orabpel" />
+
+        <sequential>
+
+            <echo>Deploying @{application} from @{application.dir}:
+            </echo>
+
+            <!-- do clean up before deployment -->
+            <delete failonerror="false" file="${basedir}/@{application}.war"/>
+            <delete failonerror="false" file="${basedir}/@{application}.ear"/>
+ 
+            <condition property="compile.schema" >
+                <not>
+                    <equals arg1="@{wsdl.path}" arg2=""/>
+                </not>
+            </condition>
+            <antcall target="schemac" >
+                <param name="wsdl.path" value="@{wsdl.path}" />
+                <param name="application.dir" value="@{application.dir}" />
+            </antcall>
+
+            <antcall target="deployOraclej2ee">
+                <param name="application" value="@{application}"/>
+                <param name="application.dir" value="@{application.dir}" />
+                <param name="parent" value="@{parent}"/>
+            </antcall>  
+
+            <antcall target="deployNonOraclej2ee">
+                <param name="application" value="@{application}"/>
+                <param name="application.dir" value="@{application.dir}" />
+            </antcall>
+
+            <!-- do clean up after deployment -->
+            <delete file="${basedir}/@{application}.war"/>
+            <delete file="${basedir}/@{application}.ear"/>
+        </sequential>
+    </macrodef>
+  
+    <target name="schemac" if="compile.schema">
+        <echo>Compiling in ${wsdl.path} in ${application.dir}/WEB-INF/classes from 
+        </echo>
+        <schemac input="${wsdl.path}" out="${application.dir}/WEB-INF/classes" lib="${bpel.home}/lib"/>
+    </target>
+
+    <target name="deployNonOraclej2ee" unless="isoraclej2ee">
+         <jar jarfile="${apps}/${application}.war" basedir="${application.dir}" compress="false"/>
+    </target>
+
+    <target name="deployOraclej2ee" if="isoraclej2ee" depends="build_ear, deployBindWebAppOc4j, deployBindWebAppIas" />
+
+    <target name="build_ear" if="isoraclej2ee">
+        <jar jarfile="${basedir}/${application}.war" basedir="${application.dir}" compress="false"/>
+        <ear destfile="${basedir}/${application}.ear" appxml="${application.dir}/application.xml">
+            <fileset dir="${basedir}" includes="*.war"/>
+        </ear>
+    </target>
+
+    <target name="deployIas" if="isias"
+            depends="deployIas_10gR2, deployIas_10gR3">
+    </target>
+    
+    <target name="deployBindWebAppIas" if="isias"
+            depends="deployBindWebAppIas_10gR2, deployBindWebAppIas_10gR3">
+    </target>
+    
+    <!-- deploy/bindWebApp for oc4j uses admin.jar -->
+    <target name="deployOc4j" if="isoc4j">
+        <property name="parent" value="orabpel"/><!-- set default parent -->
+        
+        <echo>Deploying ${application} using "admin.jar -deploy ..."</echo>         
+        <java jar="${j2ee.home}/admin.jar" fork="true">
+            <arg line="ormi://${j2ee.hostname} ${jndi.user} ${jndi.password} -deploy -parent ${parent} -file ${basedir}/${application}.ear -deploymentName ${application}"/>
+        </java>
+    </target>
+    <target name="deployBindWebAppOc4j" if="isoc4j" depends="deployOc4j">
+        <echo>Binding WebApp ${application} using "admin.jar -bindWebApp ..."</echo>      
+        <java jar="${j2ee.home}/admin.jar" fork="true">
+            <arg line="ormi://${j2ee.hostname} ${jndi.user} ${jndi.password} -bindWebApp ${application} ${application} default-web-site /${application}"/>
+        </java>
+    </target>
+    
+    <!-- deploy/bindWebApp for ias_10gR3 uses admin_client.jar -->    
+    <target name="deployIas_10gR3" if="isias_10gR3">
+        <property name="parent" value="orabpel"/><!-- set default parent -->   
+        <condition property="deployer.url" value="deployer:cluster:opmn://${j2ee.hostname}:${opmn.requestport}/${oc4jinstancename}">
+            <equals arg1="${cluster}" arg2="true" casesensitive="false"/>
+        </condition>
+        <property name="deployer.url" value="deployer:oc4j:opmn://${j2ee.hostname}:${opmn.requestport}/${oc4jinstancename}"/>
+        
+        <echo>Deploying ${application} using "admin_client.jar ${deployer.url} -file ${basedir}/${application}.ear ..."</echo>    
+        <java jar="${j2ee.home}/admin_client.jar" fork="true">
+            <arg line="${deployer.url}"/>
+            <arg line="${jndi.user} ${jndi.password}"/>
+            <arg line="-deploy"/>
+            <arg line="-file ${basedir}/${application}.ear"/>
+            <arg line="-deploymentName ${application}"/>
+            <arg line="-parent ${parent}"/>            
+        </java>
+    </target>        
+    <target name="deployBindWebAppIas_10gR3" if="isias_10gR3" depends="deployIas_10gR3">
+        <echo>Binding WebAp ${application} using "admin_client.jar ${deployer.url} ..."</echo>    
+        <java jar="${j2ee.home}/admin_client.jar" fork="true">
+            <arg line="${deployer.url}"/>
+            <arg line="${jndi.user} ${jndi.password}"/>
+            <arg line="-bindWebApp"/>
+            <arg line="-appName ${application}"/>
+            <arg line="-webModuleName ${application}"/>            
+            <arg line="-webSiteName default-web-site"/>
+            <arg line="-contextRoot /${application}"/>
+        </java>        
+    </target>
+
+    <!-- deploy/bindWebApp for ias_10gR2 uses dcmctl -->    
+    <target name="deployIas_10gR2" if="isias_10gR2">
+        <condition property="extn" value=".bat">
+            <os family="windows"/>
+        </condition>
+        <condition property="extn" value="">
+            <os family="unix"/>
+        </condition>                
+        <property name="parent" value="orabpel"/><!-- set default parent -->
+        
+        <echo>Deploying ${application} using "dcmctl${extn} redeployapplication ..."</echo>        
+        <exec executable="${oracle.home}/dcm/bin/dcmctl${extn}"> <!-- dcmctl on UNIX, dcmctl.bat on Win32 -->
+            <arg line="redeployapplication -f ${basedir}/${application}.ear -a ${application} -pa ${parent} -co OC4J_BPEL"/>
+        </exec>
+    </target>
+    <target name="deployBindWebAppIas_10gR2" if="isias_10gR2" depends="deployIas_10gR2"/><!-- No Binding needed with dcmctl -->
+    
+    <!-- end of deployUI and dependent targets -->
+    
+
+    <target name="setJndiUrlOrclej2ee" if="isoraclej2ee" >
+        <antcall target="setJndiUrlIas" />
+        <antcall target="setJndiUrlOc4j" />   
+    </target>    
+    <target name="setJndiUrlIas" if="isias">
+        <!-- replaces token ${replace.token} in file ${replace.file} by ${jndi.url}${url-path} -->      
+      <property name="url-path" value="" /> <!-- use this default for jndi url-path unless passed as param -->  
+        <echo message="Replacing token ${replace.token} by ${jndi.url}${url-path} in ${replace.file}" />
+        <replace file="${replace.file}" >
+            <replacefilter token="${replace.token}"  value="${jndi.url}${url-path}"/>
+        </replace>        
+    </target>    
+    <target name="setJndiUrlOc4j" if="isoc4j">                  
+        <property name="url-path" value="" /> <!-- use this default for jndi url-path unless passed as param -->    
+        <echo message="Replacing token ${replace.token} by ${jndi.url}${url-path} in ${replace.file}" />
+        <replace file="${replace.file}" >
+            <replacefilter token="${replace.token}"  value="${jndi.url}${url-path}"/>
+        </replace>        
+    </target>                       
+
+</project>

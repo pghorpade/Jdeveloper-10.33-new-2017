@@ -1,0 +1,13 @@
+<SercviceExplorer_Plugin>
+    <ExternalSource name="Adapter" class="oracle.tip.tools.ide.pm.datasources.serverconnection.AdapterDataSourceContainer" enable="true">
+    </ExternalSource>
+    <ExternalSource name="ESB" class="oracle.tip.tools.ide.pm.datasources.serverconnection.ESBConnectionDataSourceContainer" enable="true">
+    </ExternalSource>
+    <ExternalSource name="WSIL" class="oracle.tip.tools.ide.pm.datasources.serverconnection.ServerConnectionDataSourceContainer" enable="true">
+	</ExternalSource>
+	<ExternalSource name="WSIL" class="oracle.tip.tools.ide.pm.datasources.wsil.WSILDataSourceContainer" enable="true">
+	</ExternalSource>
+	<ExternalSource name="UDDI" class="oracle.tip.tools.ide.pm.datasources.uddi.UDDIDataSourceContainer" enable="true">
+	</ExternalSource>
+
+</SercviceExplorer_Plugin>

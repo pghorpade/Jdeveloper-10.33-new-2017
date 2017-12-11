@@ -1,0 +1,1262 @@
+package edu.ucla.library.digital.dlcs.core;
+
+import edu.ucla.library.digital.dlcs.exception.DLException;
+import edu.ucla.library.digital.dlcs.model.ContentFiles;
+import edu.ucla.library.digital.dlcs.model.Projects;
+import static edu.ucla.library.digital.dlcs.util.Constants.APPLICATION_PDF;
+import static edu.ucla.library.digital.dlcs.util.Constants.ARCHIVE_MASTER;
+import static edu.ucla.library.digital.dlcs.util.Constants.AUDIO;
+import static edu.ucla.library.digital.dlcs.util.Constants.AUDIO_CONVERT_OUTPUT;
+import static edu.ucla.library.digital.dlcs.util.Constants.AUDIO_DATA_ENCODING;
+import static edu.ucla.library.digital.dlcs.util.Constants.AUDIO_X_WAV;
+import static edu.ucla.library.digital.dlcs.util.Constants.BITS_PER_SAMPLE;
+import static edu.ucla.library.digital.dlcs.util.Constants.DATA_RATE;
+import static edu.ucla.library.digital.dlcs.util.Constants.DLCONTENT_BASE_URL;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_AVI;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_HTM;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_HTML;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_MP3;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_PDF;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_SGML;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_TIF;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_TXT;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_WAV;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_XML;
+import static edu.ucla.library.digital.dlcs.util.Constants.DOT_ZIP;
+import static edu.ucla.library.digital.dlcs.util.Constants.IMAGE;
+import static edu.ucla.library.digital.dlcs.util.Constants.IMAGE_JPEG;
+import static edu.ucla.library.digital.dlcs.util.Constants.IMAGE_PIXELS_LONG_DIMENSION;
+import static edu.ucla.library.digital.dlcs.util.Constants.IMAGE_QUALITY;
+import static edu.ucla.library.digital.dlcs.util.Constants.IMAGE_SAMPLING_FREQUENCY;
+import static edu.ucla.library.digital.dlcs.util.Constants.IMAGE_TIFF;
+import static edu.ucla.library.digital.dlcs.util.Constants.IS_UPLOADED_FILE_RENAMED;
+import static edu.ucla.library.digital.dlcs.util.Constants.MASTER_BASE_URL;
+import static edu.ucla.library.digital.dlcs.util.Constants.MASTER_BASE_URL2;
+import static edu.ucla.library.digital.dlcs.util.Constants.MIME_TYPE;
+import static edu.ucla.library.digital.dlcs.util.Constants.PDF;
+import static edu.ucla.library.digital.dlcs.util.Constants.SUBMASTER;
+import static edu.ucla.library.digital.dlcs.util.Constants.TEXT;
+import static edu.ucla.library.digital.dlcs.util.Constants.TEXT_HTML;
+import static edu.ucla.library.digital.dlcs.util.Constants.TEXT_PLAIN;
+import static edu.ucla.library.digital.dlcs.util.Constants.TEXT_SGML;
+import static edu.ucla.library.digital.dlcs.util.Constants.TEXT_XML;
+import static edu.ucla.library.digital.dlcs.util.Constants.THUMBNAIL;
+import static edu.ucla.library.digital.dlcs.util.Constants.THUMBNAIL_BASE_URL;
+import static edu.ucla.library.digital.dlcs.util.Constants.URL;
+import static edu.ucla.library.digital.dlcs.util.Constants.VIDEO;
+import static edu.ucla.library.digital.dlcs.util.Constants.VIDEO_AVI;
+import static edu.ucla.library.digital.dlcs.util.Constants.WEBSITE;
+import static edu.ucla.library.digital.dlcs.util.Constants.AUDIO_WOWZA_OUTPUT;
+import edu.ucla.library.digital.dlcs.util.ZipContent;
+import edu.ucla.library.digital.dlcs.util.filemonitor.FileUploadListener;
+import edu.ucla.library.digital.dlcs.util.filemonitor.MonitoredOutputStream;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import java.nio.channels.FileChannel;
+
+import java.util.Date;
+import java.util.Map;
+
+import org.apache.commons.io.FileUtils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+/**
+ * The <code>ContentProcessor</code> class handles processing of masters, submasters and thumbnails for the following 
+ * content types: Image, Audio, Video, Text, PDF, Website
+ * 
+ * @author Curtis Fornadley
+ * @author Henry Chiong
+ */
+public class ContentProcessor {
+    private static Logger logger = LoggerFactory.getLogger(ContentProcessor.class);
+
+    private ContentFiles masterContentFile = null;
+    private ContentFiles submasterContentFile = null;
+    private ContentFiles thumbnailContentFile = null;
+
+    private String fileUploadPath = null; // use this
+    private InputStream       inStream;
+    private String contentType = null;
+    private Projects project = null;
+    private String ark = null;
+    private String baseFileName = null;
+    private int seqNum = 1;
+    private String masterFileName = null;
+    private String masterFileExtension = null;
+    private String masterMimeType = null;
+    private String mastersDir = null; // needs trailing backslash
+    private String submastersDir = null; // needs trailing backslash
+    private String thumbnailDir = null; // needs trailing backslash
+    private Map masterAdminMdHash = null;
+    private Map submasterAdminMdHash = null;
+    private Map thumbnailAdminMdHash = null;
+    private String webAppName = null;
+    private boolean hasSubmaster = false;
+    private boolean hasThumbnail = false;
+    private Date date = null;
+    //private ByteArrayOutputStream byteOut = null; //used to hold the zip file in memory
+    private FileUploadListener listener;
+    private String imgSubmasterFile;
+
+    /**
+     * Constructors
+     * @param pFileUploadPath
+     * @param pContentType
+     * @param pProject
+     */
+    public ContentProcessor(String pFileUploadPath, String pContentType, Projects pProject) {
+        fileUploadPath = pFileUploadPath;
+        contentType = pContentType;
+        project = pProject;
+    }
+    
+    public ContentProcessor(String pFileUploadPath, String pContentType, Projects pProject, FileUploadListener listener) {
+        fileUploadPath = pFileUploadPath;
+        contentType = pContentType;
+        project = pProject;
+        this.listener = listener;
+    }
+
+
+    /**
+     * run this is the main controller for this class
+     * @return 
+     */
+    public int run() throws DLException {
+        date = new Date(System.currentTimeMillis());
+        webAppName = project.getWebappName();
+        int iStatus = 1;
+
+        iStatus = verifyContentType();
+        try {
+            if (iStatus == 1) {
+                setBaseFileName();
+                //if (contentType.equals(Constants.IMAGE)) {
+                if (IMAGE.equals(contentType)) {
+                    mastersDir = project.getImageMastersDir();
+                    //submastersDir = project.getImageSubmastersDir(); /** is this needed? */
+                    thumbnailDir = project.getThumbnailDir(); //  "\\\\lis55\\htdocs$\\dlcstest\\nails\\"
+                    processMaster();
+                    iStatus = processSubmaster();
+                    if (iStatus == 1) {
+                        iStatus = processThumbnail();
+                    } else {
+                        return iStatus;
+                    }
+                } else if (AUDIO.equals(contentType)) {
+                    mastersDir = project.getAudioMastersDir();
+                    submastersDir = project.getAudioSubmastersDir();
+                    processMaster();
+                    iStatus = processSubmaster();
+                } else if (VIDEO.equals(contentType)) {
+                    mastersDir = project.getVideoMastersDir();
+                    processMaster();
+                    iStatus = processSubmaster();
+                } else if (TEXT.equals(contentType)) { 
+                    mastersDir = project.getTextMastersDir();
+                    processMaster();
+                    iStatus = processSubmaster();
+                } else if (PDF.equals(contentType)) { 
+                    mastersDir = project.getLobMastersDir();
+                    processMaster();
+                    iStatus = processSubmaster();
+                } else if (WEBSITE.equals(contentType)) { 
+                    //mastersDir = "\\\\lis35\\dlmasters$\\test\\web\\";
+                    mastersDir = project.getWebsiteMastersDir();
+                    processWebsite();
+                    iStatus = processSubmaster();
+                }
+            }
+        } catch (Exception e) {
+            if (mastersDir == null) {
+                throw new DLException("Invalid masters directory");
+            } else {
+                if (logger.isErrorEnabled()) {
+                    logger.error("Failed to process content {}", e.toString());
+                }
+                throw new DLException("Unable to process content file.");
+            }
+        }
+        return iStatus;
+    }
+
+    /**
+     * 
+     * @return 
+     * 
+     * TODO: will contains JHOVE calls and intermedia or??    
+     */
+    private int verifyContentType() {
+        if (IMAGE.equals(contentType)) {
+            masterMimeType = IMAGE_TIFF;
+            masterFileExtension = DOT_TIF;
+        } else if (AUDIO.equals(contentType)) {
+            masterMimeType = AUDIO_X_WAV;
+            masterFileExtension = DOT_WAV;
+        } else if (VIDEO.equals(contentType)) {
+            masterMimeType = VIDEO_AVI;
+            masterFileExtension = DOT_AVI;
+        } else if (TEXT.equals(contentType)) {
+            /** could have multiple file types: .txt, .xml, .htm, .html, .sgml */
+            final int periodLoc = fileUploadPath.lastIndexOf('.');
+            masterFileExtension = fileUploadPath.substring(periodLoc); //".xml";        
+            //logger.debug("Text Master ext " + masterFileExtension);
+            if (DOT_XML.equalsIgnoreCase(masterFileExtension)) {
+                masterMimeType = TEXT_XML;
+            } else if (DOT_TXT.equalsIgnoreCase(masterFileExtension)) {
+                masterMimeType = TEXT_PLAIN;
+            } else if (DOT_HTML.equalsIgnoreCase(masterFileExtension)) {
+                masterMimeType = TEXT_HTML;
+            } else if (DOT_HTM.equalsIgnoreCase(masterFileExtension)) {
+                masterMimeType = TEXT_HTML;
+            } else if (DOT_SGML.equalsIgnoreCase(masterFileExtension)) {
+                masterMimeType = TEXT_SGML;
+            }
+        } else if (PDF.equals(contentType)) {
+            masterMimeType = APPLICATION_PDF;
+            masterFileExtension = DOT_PDF;
+        } else if (WEBSITE.equals(contentType)) {
+            /** could have multiple file types: .htm, .html etc. */
+            final int periodLoc = fileUploadPath.lastIndexOf('.');
+            masterFileExtension = fileUploadPath.substring(periodLoc);
+            if (DOT_HTML.equalsIgnoreCase(masterFileExtension)) {
+                masterMimeType = TEXT_HTML;
+            } else if (DOT_HTM.equalsIgnoreCase(masterFileExtension)) {
+                masterMimeType = TEXT_HTML;
+            }
+        }
+        //int iStatus = 1;
+        return 1;
+    }
+
+
+    /**
+     * @param pArk
+     */
+    public void setArk(String pArk) {
+        ark = pArk;
+    }
+
+    /**
+     * @param pSeqNum
+     */
+    public void setSeqNumber(int pSeqNum) {
+        seqNum = pSeqNum;
+    }
+
+    /**
+     * @param pMasterAdminMdHash
+     */
+    public void setMasterAdminMd(Map pMasterAdminMdHash) {
+        masterAdminMdHash = pMasterAdminMdHash;
+    }
+
+    /**
+     * @param pSubmasterAdminMdHash
+     */
+    public void setSubmasterAdminMd(Map pSubmasterAdminMdHash) {
+        submasterAdminMdHash = pSubmasterAdminMdHash;
+    }
+
+    /**
+     * @param pThumbnailAdminMdHash
+     */
+    public void setThumbnailAdminMd(Map pThumbnailAdminMdHash) {
+        thumbnailAdminMdHash = pThumbnailAdminMdHash;
+    }
+
+
+    /**
+     * setBaseFileName
+     * @return 
+     * Multiple contentfiles can be added to an item. The base name will have to contain a counter 
+     * after the ark.  look up the most recent creatation date and then add 1 to the sequence
+     */
+    private void setBaseFileName() {
+        baseFileName = ark.replace('/', '-');
+        /** add the sequence number for multiple contentfiles per item */
+        baseFileName = baseFileName + "-" + seqNum;
+    }
+
+    /**
+     * processMaster
+     */
+    private void processMaster() throws DLException {
+        String masterFileSize = null;
+        String masterFileLocation = null;
+        File srcFile = null;
+        // for reading text use file reader
+        try {
+
+            /** Set the ContentFile */
+            masterContentFile = new ContentFiles();
+            masterFileName = baseFileName + "-master" + masterFileExtension;
+            File destFile = new File(mastersDir + masterFileName);
+            if (destFile == null) {
+                if (logger.isInfoEnabled()) {
+                    logger.info("Failed to create file in  " + mastersDir + masterFileName);
+                }
+                throw new DLException("Failed to create file in " + mastersDir + masterFileName);
+            }
+            //File destFile = new File("C:\\test\\" + masterFileName );  //TEST ONLY
+            if (logger.isDebugEnabled()) {
+                logger.debug("OUT FILE: " + destFile.getParent() + " " + 
+                             destFile.getName() + " Content Type:" + contentType);
+            }
+            if (fileUploadPath != null) {
+                writeFileFromInputStream(inStream, mastersDir + masterFileName, listener);
+                srcFile = new File(mastersDir + masterFileName);
+                if (srcFile != null) {
+                    masterFileSize = Long.toString(srcFile.length());
+                }
+                if (logger.isDebugEnabled()) {
+                    logger.debug(srcFile.getParent());
+                    logger.debug("IN FILE: " + srcFile.getAbsolutePath() + " Length " + masterFileSize);
+                }
+                //copyFile(srcFile, destFile);
+            }
+            //if(inStream != null){ //Alternative method
+            //   copy(inStream, destFile);        
+            //}
+
+            //            /** rename srcFile to show as loaded.  TODO: how to do this with inStream: New file uploader */
+            //            if (Constants.IS_UPLOADED_FILE_RENAMED) {
+            //                File changeFile = new File(srcFile.getParent() + "\\LOADED_" + srcFile.getName());
+            //                srcFile.renameTo(changeFile);
+            //            }
+
+            /** Swap \\lis35\m$\digitallibrarymasters FOR http://digilib.library.ucla.edu */
+            int iStringIndex = mastersDir.lastIndexOf(webAppName);
+
+            if (iStringIndex == -1) {
+                throw new DLException("Web application name not found in master directory path.");
+            }
+            String strFileLoc = mastersDir.substring(iStringIndex);
+            strFileLoc = strFileLoc.replace('\\', '/');
+            
+            /**
+             * @see https://docs.library.ucla.edu/display/LIT/Websites+for+Web+Addressable+Digital+Masters
+             */
+             if (mastersDir.indexOf("dlmasters2")>0) {
+                 masterFileLocation = MASTER_BASE_URL2 + strFileLoc + masterFileName;
+             } else {
+                 masterFileLocation = MASTER_BASE_URL + strFileLoc + masterFileName;
+             }
+
+            //logger.debug("FLOCAT " + strMasterFileLocation);      
+
+            masterContentFile.setContentType(contentType); //Image, Audio, Text, Video, PDF, Website
+            masterContentFile.setFileUse(ARCHIVE_MASTER); //set with archive master, submaster
+            masterContentFile.setCreateDate(date);
+            masterContentFile.setFileSize(masterFileSize);
+            masterContentFile.setMimeType(masterMimeType); //find from JHOVE or???
+            masterContentFile.setFileLocation(masterFileLocation); // database or a URL
+            masterContentFile.setLocationType(URL);
+            masterContentFile.setFileName(masterFileName);
+            masterContentFile.setFileSequence("" + seqNum);
+            //masterContentFile.setSentToDprFlag("no");  this DB field was moved to ProjectItem table
+
+        } catch (IOException ioe) {
+            if (logger.isErrorEnabled()) {
+                logger.error("IOException caught in processMaster {}", ioe.toString());
+            }
+            throw new DLException("Exception occured while copying Masters");
+        } 
+    }
+
+    /**
+     * processWebsite
+     * This function zips an entire website, moves it to the masters dir and unzips it
+     * Contentfiles are created for both the master (Flocat linking to the index page) 
+     * and a submaster containing the zip file in the LOB field
+     * 
+     * Move this out to the WebsiteProcessor
+     */
+    private void processWebsite() throws DLException {
+        String masterFileSize = null;
+        String masterFileLocation = null;
+        File srcFile = null;
+        String srcDir = null;
+        try {
+            /** create a dir based on ark within masters Dir */
+            String webArk = ark.replace('/', '-');
+            String zipFileName = webArk + DOT_ZIP;
+            mastersDir = mastersDir + webArk + "\\";
+            File mastersDirFile = new File(mastersDir);
+            if (mastersDirFile == null) {
+                if (logger.isErrorEnabled()) {
+                    logger.error("Exception caught in processWebsite. Unable to create file in {}", mastersDir);
+                }
+                throw new DLException("Error occurred processing website.");
+            }
+            boolean wasDirMade = mastersDirFile.mkdir();
+            if (logger.isDebugEnabled()) {
+                logger.debug("Made directory: " + wasDirMade);
+            }
+
+            if (fileUploadPath != null) {
+                srcFile = new File(fileUploadPath); // in this case the index.html file
+                /** The index file cannot be renamed uniqueness is garanteed by using the ark to name the dir */
+                masterFileName = srcFile.getName();
+                srcDir = srcFile.getParent();
+                /** create the zip file */
+                ZipContent zipContent = new ZipContent();
+                zipContent.zip(srcDir, zipFileName);
+                File scrZipFile = new File(srcDir + "\\" + zipFileName);
+                File destZipFile = new File(mastersDir + webArk + DOT_ZIP);
+                /** copy the zip file */
+                copy(scrZipFile, destZipFile);
+                /** expand zip file in masterDir */
+                zipContent.unzip(mastersDir, zipFileName);
+                masterFileSize = zipContent.getUncompressedSize();
+                if (logger.isDebugEnabled()) {
+                    logger.debug("masterFileSize " + masterFileSize);
+                }
+            }
+            /** rename web folder to show as loaded. */
+            if (IS_UPLOADED_FILE_RENAMED) {
+                File srcDirFile = new File(srcDir);
+                File changeDirFile = new File(srcDir + "-LOADED");
+                srcDirFile.renameTo(changeDirFile);
+            }
+
+            /** Swap \\lis35\m$\digitallibrarymasters FOR http://digilib.library.ucla.edu */
+            int iStringIndex = mastersDir.lastIndexOf(webAppName);
+            String strFileLoc = mastersDir.substring(iStringIndex);
+            strFileLoc = strFileLoc.replace('\\', '/');
+            if (mastersDir.indexOf("dlmasters2")>0) {
+                masterFileLocation = MASTER_BASE_URL2 + strFileLoc + masterFileName;
+            } else {
+                masterFileLocation = MASTER_BASE_URL + strFileLoc + masterFileName;
+            }
+            //logger.debug("FLOCAT " + strMasterFileLocation);      
+
+            masterContentFile = new ContentFiles();
+            masterContentFile.setContentType(contentType); //Image, Audio, Text, Video, PDF, Website
+            masterContentFile.setFileUse(ARCHIVE_MASTER); //set with archive master, submaster
+            masterContentFile.setCreateDate(date);
+            masterContentFile.setFileSize(masterFileSize);
+            masterContentFile.setMimeType(masterMimeType); //find from JHOVE or???
+            masterContentFile.setFileLocation(masterFileLocation); // database or a URL
+            masterContentFile.setLocationType(URL);
+            masterContentFile.setFileName(masterFileName);
+            masterContentFile.setFileSequence("" + seqNum);
+
+        } catch (IOException ioe) {
+            if (logger.isErrorEnabled()) {
+                logger.error("IOException caught in processWebsite {}", ioe.toString());
+            }
+            throw new DLException(ioe.getMessage());
+        }
+    }
+
+
+    /**
+     * processSubmaster()
+     * This function process all submasters - seperate branches for eahc content type
+     * processSubmaster
+     * @return 
+     */
+    private int processSubmaster() throws DLException {
+        int iStatus = -1;
+        String submasterFileName = "";
+        String submasterFileExtension = "";
+        String submasterFileSize = "";
+        String mimeType = "";
+        File outSubmasterFile = null;
+        boolean isConvertSuccess = false;
+        boolean deleteWorkingCopy = false;
+
+        /** Set the submaster ContentFile */
+        submasterContentFile = new ContentFiles();
+        submasterContentFile.setContentType(contentType); //Image, Audio, Text, Video, PDF, Website
+        submasterContentFile.setFileUse(SUBMASTER); //set with archive master, submaster
+        submasterContentFile.setCreateDate(date);
+        //submasterContentFile.setSentToDprFlag("no"); //Submaster are never sent o DPR
+
+
+        File inMasterFile = new File(mastersDir + masterFileName);
+        if (inMasterFile == null) {
+            if (logger.isInfoEnabled()) {
+                logger.info("Failed to create file in " + mastersDir + masterFileName);
+            }
+            throw new DLException("Failed to create file in " + mastersDir + masterFileName);
+        }
+
+      /**
+       * IMAGE
+       */
+        if (IMAGE.equals(contentType)) {
+            listener.setStatus(FileUploadListener.STATUS_SM);
+            ImageProcessor imageProcessor = new ImageProcessor();
+            submasterContentFile.setFileLocation("database");
+            submasterContentFile.setLocationType("database");
+            submasterFileExtension = DOT_TIF; // default
+            //File inMasterFile = new File(mastersDir + masterFileName );     
+
+            /** Get tech specs from submaster Admin File group      **/
+            if (submasterAdminMdHash.containsKey(MIME_TYPE)) {
+                mimeType = (String)submasterAdminMdHash.get(MIME_TYPE);
+            }
+            
+            /** allow for other file types in the future */
+            if (IMAGE_TIFF.equals(mimeType)) {
+                submasterFileExtension = DOT_TIF;
+            }
+            int dpi = 0;
+            int width = 0;
+            int depth = 0;
+            int quality = 0;
+            int height = 0;
+
+            if (submasterAdminMdHash.containsKey(IMAGE_SAMPLING_FREQUENCY)) {
+                dpi = Integer.valueOf((String)submasterAdminMdHash.get(IMAGE_SAMPLING_FREQUENCY)).intValue();
+            } else {
+                throw new DLException("No technical value found for " + IMAGE_SAMPLING_FREQUENCY);
+            }
+            if (submasterAdminMdHash.containsKey(IMAGE_PIXELS_LONG_DIMENSION)) {
+                width = Integer.valueOf((String)submasterAdminMdHash.get(IMAGE_PIXELS_LONG_DIMENSION)).intValue();
+            } else {
+                throw new DLException("No technical value found for " + IMAGE_PIXELS_LONG_DIMENSION);
+            }
+            if (submasterAdminMdHash.containsKey(IMAGE_PIXELS_LONG_DIMENSION)) {
+                height = Integer.valueOf((String)submasterAdminMdHash.get(IMAGE_PIXELS_LONG_DIMENSION)).intValue();
+            } else {
+                throw new DLException("No technical value found for " + IMAGE_PIXELS_LONG_DIMENSION);
+            }
+            if (submasterAdminMdHash.containsKey(BITS_PER_SAMPLE)) {
+                depth = Integer.valueOf((String)submasterAdminMdHash.get(BITS_PER_SAMPLE)).intValue();
+            } else {
+                throw new DLException("No technical value found for " + BITS_PER_SAMPLE);
+            }            
+            if (submasterAdminMdHash.containsKey(IMAGE_QUALITY)) {
+                quality = Integer.valueOf((String)submasterAdminMdHash.get(IMAGE_QUALITY)).intValue();
+            } else {
+                throw new DLException("No technical value found for " + IMAGE_QUALITY);
+            }
+            
+            /** Default Image Submaster specs */
+            //String mimeType = "image/tiff";
+            if (dpi < 0 || dpi > 600) {
+                dpi = 300;
+            } //Image sampling Frequency, assuming Sampling Frequency Unit=inch
+            if (width < 0) {
+                width = 750;
+            } //Image Pixels Long Dimension
+            if (height < 0) {
+                height = 750;
+            } //Image Pixels Long Dimension
+            if (depth < 0 || depth > 16) {
+                depth = 8;
+            } //Bits Per Sample RGB 3*8=24 bit
+            if (quality < 0 || quality > 100) {
+                quality = 100;
+            }
+
+            submasterFileName = baseFileName + "-submaster" + submasterFileExtension;
+            submasterContentFile.setFileName(submasterFileName);
+            
+            outSubmasterFile = new File(mastersDir + "\\submasters\\" + submasterFileName);
+            if (logger.isDebugEnabled()) {
+                logger.debug("Image submaster: " + outSubmasterFile.getAbsolutePath());
+            }
+            imgSubmasterFile = outSubmasterFile.getAbsolutePath();
+            if (inMasterFile.exists()) {
+                try {
+                    isConvertSuccess = imageProcessor.convert(inMasterFile, outSubmasterFile, dpi, depth, width, height, quality);
+                    deleteWorkingCopy = true;
+                } catch (Exception e) {
+                    if (logger.isErrorEnabled()) {
+                        logger.error("ImageProcessor convertion failed {}", e.toString());
+                    }
+                    throw new DLException("Image convertion failed.");
+                }
+            } else {
+                if (logger.isErrorEnabled()) {
+                    logger.error("Master image file not be found in: {}", inMasterFile.getAbsolutePath());
+                }
+            }
+
+       /**
+        * AUDIO
+        */
+        } else if (AUDIO.equals(contentType)) {
+            listener.setStatus(FileUploadListener.STATUS_AUDIO_CONVERT);
+            AudioProcessor audioProcessor = new AudioProcessor();
+            submasterFileExtension = DOT_MP3; // default
+            String outPath = AUDIO_CONVERT_OUTPUT; // was mastersDir + "\\submasters"; 
+            hasSubmaster = false;
+
+            /** Get tech specs from submaster Admin File group      **/
+            if (submasterAdminMdHash.containsKey(MIME_TYPE)) {
+                mimeType = (String)submasterAdminMdHash.get(MIME_TYPE);
+            } 
+            
+            if (AUDIO_X_WAV.equals(mimeType)) {
+                submasterFileExtension = DOT_MP3;
+            }
+            
+            String masterMimeType = (String)masterAdminMdHash.get(MIME_TYPE);
+            String dataRate = ""; // = (String)submasterAdminMdHash.get(Constants.DataRate);
+            String audioDataEncoding = ""; // = (String)submasterAdminMdHash.get("Audio Data Encoding");
+            
+            if (submasterAdminMdHash.containsKey(DATA_RATE)) {
+                 dataRate = (String)submasterAdminMdHash.get(DATA_RATE);
+            } else {
+                 throw new DLException("No technical value found for " + DATA_RATE);
+            }
+            if (submasterAdminMdHash.containsKey(AUDIO_DATA_ENCODING)) {
+                audioDataEncoding = (String)submasterAdminMdHash.get(AUDIO_DATA_ENCODING);
+            } else {
+                throw new DLException("No technical value found for " + AUDIO_DATA_ENCODING);
+            }
+
+            submasterFileName = baseFileName + "-submaster" + submasterFileExtension;
+            submasterContentFile.setFileName(submasterFileName);
+            outSubmasterFile = new File(outPath + "\\" + submasterFileName); //mastersDir + "\\submasters\\" + submasterFileName); 
+            /** The name Cleaner XL gives the file */
+            String tempSubmasterFileName = baseFileName + "-master_submaster" + submasterFileExtension;
+            File outTempSubmasterFile = new File(outPath + "\\" + tempSubmasterFileName);
+
+            if (inMasterFile.exists()) {
+                isConvertSuccess = audioProcessor.convert(inMasterFile, outPath, dataRate, audioDataEncoding, masterMimeType);
+                if (!isConvertSuccess) {
+                    listener.setStatus(FileUploadListener.STATUS_AUDIO_ERR_CONVERT);
+                    throw new DLException("Audio convertion failed.");
+                }
+                deleteWorkingCopy = true;
+            } else {
+                if (logger.isErrorEnabled()) {
+                    logger.error("Audio master file not found in {}", inMasterFile.getAbsolutePath());
+                }
+            }
+            
+            if (isConvertSuccess) {
+                boolean wasRenamed = outTempSubmasterFile.renameTo(outSubmasterFile);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Audio upload: Temp Submaster full path is:"+outTempSubmasterFile);
+                    logger.debug("outSubmasterFile is "+outSubmasterFile);
+                    logger.debug("outTempSubmasterFile is "+outTempSubmasterFile);
+                    if (wasRenamed) {
+                        logger.debug("File was renamed.");
+                    } else {
+                        logger.debug(outTempSubmasterFile + " could not be renamed.");
+                    }
+                }
+
+          /**
+           * 1) FTP submaster to Real server
+           *  audio files are currently hosted on the Solaris server "Bronte"
+           *  audio-ftp.library.ucla.edu/webAppName
+           *  id: auddlcs pw:yellow
+           */
+          //  boolean wasFtpSuccess = audioProcessor.ftpMaster(outSubmasterFile, webAppName); //jira ticket DLG-454
+          
+          
+          /**
+           * copy mp3 from outSubmasterFile location to wowza streaming mounted location
+           * 
+           * 
+           */
+           File wowzaNetapp = new File(AUDIO_WOWZA_OUTPUT + "\\"+webAppName+"\\"+submasterFileName);
+            try {
+                FileUtils.copyDirectory(outSubmasterFile,wowzaNetapp);
+            } catch (IOException e) {
+                // TODO
+                e.printStackTrace();
+                 if (logger.isDebugEnabled()) {
+                    logger.debug("error found when copying the file to wowza streaming mounted netapp location {} ",e.getMessage());
+                 }
+                throw new DLException("Audio copy failed to wowza. "+e.getMessage());
+            }
+
+                /**
+           * 2)create the SMIL and RAM file
+           *  A RAM file points to a SMIL file which then points to the Real Server
+           * "http://digidev.library.ucla.edu:8080/dlcontent/<webAppName>/ram
+           * "http://digidev.library.ucla.edu:8080/dlcontent/<webAppName>/smil
+           */
+          // if (wasFtpSuccess) {
+               audioProcessor.createSMIL(outSubmasterFile, baseFileName + "-submaster", submastersDir); //was baseFileName
+               audioProcessor.createRAM(baseFileName + "-submaster", submastersDir);
+          // }
+
+           /**
+            * 3) Set the correct URL path to the hosted Real audio file
+            * ex
+            * http://digidev.library.ucla.edu/test/ram/21198-zz00010dw0-1.ram
+            */
+                String fullPath = DLCONTENT_BASE_URL + audioProcessor.getPathToContent() + 
+                                  "ram/" + audioProcessor.getRamFilename();
+                submasterContentFile.setFileLocation(fullPath);
+                submasterContentFile.setLocationType(URL);
+            }
+
+       /**
+        * TODO: Process VIDEO
+        */
+        } else if (VIDEO.equals(contentType)) {
+            hasSubmaster = false;
+            VideoProcessor videoProcessor = new VideoProcessor();
+            submasterFileExtension = ".mpeg-2"; // default
+            //TODO need to create new location for video processor 
+            String outPath = AUDIO_CONVERT_OUTPUT; // was mastersDir + "\\submasters"; 
+            hasSubmaster = false;
+
+            /** get the tech specs from submaster Admin File group      **/
+            mimeType = (String)submasterAdminMdHash.get(MIME_TYPE);
+
+            /** allow for other file types in the future */
+            if ("video/mpeg-2".equalsIgnoreCase(mimeType)) {
+                submasterFileExtension = ".mpeg-2";
+            }
+            String masterMimeType = (String)masterAdminMdHash.get(MIME_TYPE);
+            String dataRate = (String)submasterAdminMdHash.get(DATA_RATE);
+            String audioDataEncoding = (String)submasterAdminMdHash.get("Audio Data Encoding");
+
+            submasterFileName = baseFileName + "-submaster" + submasterFileExtension;
+            outSubmasterFile = new File(outPath + "\\" + submasterFileName); //mastersDir + "\\submasters\\" + submasterFileName); 
+            /** The name Cleaner XL gives the file */
+            String tempSubmasterFileName = baseFileName + "-master_submaster" + submasterFileExtension;
+            File outTempSubmasterFile = new File(outPath + "\\" + tempSubmasterFileName);
+
+            if (inMasterFile.exists()) {
+                //logger.debug("Content Processor Audio Admin data " + mimeType  + " , " + dataRate + " , " + audioDataEncoding  + " , " + masterMimeType );
+                isConvertSuccess = videoProcessor.convert(inMasterFile, outPath, dataRate, audioDataEncoding, masterMimeType);
+                if (!isConvertSuccess) {
+                    throw new DLException("Video process convertion failed.");
+                }
+                deleteWorkingCopy = true;
+            } else {
+                if (logger.isErrorEnabled()) {
+                    logger.error("Video master file not found in {}", inMasterFile.getAbsolutePath());
+                }
+            }
+
+            if (isConvertSuccess) {
+                boolean wasRenamed = outTempSubmasterFile.renameTo(outSubmasterFile);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Was the Video submaster renamed?: " + wasRenamed);
+                }
+
+           /**
+            * 1) FTP submaster to Real server
+            *  audio files are currently hosted on the Solaris server "Bronte"
+            *  audio-ftp.library.ucla.edu/webAppName
+            *  id: auddlcs pw:yellow
+            */
+                //                boolean wasFtpSuccess = audioProcessor.ftpMaster(outSubmasterFile, webAppName);
+
+                /**
+            * 2)create the SMIL and RAM file
+            *  A RAM file points to a SMIL file which then points to the Real Server
+            * "http://digidev.library.ucla.edu:8080/dlcontent/<webAppName>/ram
+            * "http://digidev.library.ucla.edu:8080/dlcontent/<webAppName>/smil
+            */
+                //                if (wasFtpSuccess) {
+                //                    audioProcessor.createSMIL(outSubmasterFile, baseFileName + "-submaster", submastersDir); //was baseFileName
+                //                    audioProcessor.createRAM(baseFileName + "-submaster", submastersDir);
+                //                }
+
+                /**
+            * 3) Set the correct URL path to the hosted Real audio file
+            * ex
+            * http://digidev.library.ucla.edu/test/ram/21198-zz00010dw0-1.ram
+            */
+                //                String fullPath = Constants.DLCONTENT_BASE_URL + audioProcessor.getPathToContent() + "ram/" + audioProcessor.getRamFilename();
+                //                submasterContentFile.setFileLocation(fullPath);
+                //                submasterContentFile.setLocationType("URL");
+            }
+     /**
+      * TEXT
+      * The subMaster is the same as the master except it lives in the DB as CLOB
+      * is the samefor reading text use file reader
+      */
+        } else if (TEXT.equals(contentType)) {
+            TextProcessor textProcessor = new TextProcessor();
+            isConvertSuccess = true; // no actual conversion on Text
+            hasSubmaster = false;
+            deleteWorkingCopy = false;
+            String charSet = (String)submasterAdminMdHash.get("Text Character Set");
+            submasterContentFile.setFileLocation("database");
+            submasterContentFile.setLocationType("database");
+            submasterFileExtension = masterFileExtension;
+            mimeType = masterMimeType;
+            submasterFileName = baseFileName + "-submaster" + submasterFileExtension;
+            outSubmasterFile = inMasterFile;
+
+            if (inMasterFile.exists()) {
+                String text = textProcessor.getStringFromTextFile(outSubmasterFile, mimeType, charSet);
+                submasterContentFile.setClobText(text);
+           /**
+            * Depending on language we may want to send the data to an nClob as well for presentation.
+            * CLOB fields will only handle up to extended ASCII
+            */
+                //NClob nClob =  textProcessor.getNClobFromTextFile(outSubmasterFile, mimeType, charSet);  
+            } else {
+                if (logger.isErrorEnabled()) {
+                    logger.error("Text master file not found in {}", inMasterFile.getAbsolutePath());
+                }
+            }
+
+       /**
+        * PDF
+        */
+        } else if (PDF.equals(contentType)) {
+            isConvertSuccess = true; // no actual conversion on PDF
+            hasSubmaster = false;
+            submasterContentFile.setFileLocation("database");
+            submasterContentFile.setLocationType("database");
+            submasterFileExtension = ".pdf"; // default
+
+            /** Get tech specs from submaster Admin File group      **/
+            mimeType = (String)submasterAdminMdHash.get(MIME_TYPE);
+            /** allow for other file types in the future */
+            if ("application/pdf".equalsIgnoreCase(mimeType)) {
+                submasterFileExtension = ".pdf";
+            }
+            submasterFileName = baseFileName + "-submaster" + submasterFileExtension;
+            outSubmasterFile = inMasterFile;
+            deleteWorkingCopy = false;
+
+       /**
+        * WEBSITE
+        */
+        } else if (WEBSITE.equals(contentType)) {
+            isConvertSuccess = true; // no actual conversion on PDF
+            hasSubmaster = false;
+            submasterContentFile.setFileLocation("database");
+            submasterContentFile.setLocationType("database");
+            submasterFileExtension = ".zip"; // default
+
+            /** Get tech specs from submaster Admin File group      **/
+            //mimeType = (String)submasterAdminMdHash.get("MIMEType");
+            mimeType = "application/zip";
+            /** allow for other file types in the future */
+            if ("application/zip".equalsIgnoreCase(mimeType)) {
+                submasterFileExtension = ".zip";
+            }
+            //submasterFileName = baseFileName + "-submaster" + submasterFileExtension;
+            outSubmasterFile = new File(mastersDir + ark.replace('/', '-') + ".zip");
+            //outSubmasterFile = inMasterFile; 
+            deleteWorkingCopy = false;
+        }
+
+        if (isConvertSuccess) {
+            iStatus = 1;
+            hasSubmaster = true;
+            if (outSubmasterFile != null) {
+                submasterFileSize = Long.toString(outSubmasterFile.length());
+                submasterContentFile.setFileSize(submasterFileSize);
+                submasterContentFile.setMimeType(mimeType);
+                submasterContentFile.setFileName(submasterFileName);
+                submasterContentFile.setFileSequence("" + seqNum);
+            }
+
+            /** write this file to a BLOB field in the DB */
+            // Constants.AUDIO.equals(contentType) || 
+            // Constants.VIDEO.equals(contentType) || 
+            // Constants.WEBSITE.equals(contentType) ||
+
+            if (TEXT.equals(contentType) || PDF.equals(contentType)) {
+                try {
+                    byte[] bytes = getFileBytes(outSubmasterFile);
+                    submasterContentFile.setBlobLob(bytes);
+                } catch (IOException ioe) {
+                    if (logger.isErrorEnabled()) {
+                        logger.error("Failed to store content into oracle database {}", ioe.toString());
+                    }
+                }
+
+
+            }
+
+//            /** remove this working copy of the submaster */
+//            logger.debug("outSubmasterFile exists?: " + outSubmasterFile.exists());
+//            if (outSubmasterFile.exists() && deleteWorkingCopy == true) {
+//                try {
+//                    FileUtils.forceDelete(outSubmasterFile);
+//                } catch (IOException e) {
+//                    logger.error("Unable to delete " + outSubmasterFile.getName() + " " + e.getMessage());
+//                }
+//            }
+        }
+        return iStatus;
+    }
+
+    /**
+     * processThumbnail
+     * @return 
+     */
+    private int processThumbnail() throws DLException {
+        int iStatus = -1;
+        String thumbnailFileName = null;
+        String thumbnailFileSize = null;
+        String thumbnailFileLocation = null;
+        boolean isConvertSuccess = false;
+        String mimeType = null;
+        // for reading text use file reader
+
+        /** Set the ContentFile */
+        thumbnailContentFile = new ContentFiles();
+        thumbnailContentFile.setContentType(contentType); //Image, Audio, Text, Video, PDF, Website
+        thumbnailContentFile.setFileUse(THUMBNAIL); //set with archive master, submaster
+        thumbnailContentFile.setLocationType(URL);
+        thumbnailContentFile.setCreateDate(date);
+        
+        //thumbnailContentFile.setSentToDprFlag("no"); //thumbnail may be sent to DPR
+
+        File inMasterFile = new File(mastersDir + masterFileName);
+        File outThumbnailFile = null;
+
+        /** Create Thumbnail for content */
+
+        /** Image */
+        if ("Image".equals(contentType)) {
+            listener.setStatus(FileUploadListener.STATUS_IMAGE_THBNL);
+            ImageProcessor imageProcessor = new ImageProcessor();
+            thumbnailFileName = baseFileName + "-thumbnail.jpg";
+            thumbnailContentFile.setFileName(thumbnailFileName);
+            outThumbnailFile = new File(thumbnailDir + thumbnailFileName);
+            
+            int iStringIndex = thumbnailDir.lastIndexOf(webAppName);
+
+            if (iStringIndex == -1) {
+                throw new DLException("Invalid thumbnail directory path.");
+            }
+            
+            String strFileLoc = thumbnailDir.substring(iStringIndex);
+            strFileLoc = strFileLoc.replace('\\', '/');
+            thumbnailFileLocation = THUMBNAIL_BASE_URL + strFileLoc + thumbnailFileName;
+            thumbnailContentFile.setLocationType(URL);
+            //thumbnailFileLocation = Constants.WEBAPP_BASE_URL + webAppName + "/nails/" + thumbnailFileName;
+            //thumbnailFileLocation = Constants.THUMBNAIL_BASE_URL + webAppName + "/nails/" + thumbnailFileName;
+
+            /** get tech specs from thumbnail Admin File group  **/            
+            mimeType = (String)thumbnailAdminMdHash.get(MIME_TYPE);
+            if (mimeType == null) {
+                // default thumbnail
+                mimeType = IMAGE_JPEG;
+            }
+            
+            int dpi = Integer.valueOf((String)thumbnailAdminMdHash.get(IMAGE_SAMPLING_FREQUENCY)).intValue();
+            int width = Integer.valueOf((String)thumbnailAdminMdHash.get(IMAGE_PIXELS_LONG_DIMENSION)).intValue();
+            int height = Integer.valueOf((String)thumbnailAdminMdHash.get(IMAGE_PIXELS_LONG_DIMENSION)).intValue();
+            int depth = Integer.valueOf((String)thumbnailAdminMdHash.get(BITS_PER_SAMPLE)).intValue();
+            int quality = Integer.valueOf((String)thumbnailAdminMdHash.get(IMAGE_QUALITY)).intValue();
+
+            /** Default Image Thumbnail specs */
+            //String mimeType = "image/jpeg";
+            if (dpi < 0 || dpi > 300) {
+                dpi = 72;
+            } //Image sampling Frequency, assuming Sampling Frequency Unit=inch
+            if (width < 0) {
+                width = 200;
+            } //Image Pixels Long Dimension
+            if (height < 0) {
+                height = 200;
+            } //Image Pixels Long Dimension
+            if (depth < 0 || depth > 16) {
+                depth = 8;
+            } //Bits per Sample RGB 3*8=24 bit
+            if (quality < 0 || quality > 100) {
+                quality = 75;
+            }
+
+            if (inMasterFile.exists()) {
+                isConvertSuccess = imageProcessor.convert(inMasterFile, outThumbnailFile, dpi, depth, width, height, quality);
+            } else {
+                listener.setStatus("Problem generating thumbnail, master image not found");
+                if (logger.isErrorEnabled()) {
+                    logger.error("Master image file not found in {}", inMasterFile.getAbsolutePath());
+                }
+            }
+
+        } else if (AUDIO.equals(contentType)) {
+            hasThumbnail = false;
+        } else if (VIDEO.equals(contentType)) {
+            hasThumbnail = false; //maybe
+        } else if (TEXT.equals(contentType)) {
+            hasThumbnail = false;
+        } else if (PDF.equals(contentType)) {
+            hasThumbnail = false;
+        } else if (WEBSITE.equals(contentType)) {
+            hasThumbnail = false; //maybe    
+        }
+        if (isConvertSuccess) {
+            iStatus = 1;
+            hasThumbnail = true;
+            if (outThumbnailFile != null) {
+                thumbnailFileSize = Long.toString(outThumbnailFile.length());
+                thumbnailContentFile.setFileSize(thumbnailFileSize);
+                thumbnailContentFile.setMimeType(mimeType); //find from JHOVE or???
+                thumbnailContentFile.setFileLocation(thumbnailFileLocation); // database or a URL
+                thumbnailContentFile.setLocationType(URL);
+                thumbnailContentFile.setFileName(thumbnailFileName);
+                thumbnailContentFile.setFileSequence("" + seqNum);
+            }
+        }
+        return iStatus;
+    }
+
+
+    /**
+     * Copy the source file to its destination
+     * 
+     * @throws java.io.IOException
+     * @param destination
+     * @param source
+     */
+    protected static void copy(File source, File destination) throws IOException {
+        //logger.info("Copying file...");
+        //StopWatch.start();
+        InputStream in = null;
+        OutputStream out = null;
+        int BUFF_SIZE = 32 * 1024 * 1024;
+        byte[] buffer = new byte[BUFF_SIZE];
+
+        try {
+            in = new FileInputStream(source);
+            out = new FileOutputStream(destination);
+            while (true) {
+                synchronized (buffer) {
+                    int amountRead = in.read(buffer);
+                    if (amountRead == -1) {
+                        break;
+                    }
+                    out.write(buffer, 0, amountRead);
+                }
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
+        }
+
+        //StopWatch.stop();
+        //logger.debug("Finished in " + StopWatch.getElapsedTime());
+    }
+
+    protected static void copyFile(File sourceFile, File destFile) throws IOException {
+        FileChannel fcin = new FileInputStream(sourceFile).getChannel();
+        FileChannel fcout = new FileOutputStream(destFile).getChannel();
+
+        int maxCount = (64 * 1024 * 1024) - (32 * 1024);
+        long size = fcin.size();
+        long position = 0;
+
+        while (position < size) {
+            position += fcin.transferTo(position, maxCount, fcout);
+        }
+
+        fcin.close();
+        fcout.close();
+    }
+
+    /**
+     * 
+     * @param inStream
+     * @param destination
+     * @throws IOException
+     */
+    protected static void copy(InputStream inStream, File destination) throws IOException {
+        BufferedInputStream bis = new BufferedInputStream(inStream);
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(destination));
+        int numRead;
+        byte[] bytes = new byte[1024];
+        while ((numRead = bis.read(bytes)) != -1) {
+            bos.write(bytes, 0, numRead);
+        }
+        try {
+            bis.close();
+        } catch (Exception e) {
+            if (logger.isErrorEnabled()) {
+                logger.error("Error closing buffered input stream {}", e.toString());
+            }
+        }
+        try {
+            bos.close();
+        } catch (Exception e) {
+            if (logger.isErrorEnabled()) {
+                logger.error("Error closing buffered output stream {}", e.toString());
+            }
+        }
+    }
+
+    /**
+    * Returns the content of the specified file in a byte array.
+    * @param file File to be read
+    * @return byte[] a byte[] array of the content of the file
+    * @throws IOException
+    */
+    /*protected byte[] getBytesFromFile(File file) throws IOException {
+       InputStream is = new FileInputStream(file);
+       
+       // Get the size of the file
+       long length = file.length();
+       
+       // You cannot create an array using a long type.
+       // It needs to be an int type.
+       // Before converting to an int type, check
+       // to ensure that file is not larger than Integer.MAX_VALUE.
+       if (length > Integer.MAX_VALUE) {
+           logger.error("File is too large to process");
+           return null;
+       }
+       
+       // Create the byte array to hold the data
+       byte[] bytes = new byte[(int)length];
+
+       try {
+           // put the contents of the file into the massive byte array
+           // is.read(bytes);  
+           // Read in the bytes
+           int offset = 0;
+           int numRead = 0;
+           
+           while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+               offset += numRead;
+           }
+    
+           // Ensure all the bytes have been read in
+           if (offset < bytes.length) {
+               throw new IOException("Could not completely read file " + file.getName());
+           }
+       }
+       finally {
+           // Close the input stream and return bytes
+           is.close();            
+       }
+       return bytes;
+    } */
+
+    protected byte[] getFileBytes(File file) throws IOException {
+        ByteArrayOutputStream ous = null;
+        InputStream ios = null;
+        try {
+            byte[] buffer = new byte[4096];
+            ous = new ByteArrayOutputStream();
+            ios = new FileInputStream(file);
+            int read = 0;
+            while ((read = ios.read(buffer)) != -1)
+                ous.write(buffer, 0, read);
+        } finally {
+            try {
+                if (ous != null)
+                    ous.close();
+            } catch (IOException e) {
+                // swallow, since not that important
+            }
+            try {
+                if (ios != null)
+                    ios.close();
+            } catch (IOException e) {
+                // swallow, since not that important
+            }
+        }
+        return ous.toByteArray();
+    }
+    
+    /**
+     * writeBinaryFile
+     * @param contents
+     * @param fullPathFilename
+     * @throws IOException
+     * NOT USED
+     */
+    /*private static void writeBinaryFile(byte[] contents, String fullPathFilename) throws IOException {
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fullPathFilename));
+        bos.write(contents);
+        bos.flush();
+        bos.close();
+    }*/
+
+    /**
+     * 
+     * @return 
+     */
+    public boolean hasSubmaster() {
+        return hasSubmaster;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public boolean hasThumbnail() {
+        return hasThumbnail;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public ContentFiles getMasterContentFile() {
+        return masterContentFile;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public ContentFiles getSubmasterContentFile() {
+        return submasterContentFile;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public ContentFiles getThumbnailContentFile() {
+        return thumbnailContentFile;
+    }
+    
+    public static void writeFileFromInputStream(InputStream inputStream, 
+                                                String filePath, FileUploadListener listener) throws IOException {
+            File writeFile = new File(filePath);
+
+            OutputStream oStream = new FileOutputStream(writeFile);
+            MonitoredOutputStream outputStream = new MonitoredOutputStream(oStream,listener); 
+
+            // Transfer bytes from in to out
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+            // Need to use monitored output stream here
+            outputStream.close();
+            inputStream.close();
+    }
+
+    public void setInStream(InputStream inStream) {
+        this.inStream = inStream;
+    }
+
+    public InputStream getInStream() {
+        return inStream;
+    }
+
+    public void setImgSubmasterFile(String imgSubmasterFile) {
+        this.imgSubmasterFile = imgSubmasterFile;
+    }
+
+    public String getImgSubmasterFile() {
+        return imgSubmasterFile;
+    }
+}

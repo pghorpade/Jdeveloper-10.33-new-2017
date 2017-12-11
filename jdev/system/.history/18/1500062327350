@@ -1,0 +1,115 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class AdminGroups {
+
+    /**Map linkAdminGroupsCollection <-> edu.ucla.library.digital.dlcs.model.LinkAdminGroups
+     * @associates <{edu.ucla.library.digital.dlcs.model.LinkAdminGroups}>
+     */
+    private List linkAdminGroupsCollection;
+
+    /**Map adminValuesCollection <-> edu.ucla.library.digital.dlcs.model.AdminValues
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminValues}>
+     */
+    private List adminValuesCollection;
+
+    /**Map adminTypes <-> edu.ucla.library.digital.dlcs.model.AdminTypes
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminTypes}>
+     */
+    private ValueHolderInterface adminTypes;
+    private Long adminGroupidPk;
+    private String adminGroupTitle;
+    private String description;
+
+    public AdminGroups() {
+        super();
+        this.linkAdminGroupsCollection = new ArrayList();
+        this.adminValuesCollection = new ArrayList();
+        this.adminTypes = new ValueHolder();
+    }
+
+    public void addAdminValues(int index, AdminValues anAdminValues) {
+        this.adminValuesCollection.add(index, anAdminValues);
+        anAdminValues.setAdminGroups(this);
+    }
+
+    public void addAdminValues(AdminValues anAdminValues) {
+        this.adminValuesCollection.add(anAdminValues);
+        anAdminValues.setAdminGroups(this);
+    }
+
+    public void addLinkAdminGroups(LinkAdminGroups aLinkAdminGroups) {
+        this.linkAdminGroupsCollection.add(aLinkAdminGroups);
+        aLinkAdminGroups.setAdminGroups(this);
+    }
+
+    public void addLinkAdminGroups(int index, 
+                                   LinkAdminGroups aLinkAdminGroups) {
+        this.linkAdminGroupsCollection.add(index, aLinkAdminGroups);
+        aLinkAdminGroups.setAdminGroups(this);
+    }
+
+    public String getAdminGroupTitle() {
+        return this.adminGroupTitle;
+    }
+
+    public Long getAdminGroupidPk() {
+        return this.adminGroupidPk;
+    }
+
+    public AdminTypes getAdminTypes() {
+        return (AdminTypes)this.adminTypes.getValue();
+    }
+
+    public List<AdminValues> getAdminValuesCollection() {
+        return this.adminValuesCollection;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public List<LinkAdminGroups> getLinkAdminGroupsCollection() {
+        return this.linkAdminGroupsCollection;
+    }
+
+    public void removeAdminValues(AdminValues anAdminValues) {
+        this.adminValuesCollection.remove(anAdminValues);
+        anAdminValues.setAdminGroups(null);
+    }
+
+    public void removeLinkAdminGroups(LinkAdminGroups aLinkAdminGroups) {
+        this.linkAdminGroupsCollection.remove(aLinkAdminGroups);
+        aLinkAdminGroups.setAdminGroups(null);
+    }
+
+    public void setAdminGroupTitle(String adminGroupTitle) {
+        this.adminGroupTitle = adminGroupTitle;
+    }
+
+    public void setAdminGroupidPk(Long adminGroupidPk) {
+        this.adminGroupidPk = adminGroupidPk;
+    }
+
+    public void setAdminTypes(AdminTypes adminTypes) {
+        this.adminTypes.setValue(adminTypes);
+    }
+
+    public void setAdminValuesCollection(List<AdminValues> adminValuesCollection) {
+        this.adminValuesCollection = adminValuesCollection;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setLinkAdminGroupsCollection(List<LinkAdminGroups> linkAdminGroupsCollection) {
+        this.linkAdminGroupsCollection = linkAdminGroupsCollection;
+    }
+
+}

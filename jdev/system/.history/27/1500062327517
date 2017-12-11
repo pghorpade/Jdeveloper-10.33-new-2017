@@ -1,0 +1,163 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class AdminTerms {
+
+    /**Map adminQualifiersCollection <-> edu.ucla.library.digital.dlcs.model.AdminQualifiers
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminQualifiers}>
+     */
+    private List adminQualifiersCollection;
+
+    /**Map adminTypes <-> edu.ucla.library.digital.dlcs.model.AdminTypes
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminTypes}>
+     */
+    private ValueHolderInterface adminTypes;
+
+    /**Map adminValuesCollection <-> edu.ucla.library.digital.dlcs.model.AdminValues
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminValues}>
+     */
+    private List adminValuesCollection;
+
+    /**Map adminControlValuesCollection <-> edu.ucla.library.digital.dlcs.model.AdminControlValues
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminControlValues}>
+     */
+    private List adminControlValuesCollection;
+    private Long adminTermidPk;
+    private String adminTerm;
+    private String controlValueFlag;
+    private String qualifierFlag;
+    private String repeatFlag;
+
+    public AdminTerms() {
+        super();
+        this.adminQualifiersCollection = new ArrayList();
+        this.adminTypes = new ValueHolder();
+        this.adminValuesCollection = new ArrayList();
+        this.adminControlValuesCollection = new ArrayList();
+    }
+
+    public void addAdminControlValues(AdminControlValues anAdminControlValues) {
+        this.adminControlValuesCollection.add(anAdminControlValues);
+        anAdminControlValues.setAdminTerms(this);
+    }
+
+    public void addAdminControlValues(int index, 
+                                      AdminControlValues anAdminControlValues) {
+        this.adminControlValuesCollection.add(index, anAdminControlValues);
+        anAdminControlValues.setAdminTerms(this);
+    }
+
+    public void addAdminQualifiers(int index, 
+                                   AdminQualifiers anAdminQualifiers) {
+        this.adminQualifiersCollection.add(index, anAdminQualifiers);
+        anAdminQualifiers.setAdminTerms(this);
+    }
+
+    public void addAdminQualifiers(AdminQualifiers anAdminQualifiers) {
+        this.adminQualifiersCollection.add(anAdminQualifiers);
+        anAdminQualifiers.setAdminTerms(this);
+    }
+
+    public void addAdminValues(AdminValues anAdminValues) {
+        this.adminValuesCollection.add(anAdminValues);
+        anAdminValues.setAdminTerms(this);
+    }
+
+    public void addAdminValues(int index, AdminValues anAdminValues) {
+        this.adminValuesCollection.add(index, anAdminValues);
+        anAdminValues.setAdminTerms(this);
+    }
+
+    public List<AdminControlValues> getAdminControlValuesCollection() {
+        return this.adminControlValuesCollection;
+    }
+
+    public List<AdminQualifiers> getAdminQualifiersCollection() {
+        return this.adminQualifiersCollection;
+    }
+
+    public String getAdminTerm() {
+        return this.adminTerm;
+    }
+
+    public Long getAdminTermidPk() {
+        return this.adminTermidPk;
+    }
+
+    public AdminTypes getAdminTypes() {
+        return (AdminTypes)this.adminTypes.getValue();
+    }
+
+    public List<AdminValues> getAdminValuesCollection() {
+        return this.adminValuesCollection;
+    }
+
+    public String getControlValueFlag() {
+        return this.controlValueFlag;
+    }
+
+    public String getQualifierFlag() {
+        return this.qualifierFlag;
+    }
+
+    public String getRepeatFlag() {
+        return this.repeatFlag;
+    }
+
+    public void removeAdminControlValues(AdminControlValues anAdminControlValues) {
+        this.adminControlValuesCollection.remove(anAdminControlValues);
+        anAdminControlValues.setAdminTerms(null);
+    }
+
+    public void removeAdminQualifiers(AdminQualifiers anAdminQualifiers) {
+        this.adminQualifiersCollection.remove(anAdminQualifiers);
+        anAdminQualifiers.setAdminTerms(null);
+    }
+
+    public void removeAdminValues(AdminValues anAdminValues) {
+        this.adminValuesCollection.remove(anAdminValues);
+        anAdminValues.setAdminTerms(null);
+    }
+
+    public void setAdminControlValuesCollection(List<AdminControlValues> adminControlValuesCollection) {
+        this.adminControlValuesCollection = adminControlValuesCollection;
+    }
+
+    public void setAdminQualifiersCollection(List<AdminQualifiers> adminQualifiersCollection) {
+        this.adminQualifiersCollection = adminQualifiersCollection;
+    }
+
+    public void setAdminTerm(String adminTerm) {
+        this.adminTerm = adminTerm;
+    }
+
+    public void setAdminTermidPk(Long adminTermidPk) {
+        this.adminTermidPk = adminTermidPk;
+    }
+
+    public void setAdminTypes(AdminTypes adminTypes) {
+        this.adminTypes.setValue(adminTypes);
+    }
+
+    public void setAdminValuesCollection(List<AdminValues> adminValuesCollection) {
+        this.adminValuesCollection = adminValuesCollection;
+    }
+
+    public void setControlValueFlag(String controlValueFlag) {
+        this.controlValueFlag = controlValueFlag;
+    }
+
+    public void setQualifierFlag(String qualifierFlag) {
+        this.qualifierFlag = qualifierFlag;
+    }
+
+    public void setRepeatFlag(String repeatFlag) {
+        this.repeatFlag = repeatFlag;
+    }
+
+}

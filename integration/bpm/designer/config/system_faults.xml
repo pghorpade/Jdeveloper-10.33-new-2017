@@ -1,0 +1,14 @@
+<faults>
+    <fault name="selectionFailure" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="conflictingReceive" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="conflictingRequest" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="mismatchedAssignmentFailure" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="joinFailure" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="forcedTermination" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="correlationViolation" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="uninitializedVariable" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="repeatedCompensation" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="invalidReply" namespace="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+    <fault name="bindingFault" namespace="http://schemas.oracle.com/bpel/extension"/>
+    <fault name="remoteFault" namespace="http://schemas.oracle.com/bpel/extension"/>
+</faults>

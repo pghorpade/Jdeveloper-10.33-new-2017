@@ -1,0 +1,454 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Projects {
+
+	private List projectItemsCollection;
+	private List userAccessCollection;
+	private List descValuesCollection;
+	private List descQualifiersCollection;
+	private List virtualCollectionsCollection;
+	private List dlObjectsCollection;
+	private List descControlValuesCollection;
+	private List fileGroupsCollection;
+	private List descTermsCollection;
+	private Long projectidPk;
+	private String projectTitle;
+	private String projectManager;
+	private String department;
+	private String workingDir;
+	private String webappDir;
+	private String imageMastersDir;
+	private String imageSubmastersDir;
+	private String audioMastersDir;
+	private String audioSubmastersDir;
+	private String videoMastersDir;
+	private String videoSubmastersDir;
+	private String textMastersDir;
+	private String textSubmastersDir;
+	private String setupFlag;
+	private String autoPublishFlag;
+	private String lobMastersDir;
+	private String lobSubmastersDir;
+	private String dprAccessGroupid;
+	private String webappName;
+	private String thumbnailDir;
+	private String itemOrderingFlag;
+	private String websiteMastersDir;
+	private String oaiFlag;
+
+public Projects() {
+	super();
+	this.projectItemsCollection = new ArrayList();
+	this.userAccessCollection = new ArrayList();
+	this.descValuesCollection = new ArrayList();
+	this.descQualifiersCollection = new ArrayList();
+	this.virtualCollectionsCollection = new ArrayList();
+	this.dlObjectsCollection = new ArrayList();
+	this.descControlValuesCollection = new ArrayList();
+	this.fileGroupsCollection = new ArrayList();
+	this.descTermsCollection = new ArrayList();
+}
+
+public void addDescControlValues(int index, DescControlValues aDescControlValues) {
+	this.descControlValuesCollection.add(index, aDescControlValues);
+	aDescControlValues.setProjects(this);
+}
+
+public void addDescControlValues(DescControlValues aDescControlValues) {
+	this.descControlValuesCollection.add(aDescControlValues);
+	aDescControlValues.setProjects(this);
+}
+
+public void addDescQualifiers(DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.add(aDescQualifiers);
+	aDescQualifiers.setProjects(this);
+}
+
+public void addDescQualifiers(int index, DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.add(index, aDescQualifiers);
+	aDescQualifiers.setProjects(this);
+}
+
+public void addDescTerms(DescTerms aDescTerms) {
+	this.descTermsCollection.add(aDescTerms);
+	aDescTerms.setProjects(this);
+}
+
+public void addDescTerms(int index, DescTerms aDescTerms) {
+	this.descTermsCollection.add(index, aDescTerms);
+	aDescTerms.setProjects(this);
+}
+
+public void addDescValues(int index, DescValues aDescValues) {
+	this.descValuesCollection.add(index, aDescValues);
+	aDescValues.setProjects(this);
+}
+
+public void addDescValues(DescValues aDescValues) {
+	this.descValuesCollection.add(aDescValues);
+	aDescValues.setProjects(this);
+}
+
+public void addDlObjects(DlObjects aDlObjects) {
+	this.dlObjectsCollection.add(aDlObjects);
+	aDlObjects.setProjects(this);
+}
+
+public void addDlObjects(int index, DlObjects aDlObjects) {
+	this.dlObjectsCollection.add(index, aDlObjects);
+	aDlObjects.setProjects(this);
+}
+
+public void addFileGroups(int index, FileGroups aFileGroups) {
+	this.fileGroupsCollection.add(index, aFileGroups);
+	aFileGroups.setProjects(this);
+}
+
+public void addFileGroups(FileGroups aFileGroups) {
+	this.fileGroupsCollection.add(aFileGroups);
+	aFileGroups.setProjects(this);
+}
+
+public void addProjectItems(ProjectItems aProjectItems) {
+	this.projectItemsCollection.add(aProjectItems);
+	aProjectItems.setProjects(this);
+}
+
+public void addProjectItems(int index, ProjectItems aProjectItems) {
+	this.projectItemsCollection.add(index, aProjectItems);
+	aProjectItems.setProjects(this);
+}
+
+public void addUserAccess(UserAccess anUserAccess) {
+	this.userAccessCollection.add(anUserAccess);
+	anUserAccess.setProjects(this);
+}
+
+public void addUserAccess(int index, UserAccess anUserAccess) {
+	this.userAccessCollection.add(index, anUserAccess);
+	anUserAccess.setProjects(this);
+}
+
+public void addVirtualsCollection(int index, VirtualCollections aVirtualCollections) {
+	this.virtualCollectionsCollection.add(index, aVirtualCollections);
+	aVirtualCollections.setProjects(this);
+}
+
+public void addVirtualsCollection(VirtualCollections aVirtualCollections) {
+	this.virtualCollectionsCollection.add(aVirtualCollections);
+	aVirtualCollections.setProjects(this);
+}
+
+public String getAudioMastersDir() {
+	return this.audioMastersDir;
+}
+
+public String getAudioSubmastersDir() {
+	return this.audioSubmastersDir;
+}
+
+public String getAutoPublishFlag() {
+	return this.autoPublishFlag;
+}
+
+public String getDepartment() {
+	return this.department;
+}
+
+public List getDescControlValuesCollection() {
+	return this.descControlValuesCollection;
+}
+
+public List getDescQualifiersCollection() {
+	return this.descQualifiersCollection;
+}
+
+public List getDescTermsCollection() {
+	return this.descTermsCollection;
+}
+
+public List getDescValuesCollection() {
+	return this.descValuesCollection;
+}
+
+public List getDlObjectsCollection() {
+	return this.dlObjectsCollection;
+}
+
+public String getDprAccessGroupid() {
+	return this.dprAccessGroupid;
+}
+
+public List getFileGroupsCollection() {
+	return this.fileGroupsCollection;
+}
+
+public String getImageMastersDir() {
+	return this.imageMastersDir;
+}
+
+public String getImageSubmastersDir() {
+	return this.imageSubmastersDir;
+}
+
+public String getItemOrderingFlag() {
+	return this.itemOrderingFlag;
+}
+
+public String getLobMastersDir() {
+	return this.lobMastersDir;
+}
+
+public String getLobSubmastersDir() {
+	return this.lobSubmastersDir;
+}
+
+public String getOaiFlag() {
+	return this.oaiFlag;
+}
+
+public List getProjectItemsCollection() {
+	return this.projectItemsCollection;
+}
+
+public String getProjectManager() {
+	return this.projectManager;
+}
+
+public String getProjectTitle() {
+	return this.projectTitle;
+}
+
+public Long getProjectidPk() {
+	return this.projectidPk;
+}
+
+public String getSetupFlag() {
+	return this.setupFlag;
+}
+
+public String getTextMastersDir() {
+	return this.textMastersDir;
+}
+
+public String getTextSubmastersDir() {
+	return this.textSubmastersDir;
+}
+
+public String getThumbnailDir() {
+	return this.thumbnailDir;
+}
+
+public List getUserAccessCollection() {
+	return this.userAccessCollection;
+}
+
+public String getVideoMastersDir() {
+	return this.videoMastersDir;
+}
+
+public String getVideoSubmastersDir() {
+	return this.videoSubmastersDir;
+}
+
+public List getVirtualCollectionsCollection() {
+	return this.virtualCollectionsCollection;
+}
+
+public String getWebappDir() {
+	return this.webappDir;
+}
+
+public String getWebappName() {
+	return this.webappName;
+}
+
+public String getWebsiteMastersDir() {
+	return this.websiteMastersDir;
+}
+
+public String getWorkingDir() {
+	return this.workingDir;
+}
+
+public void removeDescControlValues(DescControlValues aDescControlValues) {
+	this.descControlValuesCollection.remove(aDescControlValues);
+	aDescControlValues.setProjects(null);
+}
+
+public void removeDescQualifiers(DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.remove(aDescQualifiers);
+	aDescQualifiers.setProjects(null);
+}
+
+public void removeDescTerms(DescTerms aDescTerms) {
+	this.descTermsCollection.remove(aDescTerms);
+	aDescTerms.setProjects(null);
+}
+
+public void removeDescValues(DescValues aDescValues) {
+	this.descValuesCollection.remove(aDescValues);
+	aDescValues.setProjects(null);
+}
+
+public void removeDlObjects(DlObjects aDlObjects) {
+	this.dlObjectsCollection.remove(aDlObjects);
+	aDlObjects.setProjects(null);
+}
+
+public void removeFileGroups(FileGroups aFileGroups) {
+	this.fileGroupsCollection.remove(aFileGroups);
+	aFileGroups.setProjects(null);
+}
+
+public void removeProjectItems(ProjectItems aProjectItems) {
+	this.projectItemsCollection.remove(aProjectItems);
+	aProjectItems.setProjects(null);
+}
+
+public void removeUserAccess(UserAccess anUserAccess) {
+	this.userAccessCollection.remove(anUserAccess);
+	anUserAccess.setProjects(null);
+}
+
+public void removeVirtualsCollection(VirtualCollections aVirtualCollections) {
+	this.virtualCollectionsCollection.remove(aVirtualCollections);
+	aVirtualCollections.setProjects(null);
+}
+
+public void setAudioMastersDir(String audioMastersDir) {
+	this.audioMastersDir = audioMastersDir;
+}
+
+public void setAudioSubmastersDir(String audioSubmastersDir) {
+	this.audioSubmastersDir = audioSubmastersDir;
+}
+
+public void setAutoPublishFlag(String autoPublishFlag) {
+	this.autoPublishFlag = autoPublishFlag;
+}
+
+public void setDepartment(String department) {
+	this.department = department;
+}
+
+public void setDescControlValuesCollection(List descControlValuesCollection) {
+	this.descControlValuesCollection = descControlValuesCollection;
+}
+
+public void setDescQualifiersCollection(List descQualifiersCollection) {
+	this.descQualifiersCollection = descQualifiersCollection;
+}
+
+public void setDescTermsCollection(List descTermsCollection) {
+	this.descTermsCollection = descTermsCollection;
+}
+
+public void setDescValuesCollection(List descValuesCollection) {
+	this.descValuesCollection = descValuesCollection;
+}
+
+public void setDlObjectsCollection(List dlObjectsCollection) {
+	this.dlObjectsCollection = dlObjectsCollection;
+}
+
+public void setDprAccessGroupid(String dprAccessGroupid) {
+	this.dprAccessGroupid = dprAccessGroupid;
+}
+
+public void setFileGroupsCollection(List fileGroupsCollection) {
+	this.fileGroupsCollection = fileGroupsCollection;
+}
+
+public void setImageMastersDir(String imageMastersDir) {
+	this.imageMastersDir = imageMastersDir;
+}
+
+public void setImageSubmastersDir(String imageSubmastersDir) {
+	this.imageSubmastersDir = imageSubmastersDir;
+}
+
+public void setItemOrderingFlag(String itemOrderingFlag) {
+	this.itemOrderingFlag = itemOrderingFlag;
+}
+
+public void setLobMastersDir(String lobMastersDir) {
+	this.lobMastersDir = lobMastersDir;
+}
+
+public void setLobSubmastersDir(String lobSubmastersDir) {
+	this.lobSubmastersDir = lobSubmastersDir;
+}
+
+public void setOaiFlag(String oaiFlag) {
+	this.oaiFlag = oaiFlag;
+}
+
+public void setProjectItemsCollection(List projectItemsCollection) {
+	this.projectItemsCollection = projectItemsCollection;
+}
+
+public void setProjectManager(String projectManager) {
+	this.projectManager = projectManager;
+}
+
+public void setProjectTitle(String projectTitle) {
+	this.projectTitle = projectTitle;
+}
+
+public void setProjectidPk(Long projectidPk) {
+	this.projectidPk = projectidPk;
+}
+
+public void setSetupFlag(String setupFlag) {
+	this.setupFlag = setupFlag;
+}
+
+public void setTextMastersDir(String textMastersDir) {
+	this.textMastersDir = textMastersDir;
+}
+
+public void setTextSubmastersDir(String textSubmastersDir) {
+	this.textSubmastersDir = textSubmastersDir;
+}
+
+public void setThumbnailDir(String thumbnailDir) {
+	this.thumbnailDir = thumbnailDir;
+}
+
+public void setUserAccessCollection(List userAccessCollection) {
+	this.userAccessCollection = userAccessCollection;
+}
+
+public void setVideoMastersDir(String videoMastersDir) {
+	this.videoMastersDir = videoMastersDir;
+}
+
+public void setVideoSubmastersDir(String videoSubmastersDir) {
+	this.videoSubmastersDir = videoSubmastersDir;
+}
+
+public void setVirtualCollectionsCollection(List virtualCollectionsCollection) {
+	this.virtualCollectionsCollection = virtualCollectionsCollection;
+}
+
+public void setWebappDir(String webappDir) {
+	this.webappDir = webappDir;
+}
+
+public void setWebappName(String webappName) {
+	this.webappName = webappName;
+}
+
+public void setWebsiteMastersDir(String websiteMastersDir) {
+	this.websiteMastersDir = websiteMastersDir;
+}
+
+public void setWorkingDir(String workingDir) {
+	this.workingDir = workingDir;
+}
+
+}

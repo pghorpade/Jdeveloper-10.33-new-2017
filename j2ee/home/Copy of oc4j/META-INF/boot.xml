@@ -1,0 +1,575 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- ==================================================================== -->
+<!-- This file defines the arrangement of class-loaders, shared-libraries -->
+<!-- and the code-sources within them required to boot OC4J.  Think of it -->
+<!-- as a glorified manifest Class-Path.                                  -->
+<!--                                                                      -->
+<!-- Note: Before making any changes to this file, please consult         -->
+<!--       Bryan Atsatt.                                                  -->
+<!-- ==================================================================== -->
+
+<boot>
+    <!--
+        To enable property-expansion in code-source paths, we want to ensure
+        that there is a valid default when the system property is not set,
+        which will be the common case (e.g. launched via "java -jar oc4j.jar").
+        Unfortunately, we need different defaults depending upon whether we are
+        executing in ADE or in oc4j_extended/shiphome/VOH.
+
+        This element enables a comma-separated list of default values to be
+        supplied. The actual value will be produced as follows:
+
+        1.  Lookup the name in the system properties. If the value exists, use
+            it. If it does not point to a valid directory, exit with an error
+            message.
+
+        2.  Walk the list of default values, left to right, until we find one
+            that points to a valid directory. If none found, exit with an
+            error message. If found, use it and update the system properties
+            with the new value.
+
+        If a default value is itself relative, its root is that of the
+        directory containing the boot jar (oc4j.jar).
+    -->
+    <directory-property name="oracle.home" defaults="../../oracle, ../.."/>
+
+    <!--
+        There are two implicit loaders made available by the bootstrap code,
+        which are not declared in this file but can be used in parent
+        declarations. These are mappings of the JRE loaders, and can be
+        thought of as:
+
+           <boot-class-loader name="jre.bootstrap">
+               <code-source-dirs property="sun.boot.class.path"/>
+               <native-code-source-dirs property="java.library.path"/>
+           </boot-class-loader>
+
+           <extension-class-loader name="jre.extension" parent="jre.bootstrap">
+               <code-source-dirs property="jre.ext.dirs"/>
+           </extension-class-loader>
+    -->
+
+    <!--
+        The "system" class loader is unique in that it will be set as
+        the loader returned by calling:
+
+            ClassLoader.getSystemClassLoader()
+
+        It is also the default parent for any java.lang.ClassLoader that
+        does not declare one.
+
+        NOTE: Until the "system" application is introduced as a parent of
+              the "default" application, the "oc4j" loader defined below
+              must be visible to all applications. Therefore, as a
+              temporary hack, the "oc4j" loader is forcibly set as the
+              loader returned by ClassLoader.getSystemClassLoader().
+    -->
+    <system-class-loader name="api" parent="jre.extension" version="1.4.0"
+                         extension-property="api.ext.dirs"
+                         default-extension-directory="lib/api-ext">
+
+        <code-source path="oc4j-api.jar"/>
+        <code-source path="lib/jmxri.jar" if="java.specification.version == 1.4"/>
+        <code-source path="lib/oc4j-unsupported-api.jar"/>
+        <code-source path="lib/activation.jar"/>
+        <code-source path="lib/mail.jar"/>
+        <code-source path="lib/persistence.jar" if="default.persistence.provider != toplink"/>
+        <code-source path="${oracle.home}/toplink/jlib/preview-persistence.jar"
+                     if="default.persistence.provider == toplink"/>
+        <code-source path="lib/ejb30.jar" if="oracle.cts.useCtsFlags != true"/>
+        <code-source path="lib/ejb.jar"/>
+        <code-source path="lib/javax77.jar"/>
+        <code-source path="lib/javax88.jar"/>
+        <code-source path="lib/servlet.jar"/>
+        <code-source path="lib/jms.jar"/>
+        <code-source path="lib/jta.jar"/>
+        <code-source path="lib/jacc-api.jar"/>
+        <code-source path="lib/connector.jar"/>
+        <code-source path="lib/cos.jar"/>
+        <code-source path="lib/jaas.jar"/>
+        <code-source path="lib/jaxp.jar"/>
+        <code-source path="lib/jmx_remote_api.jar"/>
+        <code-source path="lib/jax-qname-namespace.jar"/>
+        <!-- WS jax-rpc -->
+        <code-source path="${oracle.home}/webservices/lib/jaxr-api.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/jaxrpc-api.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/jaxb-api.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/saaj-api.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/jws-api.jar" if="java.specification.version == /1\.[5-6]/"/>
+    </system-class-loader>
+
+    <!--
+        A shared loader for DMS.
+    -->
+    <shared-library name="oracle.dms" parent="api" version="3.0">
+        <code-source path="${oracle.home}/diagnostics/lib/ojdl.jar"/>
+        <code-source path="${oracle.home}/lib/dms.jar"/>
+    </shared-library>
+
+    <!--
+        A shared loader for the bundled Oracle JDBC driver.
+        TODO Bryan: Version number/mapping? classes12[dms] jars should be separate library.
+    -->
+    <shared-library name="oracle.gdk" parent="api" version="10.1.0_2">
+        <code-source path="${oracle.home}/jdbc/lib/orai18n.jar" manifest-dependencies="include"
+                     alias="nls_charset12.jar"/>
+    </shared-library> 
+
+    <shared-library name="oracle.jdbc" parent="api" version="10.1.0_2">
+        <import-shared-library name="oracle.dms"/>
+        <import-shared-library name="oracle.gdk"/>
+        <code-source path="${oracle.home}/jdbc/lib/ojdbc14dms.jar"
+                     alias="classes12.jar ,classes12.zip, classes12dms.jar, ojdbc14.jar"/>
+        <code-source path="${oracle.home}/opmn/lib/ons.jar"/>
+        <code-source path="${oracle.home}/jdbc/lib/ocrs12.jar"/>
+        <code-source path="${oracle.home}/rdbms/jlib/aqapi.jar"/>
+		
+		
+        <code-source path="lib/ojms-provider.jar"/>
+    </shared-library>
+	
+	
+	     
+
+
+    <!--
+        A shared loader for the bundled Oracle XML parser. TODO Bryan: Version number/mapping? 10.1.0.2.0
+    -->
+    <shared-library name="oracle.xml" parent="api" version="10.1.0_2">
+        <import-shared-library name="oracle.gdk"/>   <!-- Must precede jdbc which has a duplicate -->
+        <import-shared-library name="oracle.jdbc"/>		
+        <code-source path="${oracle.home}/lib/xmlparserv2.jar"/>
+        <code-source path="${oracle.home}/lib/xml.jar"/>
+        <code-source path="${oracle.home}/lib/xmlmesg.jar"/>
+        <code-source path="${oracle.home}/lib/xsu12.jar"/>
+        <code-source path="${oracle.home}/lib/xquery.jar"/>		
+    </shared-library>
+
+    <!--
+        A shared loader for the Java Cache and dependent xschema jar
+    -->
+    <shared-library name="oracle.cache" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.dms"/>
+        <code-source path="${oracle.home}/javacache/lib/cache.jar"/>
+        <code-source path="${oracle.home}/lib/xschema.jar"/>
+    </shared-library>
+
+    <!--
+        A shared loader for the sqlj translator and runtime12 jars
+    -->
+    <shared-library name="oracle.sqlj" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.dms"/>
+        <import-shared-library name="oracle.jdbc"/>
+        <code-source path="${oracle.home}/sqlj/lib/runtime12.jar"/>
+        <code-source path="${oracle.home}/sqlj/lib/translator.jar"/>
+    </shared-library>
+
+
+    <!--
+        A shared loader for the http client jar.
+        This is required by both soap.jar and orawsdl.jar.
+    -->
+    <shared-library name="oracle.http.client" parent="api" version="10.1.3">
+        <code-source path="lib/http_client.jar"/>
+    </shared-library>
+    <!--
+        A shared loader for soap.
+    -->
+    <shared-library name="soap" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.dms"/>
+        <import-shared-library name="oracle.jdbc"/>
+        <import-shared-library name="oracle.sqlj"/>
+        <import-shared-library name="oracle.http.client"/>
+        <code-source path="${oracle.home}/webservices/lib/soap.jar"/>
+    </shared-library>
+
+    <!--
+        A shared loader to enable customers to swap our JWSDL implementation.
+        One use case is running Axis 1.2 - wsdl4j 1.5 on oc4j.
+        note: parent must be 'api' to access javax.xml.namespace.QName
+    -->
+    <shared-library name="oracle.jwsdl" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.http.client"/>
+        <code-source path="${oracle.home}/webservices/lib/wsdl-api.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/orawsdl.jar"/>
+    </shared-library>
+
+    <!--
+        A Shared library for apache commons logging
+    -->
+    <shared-library name="apache.commons.logging" parent="api" version="1.0.4">
+        <code-source path="${oracle.home}/webservices/lib/commons-logging.jar"/>
+    </shared-library>
+
+    <!--
+        A Shared library for Doug Lea's concurrent library 
+    -->
+    <shared-library name="util.concurrent" parent="api" version="1.3.2">
+        <code-source path="lib/concurrent.jar"/>
+    </shared-library>
+
+    <!--
+        A Shared library for jgroups
+    -->
+    <shared-library name="org.jgroups" parent="api" version="2.3">
+        <import-shared-library name="apache.commons.logging"/>
+        <import-shared-library name="util.concurrent"/>
+        <code-source path="lib/jgroups-core.jar"/>
+    </shared-library>
+
+    <!--
+        A shared loader to hide some oc4j internal classes from applications.
+        TODO Bryan: This is a temporary work around until the oc4j loader
+        itself is hidden from applications.
+    -->
+    <shared-library name="oc4j.internal" parent="api" version="10.1.3">
+        <import-shared-library name="apache.commons.logging"/>
+        <!--
+            Third-Party jars that might conflict with app bundled classes.
+        -->
+        <code-source path="${oracle.home}/jlib/jaxen.jar"/>
+        <code-source path="${oracle.home}/toplink/jlib/jakarta-regexp-1.3.jar"/>
+        <code-source path="lib/commons-el.jar"/>
+        <code-source path="lib/bcel.jar"/>
+        <code-source path="lib/asm.jar"/>
+        <code-source path="lib/asm-attrs.jar"/>
+        <code-source path="lib/crimson_1_1_3.jar" if="java.specification.version == /1\.[5-6]/"/>
+    </shared-library>
+
+    <!--
+        A shared loader for access to Web Service toolkits and client apis
+    -->
+    <shared-library name="oracle.ws.client" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.dms"/>
+        <import-shared-library name="oc4j.internal"/>
+        <import-shared-library name="oracle.http.client"/>
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.jwsdl"/>
+        <code-source path="${oracle.home}/webservices/lib/wsclient.jar">
+            <external-classes>
+                <class name="oracle.j2ee.ws.client.*"/>
+            </external-classes>
+        </code-source>
+        <code-source path="${oracle.home}/webservices/lib/orasaaj.jar">
+            <external-classes>
+                <class name="oracle.j2ee.ws.saaj.soap.ch.*"/>
+            </external-classes>
+        </code-source>
+        <code-source path="${oracle.home}/webservices/lib/xsdlib.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/mdds.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/relaxngDatatype.jar"/>
+    </shared-library>
+
+    <!--
+        A shared loader for XML security classes.
+     -->
+    <shared-library name="oracle.xml.security" parent="api" version="10.1.3">
+        <import-shared-library name="oc4j.internal"/>
+        <code-source path="${oracle.home}/jlib/osdt_core.jar"/>
+        <code-source path="${oracle.home}/jlib/osdt_cert.jar"/>
+        <code-source path="${oracle.home}/jlib/osdt_xmlsec.jar">
+            <!-- For oracle.ws.security dependency -->
+            <external-classes>
+                <class name="oracle.security.xmlsec.dsig.*"/>
+                <class name="oracle.security.xmlsec.enc.*"/>
+                <class name="oracle.security.xmlsec.keys.*"/>
+                <class name="oracle.security.xmlsec.keys.retrieval.*"/>
+                <class name="oracle.security.xmlsec.util.*"/>
+            </external-classes>
+        </code-source>
+        <code-source path="${oracle.home}/jlib/osdt_wss.jar">
+            <!-- For oracle.ws.security dependency -->
+            <external-classes>
+                <class name="oracle.security.xmlsec.wss.*"/>
+                <class name="oracle.security.xmlsec.wss.saml.*"/>
+                <class name="oracle.security.xmlsec.wss.soap.*"/>
+                <class name="oracle.security.xmlsec.wss.username.UsernameToken"/>
+                <class name="oracle.security.xmlsec.wss.util.*"/>
+                <class name="oracle.security.xmlsec.wss.x509.*"/>
+            </external-classes>
+        </code-source>
+        <code-source path="${oracle.home}/jlib/osdt_saml.jar">
+            <!-- For oracle.ws.security dependency -->
+            <external-classes>
+                <class name="oracle.security.xmlsec.saml.*"/>
+            </external-classes>
+        </code-source>
+        <code-source path="${oracle.home}/jlib/ojpse.jar"/>
+        <code-source path="${oracle.home}/jlib/oraclepki.jar"/>
+    </shared-library>
+
+    <!--
+       A shared loader for the WS-Security classes.
+     -->
+    <shared-library name="oracle.ws.security" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.ws.client"/>
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.xml.security"/>
+        <import-shared-library name="oracle.cache"/>
+        <code-source path="${oracle.home}/webservices/lib/wssecurity.jar">
+            <external-classes>
+                <class name="oracle.security.wss.config.*"/>
+                <class name="oracle.security.wss.interceptors.*"/>
+            </external-classes>
+        </code-source>
+    </shared-library>
+
+    <!--
+       A shared loader for access to TopLink classes
+    -->
+    <shared-library name="oracle.toplink" parent="api" version="10.1.3">
+        <import-shared-library name="oc4j.internal"/>
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.jdbc"/>
+        <import-shared-library name="oracle.dms"/>
+        <code-source path="${oracle.home}/toplink/jlib/toplink.jar"/>
+        <code-source path="${oracle.home}/toplink/jlib/antlr.jar"/>
+        <code-source path="${oracle.home}/toplink/jlib/attunityResourceAdapter.jar"/>
+        <code-source path="${oracle.home}/toplink/jlib/cciblackbox-tx.jar"/>
+        <code-source path="${oracle.home}/toplink/jlib/xdb.jar"/>
+        <code-source path="${oracle.home}/toplink/jlib/jdo.jar"/>
+    </shared-library>
+
+    <!--
+        A shared loader for web services reliability classes.
+     -->
+    <shared-library name="oracle.ws.reliability" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.ws.client"/>
+        <import-shared-library name="oracle.jdbc"/>
+        <import-shared-library name="oracle.toplink"/>
+        <code-source path="${oracle.home}/webservices/lib/orawsrm.jar">
+            <external-classes>
+                <class name="oracle.webservices.reliability.*"/>
+                <class name="oracle.j2ee.ws.reliability.*"/>
+            </external-classes>
+        </code-source>
+    </shared-library>
+
+    <!--
+        A shared loader for web services test page classes.
+     -->
+    <shared-library name="oracle.ws.testpage" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.ws.client"/>
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.ws.reliability"/>
+        <code-source path="${oracle.home}/webservices/lib/testpage.jar"/>
+    </shared-library>
+
+    <!--
+        A shared loader for web services core classes
+     -->
+    <shared-library name="oracle.ws.core" parent="api" version="10.1.3">
+        <import-shared-library name="oracle.ws.client"/>
+        <import-shared-library name="soap"/>
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.dms"/>
+        <code-source path="${oracle.home}/webservices/lib/wsdl.jar"/>
+    </shared-library>
+
+    <!-- Begin OWSM related. -->
+    <!--
+    A shared loader for access to classes required by the OWSM agent integration.
+    This loader is used explicitly by the integration between the webservice stack
+    and the COREsv OWSM agent integration.  This loader is retrieved by name
+    at runtime and used to load all COREsv/OWSM classes.  In the future all
+    conflicts between these jars and the ones provided by oc4j will be resolved.
+
+    NOTE: This shared loader cannot be removed.  It is required for configuration
+    compatibility with the 10.1.3 server.xml file.
+    -->
+    <shared-library name="oracle.wsm" parent="api" version="10.1.3">
+        <import-shared-library name="oc4j.internal"/>
+        <import-shared-library name="oracle.gdk"/>
+        <import-shared-library name="oracle.dms"/>
+        <import-shared-library name="oracle.jdbc"/>
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.xml.security"/>
+        <import-shared-library name="oracle.http.client"/>
+        <code-source path="${oracle.home}/owsm/lib/cfluent-log4j.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/coresvagent.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/axis.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/bcprov-jdk14-119.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/commons-collections-3.1.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/commons-dbcp-1.2.1.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/commons-discovery.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/commons-pool-1.2.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/concurrent-1.3.2.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/jdom.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/jobaccess.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/jug-1.0.1.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/log4j-1.2.8.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/ojmisc.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/olite40.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/opensaml.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/regexp.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/saaj.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/saxpath.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/tsik.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/ws-security.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/xml_pilot_key.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/xmlsec-1.0.5.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/custom-steps.jar"/>
+        <code-source path="${oracle.home}/owsm/lib/custom-drivers.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/wsm-handler.jar"/>
+    </shared-library>
+    <!-- End OWSM related. -->
+    <!-- d3l.jar is used by XQS. 
+         Define as shared-library imported by 'oc4j' loader 
+         so that xds.jar can see  it, but classes in d3l.jar will not conflict 
+         with b2b.jar which is loaded by the Process Connect application
+    -->
+    <shared-library name="xqs.d3l" parent="api" version="10.1.3.1.0">
+           <import-shared-library name="oracle.xml"/>
+           <import-shared-library name="oracle.gdk"/> 
+           <code-source path="${oracle.home}/xqs/lib/d3l.jar"/>
+     </shared-library>
+	     <!--
+        The "main" loader, which contains OC4J implementation code as well as
+        the main-class entry point to which control will be transferred after
+        this file is processed.
+    -->
+    <main-class-loader name="oc4j" parent="api" version="10.1.3"
+                       main-class="com.evermind.server.OC4JServer"
+                       code-source-equality="filename"
+                       extension-property="oc4j.ext.dirs"
+                       default-extension-directory="lib/ext">
+
+        <import-shared-library name="oracle.dms"/>
+        <import-shared-library name="oracle.jdbc"/>
+        <import-shared-library name="oracle.gdk"/>
+        <import-shared-library name="oracle.xml"/>
+        <import-shared-library name="oracle.toplink"/>
+        <import-shared-library name="oracle.ws.client"/>
+        <import-shared-library name="oracle.ws.reliability"/>
+        <import-shared-library name="oracle.ws.testpage"/>
+        <import-shared-library name="oracle.cache"/>
+        <import-shared-library name="soap"/>
+        <import-shared-library name="oracle.xml.security"/>
+        <import-shared-library name="oracle.ws.security"/>
+        <import-shared-library name="oracle.ws.core"/>
+        <import-shared-library name="oracle.sqlj"/>
+        <import-shared-library name="oracle.jwsdl"/>
+        <import-shared-library name="oracle.http.client"/>
+        <import-shared-library name="oc4j.internal"/>
+        <import-shared-library name="apache.commons.logging"/>
+        <import-shared-library name="org.jgroups"/>
+        <import-shared-library name="xqs.d3l"/>
+
+        <code-source path="lib/oc4j-internal.jar">
+            <external-classes>
+                <class name="oracle.oc4j.security.OC4JPrivilegedAction$NoException"/>
+                <class name="oracle.j2ee.util.*"/>
+                <class name="com.evermind.xml.EntityResolverUtil"/>
+                <class name="oracle.j2ee.connector.proxy.AbstractProxy"/>
+                <class name="oracle.j2ee.connector.ConnectorProxy"/>
+                <class name="oracle.j2ee.connector.ConnectorProxyConstructionData"/>
+                <class name="oracle.j2ee.connector.PrincipalMappingImpl"/>
+                <class name="com.orionserver.http.OrionHttpJspPage"/>
+                <class name="com.oracle.server.ejb.entitymanager.ClassTransformer"/>
+                <class name="com.oracle.server.ejb.entitymanager.EntityManagerFactory"/>
+                <class name="com.oracle.server.ejb.entitymanager.EntityManagerSetup"/>
+            </external-classes>
+        </code-source>
+        <code-source path="lib/oems-jms-oc4j.jar"/>
+        <code-source path="lib/oems-jms-client.jar"/>
+        <code-source path="lib/oems-jms-server.jar"/>
+        <code-source path="lib/oc4j-schemas.jar"/>
+        <code-source path="lib/ojsp.jar">
+            <external-classes>
+                <class name="oracle.jsp.el.*"/>
+            </external-classes>
+        </code-source>
+        <code-source path="lib/oc4j_orb.jar"/>
+        <code-source path="lib/iiop_support.jar"/>
+        <code-source path="lib/orbbase.jar"/>
+        <code-source path="lib/jscheme.jar"/>
+        <code-source path="iiop_gen_bin.jar"/>
+
+        <!-- JMX related -->
+
+        <code-source path="lib/jmxcluster.jar"/>
+
+        <!-- End JMX related -->
+
+        <code-source path="jaccprovider.jar"/>
+        <code-source path="${oracle.home}/javavm/lib/jasper.zip"/>
+        <code-source path="lib/adminclient.jar"/>
+        <code-source path="${oracle.home}/opmn/lib/optic.jar"/>
+        <code-source path="lib/jnet.jar"/>
+        <code-source path="lib/jcert.jar"/>
+        <code-source path="lib/jaxr.jar"/>
+
+        <code-source path="jacc-spi.jar"/>
+        <code-source path="jazncore.jar">
+            <external-classes> <!-- for ADF loader -->
+                <class name="oracle.security.jazn.*"/>
+                <class name="oracle.security.jazn.realm.RealmManager"/>
+                <class name="oracle.security.jazn.util.*"/>
+                <!-- for WS interceptors -->
+            </external-classes>
+        </code-source>
+        <code-source path="jazn.jar">
+            <external-classes>
+                <class name="oracle.security.jazn.oc4j.*"/>
+                <!-- For oracle.ws.security dependency -->
+            </external-classes>
+        </code-source>
+        <code-source path="jaccprovider.jar"/>
+        <code-source path="${oracle.home}/jlib/infratool.jar"/>
+        <!-- for jazncore.jar -->
+        <code-source path="${oracle.home}/jlib/ospnego.jar"/>
+        <!-- for jazncore.jar -->
+        <code-source path="${oracle.home}/jlib/ldapjclnt10.jar"/>
+        <!-- for jazncore.jar -->
+        <code-source path="${oracle.home}/ldap/jlib/ldapjclnt10.jar"/>
+        <!-- for jazncore.jar in J2EE view -->
+
+        <!-- Begin Web Service related -->
+        <code-source path="${oracle.home}/webservices/lib/wsserver.jar">
+            <external-classes>
+                <class name="oracle.j2ee.ws.server.provider.*"/>
+                <class name="oracle.j2ee.ws.server.WebServiceProcessor"/>
+                <class name="oracle.j2ee.ws.server.WebServiceServlet"/>
+            </external-classes>
+        </code-source>
+        <code-source path="${oracle.home}/webservices/lib/wsif.jar"/>
+
+        <!-- These are used by OC4J for WS annotation processing at deployment time -->
+        <code-source path="${oracle.home}/webservices/lib/orawsmetadata.jar"
+                     if="java.specification.version == /1\.[5-6]/"/>
+
+        <!-- These are used by at least the oracle.ws.core and oracle.ws.security loaders -->
+        <code-source path="${oracle.home}/webservices/lib/jaxb-impl.jar"/>
+        <code-source path="${oracle.home}/webservices/lib/jaxb-libs.jar"/>
+
+        <code-source path="${oracle.home}/webservices/lib/orajaxr.jar"/>
+
+        <!-- End Web Service related -->
+
+        <code-source path="${oracle.home}/jlib/jssl-1_1.jar"/>
+        <code-source path="${oracle.home}/jlib/repository.jar"/>
+        <code-source path="${oracle.home}/jlib/ojmisc.jar"/>
+        <!-- for repository.jar -->
+
+        <code-source path="lib/jaasmodules.jar"/>
+
+        <code-source path="${oracle.home}/toplink/jlib/toplink-oc4j.jar"/>
+        <code-source path="${oracle.home}/diagnostics/lib/ojdl2.jar">
+            <external-classes>
+                <class name="oracle.core.ojdl.query.LogQueryException"/>
+                <class name="oracle.core.ojdl.query.LogRepository"/>
+                <class name="oracle.core.ojdl.reader.LogRecord"/>
+            </external-classes>
+        </code-source>
+        <code-source path="${oracle.home}/dcm/lib/dcm.jar" if="OPMN"/>
+
+         <!-- XQS Related code source path (These jars are only available in Shiphome not in standalone.) -->
+        <code-source path="${oracle.home}/xqs/lib/xqs-api.jar"/>
+        <code-source path="${oracle.home}/xqs/lib/xds.jar"/>
+        <!-- End of  XQS Related code source path -->
+    </main-class-loader>
+
+</boot>

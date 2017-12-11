@@ -1,0 +1,593 @@
+<LayoutInfo>
+   <knownDockableFactories>
+      <LogWindow/>
+      <ExplorerWindow/>
+      <RunManagerWindow/>
+      <SystemNavigatorWindow/>
+      <ApplicationNavigatorWindow/>
+      <ConnectionNavigatorWindow/>
+      <InspectorWindow/>
+      <ComponentPalette/>
+      <Debugger/>
+      <BrowseHierarchy/>
+      <HelpSystemAddin/>
+      <UIDebugger/>
+      <Profiler/>
+      <ToDoAddin/>
+      <ConstraintsWindow/>
+      <TCPPacketMonitor/>
+      <ThumbnailDockable/>
+      <adfdbPanel/>
+      <BPEL_VIEW_TYPE/>
+      <CVSNavigatorWindow/>
+      <CVS-PendingChangesWindow/>
+      <CVS-EditNotificationsWindow/>
+   </knownDockableFactories>
+   <dockingPositions>
+      <WEST floatSize="180" dockSize="361">
+         <box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="SystemNavigatorWindow.SystemNavigatorName" floatWidth="400">
+                     <properties flat-level="3" expandData.count="1" filter0.key="Applications" sort-by-type="false" expandData0.nodePath="Applications," show-root-dirs="false" filter0.filterCls="oracle.ide.model.ContentFilter" filter="1" show-libs="false"/>
+                  </dockable>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ApplicationNavigatorWindow.ApplicationNavigatorName" floatWidth="400">
+                     <properties filter8.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsD:\jdevstudio10133\jdev\mywork\DLWebApp\ViewController\ViewController.jpr" filter18.key="ApplicationsF:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws" filter34.options="0" filter31.options="0" filter3.filterCls="oracle.ide.model.ContentFilter" filter14.key="Applications" filter17.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsC:\jdevstudio10133\jdev\mywork\DLWebApp\JDeveloperLibs\JDeveloperLibs.jpr" filter7.key="ApplicationsD:\jdevstudio10133\jdev\mywork\sheetmusic2.0\smc2.0.jwsD:\jdevstudio10133\jdev\mywork\sheetmusic2.0\ViewController\ViewController.jpr" filter31.key="ApplicationsC:\jdevstudio10133\jdev\mywork\Minasian\Minasian.jwsC:\jdevstudio10133\jdev\mywork\Minasian\JDeveloperLibs\JDeveloperLibs.jpr" filter27.filterCls="oracle.ide.model.ContentFilter" filter16.options="0" filter4.options="0" filter25.options="0" filter26.filterCls="oracle.ide.model.ContentFilter" filter26.options="0" filter2.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsC:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\Model\Model.jpr" filter20.key="ApplicationsF:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsF:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr" filter28.filterCls="oracle.ide.model.ContentFilter" filter24.filterCls="oracle.ide.model.ContentFilter" filter32.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jws" filter10.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsC:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\JDeveloperLibs\JDeveloperLibs.jpr" filter23.key="ApplicationsD:\jdevstudio10133\jdev\mywork\sheetmusic2.0\smc2.0.jwsD:\jdevstudio10133\jdev\mywork\sheetmusic2.0\Model\Model.jpr" filter11.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsD:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\Model\Model.jpr" filter2.options="0" filter5.options="0" filter28.options="0" filter6.filterCls="oracle.ide.model.ContentFilter" filter21.key="ApplicationsF:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsF:\jdevstudio10133\jdev\mywork\DLWebApp\ViewController\ViewController.jpr" filter32.options="0" filter14.filterCls="oracle.ide.model.ContentFilter" filter13.key="ApplicationsD:\jdevstudio10133\jdev\mywork\sheetmusic2.0\smc2.0.jws" filter15.filterCls="oracle.ide.model.ContentFilter" filter6.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws" filter22.key="ApplicationsF:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jws" filter19.options="0" filter0.key="ApplicationsF:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsF:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\Model\Model.jpr" filter3.options="0" filter9.filterCls="oracle.ide.model.ContentFilter" expandData1.url="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" filter8.options="0" filter1.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsD:\jdevstudio10133\jdev\mywork\DLWebApp\JDeveloperLibs\JDeveloperLibs.jpr" filter33.options="0" filter0.options="0" filter27.options="0" show-root-dirs="false" filter11.filterCls="oracle.ide.model.ContentFilter" filter24.key="ApplicationsC:\jdevstudio10133\jdev\mywork\sheetmusic2.0\smc2.0.jwsC:\jdevstudio10133\jdev\mywork\sheetmusic2.0\ViewController\ViewController.jpr" filter21.options="0" filter2.filterCls="oracle.ide.model.ContentFilter" filter19.key="ApplicationsC:\jdevstudio10133\jdev\mywork\Minasian\Minasian.jws" filter16.key="ApplicationsC:\jdevstudio10133\jdev\mywork\Minasian\Minasian.jwsC:\jdevstudio10133\jdev\mywork\Minasian\ViewController\ViewController.jpr" filter4.key="ApplicationsC:\jdevstudio10133\jdev\mywork\Minasian\Minasian.jwsC:\jdevstudio10133\jdev\mywork\Minasian\Model\Model.jpr" expandData5.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws,D:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr,Application Sources,META-INF," filter33.filterCls="oracle.ide.model.ContentFilter" filter5.filterCls="oracle.ide.model.ContentFilter" filter1.options="0" filter33.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsC:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\ViewController\ViewController.jpr" filter5.key="ApplicationsC:\jdevstudio10133\jdev\mywork\aegaron-webservice\AEGARON\Aegaron.jwsC:\jdevstudio10133\jdev\mywork\aegaron-webservice\AEGARON\Project\Project.jpr" flat-level="3" expandData3.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws,D:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr,Application Sources," filter1.filterCls="oracle.ide.model.ContentFilter" expandData.count="9" expandData7.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws,D:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr,Application Sources,edu.ucla.library,digital," filter12.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jws" selectionRow="31" filter9.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsC:\jdevstudio10133\jdev\mywork\DLWebApp\ViewController\ViewController.jpr" filter8.filterCls="oracle.ide.model.ContentFilter" show-libs="false" filter7.filterCls="oracle.ide.model.ContentFilter" filter20.filterCls="oracle.ide.model.ContentFilter" filter15.options="0" expandData4.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws,D:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr,Application Sources,TopLink," expandData2.url="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" filter18.filterCls="oracle.ide.model.ContentFilter" filter16.filterCls="oracle.ide.model.ContentFilter" filter22.filterCls="oracle.ide.model.ContentFilter" expandData6.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws,D:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr,Application Sources,edu.ucla.library," filter15.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsD:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\JDeveloperLibs\JDeveloperLibs.jpr" filter9.options="0" filter25.filterCls="oracle.ide.model.ContentFilter" filter30.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsD:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr" filter30.filterCls="oracle.ide.model.ContentFilter" filter10.filterCls="oracle.ide.model.ContentFilter" filter26.key="ApplicationsC:\jdevstudio10133\jdev\mywork\sheetmusic2.0\smc2.0.jws" expandData1.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws," filter4.filterCls="oracle.ide.model.ContentFilter" filter23.filterCls="oracle.ide.model.ContentFilter" filter11.options="0" filter18.options="0" filter="35" expandData8.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws,D:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr,Application Sources,edu.ucla.library,digital,util," filter12.filterCls="oracle.ide.model.ContentFilter" expandData0.nodePath="Applications," filter21.filterCls="oracle.ide.model.ContentFilter" filter13.filterCls="oracle.ide.model.ContentFilter" filter20.options="0" expandData2.nodePath="Applications,D:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws,D:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr," filter0.filterCls="oracle.ide.model.ContentFilter" filter19.filterCls="oracle.ide.model.ContentFilter" filter22.options="0" filter17.options="0" filter29.options="0" filter3.key="ApplicationsC:\jdevstudio10133\jdev\mywork\aegaron-webservice\AEGARON\Aegaron.jws" filter13.options="0" filter17.filterCls="oracle.ide.model.ContentFilter" filter7.options="0" filter29.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jwsC:\jdevstudio10133\jdev\mywork\DLWebApp\Model\Model.jpr" filter32.filterCls="oracle.ide.model.ContentFilter" filter23.options="0" filter29.filterCls="oracle.ide.model.ContentFilter" filter34.filterCls="oracle.ide.model.ContentFilter" filter25.key="ApplicationsC:\jdevstudio10133\jdev\mywork\sheetmusic2.0\smc2.0.jwsC:\jdevstudio10133\jdev\mywork\sheetmusic2.0\Model\Model.jpr" filter28.key="ApplicationsC:\jdevstudio10133\jdev\mywork\DLWebApp\DLWebApp.jws" filter10.options="0" filter31.filterCls="oracle.ide.model.ContentFilter" filter34.key="ApplicationsD:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsD:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\ViewController\ViewController.jpr" filter24.options="0" sort-by-type="false" filter27.key="ApplicationsF:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\DLCS Staff.jwsF:\jdevstudio10133\jdev\mywork\DLCS Staff\trunk\ViewController\ViewController.jpr"/>
+                  </dockable>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ConnectionNavigatorWindow.Connections" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ExplorerWindow.SingletonExplorerWindow" floatWidth="400"/>
+                  <dockable dockWidth="400" floatHeight="151" dockHeight="300" ID="Debugger.ThreadsWindow" floatWidth="150"/>
+                  <dockable dockWidth="400" floatHeight="133" dockHeight="300" ID="Debugger.StackWindow" floatWidth="150"/>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="BrowseHierarchy" floatWidth="400"/>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ThumbnailDockable" floatWidth="400"/>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ExplorerWindow.1477685133681" floatWidth="400"/>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ExplorerWindow.1477685140738" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="RunManagerWindow" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="CVSNavigatorWindow.CVS" floatWidth="400"/>
+               </leafBox>
+            </box>
+         </box>
+      </WEST>
+      <EAST floatSize="180" dockSize="81">
+         <box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ComponentPalette" floatWidth="400"/>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="adfdbPanel" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="InspectorWindow.SingletonInspectorWindow" floatWidth="400"/>
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="ConstraintsWindow" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="227" dockHeight="300" ID="Debugger.ClassesWindow" floatWidth="15"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="HelpSystemAddin.HelpWindow" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="UIDebugger.TREE" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="UIDebugger.OUTLINE" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="UIDebugger.LISTENERS" floatWidth="400"/>
+               </leafBox>
+            </box>
+            <box>
+               <leafBox height="300" width="400">
+                  <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="BPEL_VIEW_TYPE.BPEL_OVERVIEW_ID" floatWidth="400"/>
+               </leafBox>
+            </box>
+         </box>
+      </EAST>
+      <NORTH floatSize="180" dockSize="150"/>
+      <SOUTH floatSize="231" dockSize="589">
+         <box>
+            <leafBox height="300" width="485">
+               <dockable dockWidth="485" floatHeight="300" dockHeight="300" ID="LogWindow.Log" floatWidth="400">
+                  <properties ClosedByUser="false"/>
+               </dockable>
+               <dockable dockWidth="485" floatHeight="151" dockHeight="300" ID="Debugger.BreakpointsWindow" floatWidth="940"/>
+               <dockable dockWidth="485" floatHeight="300" dockHeight="300" ID="ToDoAddin.ToDoWindow" floatWidth="400"/>
+            </leafBox>
+         </box>
+         <box>
+            <leafBox height="300" width="315">
+               <dockable dockWidth="315" floatHeight="151" dockHeight="300" ID="Debugger.SmartWindow" floatWidth="607"/>
+               <dockable dockWidth="315" floatHeight="151" dockHeight="300" ID="Debugger.LocalsWindow" floatWidth="607"/>
+               <dockable dockWidth="315" floatHeight="151" dockHeight="300" ID="Debugger.WatchWindow" floatWidth="225"/>
+               <dockable dockWidth="315" floatHeight="300" dockHeight="300" ID="Debugger.HeapWindow" floatWidth="400"/>
+            </leafBox>
+         </box>
+         <box>
+            <leafBox height="300" width="400">
+               <dockable dockWidth="400" floatHeight="300" dockHeight="300" ID="TCPPacketMonitor" floatWidth="400"/>
+            </leafBox>
+         </box>
+      </SOUTH>
+      <panel position="float" height="208" visible="false" width="408" y="300" x="600">
+         <box>
+            <leafBox height="300" width="400">
+               <dockable dockWidth="400" floatHeight="0" dockHeight="300" ID="Debugger.MonitorsWindow" floatWidth="0"/>
+            </leafBox>
+         </box>
+      </panel>
+   </dockingPositions>
+   <editorPositions>
+      <box>
+         <leafBox height="300" selectedPage="16" width="437">
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Fcore%2FItem.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="56172" xScrollMax="1538" xScrollMin="0" yScrollPos="43721" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="113228" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Fcore%2FDescriptiveMD.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="5988" xScrollMax="1483" xScrollMin="0" yScrollPos="1827" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="3804" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Fmodel%2FCoreDescControlValues.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="3268" xScrollMax="1483" xScrollMin="0" yScrollPos="450" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="1833" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Futil%2FConstants.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="6328" xScrollMax="1483" xScrollMin="0" yScrollPos="1164" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="5153" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Fapp%2FItemClobBuilder.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="2146" xScrollMax="1483" xScrollMin="0" yScrollPos="194" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="1558" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FViewController%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Fcontroller%2Freporting%2FAdminReportsAction.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="23362" xScrollMax="1797" xScrollMin="0" yScrollPos="3646" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="19036" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Fservice%2Fimpl%2FProjectItemServiceImpl.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="3897" xScrollMax="1483" xScrollMin="0" yScrollPos="2448" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="725" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdlcs%2Fdao%2Ftoplink%2FProjectItemDaoImpl.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="13451" xScrollMax="1671" xScrollMin="0" yScrollPos="8878" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="20254" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fcommons-logging.properties ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="327" xScrollMax="1486" xScrollMin="0" yScrollPos="0" yScrollExtent="286" xScrollExtent="1486" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="0" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FViewController%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Faction%2FDataProviderAction.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="11785" xScrollMax="1713" xScrollMin="0" yScrollPos="8232" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="23855" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fcore%2FOAIDataProvider.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="7943" xScrollMax="1463" xScrollMin="0" yScrollPos="5479" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="13118" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fjaxb%2FgenerateOAIXML.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="8351" xScrollMax="2868" xScrollMin="0" yScrollPos="4748" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="14844" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fjaxb%2FgenerateOAIDCXML.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="8232" xScrollMax="1622" xScrollMin="0" yScrollPos="531" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="1922" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FViewController%2FViewController.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdao%2Ftoplink%2FItemDaoImpl.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="33086" xScrollMax="3071" xScrollMin="0" yScrollPos="12604" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="33084" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Futil%2FConstants.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="1687" xScrollMax="1483" xScrollMin="0" yScrollPos="0" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="2081" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2FMETA-INF%2Fsessions.xml ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.toplink.addin.TopLinkMappingsAddin">
+                  <editorState yScrollMin="0" yScrollMax="855" xScrollMax="1536" xScrollMin="0" yScrollPos="0" yScrollExtent="855" xScrollExtent="1536" addin="oracle.toplink.addin.TopLinkMappingsAddin" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Ftoplink%2FtlMap1%2FtlMap1.mwp ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.toplink.addin.TopLinkMappingsAddin">
+                  <editorState yScrollMin="0" yScrollMax="0" xScrollMax="0" xScrollMin="0" yScrollPos="0" yScrollExtent="0" xScrollExtent="0" addin="oracle.toplink.addin.TopLinkMappingsAddin" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Futil%2FDBUtil.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="9558" xScrollMax="1483" xScrollMin="0" yScrollPos="0" yScrollExtent="855" xScrollExtent="1483" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="1392" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FViewController%2FViewController.jpr ; ;" document="jar ; ; -1 file%3A%2FD%3A%2FJava%2Fjdk1.6.0_45%2Fsrc.zip%21%2Fjava%2Flang%2FString.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="50715" xScrollMax="1463" xScrollMin="0" yScrollPos="1245" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="3574" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fcore%2FItem.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="11802" xScrollMax="1664" xScrollMin="0" yScrollPos="1500" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="4268" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fcore%2FContentFileCollection.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="2197" xScrollMax="1463" xScrollMin="0" yScrollPos="1324" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="297" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fdao%2Ftoplink%2FSearchDaoImpl.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="50409" xScrollMax="2189" xScrollMin="0" yScrollPos="21153" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="54577" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fcore%2Fsearch%2FSearchSQLGenerator.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="5512" xScrollMax="1463" xScrollMin="0" yScrollPos="1484" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="3891" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FModel%2Fsrc%2Fedu%2Fucla%2Flibrary%2Fdigital%2Fcore%2FFilterVO.java ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLWebApp%2FDLWebApp.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="11836" xScrollMax="1463" xScrollMin="0" yScrollPos="10544" yScrollExtent="286" xScrollExtent="1463" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="17007" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Flog4j.properties ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="1211" xScrollMax="1506" xScrollMin="0" yScrollPos="0" yScrollExtent="855" xScrollExtent="1506" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="0" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2Fcommons-logging.properties ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.ide.ceditor.CodeEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="888" xScrollMax="1506" xScrollMin="0" yScrollPos="0" yScrollExtent="855" xScrollExtent="1506" addin="oracle.ide.ceditor.CodeEditorAddin" tabsize="8" offset="0" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2FMETA-INF%2Fsessions.xml ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.toplink.addin.TopLinkMappingsAddin">
+                  <editorState yScrollMin="0" yScrollMax="294" xScrollMax="1516" xScrollMin="0" yScrollPos="0" yScrollExtent="286" xScrollExtent="1516" addin="oracle.toplink.addin.TopLinkMappingsAddin" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+            <state project="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2FModel.jpr ; ;" document="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FModel%2Fsrc%2FMETA-INF%2FtlMap1.xml ; ;" workspace="file ; ; -1 %2FD%3A%2Fjdevstudio10133%2Fjdev%2Fmywork%2FDLCS+Staff%2Ftrunk%2FDLCS+Staff.jws ; ;" accelerator="-1">
+               <paneState currentEditor="oracle.bali.xml.addin.XMLEditorAddin">
+                  <editorState yScrollMin="0" yScrollMax="45020" xScrollMax="2252" xScrollMin="0" yScrollPos="0" yScrollExtent="286" xScrollExtent="1414" addin="oracle.bali.xml.addin.XMLEditorAddin" tabsize="8" offset="0" xScrollPos="0"/>
+               </paneState>
+               <pane>
+                  <box>
+                     <leafBox height="1000" width="1000" pane="0"/>
+                  </box>
+               </pane>
+            </state>
+         </leafBox>
+      </box>
+   </editorPositions>
+   <visibilityLayouts>
+      <Web_Editing displayName="Web Editing">
+         <Debugger.WatchWindow/>
+         <BPEL_VIEW_TYPE.BPEL_OVERVIEW_ID/>
+         <Debugger.SmartWindow/>
+         <InspectorWindow.SingletonInspectorWindow raised="true" visible="true"/>
+         <ConstraintsWindow/>
+         <ExplorerWindow.SingletonExplorerWindow raised="true" visible="true"/>
+         <SystemNavigatorWindow.SystemNavigatorName/>
+         <Debugger.HeapWindow/>
+         <Debugger.MonitorsWindow/>
+         <Debugger.ThreadsWindow/>
+         <Debugger.ClassesWindow/>
+         <ApplicationNavigatorWindow.ApplicationNavigatorName raised="true" visible="true"/>
+         <UIDebugger.LISTENERS/>
+         <ConnectionNavigatorWindow.Connections visible="true"/>
+         <adfdbPanel visible="true"/>
+         <UIDebugger.TREE/>
+         <BrowseHierarchy/>
+         <ComponentPalette raised="true" visible="true"/>
+         <LogWindow.Log/>
+         <RunManagerWindow/>
+         <Debugger.LocalsWindow/>
+         <ToDoAddin.ToDoWindow/>
+         <TCPPacketMonitor/>
+         <HelpSystemAddin.HelpWindow/>
+         <Debugger.BreakpointsWindow/>
+         <UIDebugger.OUTLINE/>
+         <Debugger.StackWindow/>
+         <ThumbnailDockable/>
+         <CVSNavigatorWindow.CVS/>
+      </Web_Editing>
+      <Debugging displayName="Debugging">
+         <BPEL_VIEW_TYPE.BPEL_OVERVIEW_ID/>
+         <Debugger.WatchWindow visible="true"/>
+         <Debugger.SmartWindow visible="true"/>
+         <ExplorerWindow.1477685133681 visible="true"/>
+         <InspectorWindow.SingletonInspectorWindow/>
+         <ConstraintsWindow/>
+         <SystemNavigatorWindow.SystemNavigatorName/>
+         <ExplorerWindow.SingletonExplorerWindow raised="true" visible="true"/>
+         <Debugger.HeapWindow/>
+         <Debugger.MonitorsWindow/>
+         <Debugger.ThreadsWindow/>
+         <Debugger.ClassesWindow raised="true" minimized="true" visible="true"/>
+         <ApplicationNavigatorWindow.ApplicationNavigatorName raised="true" visible="true"/>
+         <UIDebugger.LISTENERS/>
+         <ConnectionNavigatorWindow.Connections visible="true"/>
+         <adfdbPanel/>
+         <UIDebugger.TREE/>
+         <ComponentPalette/>
+         <BrowseHierarchy/>
+         <LogWindow.Log raised="true" visible="true"/>
+         <RunManagerWindow/>
+         <Debugger.LocalsWindow raised="true" visible="true"/>
+         <ExplorerWindow.1477685140738 visible="true"/>
+         <ToDoAddin.ToDoWindow/>
+         <TCPPacketMonitor/>
+         <HelpSystemAddin.HelpWindow/>
+         <Debugger.BreakpointsWindow visible="true"/>
+         <Debugger.StackWindow visible="true"/>
+         <UIDebugger.OUTLINE/>
+         <ThumbnailDockable/>
+         <CVSNavigatorWindow.CVS/>
+      </Debugging>
+      <Xml_Editing displayName="Xml Editing">
+         <BPEL_VIEW_TYPE.BPEL_OVERVIEW_ID/>
+         <Debugger.WatchWindow/>
+         <Debugger.SmartWindow/>
+         <ExplorerWindow.1477685133681 visible="true"/>
+         <InspectorWindow.SingletonInspectorWindow raised="true" visible="true"/>
+         <ConstraintsWindow/>
+         <SystemNavigatorWindow.SystemNavigatorName/>
+         <ExplorerWindow.SingletonExplorerWindow raised="true" visible="true"/>
+         <Debugger.HeapWindow/>
+         <Debugger.MonitorsWindow/>
+         <Debugger.ThreadsWindow/>
+         <Debugger.ClassesWindow/>
+         <ApplicationNavigatorWindow.ApplicationNavigatorName raised="true" visible="true"/>
+         <UIDebugger.LISTENERS/>
+         <ConnectionNavigatorWindow.Connections visible="true"/>
+         <adfdbPanel/>
+         <UIDebugger.TREE/>
+         <ComponentPalette raised="true" visible="true"/>
+         <BrowseHierarchy/>
+         <LogWindow.Log raised="true" visible="true"/>
+         <RunManagerWindow/>
+         <Debugger.LocalsWindow/>
+         <ExplorerWindow.1477685140738 visible="true"/>
+         <ToDoAddin.ToDoWindow/>
+         <TCPPacketMonitor/>
+         <HelpSystemAddin.HelpWindow/>
+         <Debugger.BreakpointsWindow/>
+         <Debugger.StackWindow/>
+         <UIDebugger.OUTLINE/>
+         <ThumbnailDockable/>
+         <CVSNavigatorWindow.CVS/>
+      </Xml_Editing>
+      <Editing displayName="Editing">
+         <Debugger.WatchWindow/>
+         <BPEL_VIEW_TYPE.BPEL_OVERVIEW_ID/>
+         <Debugger.SmartWindow/>
+         <InspectorWindow.SingletonInspectorWindow/>
+         <ExplorerWindow.1477685133681 visible="true"/>
+         <ConstraintsWindow/>
+         <Debugger.MonitorsWindow/>
+         <Debugger.HeapWindow/>
+         <ExplorerWindow.SingletonExplorerWindow visible="true"/>
+         <SystemNavigatorWindow.SystemNavigatorName/>
+         <Debugger.ThreadsWindow/>
+         <Debugger.ClassesWindow/>
+         <ApplicationNavigatorWindow.ApplicationNavigatorName raised="true" visible="true"/>
+         <UIDebugger.LISTENERS/>
+         <ConnectionNavigatorWindow.Connections visible="true"/>
+         <adfdbPanel/>
+         <UIDebugger.TREE/>
+         <ComponentPalette/>
+         <BrowseHierarchy/>
+         <LogWindow.Log raised="true" minimized="true" visible="true"/>
+         <RunManagerWindow/>
+         <Debugger.LocalsWindow/>
+         <ExplorerWindow.1477685140738 raised="true" visible="true"/>
+         <ToDoAddin.ToDoWindow minimized="true"/>
+         <TCPPacketMonitor/>
+         <Debugger.BreakpointsWindow minimized="true"/>
+         <HelpSystemAddin.HelpWindow/>
+         <UIDebugger.OUTLINE/>
+         <Debugger.StackWindow/>
+         <ThumbnailDockable/>
+         <CVSNavigatorWindow.CVS/>
+      </Editing>
+      <Page_Flow displayName="Page Flow">
+         <BPEL_VIEW_TYPE.BPEL_OVERVIEW_ID/>
+         <Debugger.WatchWindow/>
+         <Debugger.SmartWindow/>
+         <ExplorerWindow.1477685133681 visible="true"/>
+         <InspectorWindow.SingletonInspectorWindow raised="true" visible="true"/>
+         <ConstraintsWindow/>
+         <SystemNavigatorWindow.SystemNavigatorName/>
+         <ExplorerWindow.SingletonExplorerWindow visible="true"/>
+         <Debugger.HeapWindow/>
+         <Debugger.MonitorsWindow/>
+         <Debugger.ThreadsWindow/>
+         <Debugger.ClassesWindow/>
+         <ApplicationNavigatorWindow.ApplicationNavigatorName raised="true" visible="true"/>
+         <UIDebugger.LISTENERS/>
+         <ConnectionNavigatorWindow.Connections visible="true"/>
+         <adfdbPanel visible="true"/>
+         <UIDebugger.TREE/>
+         <ComponentPalette raised="true" visible="true"/>
+         <BrowseHierarchy/>
+         <LogWindow.Log raised="true" visible="true"/>
+         <RunManagerWindow/>
+         <Debugger.LocalsWindow/>
+         <ExplorerWindow.1477685140738 raised="true" visible="true"/>
+         <ToDoAddin.ToDoWindow/>
+         <TCPPacketMonitor/>
+         <HelpSystemAddin.HelpWindow/>
+         <Debugger.BreakpointsWindow/>
+         <Debugger.StackWindow/>
+         <UIDebugger.OUTLINE/>
+         <ThumbnailDockable visible="true"/>
+         <CVSNavigatorWindow.CVS/>
+      </Page_Flow>
+   </visibilityLayouts>
+</LayoutInfo>

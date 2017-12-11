@@ -1,0 +1,14 @@
+<dataScope xmlns="http://bali.us.oracle.com/cabo/marlin" xmlns:data="http://bali.us.oracle.com/cabo/marlin">
+  <contents>
+    <globalHeader>
+      <contents data:childData="globalHeader@subtabData">
+        <link data:text="text" data:shortDesc="text" data:destination="destination" data:selected="selected"/>
+      </contents>
+    </globalHeader>
+  </contents>
+  <provider>
+    <data name="subtabData">
+      <method class="oracle.sysman.emSDK.nav.NavData" method="getGlobalHeaders"/>
+    </data>
+  </provider>
+</dataScope>

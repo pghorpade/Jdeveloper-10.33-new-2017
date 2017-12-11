@@ -1,0 +1,97 @@
+# oidSubDemoDataCreateJAZN.sbs contains the demo data
+# to be loaded to the subscriber realm.
+# Please use the utility class
+# oracle.security.jazn.util.LoadOidData to load it.
+#
+
+# add roles
+
+dn: cn=administrators,cn=groups,%s_subscriberDN%
+changetype: add
+uniquemember: cn=adminuser,cn=users,%s_subscriberDN%
+cn: administrators
+description: administrators
+objectclass: groupofuniquenames
+objectclass: orclprivilegegroup
+objectclass: top
+
+dn: cn=users,cn=groups,%s_subscriberDN%
+changetype: add
+uniquemember: cn=adminuser,cn=users,%s_subscriberDN%
+uniquemember: cn=scott,cn=users,%s_subscriberDN%
+uniquemember: cn=user,cn=users,%s_subscriberDN%
+cn: users
+description: users
+objectclass: groupofuniquenames
+objectclass: orclprivilegegroup
+objectclass: top
+
+dn: cn=guests,cn=groups,%s_subscriberDN%
+changetype: add
+uniquemember: cn=adminuser,cn=users,%s_subscriberDN%
+uniquemember: cn=anonymous,cn=users,%s_subscriberDN%
+uniquemember: cn=user,cn=users,%s_subscriberDN%
+cn: guests
+description: guests
+objectclass: groupofuniquenames
+objectclass: orclprivilegegroup
+objectclass: top
+
+
+# add user
+dn: cn=adminuser,cn=users,%s_subscriberDN%
+changetype: add
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+objectclass: inetOrgPerson
+objectclass: orclUser
+objectclass: orclUserV2
+userpassword: welcome1
+description: The default administrator
+sn: adminuser
+cn: adminuser
+uid: adminuser
+
+
+dn: cn=anonymous,cn=users,%s_subscriberDN%
+changetype: add
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+objectclass: inetOrgPerson
+objectclass: orclUser
+objectclass: orclUserV2
+description: The default guest/anonyomous user
+sn: anonymous
+cn: anonymous
+uid: anonymous
+
+dn: cn=scott,cn=users,%s_subscriberDN%
+changetype: add
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+objectclass: inetOrgPerson
+objectclass: orclUser
+objectclass: orclUserV2
+description: no description
+userpassword: tiger1
+sn: scott
+cn: scott
+uid: scott
+
+
+dn: cn=user,cn=users,%s_subscriberDN%
+changetype: add
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+objectclass: inetOrgPerson
+objectclass: orclUser
+objectclass: orclUserV2
+description: The default user
+userpassword: welcome1
+sn: user
+cn: user
+uid: user

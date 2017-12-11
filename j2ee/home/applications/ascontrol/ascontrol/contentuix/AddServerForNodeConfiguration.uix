@@ -1,0 +1,144 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the server -->
+    <data name="pageData">
+     <method class=
+             "oracle.ifs.admin.em.ias.uix.AddServerForNodeConfigurationData"
+             method="getServerData" />
+    </data>
+
+    <!-- data provider for server configurations -->
+    <data name="configData">
+     <method class=
+             "oracle.ifs.admin.em.ias.uix.ServerConfigurationOptionsData"
+             method="getServerConfigurationData" />
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="NAMEMSGINPUT">
+     <boundAttribute name="title">
+      <if>
+       <dataObject select="isNew" source="pageData"/>
+       <dataObject select="ADD_SERVER_FOR_NEW_NODE_CONFIGURATION_HEADER"
+                   source="strings"/>
+       <messageFormat data:format=
+                      "ADD_SERVER_FOR_EDIT_NODE_CONFIGURATION_HEADER@strings"
+                      fast="true">
+        <dataObject select="NCNAME" source="pageData"/>
+       </messageFormat>
+      </if>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancelAdd"/>
+        <submitButton data:text="OK@strings"
+                      ctrl:event="addServer"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ........ Content Body ........ -->
+
+      <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+       <contents>
+        <messageTextInput id="NAMEMSGINPUT"
+                          name="NAME" columns="60" required="yes"
+                          data:prompt="NAME@strings"
+                          data:text="NAME@pageData"/>
+        <messageChoice name="CONFIGURATION" required="yes"
+                       data:prompt="CONFIGURATION@strings"
+                       data:selectedValue="CONFIGURATION@pageData">
+         <contents data:childData="options@configData">
+          <option data:text="optionTextString" 
+                  data:value="optionValueString"/>
+         </contents>
+        </messageChoice>
+        <messageChoice name="SERVER_SERVICE" required="yes"
+                       data:prompt="SERVICE@strings"
+                       data:selectedValue="SERVER_SERVICE@pageData">
+         <contents data:childData="services@pageData">
+          <option data:text="optionTextString"
+                  data:value="optionTextString"/>
+         </contents>
+        </messageChoice>
+        <messageChoice name="INITIAL_PRIORITY"
+                       data:prompt="INITIAL_PRIORITY@strings"
+                       data:selectedValue="INITIAL_PRIORITY@pageData"
+                       selectedValue="5">
+         <contents>
+          <option text="1" value="1"/>
+          <option text="2" value="2"/>
+          <option text="3" value="3"/>
+          <option text="4" value="4"/>
+          <option text="5" value="5"/>
+          <option text="6" value="6"/>
+          <option text="7" value="7"/>
+          <option text="8" value="8"/>
+          <option text="9" value="9"/>
+          <option text="10" value="10"/>
+         </contents>
+        </messageChoice>
+        <messageCheckBox name="ACTIVE"
+                         data:text="ACTIVE@strings"
+                         data:checked="ACTIVE@pageData"
+                         value="true"/>
+        <messageCheckBox name="INITIALLY_STARTED"
+                         data:text="INITIALLY_STARTED@strings"
+                         data:checked="INITIALLY_STARTED@pageData"
+                         value="true"/>
+       </contents>
+      </labeledFieldLayout>
+           
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.AddServerForNodeConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="addServer">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.AddServerForNodeConfigurationData"
+           method="addServer"/>
+  </event>
+
+  <event name="cancelAdd">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.AddServerForNodeConfigurationData"
+           method="cancelAdd"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

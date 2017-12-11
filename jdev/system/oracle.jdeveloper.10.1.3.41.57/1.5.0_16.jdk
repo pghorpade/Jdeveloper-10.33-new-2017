@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JDKNode nselem="JDKNode" class="oracle.jdeveloper.library.JDKNode" xmlns="http://xmlns.oracle.com/jdeveloper/101303/jdknode">
+   <SDKBinDir path="../../../../Java/jdk1.5.0_16/bin/"/>
+   <classPath>
+      <entries>
+         <Item path="../../../../Java/jdk1.5.0_16/jre/lib/rt.jar" jar-entry=""/>
+         <Item path="../../../../Java/jdk1.5.0_16/jre/lib/i18n.jar" jar-entry=""/>
+         <Item path="../../../../Java/jdk1.5.0_16/jre/lib/sunrsasign.jar" jar-entry=""/>
+         <Item path="../../../../Java/jdk1.5.0_16/jre/lib/jsse.jar" jar-entry=""/>
+         <Item path="../../../../Java/jdk1.5.0_16/jre/lib/jce.jar" jar-entry=""/>
+         <Item path="../../../../Java/jdk1.5.0_16/jre/lib/charsets.jar" jar-entry=""/>
+         <Item path="../../../../Java/jdk1.5.0_16/jre/classes/"/>
+      </entries>
+   </classPath>
+   <docPath>
+      <entries>
+         <Item protocol="http" host="java.sun.com" path="/j2se/1.5/docs/api/"/>
+      </entries>
+   </docPath>
+   <javaExecutable path="../../../../Java/jdk1.5.0_16/jre/bin/java.exe"/>
+   <javaVersion>1.5.0_16</javaVersion>
+   <locked>false</locked>
+   <name>1.5.0_16</name>
+   <sourcePath>
+      <entries>
+         <Item path="../../../../Java/jdk1.5.0_16/src.zip" jar-entry=""/>
+      </entries>
+   </sourcePath>
+</JDKNode>

@@ -1,0 +1,299 @@
+#
+# An unexpected error has been detected by HotSpot Virtual Machine:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x6d15f7c9, pid=3972, tid=2060
+#
+# Java VM: Java HotSpot(TM) Client VM (1.5.0_20-b02 mixed mode)
+# Problematic frame:
+# C  [awt.dll+0xef7c9]
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x25249ab0):  JavaThread "AWT-EventQueue-0" [_thread_in_native, id=2060]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x00000018
+
+Registers:
+EAX=0x340bea18, EBX=0x00000000, ECX=0x3101ec28, EDX=0x00000000
+ESP=0x25fdf574, EBP=0x25fdf5a0, ESI=0x13e4dbb8, EDI=0x25249b70
+EIP=0x6d15f7c9, EFLAGS=0x00010296
+
+Top of Stack: (sp=0x25fdf574)
+0x25fdf574:   13e4dbb8 6d16080d 00000001 25fdf58c
+0x25fdf584:   25249ab0 13e4dbb8 00000000 00000000
+0x25fdf594:   00000000 00000000 25249d98 25fdf5d0
+0x25fdf5a4:   018482ff 2523cffa 25fdf5e4 00000001
+0x25fdf5b4:   25fdf5b4 00000000 25fdf5e4 13e4f158
+0x25fdf5c4:   00000000 13e4dbb8 25fdf5e0 25fdf604
+0x25fdf5d4:   01842aba 00000000 01846513 00000001
+0x25fdf5e4:   04185c68 25fdf5e8 13e4dc30 25fdf60c 
+
+Instructions: (pc=0x6d15f7c9)
+0x6d15f7b9:   03 fc ff 8b 4c 24 08 8b 14 88 8b 0d c8 94 1a 6d
+0x6d15f7c9:   8b 72 18 e8 cb 03 fc ff 8b c6 5e c3 90 90 90 90 
+
+
+Stack: [0x25ee0000,0x25fe0000),  sp=0x25fdf574,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [awt.dll+0xef7c9]
+j  sun.awt.Win32GraphicsConfig.getBounds(I)Ljava/awt/Rectangle;+0
+j  sun.awt.Win32GraphicsConfig.getBounds()Ljava/awt/Rectangle;+8
+j  oracle.ide.util.GraphicsUtils.getScreenBounds()[Ljava/awt/Rectangle;+40
+j  oracle.ide.util.GraphicsUtils.getPopupMenuShowPoint(Ljavax/swing/JPopupMenu;II)Ljava/awt/Point;+26
+j  oracle.ide.util.GraphicsUtils.getPopupMenuShowPoint(Ljavax/swing/JPopupMenu;Ljava/awt/event/MouseEvent;)Ljava/awt/Point;+32
+j  oracle.ide.controller.ContextMenu.show(Loracle/ide/Context;)V+88
+j  oracle.ideimpl.explorer.BaseTreeExplorer.tryPopup(Ljava/awt/event/MouseEvent;)V+145
+j  oracle.ideimpl.explorer.BaseTreeExplorer.mouseReleased(Ljava/awt/event/MouseEvent;)V+18
+j  oracle.ideimpl.explorer.CustomTree.processMouseEvent(Ljava/awt/event/MouseEvent;)V+114
+J  java.awt.Component.processEvent(Ljava/awt/AWTEvent;)V
+J  java.awt.Container.processEvent(Ljava/awt/AWTEvent;)V
+J  java.awt.Component.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.Container.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.LightweightDispatcher.retargetMouseEvent(Ljava/awt/Component;ILjava/awt/event/MouseEvent;)V
+J  java.awt.LightweightDispatcher.processMouseEvent(Ljava/awt/event/MouseEvent;)Z
+J  java.awt.LightweightDispatcher.dispatchEvent(Ljava/awt/AWTEvent;)Z
+J  java.awt.Container.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.Window.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.EventQueue.dispatchEvent(Ljava/awt/AWTEvent;)V
+J  java.awt.EventDispatchThread.pumpOneEventForHierarchy(ILjava/awt/Component;)Z
+J  java.awt.EventDispatchThread.pumpEventsForHierarchy(ILjava/awt/Conditional;Ljava/awt/Component;)V
+v  ~OSRAdapter
+j  java.awt.EventDispatchThread.pumpEvents(ILjava/awt/Conditional;)V+4
+j  java.awt.EventDispatchThread.pumpEvents(Ljava/awt/Conditional;)V+3
+j  java.awt.EventDispatchThread.run()V+9
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x876b1]
+V  [jvm.dll+0xe0001]
+V  [jvm.dll+0x87582]
+V  [jvm.dll+0x872df]
+V  [jvm.dll+0xa2131]
+V  [jvm.dll+0x111949]
+V  [jvm.dll+0x111917]
+C  [msvcrt.dll+0x2a3b0]
+C  [kernel32.dll+0xb729]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  sun.awt.Win32GraphicsConfig.getBounds(I)Ljava/awt/Rectangle;+0
+j  sun.awt.Win32GraphicsConfig.getBounds()Ljava/awt/Rectangle;+8
+j  oracle.ide.util.GraphicsUtils.getScreenBounds()[Ljava/awt/Rectangle;+40
+j  oracle.ide.util.GraphicsUtils.getPopupMenuShowPoint(Ljavax/swing/JPopupMenu;II)Ljava/awt/Point;+26
+j  oracle.ide.util.GraphicsUtils.getPopupMenuShowPoint(Ljavax/swing/JPopupMenu;Ljava/awt/event/MouseEvent;)Ljava/awt/Point;+32
+j  oracle.ide.controller.ContextMenu.show(Loracle/ide/Context;)V+88
+j  oracle.ideimpl.explorer.BaseTreeExplorer.tryPopup(Ljava/awt/event/MouseEvent;)V+145
+j  oracle.ideimpl.explorer.BaseTreeExplorer.mouseReleased(Ljava/awt/event/MouseEvent;)V+18
+j  oracle.ideimpl.explorer.CustomTree.processMouseEvent(Ljava/awt/event/MouseEvent;)V+114
+J  java.awt.Component.processEvent(Ljava/awt/AWTEvent;)V
+J  java.awt.Container.processEvent(Ljava/awt/AWTEvent;)V
+J  java.awt.Component.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.Container.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.LightweightDispatcher.retargetMouseEvent(Ljava/awt/Component;ILjava/awt/event/MouseEvent;)V
+J  java.awt.LightweightDispatcher.processMouseEvent(Ljava/awt/event/MouseEvent;)Z
+J  java.awt.LightweightDispatcher.dispatchEvent(Ljava/awt/AWTEvent;)Z
+J  java.awt.Container.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.Window.dispatchEventImpl(Ljava/awt/AWTEvent;)V
+J  java.awt.EventQueue.dispatchEvent(Ljava/awt/AWTEvent;)V
+J  java.awt.EventDispatchThread.pumpOneEventForHierarchy(ILjava/awt/Component;)Z
+J  java.awt.EventDispatchThread.pumpEventsForHierarchy(ILjava/awt/Conditional;Ljava/awt/Component;)V
+v  ~OSRAdapter
+j  java.awt.EventDispatchThread.pumpEvents(ILjava/awt/Conditional;)V+4
+j  java.awt.EventDispatchThread.pumpEvents(Ljava/awt/Conditional;)V+3
+j  java.awt.EventDispatchThread.run()V+9
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x3113bd98 JavaThread "JDI Event Queue Timer" daemon [_thread_blocked, id=3540]
+  0x31000018 JavaThread "WaitCursorTimer" daemon [_thread_blocked, id=5468]
+  0x32964310 JavaThread "JPDA Event Processor" [_thread_blocked, id=1856]
+  0x359038c0 JavaThread "Designer-Layout-Dispatcher [file:/C:/jdevstudio10133/jdev/mywork/joai/oai/public_html/oai_requests/ListSets.jsp]" [_thread_blocked, id=4456]
+  0x3241b610 JavaThread "BrowserProcessOut" [_thread_in_native, id=5776]
+  0x31379808 JavaThread "BrowserProcessErr" [_thread_in_native, id=4488]
+  0x357b4808 JavaThread "Thread-310" daemon [_thread_blocked, id=4816]
+  0x30f82a10 JavaThread "Thread-309" daemon [_thread_blocked, id=2240]
+  0x30dc1868 JavaThread "Timer-12" daemon [_thread_blocked, id=3444]
+  0x30ee3d28 JavaThread "Thread-306" daemon [_thread_blocked, id=4124]
+  0x3162ed98 JavaThread "Designer-Layout-Dispatcher [file:/C:/jdevstudio10133/jdev/mywork/joai/oai/public_html/search.jsp]" [_thread_blocked, id=5136]
+  0x31ae1d10 JavaThread "JDI Target VM Interface" daemon [_thread_in_native, id=4564]
+  0x31d75028 JavaThread "JDI Internal Event Handler" daemon [_thread_blocked, id=5992]
+  0x31223ac8 JavaThread "WaitForProcess" [_thread_in_native, id=3528]
+  0x2bbc6060 JavaThread "LogOutput - Embedded OC4J Server System.err" [_thread_in_native, id=5460]
+  0x30ec8100 JavaThread "LogOutput - Embedded OC4J Server System.out" [_thread_in_native, id=3820]
+  0x3183f348 JavaThread "Oc4jListener" [_thread_in_native, id=5508]
+  0x30e7f808 JavaThread "DebuggingProcessTimer" [_thread_blocked, id=4204]
+  0x2bb79808 JavaThread "Thread-95" daemon [_thread_blocked, id=3276]
+  0x2b624808 JavaThread "Thread-94" daemon [_thread_blocked, id=2964]
+  0x30e46408 JavaThread "Timer-10" daemon [_thread_blocked, id=5120]
+  0x30f92878 JavaThread "Thread-92" daemon [_thread_blocked, id=2784]
+  0x2b59d408 JavaThread "CssObservreTimer" daemon [_thread_blocked, id=1364]
+  0x30fcc700 JavaThread "Persistence Auto Flusher" daemon [_thread_blocked, id=1836]
+  0x2b0a7630 JavaThread "IconOverlayTracker Timer" [_thread_blocked, id=3140]
+  0x2b590f18 JavaThread "IdeMinPriorityTimer" daemon [_thread_blocked, id=3280]
+  0x2b419d08 JavaThread "BufferDomModel background parse thread" daemon [_thread_blocked, id=2908]
+  0x2b139970 JavaThread "Native Directory Watcher" [_thread_in_native, id=2280]
+  0x2b7bcbb8 JavaThread "WeakDataReference polling" [_thread_blocked, id=3228]
+  0x2b7f5b50 JavaThread "AuditExecutor-193" daemon [_thread_blocked, id=1752]
+  0x2b3e21f8 JavaThread "WaitCursorTimer" daemon [_thread_blocked, id=296]
+  0x2af8ec50 JavaThread "IconOverlayTracker Timer" [_thread_blocked, id=2940]
+  0x2b193560 JavaThread "Timer-2" [_thread_blocked, id=2364]
+  0x2b2abd48 JavaThread "Timer-1" [_thread_blocked, id=1468]
+  0x25296a60 JavaThread "TimerQueue" daemon [_thread_blocked, id=612]
+=>0x25249ab0 JavaThread "AWT-EventQueue-0" [_thread_in_native, id=2060]
+  0x25268428 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=3884]
+  0x252451b0 JavaThread "AWT-Windows" daemon [_thread_in_native, id=3904]
+  0x251cdbd0 JavaThread "AWT-Shutdown" [_thread_blocked, id=1764]
+  0x2511f078 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=3400]
+  0x2511dd90 JavaThread "CompilerThread0" daemon [_thread_blocked, id=1656]
+  0x2510a468 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=2692]
+  0x250fc9a0 JavaThread "Surrogate Locker Thread (CMS)" daemon [_thread_blocked, id=3108]
+  0x250ee798 JavaThread "Finalizer" daemon [_thread_blocked, id=1416]
+  0x250ed360 JavaThread "Reference Handler" daemon [_thread_blocked, id=2624]
+  0x0088ca60 JavaThread "main" [_thread_blocked, id=3428]
+
+Other Threads:
+  0x0183fa08 VMThread [id=2844]
+  0x25120410 WatcherThread [id=1404]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ par new generation   total 8128K, used 7497K [0x03a40000, 0x04240000, 0x04240000)
+  eden space 8064K,  92% used [0x03a40000, 0x04192710, 0x04220000)
+  from space 64K,   0% used [0x04230000, 0x04230000, 0x04240000)
+  to   space 64K,   0% used [0x04220000, 0x04220000, 0x04230000)
+ concurrent mark-sweep generation total 253952K, used 179873K [0x04240000, 0x13a40000, 0x13a40000)
+ concurrent-mark-sweep perm gen total 146992K, used 94003K [0x13a40000, 0x1c9cc000, 0x23a40000)
+
+Dynamic libraries:
+0x00400000 - 0x0041d000 	C:\jdevstudio10133\jdev\bin\jdevw.exe
+0x7c900000 - 0x7c9b2000 	C:\WINDOWS\system32\ntdll.dll
+0x7c800000 - 0x7c8f6000 	C:\WINDOWS\system32\kernel32.dll
+0x7e410000 - 0x7e4a1000 	C:\WINDOWS\system32\USER32.dll
+0x77f10000 - 0x77f59000 	C:\WINDOWS\system32\GDI32.dll
+0x763b0000 - 0x763f9000 	C:\WINDOWS\system32\comdlg32.dll
+0x77dd0000 - 0x77e6b000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x77e70000 - 0x77f02000 	C:\WINDOWS\system32\RPCRT4.dll
+0x77fe0000 - 0x77ff1000 	C:\WINDOWS\system32\Secur32.dll
+0x5d090000 - 0x5d12a000 	C:\WINDOWS\system32\COMCTL32.dll
+0x7c9c0000 - 0x7d1d7000 	C:\WINDOWS\system32\SHELL32.dll
+0x77c10000 - 0x77c68000 	C:\WINDOWS\system32\msvcrt.dll
+0x77f60000 - 0x77fd6000 	C:\WINDOWS\system32\SHLWAPI.dll
+0x76390000 - 0x763ad000 	C:\WINDOWS\system32\IMM32.DLL
+0x629c0000 - 0x629c9000 	C:\WINDOWS\system32\LPK.DLL
+0x74d90000 - 0x74dfb000 	C:\WINDOWS\system32\USP10.dll
+0x773d0000 - 0x774d3000 	C:\WINDOWS\WinSxS\x86_Microsoft.Windows.Common-Controls_6595b64144ccf1df_6.0.2600.5512_x-ww_35d4ce83\comctl32.dll
+0x3d930000 - 0x3da01000 	C:\WINDOWS\system32\WININET.dll
+0x008c0000 - 0x008c9000 	C:\WINDOWS\system32\Normaliz.dll
+0x3dfd0000 - 0x3e015000 	C:\WINDOWS\system32\iertutil.dll
+0x71ab0000 - 0x71ac7000 	C:\WINDOWS\system32\ws2_32.dll
+0x71aa0000 - 0x71aa8000 	C:\WINDOWS\system32\WS2HELP.dll
+0x76ee0000 - 0x76f1c000 	C:\WINDOWS\system32\RASAPI32.dll
+0x76e90000 - 0x76ea2000 	C:\WINDOWS\system32\rasman.dll
+0x5b860000 - 0x5b8b5000 	C:\WINDOWS\system32\NETAPI32.dll
+0x76eb0000 - 0x76edf000 	C:\WINDOWS\system32\TAPI32.dll
+0x76e80000 - 0x76e8e000 	C:\WINDOWS\system32\rtutils.dll
+0x76b40000 - 0x76b6d000 	C:\WINDOWS\system32\WINMM.dll
+0x769c0000 - 0x76a74000 	C:\WINDOWS\system32\USERENV.dll
+0x77c70000 - 0x77c95000 	C:\WINDOWS\system32\msv1_0.dll
+0x76790000 - 0x7679c000 	C:\WINDOWS\system32\cryptdll.dll
+0x76d60000 - 0x76d79000 	C:\WINDOWS\system32\iphlpapi.dll
+0x722b0000 - 0x722b5000 	C:\WINDOWS\system32\sensapi.dll
+0x5ad70000 - 0x5ada8000 	C:\WINDOWS\system32\uxtheme.dll
+0x6d740000 - 0x6d8de000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\client\jvm.dll
+0x74720000 - 0x7476c000 	C:\WINDOWS\system32\MSCTF.dll
+0x6d300000 - 0x6d308000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\hpi.dll
+0x76bf0000 - 0x76bfb000 	C:\WINDOWS\system32\PSAPI.DLL
+0x755c0000 - 0x755ee000 	C:\WINDOWS\system32\msctfime.ime
+0x774e0000 - 0x7761d000 	C:\WINDOWS\system32\ole32.dll
+0x6d710000 - 0x6d71c000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\verify.dll
+0x6d380000 - 0x6d39d000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\java.dll
+0x6d730000 - 0x6d73f000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\zip.dll
+0x6d070000 - 0x6d1e0000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\awt.dll
+0x73000000 - 0x73026000 	C:\WINDOWS\system32\WINSPOOL.DRV
+0x73760000 - 0x737ab000 	C:\WINDOWS\system32\ddraw.dll
+0x73bc0000 - 0x73bc6000 	C:\WINDOWS\system32\DCIMAN32.dll
+0x6d2b0000 - 0x6d300000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\fontmanager.dll
+0x6d540000 - 0x6d553000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\net.dll
+0x6d560000 - 0x6d569000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\nio.dll
+0x2bd00000 - 0x2bd1a000 	C:\jdevstudio10133\jdev\lib\jdevnative.dll
+0x77120000 - 0x771ab000 	C:\WINDOWS\system32\OLEAUT32.dll
+0x6d280000 - 0x6d288000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\dt_shmem.dll
+0x71a50000 - 0x71a8f000 	C:\WINDOWS\System32\mswsock.dll
+0x76f20000 - 0x76f47000 	C:\WINDOWS\system32\DNSAPI.dll
+0x76fb0000 - 0x76fb8000 	C:\WINDOWS\System32\winrnr.dll
+0x76f60000 - 0x76f8c000 	C:\WINDOWS\system32\WLDAP32.dll
+0x64000000 - 0x64025000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x76fc0000 - 0x76fc6000 	C:\WINDOWS\system32\rasadhlp.dll
+0x662b0000 - 0x66308000 	C:\WINDOWS\system32\hnetcfg.dll
+0x71a90000 - 0x71a98000 	C:\WINDOWS\System32\wshtcpip.dll
+0x6d230000 - 0x6d253000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\dcpr.dll
+0x605d0000 - 0x605d9000 	C:\WINDOWS\system32\mslbui.dll
+0x68000000 - 0x68036000 	C:\WINDOWS\system32\rsaenh.dll
+0x77b40000 - 0x77b62000 	C:\WINDOWS\system32\Apphelp.dll
+0x77c00000 - 0x77c08000 	C:\WINDOWS\system32\VERSION.dll
+0x71b20000 - 0x71b32000 	C:\WINDOWS\system32\MPR.dll
+0x75f60000 - 0x75f67000 	C:\WINDOWS\System32\drprov.dll
+0x71c10000 - 0x71c1e000 	C:\WINDOWS\System32\ntlanman.dll
+0x71cd0000 - 0x71ce7000 	C:\WINDOWS\System32\NETUI0.dll
+0x71c90000 - 0x71cd0000 	C:\WINDOWS\System32\NETUI1.dll
+0x71c80000 - 0x71c87000 	C:\WINDOWS\System32\NETRAP.dll
+0x71bf0000 - 0x71c03000 	C:\WINDOWS\System32\SAMLIB.dll
+0x75f70000 - 0x75f7a000 	C:\WINDOWS\System32\davclnt.dll
+0x2bcc0000 - 0x2bcd4000 	C:\WINDOWS\system32\LMIRfsClientNP.dll
+0x77920000 - 0x77a13000 	C:\WINDOWS\system32\SETUPAPI.dll
+0x76fd0000 - 0x7704f000 	C:\WINDOWS\system32\CLBCATQ.DLL
+0x77050000 - 0x77115000 	C:\WINDOWS\system32\COMRes.dll
+0x30c00000 - 0x30c17000 	C:\Program Files\Common Files\TortoiseOverlays\TortoiseOverlays.dll
+0x32f30000 - 0x32f3e000 	C:\Program Files\TortoiseSVN\bin\TortoiseStub.dll
+0x32f60000 - 0x3301a000 	C:\Program Files\TortoiseSVN\bin\TortoiseSVN.dll
+0x6eec0000 - 0x6eee0000 	C:\Program Files\TortoiseSVN\bin\libapr_tsvn.dll
+0x78520000 - 0x785c3000 	C:\WINDOWS\WinSxS\x86_Microsoft.VC90.CRT_1fc8b3b9a1e18e3b_9.0.30729.4974_x-ww_d889290f\MSVCR90.dll
+0x6ee60000 - 0x6ee89000 	C:\Program Files\TortoiseSVN\bin\libaprutil_tsvn.dll
+0x33150000 - 0x33162000 	C:\Program Files\TortoiseSVN\bin\intl3_tsvn.dll
+0x78480000 - 0x7850e000 	C:\WINDOWS\WinSxS\x86_Microsoft.VC90.CRT_1fc8b3b9a1e18e3b_9.0.30729.4974_x-ww_d889290f\MSVCP90.dll
+0x76780000 - 0x76789000 	C:\WINDOWS\system32\SHFOLDER.dll
+0x33430000 - 0x3364f000 	C:\Program Files\Microsoft Office\Office12\GrooveShellExtensions.dll
+0x68ef0000 - 0x68fe2000 	C:\Program Files\Microsoft Office\Office12\GrooveUtil.DLL
+0x77a80000 - 0x77b15000 	C:\WINDOWS\system32\CRYPT32.dll
+0x77b20000 - 0x77b32000 	C:\WINDOWS\system32\MSASN1.dll
+0x78130000 - 0x781cb000 	C:\WINDOWS\WinSxS\x86_Microsoft.VC80.CRT_1fc8b3b9a1e18e3b_8.0.50727.4053_x-ww_e6967989\MSVCR80.dll
+0x68ff0000 - 0x68ff7000 	C:\Program Files\Microsoft Office\Office12\GrooveNew.DLL
+0x7c630000 - 0x7c64b000 	C:\WINDOWS\WinSxS\x86_Microsoft.VC80.ATL_1fc8b3b9a1e18e3b_8.0.50727.4053_x-ww_473666fd\ATL80.DLL
+0x76380000 - 0x76385000 	C:\WINDOWS\system32\MSImg32.dll
+0x33660000 - 0x337e4000 	C:\Program Files\TortoiseCVS\TortoiseShell.dll
+0x4ec50000 - 0x4edfb000 	C:\WINDOWS\WinSxS\x86_Microsoft.Windows.GdiPlus_6595b64144ccf1df_1.0.6001.22319_x-ww_f0b4c2df\gdiplus.dll
+0x7c420000 - 0x7c4a7000 	C:\WINDOWS\WinSxS\x86_Microsoft.VC80.CRT_1fc8b3b9a1e18e3b_8.0.50727.4053_x-ww_e6967989\MSVCP80.dll
+0x33ae0000 - 0x33da5000 	C:\WINDOWS\system32\xpsp2res.dll
+0x6d530000 - 0x6d538000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\management.dll
+
+VM Arguments:
+jvm_args: -Dide.product=oracle.jdeveloper -Dide.splash.screen=splash.gif -Xverify:none -Xmx256M -XX:MaxPermSize=256M -XX:JavaPriority10_To_OSPriority=10 -XX:JavaPriority9_To_OSPriority=9 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0 -XX:CMSIncrementalDutyCycle=10 -Dsun.awt.keepWorkingSetOnMinimize=true -Dice.browser.forcegc=false -Dice.pilots.html4.tileOptThreshold=0 -Xbootclasspath/p:../lib/lwawt.jar -Dreserved_filenames=con,aux,prn,lpt1,lpt2,lpt3,lpt4,lpt5,lpt6,lpt7,lpt8,lpt9,com1,com2,com3,com4,com5,com6,com7,com8,com9,conin$,conout$ -DEDITOR_J2SE_VERSION=1.5 -DINSIGHT_OMIT_HIDDEN=true -Doracle.xdkjava.compatibility.version=9.0.4 -Doracle.translated.locales=ja -Dwindows.shell.font.languages=en -Dide.debug.controller.stack=false -Dceditor.java.parse.small=300 -Dceditor.java.parse.large=1500 -Dide.extension.cpmissing.nowarn=true -Dcompiler.vmargs=-mx512m -Doracle.soap.transport.noHTTPClient=true -Djbo.debugoutput=silent -Djbo.showdebugwarningbanner=false -Djava.library.path=c:\imagemagick;C:\oracle\instantclient_10_2;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Diskeeper Corporation\Diskeeper\;C:\ant\apache-ant-1.7.1\bin;C:\TOPLINK10.1.3\toplink\bin;C:\Program Files\Java\jdk1.5.0_20\bin;C:\jboss-4.0.2\bin;C:\Program Files\TortoiseSVN\bin;C:\Sun\AppServer\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Program Files\QuickTime\QTSystem\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\IBM\Page Detailer\;C:\WINDOWS\system32\WindowsPowerShell\v1.0;C:\Program Files\GnuWin32\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Program Files\CVSNT\;C:\Program Files\Java\jdk1.5.0_20\bin;..\lib\ext;..\..\lib -Dide.user.dir= -Dide.startingArg0=C:\jdevstudio10133\jdev\bin\jdevw.exe -Dide.launcherProcessId=39
+java_command: <unknown>
+Launcher Type: generic
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.5.0_20
+CLASSPATH=.;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb1-impl.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-api.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-impl.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-xjc.jar;C:\Sun\jwsdp-2.0\jwsdp-shared\lib\relaxngDatatype.jar;C:\Program Files\Java\jre6\lib\ext\QTJava.zip
+PATH=c:\imagemagick;C:\oracle\instantclient_10_2;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Diskeeper Corporation\Diskeeper\;C:\ant\apache-ant-1.7.1\bin;C:\TOPLINK10.1.3\toplink\bin;C:\Program Files\Java\jdk1.5.0_20\bin;C:\jboss-4.0.2\bin;C:\Program Files\TortoiseSVN\bin;C:\Sun\AppServer\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Program Files\QuickTime\QTSystem\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\IBM\Page Detailer\;C:\WINDOWS\system32\WindowsPowerShell\v1.0;C:\Program Files\GnuWin32\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Program Files\CVSNT\;C:\Program Files\Java\jdk1.5.0_20\bin
+USERNAME=pghorpade
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 15 Model 6 Stepping 4, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows XP Build 2600 Service Pack 3
+
+CPU:total 2 (cores per cpu 1, threads per core 2) family 15 model 6 stepping 4, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ht
+
+Memory: 4k page, physical 1047884k(15912k free), swap 4092204k(1576176k free)
+
+vm_info: Java HotSpot(TM) Client VM (1.5.0_20-b02) for windows-x86, built on Jul 25 2009 02:30:20 by "java_re" with MS VC++ 6.0
+
+time: Sun Aug 08 09:10:04 2010
+elapsed time: 232603 seconds
+

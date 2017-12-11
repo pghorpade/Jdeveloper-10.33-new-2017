@@ -1,0 +1,159 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CoreDescTerms {
+
+    /**Map coreDescControlValuesCollection <-> edu.ucla.library.digital.dlcs.model.CoreDescControlValues
+     * @associates <{edu.ucla.library.digital.dlcs.model.CoreDescControlValues}>
+     */
+    private List coreDescControlValuesCollection;
+
+    /**Map descControlValuesCollection <-> edu.ucla.library.digital.dlcs.model.DescControlValues
+     * @associates <{edu.ucla.library.digital.dlcs.model.DescControlValues}>
+     */
+    private List descControlValuesCollection;
+
+    /**Map descTermsCollection <-> edu.ucla.library.digital.dlcs.model.DescTerms
+     * @associates <{edu.ucla.library.digital.dlcs.model.DescTerms}>
+     */
+    private List descTermsCollection;
+
+    /**Map coreDescQualifiersCollection <-> edu.ucla.library.digital.dlcs.model.CoreDescQualifiers
+     * @associates <{edu.ucla.library.digital.dlcs.model.CoreDescQualifiers}>
+     */
+    private List coreDescQualifiersCollection;
+    private Integer coreDescTermidPk;
+    private String descTerm;
+    private String authorityControlFlag;
+
+    public CoreDescTerms() {
+        super();
+        this.coreDescControlValuesCollection = new ArrayList();
+        this.descControlValuesCollection = new ArrayList();
+        this.descTermsCollection = new ArrayList();
+        this.coreDescQualifiersCollection = new ArrayList();
+    }
+
+    public void addCoreDescControlValues(int index, 
+                                         CoreDescControlValues aCoreDescControlValues) {
+        this.coreDescControlValuesCollection.add(index, 
+                                                 aCoreDescControlValues);
+        aCoreDescControlValues.setCoreDescTerms(this);
+    }
+
+    public void addCoreDescControlValues(CoreDescControlValues aCoreDescControlValues) {
+        this.coreDescControlValuesCollection.add(aCoreDescControlValues);
+        aCoreDescControlValues.setCoreDescTerms(this);
+    }
+
+    public void addCoreDescQualifiers(int index, 
+                                      CoreDescQualifiers aCoreDescQualifiers) {
+        this.coreDescQualifiersCollection.add(index, aCoreDescQualifiers);
+        aCoreDescQualifiers.setCoreDescTerms(this);
+    }
+
+    public void addCoreDescQualifiers(CoreDescQualifiers aCoreDescQualifiers) {
+        this.coreDescQualifiersCollection.add(aCoreDescQualifiers);
+        aCoreDescQualifiers.setCoreDescTerms(this);
+    }
+
+    public void addDescControlValues(DescControlValues aDescControlValues) {
+        this.descControlValuesCollection.add(aDescControlValues);
+        aDescControlValues.setCoreDescTerms(this);
+    }
+
+    public void addDescControlValues(int index, 
+                                     DescControlValues aDescControlValues) {
+        this.descControlValuesCollection.add(index, aDescControlValues);
+        aDescControlValues.setCoreDescTerms(this);
+    }
+
+    public void addDescTerms(DescTerms aDescTerms) {
+        this.descTermsCollection.add(aDescTerms);
+        aDescTerms.setCoreDescTerms(this);
+    }
+
+    public void addDescTerms(int index, DescTerms aDescTerms) {
+        this.descTermsCollection.add(index, aDescTerms);
+        aDescTerms.setCoreDescTerms(this);
+    }
+
+    public String getAuthorityControlFlag() {
+        return this.authorityControlFlag;
+    }
+
+    public List<CoreDescControlValues> getCoreDescControlValuesCollection() {
+        return this.coreDescControlValuesCollection;
+    }
+
+    public List<CoreDescQualifiers> getCoreDescQualifiersCollection() {
+        return this.coreDescQualifiersCollection;
+    }
+
+    public Integer getCoreDescTermidPk() {
+        return this.coreDescTermidPk;
+    }
+
+    public List<DescControlValues> getDescControlValuesCollection() {
+        return this.descControlValuesCollection;
+    }
+
+    public String getDescTerm() {
+        return this.descTerm;
+    }
+
+    public List<DescTerms> getDescTermsCollection() {
+        return this.descTermsCollection;
+    }
+
+    public void removeCoreDescControlValues(CoreDescControlValues aCoreDescControlValues) {
+        this.coreDescControlValuesCollection.remove(aCoreDescControlValues);
+        aCoreDescControlValues.setCoreDescTerms(null);
+    }
+
+    public void removeCoreDescQualifiers(CoreDescQualifiers aCoreDescQualifiers) {
+        this.coreDescQualifiersCollection.remove(aCoreDescQualifiers);
+        aCoreDescQualifiers.setCoreDescTerms(null);
+    }
+
+    public void removeDescControlValues(DescControlValues aDescControlValues) {
+        this.descControlValuesCollection.remove(aDescControlValues);
+        aDescControlValues.setCoreDescTerms(null);
+    }
+
+    public void removeDescTerms(DescTerms aDescTerms) {
+        this.descTermsCollection.remove(aDescTerms);
+        aDescTerms.setCoreDescTerms(null);
+    }
+
+    public void setAuthorityControlFlag(String authorityControlFlag) {
+        this.authorityControlFlag = authorityControlFlag;
+    }
+
+    public void setCoreDescControlValuesCollection(List<CoreDescControlValues> coreDescControlValuesCollection) {
+        this.coreDescControlValuesCollection = coreDescControlValuesCollection;
+    }
+
+    public void setCoreDescQualifiersCollection(List<CoreDescQualifiers> coreDescQualifiersCollection) {
+        this.coreDescQualifiersCollection = coreDescQualifiersCollection;
+    }
+
+    public void setCoreDescTermidPk(Integer coreDescTermidPk) {
+        this.coreDescTermidPk = coreDescTermidPk;
+    }
+
+    public void setDescControlValuesCollection(List<DescControlValues> descControlValuesCollection) {
+        this.descControlValuesCollection = descControlValuesCollection;
+    }
+
+    public void setDescTerm(String descTerm) {
+        this.descTerm = descTerm;
+    }
+
+    public void setDescTermsCollection(List<DescTerms> descTermsCollection) {
+        this.descTermsCollection = descTermsCollection;
+    }
+
+}

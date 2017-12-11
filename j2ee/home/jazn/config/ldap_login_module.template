@@ -1,0 +1,102 @@
+<!-- This is a template file containing all the editable configurations to associate
+an application with a 3rd party LDAP login module.  The editable values are marked as 
+%variable% which should be replaced by real values.  Copy the content
+"<application> .... </application" and paste it within the <jazn-loginconfig> block
+in $ORACLE_HOME/j2ee/<instance>/config/jazn-data.xml -->
+
+<jazn-loginconfig>
+	<application>
+		<name>%application_name%</name>
+		<login-modules>
+			<login-module>
+				<class>oracle.security.jazn.login.module.LDAPLoginModule</class>
+				<control-flag>required</control-flag>
+				<options>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.url</name>
+						<value>%LDAP_PROVIDER_HOST:PORT%</value>
+					</option>
+					<option>	
+						<name>oracle.security.jaas.ldap.provider.user</name>
+						<value>%ADMIN_USER_DN%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.credential</name>
+						<value>%ADMIN_USER_PASSWORD%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.type</name>
+						<value>%LDAP_PROVIDER_TYPE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.name.attribute</name>
+						<value>%USER_NAME_ATTRIBUTE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.object.class</name>
+						<value>%USER_OBJECT_CLASS%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.searchbase</name>
+						<value>%USER_SEARCH_BASE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.searchscope</name>
+						<value>%USER_SEARCH_SCOPE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.name.attribute</name>
+						<value>%ROLE_NAME_ATTRIBUTE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.object.class</name>
+						<value>%ROLE_OBJECT_CLASS%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.searchbase</name>
+						<value>%ROLE_SERACH_BASE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.searchscope</name>
+						<value>%ROLE_SEARCH_SCOPE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.member.attribute</name>
+						<value>%ROLE_MEMBER_ATTRIBUTE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.membership.searchscope</name>
+						<value>%ROLE_MEMBER_SEARCH_SCOPE%</value>
+					</option>
+
+	<!--Following are properties which are optional -->
+
+					<option>
+						<name>oracle.security.jaas.ldap.provider.connect.pool</name>
+						<value>%TRUE_OR_FALSE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.lm.cache_enabled</name>
+						<value>%TRUE_OR_FALSE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.connect.pool.initsize</name>
+						<value>%INIT_SIZE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.connect.pool.maxsize</name>
+						<value>%MAX_SIZE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.connect.pool.prefsize</name>
+						<value>%PREF_SIZE%</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.connect.pool.timeout</name>
+						<value>%TIMEOUT%</value>
+					</option>
+				</options>
+			</login-module>
+		</login-modules>
+	</application>
+</jazn-loginconfig>

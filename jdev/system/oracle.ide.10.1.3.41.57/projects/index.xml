@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<index>
+   <hash>
+      <url n="shared" path="../../../mywork/DLCS Staff/trunk/ViewController/ViewController.jpr"/>
+      <value n="user" v="ViewController.jpr1469595706505"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+      <value n="user" v="Model.jpr1469595706505"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/DLCS Staff/trunk/JDeveloperLibs/JDeveloperLibs.jpr"/>
+      <value n="user" v="JDeveloperLibs.jpr1469595706505"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/DLWebApp/ViewController/ViewController.jpr"/>
+      <value n="user" v="ViewController.jpr1469595743496"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/DLWebApp/Model/Model.jpr"/>
+      <value n="user" v="Model.jpr1469595743496"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/DLWebApp/JDeveloperLibs/JDeveloperLibs.jpr"/>
+      <value n="user" v="JDeveloperLibs.jpr1469595743496"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../oracle.jdeveloper.10.1.3.41.57/DefaultWorkspace/Project1.jpr"/>
+      <value n="user" v="Project1.jpr1469595750061"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/aegaron-webservice/AEGARON/Project/Project.jpr"/>
+      <value n="user" v="Project.jpr1472594107701"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/OralhistoryWebApp/Model/Model.jpr"/>
+      <value n="user" v="Model.jpr1475516324656"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/OralhistoryWebApp/ViewController/ViewController.jpr"/>
+      <value n="user" v="ViewController.jpr1475516324656"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/OralhistoryWebApp/JDeveloperLibs/JDeveloperLibs.jpr"/>
+      <value n="user" v="JDeveloperLibs.jpr1475516324656"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/StGallMSS/Model/Model.jpr"/>
+      <value n="user" v="Model.jpr1475520671947"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/StGallMSS/ViewController/ViewController.jpr"/>
+      <value n="user" v="ViewController.jpr1475520671948"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/Minasian/ViewController/ViewController.jpr"/>
+      <value n="user" v="ViewController.jpr1475799851496"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/Minasian/Model/Model.jpr"/>
+      <value n="user" v="Model.jpr1475799851498"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/Minasian/JDeveloperLibs/JDeveloperLibs.jpr"/>
+      <value n="user" v="JDeveloperLibs.jpr1475799851499"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/sheetmusic2.0/Model/Model.jpr"/>
+      <value n="user" v="Model.jpr1481830206299"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/sheetmusic2.0/ViewController/ViewController.jpr"/>
+      <value n="user" v="ViewController.jpr1481830206301"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/joaiProd/trunk/dlese-tools-project/dlese-tools-project.jpr"/>
+      <value n="user" v="dlese-tools-project.jpr1488951205684"/>
+   </hash>
+   <hash>
+      <url n="shared" path="../../../mywork/joaiProd/trunk/joai-project/joai-project.jpr"/>
+      <value n="user" v="joai-project.jpr1488951205714"/>
+   </hash>
+</index>

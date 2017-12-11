@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://xmlns.oracle.com/bpel/workflow/taskDefinition"
+     xmlns:tns="http://xmlns.oracle.com/bpel/workflow/taskDefinition"
+     xmlns:config="http://xmlns.oracle.com/bpel/workflow/configuration"
+     xmlns:routingslip="http://xmlns.oracle.com/bpel/workflow/routingSlip"
+     xmlns="http://www.w3.org/2001/XMLSchema" 
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+     elementFormDefault="qualified" blockDefault="#all">
+
+    <import namespace="http://xmlns.oracle.com/bpel/workflow/configuration"
+            schemaLocation="WorkflowConfiguration.xsd"/>
+    <import namespace="http://xmlns.oracle.com/bpel/workflow/routingSlip"
+            schemaLocation="RoutingSlip.xsd"/>
+
+    <element name="taskDefinition">
+      <complexType>
+        <sequence>
+          <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <element name="title" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <element name="priority" type="xsd:integer" minOccurs="0" maxOccurs="1"/>
+          <element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <element name="process" type="tns:taskDefinitionProcessType" minOccurs="1" maxOccurs="1"/>
+          <choice minOccurs="1" maxOccurs="1">
+            <element name="routingSlipLocation" type="xsd:string"/>
+            <element ref="routingslip:routingSlip"/>
+          </choice>
+          <element ref="config:workflowConfiguration" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+        <attribute name="targetNamespace" type="xsd:string" use="optional"/>
+        <attribute name="version" type="xsd:string" use="optional"/>
+      </complexType>
+    </element>
+
+    <complexType name="taskDefinitionProcessType">
+      <sequence/>
+      <attribute name="domainId" type="xsd:string" use="optional"/>
+      <attribute name="processId" type="xsd:string" use="required"/>
+      <attribute name="processName" type="xsd:string" use="optional"/>
+      <attribute name="processVersion" type="xsd:string" use="required"/>
+    </complexType>
+
+</schema>
+

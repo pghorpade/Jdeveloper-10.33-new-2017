@@ -1,0 +1,258 @@
+<?xml version = '1.0'?>
+<project name="ant-bpeltest"> 
+
+    <!-- To test any BPEL process using BPELTest feature integrated with     -->
+    <!-- Oracle BPEL Process Manager, "deploytest" and "bpeltest" ant tasks  -->
+    <!-- can be used in an antfile to run the test from command line.        -->
+    <!-- Such antfile(s) can import this file instead of duplicating same    -->
+    <!-- script. "test" target defined below should be invoked from parent   -->
+    <!-- antfile to deploy process and tests, to run the process, and create -->
+    <!-- html report in JunitReport format.                                  -->
+
+    <property name="fs" value="${file.separator}" />         
+
+    <property name="samples.dir" value="${home}${fs}samples" />
+    
+    <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${samples.dir}/testutils/lib/ant-contrib-1.0b2.jar"/>
+
+    <property name="rev" value="1.0"/>
+    <property name="deploy" value="default"/>
+
+    <!-- Make sure that parent antfile's project name is same as BPEL        -->
+    <!-- process name, otherwise property "process" should be defined to     -->
+    <!-- override default value defined below.                               -->
+    <property name="process" value="${ant.project.name}" />
+    
+    <property name="process.dir" value="${basedir}" />
+
+    <property name="work.dir" value="${samples.dir}${fs}work" />
+
+    <property name="resultsDir" value="${work.dir}${fs}results" />
+   
+    <target name="test" depends="setup, deployall, bpeltest, report" />    
+
+    <!-- "setup" is empty target to be overriden by parent project if setup  -->
+    <!-- is required for a specific test e.g. ResielientDemo.                -->
+    <target name="setup">
+    </target>
+
+    <!-- "deployall" target deploys BPEL process to be tested along with any -->
+    <!-- dependent UI/EJB applications and its testsuites.                   -->
+    <target name="deployall" >
+        <fail message="*** Make sure ${samples.dir}${fs}testutils${fs}lib${fs}hatatap.jar is available and is added in CLASSPATH environment">
+            <condition>
+                <not>
+                    <available classname="com.pingdynasty.hatatap.Hatatap"/>
+                </not>                    
+            </condition>
+        </fail>   
+        
+        <condition property="is.skip.deploy">
+            <equals arg1="${skip.deploy}" arg2="true"/>
+        </condition>
+        <antcall target="deploy.application"/>
+
+        <property name="testsuites.dir" value="${basedir}/testsuites"/> 
+        
+        <!-- In case of multiple testsuites, this properties must be   -->
+        <!-- overriden with a list of suites by the parent ant project -->
+        <property name="testsuites" value="suite_main"/>   
+
+        <for list="${testsuites}" param="suite">
+            <sequential>
+                <echo message="*** Deploying testsuite @{suite} for process ${process}(v.${rev})"/>        
+                <deploytest process="${process}" rev="${rev}" domain="${deploy}" suite="@{suite}" failonerror="false">     
+                    <!-- if any common includes or messages are defined, -->
+                    <!-- deploy them along with the testsuite.           -->
+                    <fileset dir="${testsuites.dir}">
+                        <include name="includes/**"/>
+                        <include name="messages/**"/>
+                    </fileset>
+                    <fileset dir="${testsuites.dir}/@{suite}">
+                        <exclude name="**/hatatapScript*"/>
+                        <exclude name="**/metadata/*"/>
+                    </fileset>
+                </deploytest>
+            </sequential>
+        </for>        
+    </target>    
+    
+    <target name="deploy.application" unless="skip.deploy">
+        
+        <echo message='*** Deploying BPEL process ${process}(v.${rev}) and all dependent J2EE applications e.g. UI, EJB'/>
+        <ant dir="${process.dir}"/>
+        
+    </target>
+
+    <!-- "bpeltest" target runs deployed testsuites of a BPEL process -->    
+    <target name="bpeltest">
+        <!-- Create /tmp on Windows for hatatap scripts to save jsp page flow -->
+        <mkdir dir="/tmp"/> 
+        <!-- setup default values if not already defined -->
+        <property name="process.timeout" value="90"/>
+        <property name="minCoverage" value="100%"/>
+        <property name="numWorkers" value="1"/>
+        
+        <!-- package is overriden when "test" is called by "testall" target -->        
+        <property name="package" value=""/>
+        
+        <echo message='*** Running process ${process}(v.${rev}): minCoverage=${minCoverage}, timeout=${process.timeout} sec, numWorkers=${numWorkers}' />
+        <bpeltest
+            junitPackageFormat="${package}$process-$revision"
+            name="${process}Tests" 
+            home="${home}" 
+            numWorkers="${numWorkers}"
+            process="${process}"
+            rev="${rev}"
+            minCoverage="${minCoverage}"
+            resultsDir="${resultsDir}/xml"
+            countProperty="countProperty"
+            failureProperty="failureProperty"
+            timeout="${process.timeout}"
+            failonerror="false"
+            callHandler="com.oracle.services.bpel.test.handler.CommonCallHandler"
+            context="${home}/samples/tutorials/102.InvokingProcesses/rmi/context.properties" >
+            
+            <include name="*"/>
+            
+            <classpath>
+                <pathelement location="${home}/samples/testutils/lib/testutils.jar"/>
+                <pathelement location="${home}/samples/testutils/lib/hatatap.jar"/>                      
+            </classpath>  
+            
+        </bpeltest>
+
+        <echo>====================================================================
+Executed ${countProperty} test(s) for ${package}${process}(v.${rev}) with ${failureProperty} failure(s)
+====================================================================</echo> 
+
+        <echo file="${resultsDir}/${process}.properties">
+count.total    = ${countProperty}
+count.failure  = ${failureProperty}
+        </echo>
+    </target>
+
+    <!-- "report" target creates JUnitReport for testsuites run by bpeltest. -->  
+    <!-- This can be called after run of bpeltest so as to get the results   -->
+    <!-- updated after completion of test of each process.                   -->
+    <target name="report">
+        <mkdir dir="${resultsDir}/xml"/>
+        <junitreport todir="${resultsDir}/xml">
+            <fileset dir="${resultsDir}/xml">
+                <include name="TEST-*.xml" />
+                <include name="BPEL-*.xml" />
+            </fileset>
+            <report format="frames" todir="${resultsDir}/html" />
+        </junitreport>  
+        <echo>
+        *** Please check JUnitReport file:
+        ${resultsDir}${fs}html${fs}index.html
+        </echo> 
+    </target>
+
+
+    <!-- "testall" target runs "test" for all samples having bpel testuites -->
+    <target name="testall">
+        <ant antfile="${home}/samples/testutils/bpeltest_common.xml" target="clean"/>  
+        
+        <property name="samples.list" value="
+            demos/AmazonFlow/,
+            demos/BankTransferDemo/BankTransferFlow/,
+            demos/BankTransferDemo/BankTransferFlowWithCompensation/,
+            demos/GoogleFlow/,
+            demos/HotwireDemo/HotwireClient/,
+            demos/IBMSamples/echo/,
+            demos/IBMSamples/echocomplex/,
+            demos/IBMSamples/simple/,
+            demos/LoanDemo/LoanFlow/,
+            demos/LoanDemoPlus/LoanFlowPlus/,
+            demos/ParallelSearch/GoogleSearch/,
+            demos/ParallelSearch/YahooSearch/,
+            demos/PriorityDemo/NoiseProcess/,
+            demos/ResilientDemo/ResilientFlow/,
+            demos/SalesforceFlow/,
+            demos/TimeOffRequestDemo/TimeOffRequestFlow/,
+            interop/axis/BPELCallingAsyncAXIS/,
+            interop/axis/BPELCallingSyncAXIS/,
+            references/Assign/,
+            references/Catch/,
+            references/DynamicPartnerLink/,
+            references/Event/,
+            references/Flow/,
+            references/FlowN/,
+            references/Invoke/,
+            references/JavaExec/,
+            references/Link/,
+            references/Pick/,
+            references/Receive/,
+            references/Replay/,
+            references/Reply/,
+            references/Switch/,
+            references/Terminate/,
+            references/Throw/,
+            references/Wait/,
+            references/While/,
+            references/XPath/,
+            references/XPathFunction/,
+            tutorials/101.HelloWorld/,
+            tutorials/103.XMLDocuments/,
+            tutorials/104.SyncQuoteConsumer/,
+            tutorials/105.AsyncCompositeLoanBroker/,
+            tutorials/106.ParallelFlows/,
+            tutorials/107.Exceptions/,
+            tutorials/108.Timeouts/,
+            tutorials/109.CorrelationSets/BuyerSeller/Buyer/,
+            tutorials/110.UserTasks/TaskSample/,
+            tutorials/111.CallingSessionBeans/,
+            tutorials/112.Arrays/,
+            tutorials/113.ABCARouting/FlowA/,
+            tutorials/114.XSLTTransformations/,
+            tutorials/116.SendEmails/,
+            tutorials/117.ReceiveEmails/,
+            tutorials/118.JMSService/buyer/,
+            tutorials/119.JMSTopics/,
+            tutorials/120.XSQLExecution/,
+            tutorials/126.DataAggregator/AggregationTutorial/,
+            tutorials/126.DataAggregator/AggregationTutorialFlowN/,
+            tutorials/126.DataAggregator/AggregationTutorialPartInfoService/,
+            tutorials/701.LargeProcesses/,
+            tutorials/702.Bindings/EJBBinding/,
+            tutorials/702.Bindings/HTTPBinding/HTTPBindingSample/,
+            tutorials/702.Bindings/JavaBinding/,
+            utils/AsyncLoanService/StarLoan/"/>  
+        
+        <for list="${samples.list}" param="sample.dir" keepgoing="true" trim="true">
+            <sequential>
+                <echo>*******************************************************************
+Starting samples/@{sample.dir}/testsuites
+*******************************************************************</echo>
+                <ant dir="${home}/samples/@{sample.dir}" target="test" inheritAll="false">
+                    <property name="package" value="@{sample.dir}"/>
+                </ant>
+            </sequential>
+        </for>        
+    </target>    
+    
+    <!-- "clean" cleans up BPEL deployment, instances and test results      -->
+    <target name="clean">
+        <!-- delete old JUnitReport results -->
+        <delete dir="${resultsDir}"/>
+        
+        <!-- delete all BPEL instances -->
+        <ant dir="${samples.dir}/testutils" target="deleteall"/>
+        
+        <!-- undeploy all deployed BPEL processes -->
+        <ant dir="${samples.dir}/testutils" target="undeployall"/>        
+    </target>
+    
+    <target name="iterate.antfiles">
+        <!-- This target runs a common target in all antfiles under a directory -->
+        <!-- default input prperties below can be overriden as param in antcall -->
+        <property name="dir" value="${user.dir}"/>  <!-- current directory --> 
+        <property name="antfile" value="build.xml"/>         
+        <property name="target" value="test"/>             
+        <subant target="${target}" failonerror="false">
+            <fileset dir="${dir}" includes="**/${antfile}"/>
+        </subant>        
+    </target>
+</project>

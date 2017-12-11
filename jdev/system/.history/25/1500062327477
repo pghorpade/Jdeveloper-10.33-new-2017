@@ -1,0 +1,231 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.Date;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class ContentFiles {
+
+    /**Map fileGroups <-> edu.ucla.library.digital.dlcs.model.FileGroups
+     * @associates <{edu.ucla.library.digital.dlcs.model.FileGroups}>
+     */
+    private ValueHolderInterface fileGroups;
+
+    /**Map projectItems <-> edu.ucla.library.digital.dlcs.model.ProjectItems
+     * @associates <{edu.ucla.library.digital.dlcs.model.ProjectItems}>
+     */
+    private ValueHolderInterface projectItems;
+    private Long fileidPk;
+    private String mimeType;
+    private String fileSequence;
+    private String fileSize;
+    private Date createDate;
+    private String fileLocation;
+    private String locationType;
+    private String fileUse;
+    private String oldFileid;
+    private String fileName;
+    private String bfileVideo;
+    private String blobVideo;
+    private String clobText;
+    private String nclobText;
+    private String bfileImage;
+    private String blobImage;
+    private String bfileAudio;
+    private String blobAudio;
+    private String bfileLob;
+    private byte[] blobLob;
+    private String contentType;
+
+    public ContentFiles() {
+        super();
+        this.fileGroups = new ValueHolder();
+        this.projectItems = new ValueHolder();
+    }
+
+    public String getBfileAudio() {
+        return this.bfileAudio;
+    }
+
+    public String getBfileImage() {
+        return this.bfileImage;
+    }
+
+    public String getBfileLob() {
+        return this.bfileLob;
+    }
+
+    public String getBfileVideo() {
+        return this.bfileVideo;
+    }
+
+    public String getBlobAudio() {
+        return this.blobAudio;
+    }
+
+    public String getBlobImage() {
+        return this.blobImage;
+    }
+
+    public byte[] getBlobLob() {
+        return this.blobLob;
+    }
+
+    public String getBlobVideo() {
+        return this.blobVideo;
+    }
+
+    public String getClobText() {
+        return this.clobText;
+    }
+
+    public String getContentType() {
+        return this.contentType;
+    }
+
+    public Date getCreateDate() {
+        return this.createDate;
+    }
+
+    public FileGroups getFileGroups() {
+        return (FileGroups)this.fileGroups.getValue();
+    }
+
+    public String getFileLocation() {
+        return this.fileLocation;
+    }
+
+    public String getFileName() {
+        return this.fileName;
+    }
+
+    public String getFileSequence() {
+        return this.fileSequence;
+    }
+
+    public String getFileSize() {
+        return this.fileSize;
+    }
+
+    public String getFileUse() {
+        return this.fileUse;
+    }
+
+    public Long getFileidPk() {
+        return this.fileidPk;
+    }
+
+    public String getLocationType() {
+        return this.locationType;
+    }
+
+    public String getMimeType() {
+        return this.mimeType;
+    }
+
+    public String getNclobText() {
+        return this.nclobText;
+    }
+
+    public String getOldFileid() {
+        return this.oldFileid;
+    }
+
+    public ProjectItems getProjectItems() {
+        return (ProjectItems)this.projectItems.getValue();
+    }
+
+    public void setBfileAudio(String bfileAudio) {
+        this.bfileAudio = bfileAudio;
+    }
+
+    public void setBfileImage(String bfileImage) {
+        this.bfileImage = bfileImage;
+    }
+
+    public void setBfileLob(String bfileLob) {
+        this.bfileLob = bfileLob;
+    }
+
+    public void setBfileVideo(String bfileVideo) {
+        this.bfileVideo = bfileVideo;
+    }
+
+    public void setBlobAudio(String blobAudio) {
+        this.blobAudio = blobAudio;
+    }
+
+    public void setBlobImage(String blobImage) {
+        this.blobImage = blobImage;
+    }
+
+    public void setBlobLob(byte[] blobLob) {
+        this.blobLob = blobLob;
+    }
+
+    public void setBlobVideo(String blobVideo) {
+        this.blobVideo = blobVideo;
+    }
+
+    public void setClobText(String clobText) {
+        this.clobText = clobText;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public void setFileGroups(FileGroups fileGroups) {
+        this.fileGroups.setValue(fileGroups);
+    }
+
+    public void setFileLocation(String fileLocation) {
+        this.fileLocation = fileLocation;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setFileSequence(String fileSequence) {
+        this.fileSequence = fileSequence;
+    }
+
+    public void setFileSize(String fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public void setFileUse(String fileUse) {
+        this.fileUse = fileUse;
+    }
+
+    public void setFileidPk(Long fileidPk) {
+        this.fileidPk = fileidPk;
+    }
+
+    public void setLocationType(String locationType) {
+        this.locationType = locationType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    public void setNclobText(String nclobText) {
+        this.nclobText = nclobText;
+    }
+
+    public void setOldFileid(String oldFileid) {
+        this.oldFileid = oldFileid;
+    }
+
+    public void setProjectItems(ProjectItems projectItems) {
+        this.projectItems.setValue(projectItems);
+    }
+
+}

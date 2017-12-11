@@ -1,0 +1,136 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Users {
+
+	private List userAccessCollection;
+	private List virtualCollectionsCollection;
+	private Long useridPk;
+	private String userName;
+	private String passCode;
+	private String email;
+	private Date lastAccessDate;
+	private String userHandle;
+	private String userRole;
+	private String resetFlag;
+
+public Users() {
+	super();
+	this.userAccessCollection = new ArrayList();
+	this.virtualCollectionsCollection = new ArrayList();
+}
+
+public void addUserAccess(UserAccess anUserAccess) {
+	this.userAccessCollection.add(anUserAccess);
+	anUserAccess.setUsers(this);
+}
+
+public void addUserAccess(int index, UserAccess anUserAccess) {
+	this.userAccessCollection.add(index, anUserAccess);
+	anUserAccess.setUsers(this);
+}
+
+public void addVirtualsCollection(int index, VirtualCollections aVirtualCollections) {
+	this.virtualCollectionsCollection.add(index, aVirtualCollections);
+	aVirtualCollections.setUsers(this);
+}
+
+public void addVirtualsCollection(VirtualCollections aVirtualCollections) {
+	this.virtualCollectionsCollection.add(aVirtualCollections);
+	aVirtualCollections.setUsers(this);
+}
+
+public String getEmail() {
+	return this.email;
+}
+
+public Date getLastAccessDate() {
+	return this.lastAccessDate;
+}
+
+public String getPassCode() {
+	return this.passCode;
+}
+
+public String getResetFlag() {
+	return this.resetFlag;
+}
+
+public List getUserAccessCollection() {
+	return this.userAccessCollection;
+}
+
+public String getUserHandle() {
+	return this.userHandle;
+}
+
+public String getUserName() {
+	return this.userName;
+}
+
+public String getUserRole() {
+	return this.userRole;
+}
+
+public Long getUseridPk() {
+	return this.useridPk;
+}
+
+public List getVirtualCollectionsCollection() {
+	return this.virtualCollectionsCollection;
+}
+
+public void removeUserAccess(UserAccess anUserAccess) {
+	this.userAccessCollection.remove(anUserAccess);
+	anUserAccess.setUsers(null);
+}
+
+public void removeVirtualsCollection(VirtualCollections aVirtualCollections) {
+	this.virtualCollectionsCollection.remove(aVirtualCollections);
+	aVirtualCollections.setUsers(null);
+}
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+public void setLastAccessDate(Date lastAccessDate) {
+	this.lastAccessDate = lastAccessDate;
+}
+
+public void setPassCode(String passCode) {
+	this.passCode = passCode;
+}
+
+public void setResetFlag(String resetFlag) {
+	this.resetFlag = resetFlag;
+}
+
+public void setUserAccessCollection(List userAccessCollection) {
+	this.userAccessCollection = userAccessCollection;
+}
+
+public void setUserHandle(String userHandle) {
+	this.userHandle = userHandle;
+}
+
+public void setUserName(String userName) {
+	this.userName = userName;
+}
+
+public void setUserRole(String userRole) {
+	this.userRole = userRole;
+}
+
+public void setUseridPk(Long useridPk) {
+	this.useridPk = useridPk;
+}
+
+public void setVirtualCollectionsCollection(List virtualCollectionsCollection) {
+	this.virtualCollectionsCollection = virtualCollectionsCollection;
+}
+
+}

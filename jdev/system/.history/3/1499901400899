@@ -1,0 +1,60 @@
+package edu.ucla.library.digital.dlcs.app;
+
+import edu.ucla.library.digital.dlcs.exception.DLException;
+import edu.ucla.library.digital.dlcs.tool.NewProjectSetup;
+
+
+/**
+ * Do NOT run it if your machine does not have priviledge to invoke the ARK Minter.
+ * URL: http://noid.library.ucla.edu/noidu_zz8+?mint+1
+ */
+public class NewProjectSetupApp {
+    public NewProjectSetupApp() {
+    }
+
+    public static void main(String[] args) {
+        new NewProjectSetupApp().run();
+    }
+
+    public void run() {
+        NewProjectSetup newPrj = new NewProjectSetup();
+        try {
+
+            newPrj.setPathToTemplate("C:\\Users\\parinita ghorpade\\Downloads\\ojai.xml");
+
+          
+            newPrj.run();
+        } catch (DLException dlex) {
+            dlex.printStackTrace(System.out);
+        }
+    }
+
+}
+
+
+/** 
+ * here is the SQL to back out an added Project
+ * 
+ * Do this in reverse order
+ * 
+delete from projects where projectid_pk='90'
+
+delete from dl_objects where projectid_fk='90'
+
+delete from desc_terms where projectid_fk='90'
+
+delete from core_desc_qualifiers where core_desc_qualifierid_pk='50'
+
+delete from desc_Qualifiers where projectid_fk='90'
+
+delete from core_desc_control_values where core_desc_cvid_pk='657'
+
+delete File_groups where PROJECTID_FK='90'
+
+delete from desc_control_values where projectid_fk='90'
+
+delete project_items where PROJECTID_FK='90'
+
+delete from link_admin_groups where admin_linkid_pk='32'
+
+*/

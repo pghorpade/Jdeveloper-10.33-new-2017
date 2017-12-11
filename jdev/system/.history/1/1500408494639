@@ -1,0 +1,320 @@
+  /*@lineinfo:filename=/pages/tiles/nav/ProjectSetupSideNav.jsp*/
+  /*@lineinfo:generated-code*/
+
+import oracle.jsp.runtime.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.jsp.*;
+import oracle.jsp.el.*;
+import javax.servlet.jsp.el.*;
+
+
+public class _jqc_e_ extends com.orionserver.http.OrionHttpJspPage {
+
+
+  // ** Begin Declarations
+
+
+  // ** End Declarations
+
+  public void _jspService(HttpServletRequest request, HttpServletResponse response) throws java.io.IOException, ServletException {
+
+    response.setContentType( "text/html");
+    /* set up the intrinsic variables using the pageContext goober:
+    ** session = HttpSession
+    ** application = ServletContext
+    ** out = JspWriter
+    ** page = this
+    ** config = ServletConfig
+    ** all session/app beans declared in globals.jsa
+    */
+    PageContext pageContext = JspFactory.getDefaultFactory().getPageContext( this, request, response, null, true, JspWriter.DEFAULT_BUFFER, true);
+    // Note: this is not emitted if the session directive == false
+    HttpSession session = pageContext.getSession();
+    int __jsp_tag_starteval;
+    ServletContext application = pageContext.getServletContext();
+    JspWriter out = pageContext.getOut();
+    _jqc_e_ page = this;
+    ServletConfig config = pageContext.getServletConfig();
+    javax.servlet.jsp.el.VariableResolver __ojsp_varRes = (VariableResolver)new OracleVariableResolverImpl(pageContext);
+
+    try {
+
+
+      out.write( "\n");
+      out.write( "\n");
+      /*@lineinfo:user-code*//*@lineinfo:3^1*/      //@ include file="../TagLibsInc.jsp" 
+      /*@lineinfo:generated-code*/
+      out.write( "\n");
+      out.write( "\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n<tr>\n<td>\n");
+      /*@lineinfo:translated-code*//*@lineinfo:9^1*/      {
+        edu.ucla.library.taglib.SecurityTag __jsp_taghandler_1=(edu.ucla.library.taglib.SecurityTag)OracleJspRuntime.getTagHandler(pageContext,edu.ucla.library.taglib.SecurityTag.class,"edu.ucla.library.taglib.SecurityTag role");
+        __jsp_taghandler_1.setParent(null);
+        __jsp_taghandler_1.setRole("Admin");
+        __jsp_tag_starteval=__jsp_taghandler_1.doStartTag();
+        if (OracleJspRuntime.checkStartTagEval(__jsp_tag_starteval))
+        {
+          do {
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+            /*@lineinfo:translated-code*//*@lineinfo:10^1*/            {
+              org.apache.struts.taglib.html.LinkTag __jsp_taghandler_2=(org.apache.struts.taglib.html.LinkTag)OracleJspRuntime.getTagHandler(pageContext,org.apache.struts.taglib.html.LinkTag.class,"org.apache.struts.taglib.html.LinkTag action target title");
+              __jsp_taghandler_2.setParent(__jsp_taghandler_1);
+              __jsp_taghandler_2.setAction("PopulateProjectSetup");
+              __jsp_taghandler_2.setTarget("_top");
+              __jsp_taghandler_2.setTitle("Project Setup");
+              __jsp_tag_starteval=__jsp_taghandler_2.doStartTag();
+              if (OracleJspRuntime.checkStartBodyTagEval(__jsp_tag_starteval))
+              {
+                out=OracleJspRuntime.pushBodyIfNeeded(pageContext,__jsp_taghandler_2,__jsp_tag_starteval,out);
+                do {
+                  /*@lineinfo:generated-code*/
+                  out.write( "Project Setup");
+                /*@lineinfo:translated-code*//*@lineinfo:10^78*/                } while (__jsp_taghandler_2.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+                out=OracleJspRuntime.popBodyIfNeeded(pageContext,out);
+              }
+              if (__jsp_taghandler_2.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+                return;
+              OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_2,2);
+            }
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+          /*@lineinfo:translated-code*//*@lineinfo:10^103*/          } while (__jsp_taghandler_1.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+        }
+        if (__jsp_taghandler_1.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+          return;
+        OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_1,1);
+      }
+      /*@lineinfo:generated-code*/
+      out.write( "\n</td>\n</tr>\n<tr>\n<td>\n");
+      /*@lineinfo:translated-code*//*@lineinfo:16^1*/      {
+        edu.ucla.library.taglib.SecurityTag __jsp_taghandler_3=(edu.ucla.library.taglib.SecurityTag)OracleJspRuntime.getTagHandler(pageContext,edu.ucla.library.taglib.SecurityTag.class,"edu.ucla.library.taglib.SecurityTag role");
+        __jsp_taghandler_3.setParent(null);
+        __jsp_taghandler_3.setRole("Admin");
+        __jsp_tag_starteval=__jsp_taghandler_3.doStartTag();
+        if (OracleJspRuntime.checkStartTagEval(__jsp_tag_starteval))
+        {
+          do {
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+            /*@lineinfo:translated-code*//*@lineinfo:17^1*/            {
+              org.apache.struts.taglib.html.LinkTag __jsp_taghandler_4=(org.apache.struts.taglib.html.LinkTag)OracleJspRuntime.getTagHandler(pageContext,org.apache.struts.taglib.html.LinkTag.class,"org.apache.struts.taglib.html.LinkTag action target title");
+              __jsp_taghandler_4.setParent(__jsp_taghandler_3);
+              __jsp_taghandler_4.setAction("PopulateObjectModel");
+              __jsp_taghandler_4.setTarget("_top");
+              __jsp_taghandler_4.setTitle("Object Model");
+              __jsp_tag_starteval=__jsp_taghandler_4.doStartTag();
+              if (OracleJspRuntime.checkStartBodyTagEval(__jsp_tag_starteval))
+              {
+                out=OracleJspRuntime.pushBodyIfNeeded(pageContext,__jsp_taghandler_4,__jsp_tag_starteval,out);
+                do {
+                  /*@lineinfo:generated-code*/
+                  out.write( "Object Model");
+                /*@lineinfo:translated-code*//*@lineinfo:17^76*/                } while (__jsp_taghandler_4.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+                out=OracleJspRuntime.popBodyIfNeeded(pageContext,out);
+              }
+              if (__jsp_taghandler_4.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+                return;
+              OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_4,2);
+            }
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+          /*@lineinfo:translated-code*//*@lineinfo:17^100*/          } while (__jsp_taghandler_3.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+        }
+        if (__jsp_taghandler_3.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+          return;
+        OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_3,1);
+      }
+      /*@lineinfo:generated-code*/
+      out.write( "\n</td>\n</tr>\n<tr>\n<td>\n");
+      /*@lineinfo:translated-code*//*@lineinfo:23^1*/      {
+        edu.ucla.library.taglib.SecurityTag __jsp_taghandler_5=(edu.ucla.library.taglib.SecurityTag)OracleJspRuntime.getTagHandler(pageContext,edu.ucla.library.taglib.SecurityTag.class,"edu.ucla.library.taglib.SecurityTag role");
+        __jsp_taghandler_5.setParent(null);
+        __jsp_taghandler_5.setRole("Admin");
+        __jsp_tag_starteval=__jsp_taghandler_5.doStartTag();
+        if (OracleJspRuntime.checkStartTagEval(__jsp_tag_starteval))
+        {
+          do {
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+            /*@lineinfo:translated-code*//*@lineinfo:24^1*/            {
+              org.apache.struts.taglib.html.LinkTag __jsp_taghandler_6=(org.apache.struts.taglib.html.LinkTag)OracleJspRuntime.getTagHandler(pageContext,org.apache.struts.taglib.html.LinkTag.class,"org.apache.struts.taglib.html.LinkTag action target title");
+              __jsp_taghandler_6.setParent(__jsp_taghandler_5);
+              __jsp_taghandler_6.setAction("PopulateDescriptiveTerms");
+              __jsp_taghandler_6.setTarget("_top");
+              __jsp_taghandler_6.setTitle("Descriptive Terms");
+              __jsp_tag_starteval=__jsp_taghandler_6.doStartTag();
+              if (OracleJspRuntime.checkStartBodyTagEval(__jsp_tag_starteval))
+              {
+                out=OracleJspRuntime.pushBodyIfNeeded(pageContext,__jsp_taghandler_6,__jsp_tag_starteval,out);
+                do {
+                  /*@lineinfo:generated-code*/
+                  out.write( "Descriptive Terms");
+                /*@lineinfo:translated-code*//*@lineinfo:24^86*/                } while (__jsp_taghandler_6.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+                out=OracleJspRuntime.popBodyIfNeeded(pageContext,out);
+              }
+              if (__jsp_taghandler_6.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+                return;
+              OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_6,2);
+            }
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+          /*@lineinfo:translated-code*//*@lineinfo:24^115*/          } while (__jsp_taghandler_5.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+        }
+        if (__jsp_taghandler_5.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+          return;
+        OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_5,1);
+      }
+      /*@lineinfo:generated-code*/
+      out.write( "\n</td>\n</tr>\n<tr>\n<td>\n");
+      /*@lineinfo:translated-code*//*@lineinfo:30^1*/      {
+        edu.ucla.library.taglib.SecurityTag __jsp_taghandler_7=(edu.ucla.library.taglib.SecurityTag)OracleJspRuntime.getTagHandler(pageContext,edu.ucla.library.taglib.SecurityTag.class,"edu.ucla.library.taglib.SecurityTag role");
+        __jsp_taghandler_7.setParent(null);
+        __jsp_taghandler_7.setRole("Admin");
+        __jsp_tag_starteval=__jsp_taghandler_7.doStartTag();
+        if (OracleJspRuntime.checkStartTagEval(__jsp_tag_starteval))
+        {
+          do {
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+            /*@lineinfo:translated-code*//*@lineinfo:31^1*/            {
+              edu.ucla.library.taglib.DisplayNavItemTag __jsp_taghandler_8=(edu.ucla.library.taglib.DisplayNavItemTag)OracleJspRuntime.getTagHandler(pageContext,edu.ucla.library.taglib.DisplayNavItemTag.class,"edu.ucla.library.taglib.DisplayNavItemTag parameter");
+              __jsp_taghandler_8.setParent(__jsp_taghandler_7);
+              __jsp_taghandler_8.setParameter("Qualifiers");
+              __jsp_tag_starteval=__jsp_taghandler_8.doStartTag();
+              if (OracleJspRuntime.checkStartTagEval(__jsp_tag_starteval))
+              {
+                do {
+                  /*@lineinfo:generated-code*/
+                  out.write( "\n   ");
+                  /*@lineinfo:translated-code*//*@lineinfo:32^4*/                  {
+                    org.apache.struts.taglib.html.LinkTag __jsp_taghandler_9=(org.apache.struts.taglib.html.LinkTag)OracleJspRuntime.getTagHandler(pageContext,org.apache.struts.taglib.html.LinkTag.class,"org.apache.struts.taglib.html.LinkTag action target title");
+                    __jsp_taghandler_9.setParent(__jsp_taghandler_8);
+                    __jsp_taghandler_9.setAction("PopulateDescriptiveQualifiers");
+                    __jsp_taghandler_9.setTarget("_top");
+                    __jsp_taghandler_9.setTitle("Descriptive Qualifiers");
+                    __jsp_tag_starteval=__jsp_taghandler_9.doStartTag();
+                    if (OracleJspRuntime.checkStartBodyTagEval(__jsp_tag_starteval))
+                    {
+                      out=OracleJspRuntime.pushBodyIfNeeded(pageContext,__jsp_taghandler_9,__jsp_tag_starteval,out);
+                      do {
+                        /*@lineinfo:generated-code*/
+                        out.write( "Descriptive Qualifiers");
+                      /*@lineinfo:translated-code*//*@lineinfo:32^99*/                      } while (__jsp_taghandler_9.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+                      out=OracleJspRuntime.popBodyIfNeeded(pageContext,out);
+                    }
+                    if (__jsp_taghandler_9.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+                      return;
+                    OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_9,3);
+                  }
+                  /*@lineinfo:generated-code*/
+                  out.write( "\n");
+                /*@lineinfo:translated-code*//*@lineinfo:32^133*/                } while (__jsp_taghandler_8.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+              }
+              if (__jsp_taghandler_8.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+                return;
+              OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_8,2);
+            }
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+          /*@lineinfo:translated-code*//*@lineinfo:33^26*/          } while (__jsp_taghandler_7.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+        }
+        if (__jsp_taghandler_7.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+          return;
+        OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_7,1);
+      }
+      /*@lineinfo:generated-code*/
+      out.write( "\n</td>\n</tr>\n<tr>\n<td>\n");
+      /*@lineinfo:translated-code*//*@lineinfo:39^1*/      {
+        edu.ucla.library.taglib.SecurityTag __jsp_taghandler_10=(edu.ucla.library.taglib.SecurityTag)OracleJspRuntime.getTagHandler(pageContext,edu.ucla.library.taglib.SecurityTag.class,"edu.ucla.library.taglib.SecurityTag role");
+        __jsp_taghandler_10.setParent(null);
+        __jsp_taghandler_10.setRole("Admin,Data Entry");
+        __jsp_tag_starteval=__jsp_taghandler_10.doStartTag();
+        if (OracleJspRuntime.checkStartTagEval(__jsp_tag_starteval))
+        {
+          do {
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+            /*@lineinfo:translated-code*//*@lineinfo:40^1*/            {
+              edu.ucla.library.taglib.DisplayNavItemTag __jsp_taghandler_11=(edu.ucla.library.taglib.DisplayNavItemTag)OracleJspRuntime.getTagHandler(pageContext,edu.ucla.library.taglib.DisplayNavItemTag.class,"edu.ucla.library.taglib.DisplayNavItemTag parameter");
+              __jsp_taghandler_11.setParent(__jsp_taghandler_10);
+              __jsp_taghandler_11.setParameter("Control Values");
+              __jsp_tag_starteval=__jsp_taghandler_11.doStartTag();
+              if (OracleJspRuntime.checkStartTagEval(__jsp_tag_starteval))
+              {
+                do {
+                  /*@lineinfo:generated-code*/
+                  out.write( "\n   ");
+                  /*@lineinfo:translated-code*//*@lineinfo:41^4*/                  {
+                    org.apache.struts.taglib.html.LinkTag __jsp_taghandler_12=(org.apache.struts.taglib.html.LinkTag)OracleJspRuntime.getTagHandler(pageContext,org.apache.struts.taglib.html.LinkTag.class,"org.apache.struts.taglib.html.LinkTag action target title");
+                    __jsp_taghandler_12.setParent(__jsp_taghandler_11);
+                    __jsp_taghandler_12.setAction("PopulateDescriptiveControlValues");
+                    __jsp_taghandler_12.setTarget("_top");
+                    __jsp_taghandler_12.setTitle("Control Values");
+                    __jsp_tag_starteval=__jsp_taghandler_12.doStartTag();
+                    if (OracleJspRuntime.checkStartBodyTagEval(__jsp_tag_starteval))
+                    {
+                      out=OracleJspRuntime.pushBodyIfNeeded(pageContext,__jsp_taghandler_12,__jsp_tag_starteval,out);
+                      do {
+                        /*@lineinfo:generated-code*/
+                        out.write( "Control Values");
+                      /*@lineinfo:translated-code*//*@lineinfo:41^94*/                      } while (__jsp_taghandler_12.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+                      out=OracleJspRuntime.popBodyIfNeeded(pageContext,out);
+                    }
+                    if (__jsp_taghandler_12.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+                      return;
+                    OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_12,3);
+                  }
+                  /*@lineinfo:generated-code*/
+                  out.write( "\n");
+                /*@lineinfo:translated-code*//*@lineinfo:41^120*/                } while (__jsp_taghandler_11.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+              }
+              if (__jsp_taghandler_11.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+                return;
+              OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_11,2);
+            }
+            /*@lineinfo:generated-code*/
+            out.write( "\n");
+          /*@lineinfo:translated-code*//*@lineinfo:42^26*/          } while (__jsp_taghandler_10.doAfterBody()==javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN);
+        }
+        if (__jsp_taghandler_10.doEndTag()==javax.servlet.jsp.tagext.Tag.SKIP_PAGE)
+          return;
+        OracleJspRuntime.releaseTagHandler(pageContext,__jsp_taghandler_10,1);
+      }
+      /*@lineinfo:generated-code*/
+      out.write( "\n</td>\n</tr>\n\n");
+      /*@lineinfo:user-code*//*@lineinfo:47^1*/       /**
+      <security:present role="Admin">
+      <html:link href="#">Image Parameters</html:link>
+      <html:link href="#">Administrative Terms</html:link>
+      <html:link href="#">Administrative Control Values</html:link>
+      <html:link href="#">Administrative Group</html:link>
+      <html:link href="#">File Group</html:link> 
+      </security:present>
+      
+      <html:link action="PopulateImageParameters" target="_top" title="Image Parameters">Image Parameters</html:link>
+      <html:link action="PopulateAdministrativeTerms" target="_top" title="Administrative Terms">Administrative Terms</html:link>
+      <html:link action="PopulateAdministrativeControlValues" target="_top" title="Administrative Control Values">Administrative Control Values</html:link>
+      <html:link action="PopulateAdministrativeGroup" target="_top" title="Administrative Group">Administrative Group</html:link>
+      <html:link action="PopulateFileGroup" target="_top" title="File Group">File Group</html:link> **/
+      /*@lineinfo:generated-code*/
+      out.write( "\n\n</table>");
+
+    }
+    catch (Throwable e) {
+      if (!(e instanceof javax.servlet.jsp.SkipPageException)){
+        try {
+          if (out != null) out.clear();
+        }
+        catch (Exception clearException) {
+        }
+        pageContext.handlePageException(e);
+      }
+    }
+    finally {
+      OracleJspRuntime.extraHandlePCFinally(pageContext, true);
+      JspFactory.getDefaultFactory().releasePageContext(pageContext);
+    }
+
+  }
+}

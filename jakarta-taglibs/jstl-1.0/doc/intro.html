@@ -1,0 +1,178 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="Shawn Bayern" name="author"><title>The Jakarta-Taglibs Project: Standard-1.0 taglib: JSP[tm] Standard Tag Library (JSTL 1.0) implementation</title></head><body vlink="#023264" alink="#023264" link="#023264" text="#000000" bgcolor="#ffffff"><table cellspacing="5" width="100%" border="0"><tr><td colspan="2"><a href="http://jakarta.apache.org"><img border="0" align="left" src="../../images/jakarta-logo.gif"></a><a href="http://jakarta.apache.org/taglibs/index.html"><img border="0" align="right" src="../../images/taglibs.gif"></a></td></tr><tr><td colspan="2"><hr></td></tr><tr><td valign="top" width="120"><project name="Taglibs Framework" href="http://jakarta.apache.org/taglibs" image="images/taglibs.gif">
+
+    <table cellspacing="5" border="0"><tr><th align="left" colspan="2"><font color=""><strong>Home</strong></font></th></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../index.html">Jakarta Taglibs</a></font></td></tr></table>
+
+    <table cellspacing="5" border="0"><tr><th align="left" colspan="2"><font color=""><strong>JCP Standardized Tag Libraries</strong></font></th></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/standard-1.0-doc/intro.html">Standard-1.0: JSTL 1.0 (1.2)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/standard-doc/intro.html">Standard-1.1: JSTL 1.1 (2.0)</a></font></td></tr></table>
+
+    <table cellspacing="5" border="0"><tr><th align="left" colspan="2"><font color=""><strong>Supported Tag Libaries</strong></font></th></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/application-doc/intro.html">Application (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/benchmark-doc/intro.html">Benchmark (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/bsf-doc/intro.html">BSF (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/cache-doc/intro.html">Cache (1.2)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/datetime-doc/intro.html">DateTime (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/dbtags-doc/intro.html">DBTags (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/i18n-doc/intro.html">I18N (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/input-doc/intro.html">Input (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/io-doc/intro.html">IO (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/jmstags-doc/intro.html">JMS (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/jndi-doc/intro.html">JNDI (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/log-doc/intro.html">Log (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/mailer-doc/intro.html">Mailer (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/page-doc/intro.html">Page (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/random-doc/intro.html">Random (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/regexp-doc/intro.html">Regexp (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/request-doc/intro.html">Request (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/response-doc/intro.html">Response (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/scrape-doc/intro.html">Scrape (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/session-doc/intro.html">Session (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/string-doc/intro.html">String (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/xtags-doc/intro.html">XTags (1.1)</a></font></td></tr></table>
+
+    <table cellspacing="5" border="0"><tr><th align="left" colspan="2"><font color=""><strong>Tool Extensions</strong></font></th></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/ultradev4-doc/intro.html">UltraDev 4.0</a></font></td></tr></table>
+
+    <table cellspacing="5" border="0"><tr><th align="left" colspan="2"><font color=""><strong>Sandbox</strong></font></th></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../sandbox/doc/image-doc/intro.html">Image (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../sandbox/doc/iterators-doc/intro.html">Iterators (1.2)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../sandbox/doc/unstandard-doc/intro.html">Unstandard (1.2)</a></font></td></tr></table>
+
+    <table cellspacing="5" border="0"><tr><th align="left" colspan="2"><font color=""><strong>Deprecated Tag Libraries</strong></font></th></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/utility-doc/intro.html">Utility (1.1)</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="../../doc/xsl-doc/intro.html">XSL (1.1)</a></font></td></tr></table>
+
+    <table cellspacing="5" border="0"><tr><th align="left" colspan="2"><font color=""><strong>Jakarta Community</strong></font></th></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="http://jakarta.apache.org/site/getinvolved.html">Get Involved</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="http://jakarta.apache.org/site/mail.html">Mailing Lists</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="http://jakarta.apache.org/site/cvsindex.html">CVS Repositories</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="http://jakarta.apache.org/site/library.html">Reference Library</a></font></td></tr><tr><td width="15" align="center"></td><td><font size="-1"><a href="http://jakarta.apache.org/site/bugs.html">Bug Database</a></font></td></tr></table>
+
+</project></td><td valign="top"><body>
+
+  <a name="Welcome"></a><table width="100%" cellpadding="5" cellspacing="5" border="0"><tr><td bgcolor="#023264"><font size="+1" face="arial,helvetica,sanserif" color="#ffffff"><strong>Standard-1.0 Taglib</strong></font></td></tr><tr><td>
+
+    <big><b>JSP(tm) Standard Tag Library 1.0 implementation</b></big>
+
+    <p>Jakarta Taglibs hosts the Standard Taglib 1.0, an implementation of
+      the <a href="http://java.sun.com/products/jsp/jstl">JSP Standard Tag
+      Library (JSTL)</a>, version 1.0, which was developed under the
+      <a href="http://jcp.org/">Java Community Process</a>.
+    <br></p>
+
+    <p><b>NOTE:</b> 
+    Standard-1.0 (JSTL 1.0) requires a JSP container that supports
+      the Java Servlet 2.3 and JavaServer Pages 1.2 specifications.
+      Jakarta <a href="http://jakarta.apache.org/tomcat/">
+      Tomcat 4</a> supports these specifications. The Standard 1.0 taglib
+      has been tested with Tomcat 4.1.24.
+    <br></p>
+    <p><a href="http://jakarta.apache.org/taglibs/doc/standard-doc/intro.html">Standard-1.1</a> 
+    (implementation of the JSTL 1.1 specification) requires a JSP container that supports
+      the Java Servlet 2.4 and JavaServer Pages 2.0 specifications.
+      Jakarta <a href="http://jakarta.apache.org/tomcat/">
+      Tomcat 5</a> supports the new specifications. The Standard-1.1 taglib
+      has been tested with Tomcat 5.0.3.<br></p>
+
+  </td></tr></table>
+
+  <a name="News"></a><table width="100%" cellpadding="5" cellspacing="5" border="0"><tr><td bgcolor="#023264"><font size="+1" face="arial,helvetica,sanserif" color="#ffffff"><strong>'Standard' Taglib News</strong></font></td></tr><tr><td>
+
+    <table cellpadding="2">
+      <tr><td bgcolor="#CCCCCC"><b><font size="-1">01/30/2004</font></b></td><td bgcolor="#CCCCCC"><font size="-1">
+       Standard Taglib version 1.0.5 - another bugfix release - is now
+       available from the <a href="http://jakarta.apache.org/site/binindex.cgi#Release%20Builds">
+       Apache Jakarta Project Mirrors</a>.
+      </font></td></tr>
+      <tr><td bgcolor="#CCCCCC"><b><font size="-1">09/25/2003</font></b></td><td bgcolor="#CCCCCC"><font size="-1">
+       Standard Taglib version 1.0.4 - another bugfix release - is now
+       available from the <a href="http://jakarta.apache.org/site/binindex.cgi#Release%20Builds">
+       Apache Jakarta Project Mirrors</a>.
+      </font></td></tr>
+      <tr><td bgcolor="#CCCCCC"><b><font size="-1">02/20/2003</font></b></td><td bgcolor="#CCCCCC"><font size="-1">
+       Standard Taglib version 1.0.3 -- another minor bugfix release -- is now
+       available from the <a href="http://jakarta.apache.org/site/binindex.cgi#Release%20Builds">
+       Apache Jakarta Project Mirrors</a>.
+      </font></td></tr>
+      <tr><td bgcolor="#CCCCCC"><b><font size="-1">10/13/2002</font></b></td><td bgcolor="#CCCCCC"><font size="-1">
+       Standard Taglib version 1.0.2 -- another minor bugfix release -- was released.
+      </font></td></tr>
+      <tr><td bgcolor="#CCCCCC"><b><font size="-1">7/27/2002</font></b></td><td bgcolor="#CCCCCC"><font size="-1">
+       Standard Taglib version 1.0.1 -- a minor bugfix release -- was released.
+      </font></td></tr>
+      <tr><td bgcolor="#CCCCCC"><b><font size="-1">6/21/2002</font></b></td><td bgcolor="#CCCCCC"><font size="-1">
+	Standard Taglib, final release 1.0, was released.
+        This distribution contained the same JSTL implementation as was
+        included in Sun's Web Services Developer Pack, version 1.0.
+      </font></td></tr>
+
+    </table>
+
+  </td></tr></table>
+
+  <a name="Documentation"></a><table width="100%" cellpadding="5" cellspacing="5" border="0"><tr><td bgcolor="#023264"><font size="+1" face="arial,helvetica,sanserif" color="#ffffff"><strong>Documentation</strong></font></td></tr><tr><td>
+
+    <p>For more information about the Standard Taglib,
+       look at the on-line documentation:<br></p>
+    <ul>
+      
+      <li>View the Standard 1.0 taglib documentation
+        <a href="standard-1.0/index.html">Standard 1.0 Documentation</a>
+      </li>
+
+      <li>View the most recent, nightly build of the
+        <a href="index.html">Standard Taglib Documentation</a>
+      </li>
+    </ul>
+  
+    <p>For information on how to use the distributions,
+       look at the following documentation:<br></p>
+  
+    <ul>
+	<li><a href="http://jakarta.apache.org/taglibs/binarydist.html">
+	Using the Jakarta-Taglibs
+        Binary Distribution</a></li>
+      <li>
+        <a href="http://jakarta.apache.org/taglibs/sourcedist.html">
+        Using the Jakarta-Taglibs
+        Source Distribution</a></li>
+    </ul>
+
+    <p>Several books have been written about JSTL.  See the <a href="#Books">JSTL Books</a> section below for more documentation.<br></p>
+  
+  </td></tr></table>
+
+  <a name="Download"></a><table width="100%" cellpadding="5" cellspacing="5" border="0"><tr><td bgcolor="#023264"><font size="+1" face="arial,helvetica,sanserif" color="#ffffff"><strong>Download</strong></font></td></tr><tr><td>
+
+    
+    <p>Download a binary distribution of the Standard 1.0 release:<br></p>
+    <ul>
+      <li>
+        Download the Standard Tag Library 1.0 Release from an
+        <a href="http://jakarta.apache.org/site/binindex.cgi#Release%20Builds">
+        Apache Jakarta Project Mirror</a>
+      </li>
+    </ul>
+
+    <p>Download the most recent, nightly snapshot:<br></p>
+    <ul>
+      <li>
+        <a href="http://jakarta.apache.org/builds/jakarta-taglibs/nightly/projects/standard-1.0/">
+        Standard Taglib nightly snapshot</a></li>
+    </ul>
+
+    <p>Nightly build distributions of the development version for all the
+      Jakarta-Taglibs are available for download:<br></p>
+    <ul>
+      <li>Download
+        <a href="http://jakarta.apache.org/builds/jakarta-taglibs/nightly/src/">
+        Jakarta-Taglibs Source</a></li>
+      <li>Download entire
+        <a href="http://jakarta.apache.org/builds/jakarta-taglibs/nightly">
+        Jakarta-Taglibs Distribution</a></li>
+    </ul>
+
+  </td></tr></table>
+
+  <a name="Books"></a><table width="100%" cellpadding="5" cellspacing="5" border="0"><tr><td bgcolor="#023264"><font size="+1" face="arial,helvetica,sanserif" color="#ffffff"><strong>JSTL Books</strong></font></td></tr><tr><td>
+
+    <p>The following books about JSTL are available:<br></p>
+
+    <ul>
+      <li><a href="http://jstlbook.com/"><i>JSTL in Action</i></a>, Shawn Bayern, Manning</li>
+      <li><a href="http://TheJSPBook.com/"><i>JavaServer Pages</i></a>, Hans Bergsten, O'Reilly</li>
+      <li><a href="http://www.core-jstl.com"><i>Core JSTL: Mastering the JSP Standard Tag Library</i></a>, David Geary, Sun Microsystems Press</li>
+    </ul>
+
+  </td></tr></table>
+
+  <a name="Contributors"></a><table width="100%" cellpadding="5" cellspacing="5" border="0"><tr><td bgcolor="#023264"><font size="+1" face="arial,helvetica,sanserif" color="#ffffff"><strong>Contributors</strong></font></td></tr><tr><td>
+
+    <p>List of contributors:<br></p>
+
+    <ul>
+      <li>The <a href="http://www.jcp.org/jsr/detail/52.jsp">JSR-052 Expert Group</a></li>
+      <li>Pierre Delisle (specification lead)</li>
+      <li>Shawn Bayern (implementation lead)</li>
+      <li>Nathan Abramson</li>
+      <li>Hans Bergsten</li>
+      <li>Scott Hasse</li>
+      <li>Justyna Horwat</li>
+      <li>Mark Kolb</li>
+      <li>Jan Luehe</li>
+      <li>Glenn Nielsen</li>
+      <li>Dmitri Plotnikov</li>
+      <li>Felipe Leme</li>
+    </ul>
+
+  </td></tr></table>
+
+  </body></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2"><div align="center"><font size="-1" color="#023264"><em>
+        Copyright &copy; 2000-2004 The Apache Software Foundation
+        </em></font></div></td></tr></table></body></html>

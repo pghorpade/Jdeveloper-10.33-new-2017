@@ -1,0 +1,171 @@
+<typedef pattern="com.oracle.bpel.pattern.notification.email"
+         name="WFBasicCallBack" 
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpeld="http://schemas.oracle.com/bpel/eclipse/designer"
+         xmlns:picasso="http://schemas.oracle.com/bpel/eclipse/designer/picasso"
+>
+    <!--  BPEL Fragment that is used as this pattern -->
+    <fragment>
+        <scope name="${scopeName}">
+            <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+            </bpelx:annotation>
+	    <variables>
+	        <variable name="initiateTaskInput" 
+                     messageType="${taskSvcPrefix}:initiateTaskMessage"/>
+        	<variable name="initiateTaskResponseMessage"
+                     messageType="${taskSvcPrefix}:initiateTaskResponseMessage"/>
+                <variable name="workflowContext"
+                      element="${wfCommonPrefix}:workflowContext"/>
+                <variable name="taskAssignedMessage"
+                      messageType="${taskSvcPrefix}:taskAssignedMessage"/>
+                <variable name="taskUpdatedMessage"
+                      messageType="${taskSvcPrefix}:taskUpdatedMessage"/>
+                <variable name="subTaskUpdatedMessage"
+                      messageType="${taskSvcPrefix}:subTaskUpdatedMessage"/>
+            </variables>  
+            <correlationSets>
+                <correlationSet name="WorkflowTaskIdCor" properties="${taskSvcPrefix}:taskId"/>
+            </correlationSets>
+            <sequence>
+                <assign name="${scopeName}_AssignTaskAttributes">
+                    ${userCPRules}
+                    ${payloadCPRules}
+                </assign>
+                <assign name="${scopeName}_AssignSystemTaskAttributes">
+                    <copy>
+                        <from expression="ora:getInstanceId()"/>
+                        <to variable="initiateTaskInput" part="payload"
+                            query="/${taskSvcPrefix}:initiateTask/${taskPrefix}:task/${taskPrefix}:processInfo/${taskPrefix}:instanceId"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:getProcessId()"/>
+                        <to variable="initiateTaskInput" part="payload"
+                            query="/${taskSvcPrefix}:initiateTask/${taskPrefix}:task/${taskPrefix}:processInfo/${taskPrefix}:processName"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:getProcessId()"/>
+                        <to variable="initiateTaskInput" part="payload"
+                            query="/${taskSvcPrefix}:initiateTask/${taskPrefix}:task/${taskPrefix}:processInfo/${taskPrefix}:processId"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:getProcessVersion()"/>
+                        <to variable="initiateTaskInput" part="payload"
+                            query="/${taskSvcPrefix}:initiateTask/${taskPrefix}:task/${taskPrefix}:processInfo/${taskPrefix}:processVersion"/>
+                    </copy>
+                    <copy>
+                        <from expression="ora:getDomainId()"/>
+                        <to variable="initiateTaskInput" part="payload"
+                            query="/${taskSvcPrefix}:initiateTask/${taskPrefix}:task/${taskPrefix}:processInfo/${taskPrefix}:domainId"/>
+                    </copy>
+                    <copy>
+                        <from expression="string('BPEL')"/>
+                        <to variable="initiateTaskInput" part="payload"
+                            query="/${taskSvcPrefix}:initiateTask/${taskPrefix}:task/${taskPrefix}:processInfo/${taskPrefix}:processType"/>
+                    </copy>
+                </assign>
+                <invoke name="initiateTask_${scopeName}" partnerLink="TaskService"
+                        portType="${taskSvcPrefix}:TaskService" operation="initiateTask"
+                        inputVariable="initiateTaskInput"
+                        outputVariable="initiateTaskResponseMessage">
+                    <correlations>
+                        <correlation initiate="yes" set="WorkflowTaskIdCor" pattern="in"/>
+                    </correlations>
+                </invoke>
+                <assign name="${scopeName}_AssignWorkflowContext">
+                    <copy>
+                        <from variable="initiateTaskResponseMessage" part="payload"
+                            query="/${taskSvcPrefix}:initiateTaskResponse/${wfCommonPrefix}:workflowContext"/>
+                        <to variable="workflowContext"
+                            query="/${wfCommonPrefix}:workflowContext"/>
+                    </copy>
+                    <copy>
+                        <from variable="initiateTaskResponseMessage" part="payload"
+                              query="/${taskSvcPrefix}:initiateTaskResponse/${taskPrefix}:task"/>
+                        <to variable="${variableName}"
+                            part="payload"
+                            query="/${taskPrefix}:task"/>
+                    </copy>
+                </assign>
+                <!-- Iterate until the task is marked as EXPIRED, COMPLETED, STALE, WITHDRAWN or ERRORED -->
+                <while condition="bpws:getVariableData('${variableName}', 'payload', '/${taskPrefix}:task/${taskPrefix}:systemAttributes/${taskPrefix}:state') != 'EXPIRED' and bpws:getVariableData('${variableName}', 'payload', '/${taskPrefix}:task/${taskPrefix}:systemAttributes/${taskPrefix}:state') != 'COMPLETED' and bpws:getVariableData('${variableName}', 'payload', '/${taskPrefix}:task/${taskPrefix}:systemAttributes/${taskPrefix}:state') != 'WITHDRAWN' and bpws:getVariableData('${variableName}', 'payload', '/${taskPrefix}:task/${taskPrefix}:systemAttributes/${taskPrefix}:state') != 'STALE' and bpws:getVariableData('${variableName}', 'payload', '/${taskPrefix}:task/${taskPrefix}:systemAttributes/${taskPrefix}:state') != 'ERRORED'">
+                    <pick name="receiveTaskUpdates_${scopeName}">
+                        <onMessage operation="onTaskCompleted" partnerLink="TaskService"
+                            portType="${taskSvcPrefix}:TaskServiceCallback"
+                            variable="${variableName}">
+                            <bpelx:annotation>
+                                <bpelx:pattern>Task is completed</bpelx:pattern>
+                            </bpelx:annotation>
+                            <correlations>
+                                <correlation initiate="no" set="WorkflowTaskIdCor"/>
+                            </correlations>
+                            <sequence>
+                                <empty name="TaskCompleted"/>
+                            </sequence>
+                        </onMessage>
+                        <onMessage operation="onTaskAssigned" partnerLink="TaskService"
+                            portType="${taskSvcPrefix}:TaskServiceCallback"
+                            variable="taskAssignedMessage">
+                            <bpelx:annotation>
+                                <bpelx:pattern>Task is assigned</bpelx:pattern>
+                            </bpelx:annotation>
+                            <correlations>
+                                <correlation initiate="no" set="WorkflowTaskIdCor"/>
+                            </correlations>
+                            <sequence>
+                                <assign name="${scopeName}_readTask">
+                                    <copy>
+                                        <from variable="taskAssignedMessage" part="payload"
+                                            query="/${taskSvcPrefix}:taskAssignedMessage/${taskPrefix}:task"/>
+                                        <to variable="${variableName}" part="payload"
+                                            query="/${taskPrefix}:task"/>
+                                    </copy>
+                                </assign>
+                            </sequence>
+                        </onMessage>
+                        <onMessage operation="onTaskUpdated" partnerLink="TaskService"
+                            portType="${taskSvcPrefix}:TaskServiceCallback"
+                            variable="taskUpdatedMessage">
+                            <bpelx:annotation>
+                                <bpelx:pattern>Task is updated</bpelx:pattern>
+                            </bpelx:annotation>
+                            <correlations>
+                                <correlation initiate="no" set="WorkflowTaskIdCor"/>
+                            </correlations>
+                            <sequence>
+                                <assign name="${scopeName}_readTask">
+                                    <copy>
+                                        <from variable="taskUpdatedMessage" part="payload"
+                                            query="/${taskSvcPrefix}:taskUpdatedMessage/${taskPrefix}:task"/>
+                                        <to variable="${variableName}" part="payload"
+                                            query="/${taskPrefix}:task"/>
+                                    </copy>
+                                </assign>
+                            </sequence>
+                        </onMessage>
+                        <onMessage operation="onSubTaskUpdated" partnerLink="TaskService"
+                            portType="${taskSvcPrefix}:TaskServiceCallback"
+                            variable="subTaskUpdatedMessage">
+                            <bpelx:annotation>
+                                <bpelx:pattern>Sub task is updated</bpelx:pattern>
+                            </bpelx:annotation>
+                            <correlations>
+                                <correlation initiate="no" set="WorkflowTaskIdCor"/>
+                            </correlations>
+                            <sequence>
+                                <assign name="${scopeName}_readTask">
+                                    <copy>
+                                        <from variable="subTaskUpdatedMessage" part="payload"
+                                            query="/${taskSvcPrefix}:subTaskUpdatedMessage/${taskPrefix}:task"/>
+                                        <to variable="${variableName}" part="payload"
+                                            query="/${taskPrefix}:task"/>
+                                    </copy>
+                                </assign>
+                            </sequence>
+                        </onMessage>
+                    </pick>
+                </while>
+            </sequence>
+        </scope>
+    </fragment>
+</typedef>

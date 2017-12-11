@@ -1,0 +1,6 @@
+#Layout 5.0
+Layout.ShowPalette=true
+Layout.RaisePalette=true
+Layout.ShowInspector=true
+Layout.ShowDataBindingPalette=true
+Layout.ShowThumbNail=true

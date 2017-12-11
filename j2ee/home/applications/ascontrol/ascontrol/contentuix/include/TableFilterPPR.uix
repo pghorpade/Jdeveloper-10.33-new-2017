@@ -1,0 +1,101 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui" 
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller" 
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <ctrl:content>
+  <dataScope>
+
+   <provider>
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+
+    <data name="getFilterData">
+     <method class="oracle.ifs.admin.em.ias.uix.TableFilterData"
+             method="getFilterData" />
+    </data>
+   </provider>
+ 
+  <contents>
+
+   <script>
+    <contents>
+      function getKeyCode(event) 
+      { 
+         e = (window.event) ? window.event.keyCode : event.which; 
+         if (e == 13) 
+         { 
+           submitForm('iFSForm', 0, {'event' : 'doSearch'}); 
+           return false; 
+         } 
+         return true; 
+      } 
+    </contents>
+   </script>
+
+   <spacer height="10" />
+   <switcher data:childName="TableLevel@getFilterData">
+    <default>
+     <messageTextInput id="SEARCHINPUT"
+                       data:prompt="SEARCH@strings" name="search"
+                       data:shortDesc="SEARCH_DESCRIPTION@strings"
+                       onKeyPress="return getKeyCode(event)">
+      <end>
+       <submitButton data:text="GO@strings">
+         <primaryClientAction>
+              <firePartialAction data:targets="tableId@tableIdData"
+                                 event="doSearch" />
+             </primaryClientAction>
+            </submitButton>   
+      </end>
+     </messageTextInput>
+    </default>
+
+    <case name="outer">
+     <messageTextInput id="SEARCHINPUT"
+                       data:prompt="SEARCH@strings" name="search"
+                       data:shortDesc="SEARCH_DESCRIPTION@strings"
+                       data:text="Filter@getFilterData"
+                       onKeyPress="return getKeyCode(event)">
+      <end>
+       <submitButton data:text="GO@strings">
+         <primaryClientAction>
+              <firePartialAction data:targets="tableId@tableIdData"
+                                 event="doSearch" />
+             </primaryClientAction>
+            </submitButton>
+      </end>
+     </messageTextInput>
+    </case>
+
+    <case name="inner">
+     <messageTextInput id="SEARCHINPUT"
+                       data:prompt="SEARCH@strings" name="search"
+                       data:shortDesc="SEARCH_DESCRIPTION@strings"
+                       data:text="FilterInner@getFilterData"
+                       onKeyPress="return getKeyCode(event)">
+      <end>
+       <submitButton data:text="GO@strings">
+          <primaryClientAction>
+            <firePartialAction data:targets="tableId@tableIdData"
+                               event="doSearch" />
+          </primaryClientAction>
+        </submitButton>
+      </end>
+     </messageTextInput>
+    </case>
+   </switcher>  
+  </contents>
+ 
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.TableFilterData"
+           method="doSearch"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

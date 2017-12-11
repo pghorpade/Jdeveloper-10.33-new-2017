@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+         
+  <context-param>
+    <param-name>oracle.sysman.emSDK.svlt.ImageServletPath</param-name>
+    <param-value>dynamicImage</param-value>
+  </context-param>
+  <!-- listen for session destroy event so we can perform logviewer cleanup -->
+  <listener>
+    <listener-class>oracle.sysman.ias.studio.logging.LogUtil</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>jsp</servlet-name>
+    <servlet-class>oracle.jsp.runtimev2.JspServlet</servlet-class>
+    <!-- you can disable page scope listener if you
+	     don't need this function. -->
+    <!-- 
+	<init-param>
+		<param-name>check_page_scope</param-name>
+		<param-value>true</param-value>
+	</init-param>
+-->
+    <!-- enable justrun in nightly build -->
+    <!-- %STARTJUSTRUN%
+	<init-param>
+		<param-name>main_mode</param-name>
+		<param-value>justrun</param-value>
+	</init-param>
+%ENDJUSTRUN% -->
+    <load-on-startup>-1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>console</servlet-name>
+    <servlet-class>oracle.sysman.ias.studio.app.StudioConsole</servlet-class>
+    <!-- register standard UIX page broker -->
+    <init-param>
+      <param-name>oracle.cabo.servlet.pageBroker</param-name>
+      <param-value>oracle.cabo.servlet.xml.UIXPageBroker</param-value>
+    </init-param>
+    <!-- registers UIExtensions for the chart tag -->
+    <init-param>
+      <param-name>oracle.cabo.ui.UIExtensions</param-name>
+      <param-value>oracle.sysman.emSDK.chart.EmChartUIExtension</param-value>
+    </init-param>
+    <load-on-startup>-1</load-on-startup>
+  </servlet>
+  <!-- required to generate images for charts -->
+  <servlet>
+    <servlet-name>dynamicImage</servlet-name>
+    <servlet-class>oracle.sysman.emSDK.svlt.ImageServlet</servlet-class>
+  </servlet>
+  
+
+  <!-- index_jsp should get used as the welcome-file for /.  
+  -->  
+  <servlet>
+    <servlet-name> index_jsp </servlet-name>
+    <jsp-file> /index.jsp </jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>index_jsp</servlet-name>
+    <url-pattern>/index.html</url-pattern>
+  </servlet-mapping>
+
+  
+  <servlet-mapping>
+    <servlet-name>dynamicImage</servlet-name>
+    <url-pattern>/dynamicImage/*</url-pattern>
+  </servlet-mapping>
+  <!-- handles help requests -->
+  <servlet>
+    <servlet-name>OHW</servlet-name>
+    <servlet-class>oracle.help.web.OHWController</servlet-class>
+    <init-param>
+      <param-name>ohwConfigFileURL</param-name>
+      <param-value>/online_help/ohwconfig.xml</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OHW</servlet-name>
+    <url-pattern>/console/help/*</url-pattern>
+  </servlet-mapping>
+  <!-- runs before all servlets, initializes emSDK and critical infrastructure -->
+  <listener>
+    <listener-class>oracle.sysman.ias.studio.app.ContextInitializer</listener-class>
+  </listener>
+  <!--  
+  <servlet-mapping>
+    <servlet-name>logon</servlet-name>
+    <url-pattern>/console/logon/*</url-pattern>
+  </servlet-mapping>
+-->
+  <servlet-mapping>
+    <servlet-name>console</servlet-name>
+    <url-pattern>/console/*</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <filter-name>shortHostnameRedirectFilter</filter-name>
+    <filter-class>oracle.sysman.ias.studio.app.ShortHostnameRedirectFilter</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>browserVersionFilter</filter-name>
+    <filter-class>oracle.sysman.ias.studio.app.BrowserVersionFilter</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>multipleJVMFilter</filter-name>
+    <filter-class>oracle.sysman.ias.studio.app.MultipleJVMFilter</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>postLogonFilter</filter-name>
+    <filter-class>oracle.sysman.ias.studio.app.PostLogonFilter</filter-class>
+  </filter>
+
+<!-- the order of the filter mappings is important, we want
+     the hostname redirect to occur before the post login page -->
+       
+  <filter-mapping>
+    <filter-name>shortHostnameRedirectFilter</filter-name>
+    <url-pattern>/index*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>shortHostnameRedirectFilter</filter-name>
+    <url-pattern>/console/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>postLogonFilter</filter-name>
+    <url-pattern>/console/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+    <filter-name>multipleJVMFilter</filter-name>
+    <url-pattern>/console/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>browserVersionFilter</filter-name>
+    <url-pattern>/console/*</url-pattern>
+  </filter-mapping>
+  
+
+  
+  <jsp-config>
+    <taglib>
+      <taglib-uri>http://xmlns.oracle.com/uix/ui</taglib-uri>
+      <taglib-location>/WEB-INF/lib/uix2.jar</taglib-location>
+    </taglib>
+    <taglib>
+      <taglib-uri>http://xmlns.oracle.com/oem/jsp/tag</taglib-uri>
+      <taglib-location>/WEB-INF/tlds/oemjsp.tld</taglib-location>
+    </taglib>
+    <jsp-property-group>
+      <description> we use UIX-internal EL, don't enable container based EL </description>
+      <url-pattern>*.jsp</url-pattern>
+      <el-ignored>true</el-ignored>
+    </jsp-property-group>
+  </jsp-config>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>adminaccess</web-resource-name>
+      <url-pattern>/servlet/*</url-pattern>
+      <url-pattern>/browser/*</url-pattern>
+      <url-pattern>/console/*</url-pattern>
+      <url-pattern>/ias/*</url-pattern>
+      <url-pattern>/index.jsp</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>ascontrol_admin</role-name>
+      <role-name>ascontrol_appadmin</role-name>
+      <role-name>ascontrol_monitor</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <security-role>
+    <role-name>ascontrol_admin</role-name>
+  </security-role>
+  <security-role>
+    <role-name>ascontrol_appadmin</role-name>
+  </security-role>
+  <security-role>
+    <role-name>ascontrol_monitor</role-name>
+  </security-role>
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>ascontrol</realm-name>
+    <form-login-config>
+      <form-login-page>/console/logon</form-login-page>
+      <form-error-page>/logon_failed.html</form-error-page>
+    </form-login-config>
+  </login-config>
+  <!--
+  <env-entry>
+     <env-entry-name> oracle/oem/consoleConfigDir </env-entry-name>
+     <env-entry-value> /WEB-INF/config/ </env-entry-value>
+     <env-entry-type> java.lang.String </env-entry-type>
+  </env-entry>
+-->
+  <env-entry>
+    <env-entry-name>oracle.sysman.emSDK.svlt.ConsoleMode</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value> JMXMode </env-entry-value>
+  </env-entry>
+
+  <env-entry>
+    <env-entry-name>oracle.sysman.ias.studio.caboImageCache</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>persistence/cabo/image-cache</env-entry-value>
+  </env-entry>
+
+  <env-entry>
+    <env-entry-name>oracle.sysman.ias.studio.caboStyleCache</env-entry-name>
+    <env-entry-type>java.lang.String</env-entry-type>
+    <env-entry-value>persistence/cabo/style-cache </env-entry-value>
+  </env-entry>
+</web-app>
+
+

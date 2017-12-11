@@ -1,0 +1,342 @@
+#
+# An unexpected error has been detected by HotSpot Virtual Machine:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x6d841e6a, pid=3460, tid=2576
+#
+# Java VM: Java HotSpot(TM) Client VM (1.5.0_20-b02 mixed mode)
+# Problematic frame:
+# V  [jvm.dll+0x101e6a]
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x24ef8b58):  JavaThread "AWT-EventQueue-0" [_thread_in_vm, id=2576]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x03004b00
+
+Registers:
+EAX=0x0361dc73, EBX=0x00004451, ECX=0x00004451, EDX=0x00004451
+ESP=0x25c4c798, EBP=0x25c4c7c0, ESI=0x03004b00, EDI=0x0000001c
+EIP=0x6d841e6a, EFLAGS=0x00010206
+
+Top of Stack: (sp=0x25c4c798)
+0x25c4c798:   0000001c a8e98136 6d841ed4 00004451
+0x25c4c7a8:   2b2a2902 0000001c a8e98136 25c4c9cc
+0x25c4c7b8:   24ef8b58 0000001c 25c4c7f0 6d81b08a
+0x25c4c7c8:   2b2a2902 0000001c 24ef8b58 6d78732f
+0x25c4c7d8:   2b2a2902 0000001c 24ef8b58 25c4c9cc
+0x25c4c7e8:   24ef8b58 000000c2 25c4c828 6d7877c5
+0x25c4c7f8:   24ecdd38 000000c2 2b2a2902 000000fc
+0x25c4c808:   24ef8b58 00000000 24ef8b58 24ef8b38 
+
+Instructions: (pc=0x6d841e6a)
+0x6d841e5a:   8b 41 04 8b 4c 24 04 56 57 8b 34 88 85 f6 74 26
+0x6d841e6a:   8b 06 3b 44 24 18 75 16 ff 74 24 14 8b 7e 08 8b 
+
+
+Stack: [0x25b50000,0x25c50000),  sp=0x25c4c798,  free space=1009k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x101e6a]
+V  [jvm.dll+0xdb08a]
+V  [jvm.dll+0x477c5]
+V  [jvm.dll+0x47899]
+V  [jvm.dll+0x4b8ce]
+V  [jvm.dll+0x103c65]
+V  [jvm.dll+0x9e511]
+V  [jvm.dll+0x9e584]
+C  [java.dll+0x15c0]
+J  java.lang.ClassLoader.defineClass1(Ljava/lang/String;[BIILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;
+J  java.lang.ClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class;
+J  java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class;
+J  java.net.URLClassLoader$1.run()Ljava/lang/Object;
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x876b1]
+V  [jvm.dll+0xe0001]
+V  [jvm.dll+0x87582]
+C  [java.dll+0x1061]
+J  java.net.URLClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+J  oracle.ideimpl.IdeClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
+J  java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+v  ~RuntimeStub::alignment_frame_return Runtime1 stub
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x876b1]
+V  [jvm.dll+0xe0001]
+V  [jvm.dll+0x87582]
+V  [jvm.dll+0x8742a]
+V  [jvm.dll+0x10403b]
+V  [jvm.dll+0x103878]
+V  [jvm.dll+0x102eb7]
+V  [jvm.dll+0x10308c]
+V  [jvm.dll+0x4bcdb]
+V  [jvm.dll+0x103c65]
+V  [jvm.dll+0x9e511]
+V  [jvm.dll+0x9e584]
+C  [java.dll+0x15c0]
+J  java.lang.ClassLoader.defineClass1(Ljava/lang/String;[BIILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;
+J  java.lang.ClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class;
+J  java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class;
+J  java.net.URLClassLoader$1.run()Ljava/lang/Object;
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x876b1]
+V  [jvm.dll+0xe0001]
+V  [jvm.dll+0x87582]
+C  [java.dll+0x1061]
+J  java.net.URLClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+J  oracle.ideimpl.IdeClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
+J  java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+v  ~RuntimeStub::alignment_frame_return Runtime1 stub
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x876b1]
+V  [jvm.dll+0xe0001]
+V  [jvm.dll+0x87582]
+V  [jvm.dll+0x8742a]
+V  [jvm.dll+0x10403b]
+V  [jvm.dll+0x103878]
+V  [jvm.dll+0x102eb7]
+V  [jvm.dll+0x10308c]
+V  [jvm.dll+0x4bcdb]
+V  [jvm.dll+0x103c65]
+V  [jvm.dll+0x9e511]
+V  [jvm.dll+0x9e584]
+C  [java.dll+0x15c0]
+J  java.lang.ClassLoader.defineClass1(Ljava/lang/String;[BIILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;
+J  java.lang.ClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class;
+J  java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class;
+J  java.net.URLClassLoader$1.run()Ljava/lang/Object;
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x876b1]
+V  [jvm.dll+0xe0001]
+V  [jvm.dll+0x87582]
+C  [java.dll+0x1061]
+J  java.net.URLClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+J  oracle.ideimpl.IdeClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
+J  java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+v  ~RuntimeStub::alignment_frame_return Runtime1 stub
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x876b1]
+V  [jvm.dll+0xe0001]
+V  [jvm.dll+0x87582]
+V  [jvm.dll+0x8742a]
+V  [jvm.dll+0x10403b]
+V  [jvm.dll+0x103878]
+V  [jvm.dll+0x102eb7]
+V  [jvm.dll+0x102d71]
+V  [jvm.dll+0x61d88]
+V  [jvm.dll+0x8200f]
+j  oracle.bali.xml.gui.swing.explorer.SwingExplorerGui._setupTree(Ljavax/swing/JTree;)V+151
+j  oracle.bali.xml.gui.swing.explorer.SwingExplorerGui.getNewJTree()Ljavax/swing/JTree;+7
+j  oracle.bali.xml.gui.jdev.explorer.XmlExplorer._createNewTree(Loracle/bali/xml/gui/jdev/explorer/JDevExplorerGui;)V+8
+j  oracle.bali.xml.gui.jdev.explorer.XmlExplorer.setContext(Loracle/ide/Context;)V+192
+j  oracle.ideimpl.explorer.ExplorerManagerImpl.getExplorerForHost(Loracle/ide/view/View;Loracle/ide/Context;)Loracle/ide/explorer/Explorer;+675
+j  oracle.ideimpl.explorer.ExplorerWindowImpl.viewSelectionChanged(Loracle/ide/Context;)V+11
+j  oracle.ide.view.AbstractPinnable.viewSelectionChangedImpl(Loracle/ide/view/View;)V+7
+j  oracle.ide.view.AbstractPinnable.viewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+14
+j  oracle.ideimpl.explorer.ExplorerWindowImpl.viewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+22
+j  oracle.ide.view.View.fireViewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+25
+j  oracle.ideri.navigator.DefaultNavigatorWindow.fireViewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+11
+j  oracle.ide.view.View.updateSelectionImpl(Z)V+49
+j  oracle.ide.view.View.updateSelection()V+2
+...<more frames>...
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J  java.lang.ClassLoader.defineClass1(Ljava/lang/String;[BIILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;
+J  java.lang.ClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class;
+J  java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class;
+J  java.net.URLClassLoader$1.run()Ljava/lang/Object;
+v  ~StubRoutines::call_stub
+J  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedExceptionAction;Ljava/security/AccessControlContext;)Ljava/lang/Object;
+J  java.net.URLClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+J  oracle.ideimpl.IdeClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
+J  java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+v  ~RuntimeStub::alignment_frame_return Runtime1 stub
+v  ~StubRoutines::call_stub
+J  java.lang.ClassLoader.defineClass1(Ljava/lang/String;[BIILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;
+J  java.lang.ClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class;
+J  java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class;
+J  java.net.URLClassLoader$1.run()Ljava/lang/Object;
+v  ~StubRoutines::call_stub
+J  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedExceptionAction;Ljava/security/AccessControlContext;)Ljava/lang/Object;
+J  java.net.URLClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+J  oracle.ideimpl.IdeClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
+J  java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+v  ~RuntimeStub::alignment_frame_return Runtime1 stub
+v  ~StubRoutines::call_stub
+J  java.lang.ClassLoader.defineClass1(Ljava/lang/String;[BIILjava/security/ProtectionDomain;Ljava/lang/String;)Ljava/lang/Class;
+J  java.lang.ClassLoader.defineClass(Ljava/lang/String;[BIILjava/security/ProtectionDomain;)Ljava/lang/Class;
+J  java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class;
+J  java.net.URLClassLoader$1.run()Ljava/lang/Object;
+v  ~StubRoutines::call_stub
+J  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedExceptionAction;Ljava/security/AccessControlContext;)Ljava/lang/Object;
+J  java.net.URLClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+J  oracle.ideimpl.IdeClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
+J  java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+v  ~RuntimeStub::alignment_frame_return Runtime1 stub
+v  ~StubRoutines::call_stub
+j  oracle.bali.xml.gui.swing.explorer.SwingExplorerGui._setupTree(Ljavax/swing/JTree;)V+151
+j  oracle.bali.xml.gui.swing.explorer.SwingExplorerGui.getNewJTree()Ljavax/swing/JTree;+7
+j  oracle.bali.xml.gui.jdev.explorer.XmlExplorer._createNewTree(Loracle/bali/xml/gui/jdev/explorer/JDevExplorerGui;)V+8
+j  oracle.bali.xml.gui.jdev.explorer.XmlExplorer.setContext(Loracle/ide/Context;)V+192
+j  oracle.ideimpl.explorer.ExplorerManagerImpl.getExplorerForHost(Loracle/ide/view/View;Loracle/ide/Context;)Loracle/ide/explorer/Explorer;+675
+j  oracle.ideimpl.explorer.ExplorerWindowImpl.viewSelectionChanged(Loracle/ide/Context;)V+11
+j  oracle.ide.view.AbstractPinnable.viewSelectionChangedImpl(Loracle/ide/view/View;)V+7
+j  oracle.ide.view.AbstractPinnable.viewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+14
+j  oracle.ideimpl.explorer.ExplorerWindowImpl.viewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+22
+j  oracle.ide.view.View.fireViewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+25
+j  oracle.ideri.navigator.DefaultNavigatorWindow.fireViewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+11
+j  oracle.ide.view.View.updateSelectionImpl(Z)V+49
+j  oracle.ide.view.View.updateSelection()V+2
+j  oracle.ideri.navigator.DefaultNavigatorWindow$3.viewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+4
+j  oracle.ide.view.View.fireViewSelectionChanged(Loracle/ide/view/ViewSelectionEvent;)V+25
+j  oracle.ide.view.View$4.actionPerformed(Ljava/awt/event/ActionEvent;)V+25
+J  javax.swing.Timer.fireActionPerformed(Ljava/awt/event/ActionEvent;)V
+J  javax.swing.Timer$DoPostEvent.run()V
+J  java.awt.event.InvocationEvent.dispatch()V
+J  java.awt.EventQueue.dispatchEvent(Ljava/awt/AWTEvent;)V
+J  java.awt.EventDispatchThread.pumpOneEventForHierarchy(ILjava/awt/Component;)Z
+v  ~RuntimeStub::alignment_frame_return Runtime1 stub
+j  java.awt.EventDispatchThread.pumpEventsForHierarchy(ILjava/awt/Conditional;Ljava/awt/Component;)V+26
+j  java.awt.EventDispatchThread.pumpEvents(ILjava/awt/Conditional;)V+4
+j  java.awt.EventDispatchThread.pumpEvents(Ljava/awt/Conditional;)V+3
+j  java.awt.EventDispatchThread.run()V+9
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x2b5448a8 JavaThread "Persistence Auto Flusher" daemon [_thread_blocked, id=6108]
+  0x2b2754e0 JavaThread "IconOverlayTracker Timer" [_thread_blocked, id=3028]
+  0x2b109788 JavaThread "AuditExecutor-1" daemon [_thread_blocked, id=2532]
+  0x2b315de0 JavaThread "BufferDomModel background parse thread" daemon [_thread_blocked, id=3296]
+  0x2adde920 JavaThread "WaitCursorTimer" daemon [_thread_blocked, id=2240]
+  0x2b0bd618 JavaThread "Native Directory Watcher" [_thread_in_native, id=2324]
+  0x2ac72ac8 JavaThread "WeakDataReference polling" [_thread_blocked, id=3088]
+  0x2aeadaa8 JavaThread "WaitCursorTimer" daemon [_thread_blocked, id=3092]
+  0x2b0bdad8 JavaThread "IconOverlayTracker Timer" [_thread_blocked, id=1440]
+  0x2b0fedd8 JavaThread "Timer-2" [_thread_blocked, id=1560]
+  0x2af64e80 JavaThread "Timer-1" [_thread_blocked, id=3076]
+  0x24f23c48 JavaThread "TimerQueue" daemon [_thread_blocked, id=2712]
+=>0x24ef8b58 JavaThread "AWT-EventQueue-0" [_thread_in_vm, id=2576]
+  0x24ef0298 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=2288]
+  0x24ee8820 JavaThread "AWT-Windows" daemon [_thread_in_native, id=2456]
+  0x24e2c418 JavaThread "AWT-Shutdown" [_thread_blocked, id=2332]
+  0x24d9ecd0 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=1904]
+  0x24d9d8b8 JavaThread "CompilerThread0" daemon [_thread_blocked, id=2612]
+  0x24d7c978 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=2292]
+  0x24d7c670 JavaThread "Surrogate Locker Thread (CMS)" daemon [_thread_blocked, id=2088]
+  0x24d6d898 JavaThread "Finalizer" daemon [_thread_blocked, id=2708]
+  0x24d6ce40 JavaThread "Reference Handler" daemon [_thread_blocked, id=2620]
+  0x003dcd58 JavaThread "main" [_thread_blocked, id=3720]
+
+Other Threads:
+  0x24d6a420 VMThread [id=2144]
+  0x24d9fe98 WatcherThread [id=2588]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ par new generation   total 7296K, used 3895K [0x03660000, 0x03d90000, 0x03e60000)
+  eden space 7232K,  53% used [0x03660000, 0x03a2de30, 0x03d70000)
+  from space 64K,   0% used [0x03d70000, 0x03d70000, 0x03d80000)
+  to   space 64K,   0% used [0x03d80000, 0x03d80000, 0x03d90000)
+ concurrent mark-sweep generation total 109316K, used 60716K [0x03e60000, 0x0a921000, 0x13660000)
+ concurrent-mark-sweep perm gen total 115620K, used 69485K [0x13660000, 0x1a749000, 0x23660000)
+
+Dynamic libraries:
+0x00400000 - 0x0041d000 	C:\jdevstudio10133\jdev\bin\jdevw.exe
+0x7c900000 - 0x7c9b2000 	C:\WINDOWS\system32\ntdll.dll
+0x7c800000 - 0x7c8f6000 	C:\WINDOWS\system32\kernel32.dll
+0x7e410000 - 0x7e4a1000 	C:\WINDOWS\system32\USER32.dll
+0x77f10000 - 0x77f59000 	C:\WINDOWS\system32\GDI32.dll
+0x763b0000 - 0x763f9000 	C:\WINDOWS\system32\comdlg32.dll
+0x77dd0000 - 0x77e6b000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x77e70000 - 0x77f02000 	C:\WINDOWS\system32\RPCRT4.dll
+0x77fe0000 - 0x77ff1000 	C:\WINDOWS\system32\Secur32.dll
+0x5d090000 - 0x5d12a000 	C:\WINDOWS\system32\COMCTL32.dll
+0x7c9c0000 - 0x7d1d7000 	C:\WINDOWS\system32\SHELL32.dll
+0x77c10000 - 0x77c68000 	C:\WINDOWS\system32\msvcrt.dll
+0x77f60000 - 0x77fd6000 	C:\WINDOWS\system32\SHLWAPI.dll
+0x76390000 - 0x763ad000 	C:\WINDOWS\system32\IMM32.DLL
+0x629c0000 - 0x629c9000 	C:\WINDOWS\system32\LPK.DLL
+0x74d90000 - 0x74dfb000 	C:\WINDOWS\system32\USP10.dll
+0x773d0000 - 0x774d3000 	C:\WINDOWS\WinSxS\x86_Microsoft.Windows.Common-Controls_6595b64144ccf1df_6.0.2600.5512_x-ww_35d4ce83\comctl32.dll
+0x76c90000 - 0x76cb8000 	C:\WINDOWS\system32\imagehlp.dll
+0x774e0000 - 0x7761d000 	C:\WINDOWS\system32\ole32.dll
+0x3d930000 - 0x3da16000 	C:\WINDOWS\system32\WININET.dll
+0x003f0000 - 0x003f9000 	C:\WINDOWS\system32\Normaliz.dll
+0x78130000 - 0x78262000 	C:\WINDOWS\system32\urlmon.dll
+0x77120000 - 0x771ab000 	C:\WINDOWS\system32\OLEAUT32.dll
+0x3dfd0000 - 0x3e1b8000 	C:\WINDOWS\system32\iertutil.dll
+0x71ab0000 - 0x71ac7000 	C:\WINDOWS\system32\ws2_32.dll
+0x71aa0000 - 0x71aa8000 	C:\WINDOWS\system32\WS2HELP.dll
+0x76ee0000 - 0x76f1c000 	C:\WINDOWS\system32\RASAPI32.dll
+0x76e90000 - 0x76ea2000 	C:\WINDOWS\system32\rasman.dll
+0x5b860000 - 0x5b8b5000 	C:\WINDOWS\system32\NETAPI32.dll
+0x76eb0000 - 0x76edf000 	C:\WINDOWS\system32\TAPI32.dll
+0x76e80000 - 0x76e8e000 	C:\WINDOWS\system32\rtutils.dll
+0x76b40000 - 0x76b6d000 	C:\WINDOWS\system32\WINMM.dll
+0x769c0000 - 0x76a74000 	C:\WINDOWS\system32\USERENV.dll
+0x77c70000 - 0x77c95000 	C:\WINDOWS\system32\msv1_0.dll
+0x76790000 - 0x7679c000 	C:\WINDOWS\system32\cryptdll.dll
+0x76d60000 - 0x76d79000 	C:\WINDOWS\system32\iphlpapi.dll
+0x5ad70000 - 0x5ada8000 	C:\WINDOWS\system32\uxtheme.dll
+0x722b0000 - 0x722b5000 	C:\WINDOWS\system32\sensapi.dll
+0x6d740000 - 0x6d8de000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\client\jvm.dll
+0x74720000 - 0x7476c000 	C:\WINDOWS\system32\MSCTF.dll
+0x6d300000 - 0x6d308000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\hpi.dll
+0x76bf0000 - 0x76bfb000 	C:\WINDOWS\system32\PSAPI.DLL
+0x6d710000 - 0x6d71c000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\verify.dll
+0x6d380000 - 0x6d39d000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\java.dll
+0x6d730000 - 0x6d73f000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\zip.dll
+0x755c0000 - 0x755ee000 	C:\WINDOWS\system32\msctfime.ime
+0x6d070000 - 0x6d1e0000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\awt.dll
+0x73000000 - 0x73026000 	C:\WINDOWS\system32\WINSPOOL.DRV
+0x73760000 - 0x737ab000 	C:\WINDOWS\system32\ddraw.dll
+0x73bc0000 - 0x73bc6000 	C:\WINDOWS\system32\DCIMAN32.dll
+0x6d2b0000 - 0x6d300000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\fontmanager.dll
+0x6d540000 - 0x6d553000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\net.dll
+0x6d560000 - 0x6d569000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\nio.dll
+0x25a60000 - 0x25a7a000 	C:\jdevstudio10133\jdev\lib\jdevnative.dll
+0x6d280000 - 0x6d288000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\dt_shmem.dll
+0x71a50000 - 0x71a8f000 	C:\WINDOWS\System32\mswsock.dll
+0x76f20000 - 0x76f47000 	C:\WINDOWS\system32\DNSAPI.dll
+0x76fb0000 - 0x76fb8000 	C:\WINDOWS\System32\winrnr.dll
+0x76f60000 - 0x76f8c000 	C:\WINDOWS\system32\WLDAP32.dll
+0x64000000 - 0x64025000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x76fc0000 - 0x76fc6000 	C:\WINDOWS\system32\rasadhlp.dll
+0x662b0000 - 0x66308000 	C:\WINDOWS\system32\hnetcfg.dll
+0x71a90000 - 0x71a98000 	C:\WINDOWS\System32\wshtcpip.dll
+0x6d230000 - 0x6d253000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\dcpr.dll
+0x605d0000 - 0x605d9000 	C:\WINDOWS\system32\mslbui.dll
+0x68000000 - 0x68036000 	C:\WINDOWS\system32\rsaenh.dll
+0x77b40000 - 0x77b62000 	C:\WINDOWS\system32\Apphelp.dll
+
+VM Arguments:
+jvm_args: -Dide.product=oracle.jdeveloper -Dide.splash.screen=splash.gif -Xverify:none -Xmx256M -XX:MaxPermSize=256M -XX:JavaPriority10_To_OSPriority=10 -XX:JavaPriority9_To_OSPriority=9 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0 -XX:CMSIncrementalDutyCycle=10 -Dsun.awt.keepWorkingSetOnMinimize=true -Dice.browser.forcegc=false -Dice.pilots.html4.tileOptThreshold=0 -Xbootclasspath/p:../lib/lwawt.jar -Dreserved_filenames=con,aux,prn,lpt1,lpt2,lpt3,lpt4,lpt5,lpt6,lpt7,lpt8,lpt9,com1,com2,com3,com4,com5,com6,com7,com8,com9,conin$,conout$ -DEDITOR_J2SE_VERSION=1.5 -DINSIGHT_OMIT_HIDDEN=true -Doracle.xdkjava.compatibility.version=9.0.4 -Doracle.translated.locales=ja -Dwindows.shell.font.languages=en -Dide.debug.controller.stack=false -Dceditor.java.parse.small=300 -Dceditor.java.parse.large=1500 -Dide.extension.cpmissing.nowarn=true -Dcompiler.vmargs=-mx512m -Doracle.soap.transport.noHTTPClient=true -Djbo.debugoutput=silent -Djbo.showdebugwarningbanner=false -Djava.library.path=c:\imagemagick;C:\oracle\instantclient_10_2;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Diskeeper Corporation\Diskeeper\;C:\ant\apache-ant-1.7.1\bin;C:\TOPLINK10.1.3\toplink\bin;C:\Program Files\Java\jdk1.6.0_10\bin;C:\jboss-4.0.2\bin;C:\Program Files\TortoiseSVN\bin;C:\Sun\AppServer\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Program Files\QuickTime\QTSystem\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\IBM\Page Detailer\;C:\WINDOWS\system32\WindowsPowerShell\v1.0;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;..\lib\ext;..\..\lib -Dide.user.dir= -Dide.startingArg0=C:\jdevstudio10133\jdev\bin\jdevw.exe -Dide.launcherProcessId=3460 -Dide.config_pathname=C:\jdevstudio10133\jdev\bin\jdev.conf -Dide.startingcwd=C:\jdevstud
+java_command: <unknown>
+Launcher Type: generic
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.6.0_10
+CLASSPATH=.;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb1-impl.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-api.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-impl.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-xjc.jar;C:\Sun\jwsdp-2.0\jwsdp-shared\lib\relaxngDatatype.jar;C:\Program Files\Java\jre6\lib\ext\QTJava.zip
+PATH=c:\imagemagick;C:\oracle\instantclient_10_2;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Diskeeper Corporation\Diskeeper\;C:\ant\apache-ant-1.7.1\bin;C:\TOPLINK10.1.3\toplink\bin;C:\Program Files\Java\jdk1.6.0_10\bin;C:\jboss-4.0.2\bin;C:\Program Files\TortoiseSVN\bin;C:\Sun\AppServer\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Program Files\QuickTime\QTSystem\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\IBM\Page Detailer\;C:\WINDOWS\system32\WindowsPowerShell\v1.0;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin
+USERNAME=pghorpade
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 15 Model 6 Stepping 4, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows XP Build 2600 Service Pack 3
+
+CPU:total 2 (cores per cpu 1, threads per core 2) family 15 model 6 stepping 4, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ht
+
+Memory: 4k page, physical 1047884k(227096k free), swap 4092964k(2533212k free)
+
+vm_info: Java HotSpot(TM) Client VM (1.5.0_20-b02) for windows-x86, built on Jul 25 2009 02:30:20 by "java_re" with MS VC++ 6.0
+
+time: Thu Jun 24 13:09:34 2010
+elapsed time: 4844 seconds
+

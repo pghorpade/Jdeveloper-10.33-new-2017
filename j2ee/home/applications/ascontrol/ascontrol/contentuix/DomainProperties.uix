@@ -1,0 +1,201 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="linkDestinationData">
+     <method class="oracle.ifs.admin.em.ias.uix.DomainPropertyData"
+             method="getLinkDestinationData" />
+    </data>
+
+    <!-- data provider for domain properties table -->
+    <data name="dpTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.DomainPropertyData"
+             method="getDomainPropertyTableData" />
+    </data>
+
+    <data name="dpTableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="TYPE@strings" sort="yes" value="type"/>
+      <column data:text="VALUE@strings" sort="no" value="value"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="SEARCHINPUT"
+                           data:title="pageHeader@linkDestinationData">
+
+     <pageStatus>
+      <include ctrl:node="../timestamp"/>
+     </pageStatus>
+
+     <contents>
+
+      <styledText styleClass="OraInstructionText">
+       <boundAttribute name="text">
+        <comparison type="equals">
+         <dataObject select="domainType" source="linkDestinationData"/>
+         <fixed text="cmsdk"/>
+        </comparison>
+        <dataObject select="DOMAIN_PROPERTIES_INSTRUCTION"
+                    source="strings"/>
+        <dataObject select="DOMAIN_PROPERTIES_NO_ADD_INSTRUCTION"
+                    source="strings"/>
+       </boundAttribute>
+      </styledText>
+
+      <!-- Table Filter -->
+
+      <include ctrl:node="include/TableFilter"/>
+       
+      <formValue name="table_level" value="outer"/>
+
+      <!-- ........ Domain Properties Table ....... -->
+
+      <!-- ADD button is only present for cmsdk domain -->
+      <tableLayout width="100%">
+       <boundAttribute name="rendered">
+        <comparison type="equals">
+         <dataObject select="domainType" source="linkDestinationData"/>
+         <fixed text="cmsdk"/>
+        </comparison>
+       </boundAttribute>
+       <contents>
+        <rowLayout hAlign="end">
+         <contents>
+          <pageButtonBar>
+           <contents>
+            <button data:text="ADD@strings"
+                    data:destination="addPropertyLinkDestination@linkDestinationData"/>
+           </contents>
+          </pageButtonBar>
+         </contents>
+        </rowLayout>
+       </contents>
+      </tableLayout>
+
+      <table name="DomainPropertiesTable"
+             id="table_DomainPropertiesTable"
+             partialRenderMode="self"
+             width="100%"
+             data:alternateText="NO_ITEMS_FOUND@strings"
+             data:summary="DOMAIN_PROPERTIES_TABLE_SUMMARY@strings"
+             data:tableData="row@dpTableData"
+             data:columnHeaderData="column@dpTableColumnHeaderData"
+             data:value="startingCount@dpTableData"
+             data:maxValue="totalCount@dpTableData"
+             data:blockSize="blockSize@dpTableData"
+             showAll="yes"
+             formSubmitted="true" >
+
+       <columnHeaderStamp>
+         <sortableHeader data:text="text" data:value="value">
+           <boundAttribute name="sortable">
+             <defaulting>
+               <dataObject data:select="value" source="sortColumnHeader"/>
+               <dataObject data:source="(value)@sortColumnHeader"/>
+               <dataObject select="sort"/>
+             </defaulting>
+           </boundAttribute>
+         </sortableHeader>
+       </columnHeaderStamp>
+
+       <tableFormat tableBanding="rowBanding"/>
+
+        <contents>
+         <link data:text="propName"
+               data:destination="editDestination" />
+
+         <styledText data:text="propType" />
+
+         <switcher childName="scalarview"
+                   data:childName="viewType">
+
+          <case name="scalarview">
+           <styledText data:text="propValue" />
+          </case>
+
+          <case name="objnameview">
+           <styledText data:text="propValue" />
+          </case>
+
+          <case name="serviceconfigview">
+           <styledText data:text="propValue" />
+          </case>
+
+          <case name="arrayview">
+           <image data:source="detailsIcon"
+                  data:destination="detailsDestination"
+                  data:shortDesc="PROPERTYDETAILS_ICON_TOOLTIP@strings" />
+          </case>
+
+          <case name="bundleview">
+           <image data:source="detailsIcon"
+                  data:destination="detailsDestination"
+                  data:shortDesc="PROPERTYDETAILS_ICON_TOOLTIP@strings" />
+          </case>
+
+          <case name="unsupportedview">
+           <styledText styleClass="OraErrorText"
+                       data:text="UNSUPPORTED@strings" />
+          </case>
+
+         </switcher>
+        </contents>
+       </table>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="null">
+   <method class="oracle.ifs.admin.em.ias.uix.DomainPropertyData"
+           method="doLoad"/>
+  </event>
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.DomainPropertyData"
+           method="doLoad"/>
+  </event>
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.DomainPropertyData"
+           method="doLoad"/>
+  </event>
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.DomainPropertyData"
+           method="doSearch"/>
+  </event>
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>
+

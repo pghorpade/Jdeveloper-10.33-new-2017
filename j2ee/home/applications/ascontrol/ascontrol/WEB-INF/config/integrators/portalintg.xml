@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<integration product="portal">
+    <controller subcontext="portal"
+ class="oracle.sysman.ias.studio.oc4j.portal.PortalController" 
+/>
+</integration>

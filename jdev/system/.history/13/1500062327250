@@ -1,0 +1,49 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class LinkAdminGroups {
+
+    /**Map adminGroups <-> edu.ucla.library.digital.dlcs.model.AdminGroups
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminGroups}>
+     */
+    private ValueHolderInterface adminGroups;
+
+    /**Map fileGroups <-> edu.ucla.library.digital.dlcs.model.FileGroups
+     * @associates <{edu.ucla.library.digital.dlcs.model.FileGroups}>
+     */
+    private ValueHolderInterface fileGroups;
+    private Long adminLinkidPk;
+
+    public LinkAdminGroups() {
+        super();
+        this.adminGroups = new ValueHolder();
+        this.fileGroups = new ValueHolder();
+    }
+
+    public AdminGroups getAdminGroups() {
+        return (AdminGroups)this.adminGroups.getValue();
+    }
+
+    public Long getAdminLinkidPk() {
+        return this.adminLinkidPk;
+    }
+
+    public FileGroups getFileGroups() {
+        return (FileGroups)this.fileGroups.getValue();
+    }
+
+    public void setAdminGroups(AdminGroups adminGroups) {
+        this.adminGroups.setValue(adminGroups);
+    }
+
+    public void setAdminLinkidPk(Long adminLinkidPk) {
+        this.adminLinkidPk = adminLinkidPk;
+    }
+
+    public void setFileGroups(FileGroups fileGroups) {
+        this.fileGroups.setValue(fileGroups);
+    }
+
+}

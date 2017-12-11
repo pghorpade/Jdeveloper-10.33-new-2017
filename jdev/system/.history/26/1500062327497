@@ -1,0 +1,141 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class CoreDescControlValues {
+
+    /**Map coreDescTerms <-> edu.ucla.library.digital.dlcs.model.CoreDescTerms
+     * @associates <{edu.ucla.library.digital.dlcs.model.CoreDescTerms}>
+     */
+    private ValueHolderInterface coreDescTerms;
+
+    /**Map descControlValuesCollection <-> edu.ucla.library.digital.dlcs.model.DescControlValues
+     * @associates <{edu.ucla.library.digital.dlcs.model.DescControlValues}>
+     */
+    private List descControlValuesCollection;
+    private Long coreDescCvidPk;
+    private String coreDescCv;
+    private String coreDescCvSource;
+    private String authorityRecordFlag;
+    private Long coreAuthorityid;
+    private String coreDescCvRecordNo;
+    private String coreDescCvType;
+    private String oldAuthorityid;
+    private Date createDate;
+
+    public CoreDescControlValues() {
+        super();
+        this.coreDescTerms = new ValueHolder();
+        this.descControlValuesCollection = new ArrayList();
+    }
+
+    public void addDescControlValues(int index, 
+                                     DescControlValues aDescControlValues) {
+        this.descControlValuesCollection.add(index, aDescControlValues);
+        aDescControlValues.setCoreDescControlValues(this);
+    }
+
+    public void addDescControlValues(DescControlValues aDescControlValues) {
+        this.descControlValuesCollection.add(aDescControlValues);
+        aDescControlValues.setCoreDescControlValues(this);
+    }
+
+    public String getAuthorityRecordFlag() {
+        return this.authorityRecordFlag;
+    }
+
+    public Long getCoreAuthorityid() {
+        return this.coreAuthorityid;
+    }
+
+    public String getCoreDescCv() {
+        return this.coreDescCv;
+    }
+
+    public String getCoreDescCvRecordNo() {
+        return this.coreDescCvRecordNo;
+    }
+
+    public String getCoreDescCvSource() {
+        return this.coreDescCvSource;
+    }
+
+    public String getCoreDescCvType() {
+        return this.coreDescCvType;
+    }
+
+    public Long getCoreDescCvidPk() {
+        return this.coreDescCvidPk;
+    }
+
+    public CoreDescTerms getCoreDescTerms() {
+        return (CoreDescTerms)this.coreDescTerms.getValue();
+    }
+
+    public Date getCreateDate() {
+        return this.createDate;
+    }
+
+    public List<DescControlValues> getDescControlValuesCollection() {
+        return this.descControlValuesCollection;
+    }
+
+    public String getOldAuthorityid() {
+        return this.oldAuthorityid;
+    }
+
+    public void removeDescControlValues(DescControlValues aDescControlValues) {
+        this.descControlValuesCollection.remove(aDescControlValues);
+        aDescControlValues.setCoreDescControlValues(null);
+    }
+
+    public void setAuthorityRecordFlag(String authorityRecordFlag) {
+        this.authorityRecordFlag = authorityRecordFlag;
+    }
+
+    public void setCoreAuthorityid(Long coreAuthorityid) {
+        this.coreAuthorityid = coreAuthorityid;
+    }
+
+    public void setCoreDescCv(String coreDescCv) {
+        this.coreDescCv = coreDescCv;
+    }
+
+    public void setCoreDescCvRecordNo(String coreDescCvRecordNo) {
+        this.coreDescCvRecordNo = coreDescCvRecordNo;
+    }
+
+    public void setCoreDescCvSource(String coreDescCvSource) {
+        this.coreDescCvSource = coreDescCvSource;
+    }
+
+    public void setCoreDescCvType(String coreDescCvType) {
+        this.coreDescCvType = coreDescCvType;
+    }
+
+    public void setCoreDescCvidPk(Long coreDescCvidPk) {
+        this.coreDescCvidPk = coreDescCvidPk;
+    }
+
+    public void setCoreDescTerms(CoreDescTerms coreDescTerms) {
+        this.coreDescTerms.setValue(coreDescTerms);
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public void setDescControlValuesCollection(List<DescControlValues> descControlValuesCollection) {
+        this.descControlValuesCollection = descControlValuesCollection;
+    }
+
+    public void setOldAuthorityid(String oldAuthorityid) {
+        this.oldAuthorityid = oldAuthorityid;
+    }
+
+}

@@ -1,0 +1,190 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the (domain) property -->
+    <data name="propData">
+     <method class="oracle.ifs.admin.em.ias.uix.ViewInnerDomainPropertyData"
+             method="getPropertyData" />
+    </data>
+
+<!--
+    <data name="tableColumnHeaderData">
+     <inline>
+      <column data:value="NAME@strings"/>
+      <column data:value="TYPE@strings"/>
+      <column data:value="VALUE@strings"/>
+     </inline>
+    </data>
+-->
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="OKBUTTON">
+     <boundAttribute name="title">
+      <messageFormat data:format="VIEW_INNER_HEADER@strings"
+                     fast="true">
+       <dataObject select="outerPropName" source="propData"/>
+       <dataObject select="propName" source="propData"/>
+      </messageFormat>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button id="OKBUTTON" data:text="OK@strings"
+                data:destination="cancelDestination@propData"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ........ Content Body ........ -->
+
+      <tableLayout width="100%">
+       <contents>
+
+        <rowLayout>
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+         </contents>
+        </rowLayout>
+
+        <switcher data:childName="viewType@propData"
+                  defauultCase="unsupportedview">
+        
+         <case name="arrayview">
+          <rowLayout>
+           <contents>
+            <shuttle name="viewArray" reorderable="false">
+             <!-- String Array list display -->
+             <leading>
+              <list multiple="true"
+                    data:shortDesc="ENUM_LIST@strings">
+               <contents data:childData="arrayData@propData">
+                <option data:text="optionTextString"
+                        data:value="optionValueString" />
+               </contents>
+              </list>
+             </leading>
+            </shuttle>
+           </contents>
+          </rowLayout>
+         </case>
+
+<!-- Currently, only bundlview will possibly be encountered... -->             
+<!--
+         <case name="bundleview">
+          <rowLayout>
+           <contents>
+            <header data:text="VALUE@strings">
+             <contents>
+
+              <table name="PropertyValueTable"
+                   id="table_PropertyValueTable"
+                   partialRenderMode="self"              
+                   width="100%"
+                   data:alternateText="NO_ITEMS_FOUND@strings"
+                   data:tableData="bundleData@propData"
+                   data:columnHeaderData="column@tableColumnHeaderData"
+                   data:value="startingCount@propData"
+                   data:maxValue="totalCount@propData"
+                   data:blockSize="blockSize@propData"
+                   formSubmitted="true" >
+
+               <columnHeaderStamp>
+                <boundText select="value"/>
+               </columnHeaderStamp>
+
+               <tableFormat tableBanding="rowBanding"/>
+
+               <contents>
+                <styledText data:text="nestedPropName"/>
+
+                <styledText data:text="nestedPropType" />
+
+                <switcher data:childName="nestedViewType"
+                          defaultCase="unsupportedview">                 
+
+                 <case name="scalarview">
+                  <styledText data:text="nestedPropValue" />
+                 </case>
+
+                 <case name="arrayview">
+                  <image data:source="detailsIcon"
+                         data:destination="detailsDestination"
+                         data:shortDesc="PROPERTYDETAILS_ICON_TOOLTIP@strings" />
+                 </case>
+
+                 <case name="unsupportedview">
+                  <styledText styleClass="OraErrorText"
+                              data:text="UNSUPPORTED@strings" />
+                 </case>
+
+                </switcher>
+               </contents>
+
+              </table>
+                      
+             </contents>
+            </header>
+           </contents>
+          </rowLayout>
+         </case>
+-->
+
+         <case name="unsupportedview">
+          <rowLayout>
+           <contents>
+            <messageStyledText data:prompt="VALUE@strings"
+                               data:text="UNSUPPORTED@strings"
+                               styleClass="OraErrorText"/>
+           </contents>
+          </rowLayout>
+         </case>
+
+        </switcher>
+       </contents>
+      </tableLayout>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewInnerDomainPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.ViewInnerDomainPropertyData"
+           method="doLoad"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

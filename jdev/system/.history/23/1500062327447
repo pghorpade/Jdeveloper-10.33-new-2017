@@ -1,0 +1,99 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class DlObjects {
+
+    /**Map projectItemsCollection <-> edu.ucla.library.digital.dlcs.model.ProjectItems
+     * @associates <{edu.ucla.library.digital.dlcs.model.ProjectItems}>
+     */
+    private List projectItemsCollection;
+
+    /**Map projects <-> edu.ucla.library.digital.dlcs.model.Projects
+     * @associates <{edu.ucla.library.digital.dlcs.model.Projects}>
+     */
+    private ValueHolderInterface projects;
+
+    /**Map dlObjectTypes <-> edu.ucla.library.digital.dlcs.model.DlObjectTypes
+     * @associates <{edu.ucla.library.digital.dlcs.model.DlObjectTypes}>
+     */
+    private ValueHolderInterface dlObjectTypes;
+    private Long objectidPk;
+    private String objectLabel;
+    private Integer objectLevel;
+
+    public DlObjects() {
+        super();
+        this.projectItemsCollection = new ArrayList();
+        this.projects = new ValueHolder();
+        this.dlObjectTypes = new ValueHolder();
+    }
+
+    public void addProjectItems(int index, ProjectItems aProjectItems) {
+        this.projectItemsCollection.add(index, aProjectItems);
+        aProjectItems.setDlObjects(this);
+    }
+
+    public void addProjectItems(ProjectItems aProjectItems) {
+        this.projectItemsCollection.add(aProjectItems);
+        aProjectItems.setDlObjects(this);
+    }
+
+    public DlObjectTypes getDlObjectTypes() {
+        return (DlObjectTypes)this.dlObjectTypes.getValue();
+    }
+
+    public String getObjectLabel() {
+        return this.objectLabel;
+    }
+
+    public Integer getObjectLevel() {
+        return this.objectLevel;
+    }
+
+    public Long getObjectidPk() {
+        return this.objectidPk;
+    }
+
+    public List<ProjectItems> getProjectItemsCollection() {
+        return this.projectItemsCollection;
+    }
+
+    public Projects getProjects() {
+        return (Projects)this.projects.getValue();
+    }
+
+    public void removeProjectItems(ProjectItems aProjectItems) {
+        this.projectItemsCollection.remove(aProjectItems);
+        aProjectItems.setDlObjects(null);
+    }
+
+    public void setDlObjectTypes(DlObjectTypes dlObjectTypes) {
+        this.dlObjectTypes.setValue(dlObjectTypes);
+    }
+
+    public void setObjectLabel(String objectLabel) {
+        this.objectLabel = objectLabel;
+    }
+
+    public void setObjectLevel(Integer objectLevel) {
+        this.objectLevel = objectLevel;
+    }
+
+    public void setObjectidPk(Long objectidPk) {
+        this.objectidPk = objectidPk;
+    }
+
+    public void setProjectItemsCollection(List<ProjectItems> projectItemsCollection) {
+        this.projectItemsCollection = projectItemsCollection;
+    }
+
+    public void setProjects(Projects projects) {
+        this.projects.setValue(projects);
+    }
+
+}

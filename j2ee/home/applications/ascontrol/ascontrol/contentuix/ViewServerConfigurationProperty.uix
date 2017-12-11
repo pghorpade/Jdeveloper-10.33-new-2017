@@ -1,0 +1,218 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the property -->
+    <data name="pageData">
+     <method class=
+             "oracle.ifs.admin.em.ias.uix.ViewServerConfigurationPropertyData"
+             method="getPropertyData" />
+    </data>
+        
+    <!-- data provider for datatype -->
+    <data name="typeData">
+     <method class="oracle.ifs.admin.em.ias.uix.PropertyDatatypeChoiceData"
+             method="getDatatypeData" />
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="CANCELBUTTON">
+     <boundAttribute name="title">
+      <if>
+       <dataObject select="isNew" source="pageData"/>
+       <dataObject select="VIEW_INHERITED_PROPERTY_FOR_NEW_HEADER"
+                   source="strings"/>
+       <messageFormat data:format=
+                      "VIEW_INHERITED_PROPERTY_FOR_EDIT_HEADER@strings"
+                      fast="true">
+        <dataObject select="SCNAME" source="pageData"/>
+       </messageFormat>
+      </if>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button id="CANCELBUTTON" data:text="CANCEL@strings"
+                ctrl:event="cancelUpdate"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ........ Property Fields .......... -->
+ 
+      <switcher childName="textinput"
+                data:childName="INPUTTYPE@pageData">
+
+       <!-- for String datatype -->
+
+       <case name="textinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageTextInput name="VALUE" columns="60"
+                            data:prompt="VALUE@strings"
+                            data:text="VALUE@pageData"/>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for Integer, Long, Double datatypes -->
+
+       <case name="numberinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <switcher data:childName="TYPENAME@pageData"
+                    defaultCase="wholenumber">
+           <case name="DOUBLE">
+            <messageTextInput name="VALUE" 
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="VALUE@pageData">
+             <onSubmitValidater>
+              <decimal />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+           <case name="wholenumber">
+            <messageTextInput name="VALUE" 
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="VALUE@pageData">
+             <onSubmitValidater>
+              <decimal maxScale="0" />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+          </switcher>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for Boolean datatype -->
+
+       <case name="booleaninput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageChoice name="VALUE"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="VALUE@pageData">
+           <contents>
+            <option text="true" value="true"/>
+            <option text="false" value="false"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for String-Array datatype -->
+
+       <case name="arrayinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <styledText styleClass="OraPromptText"
+                      data:text="VALUE@strings" />
+
+          <!-- view inherited string array property -->
+          <shuttle name="viewArray" reorderable="false">
+           <!-- String Array list display -->
+           <leading>
+            <list multiple="true"
+                  data:shortDesc="ENUM_LIST@strings">
+             <contents data:childData="VALUE@pageData">
+              <option data:text="optionTextString"
+                      data:value="optionValueString" />
+             </contents>
+            </list>
+           </leading>
+          </shuttle>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- everything else is unsupported -->
+
+       <case name="unsupportedinput">
+        <styledText styleClass="OraErrorText"
+                    data:text="UNSUPPORTED@strings" />
+       </case>
+
+      </switcher>
+
+      <formValue name="NAME" data:value="NAME@pageData"/>
+      <formValue name="TYPE" data:value="TYPE@pageData"/>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.ViewServerConfigurationPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <event name="cancelUpdate">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.ViewServerConfigurationPropertyData"
+           method="cancelUpdate"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

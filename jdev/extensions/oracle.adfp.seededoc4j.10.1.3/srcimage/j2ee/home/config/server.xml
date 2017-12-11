@@ -1,0 +1,233 @@
+<?xml version="1.0" standalone='yes'?>
+
+<application-server 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/application-server-10_1.xsd"
+  application-directory="../applications"
+  deployment-directory="../application-deployments"
+  connector-directory="../connectors"
+  schema-major-version="10"
+  schema-minor-version="1"
+  check-for-updates="adminClientOnly"
+>
+
+  <rmi-config path="./rmi.xml" />
+
+  <!-- Interoperability config link - Uncomment for IIOP functionality 
+  <sep-config path="./internal-settings.xml" />
+  -->
+
+  <!-- JMS-server config link -->
+  <jms-config path="./jms.xml" />
+  <javacache-config path="../../../javacache/admin/javacache.xml" />
+  <j2ee-logging-config path="./j2ee-logging.xml" />
+  <log>
+    <file path="../log/server.log" />
+    <!-- Uncomment this if you want to use ODL logging capabilities
+    <odl path="../log/server/" max-file-size="1000" max-directory-size="10000"/>
+    -->
+  </log>
+ 
+  <transaction-manager-config path="transaction-manager.xml" />
+  
+  <global-application name="default" path="application.xml" />
+
+  <application name="javasso" path="../../home/applications/javasso.ear" parent="default" start="false" /> 
+  <application name="ascontrol" path="../../home/applications/ascontrol.ear" parent="system" start="true"/>
+
+  <application name="datatags" path="../applications/datatags.ear" start="true"/>
+
+  <application name="jpdk" path="../applications/jpdk.ear" parent="default" start="true" />
+  <application name="portalTools" path="../applications/portalTools.ear" parent="default" start="true" />
+  <application name="wsrp-samples" path="../applications/wsrp-samples.ear" parent="default" start="true" />
+  <application name="richtextportlet" path="../applications/richtextportlet.ear" parent="default" start="true" />
+
+  <global-web-app-config path="global-web-application.xml" />
+
+  <web-site default="true" path="./default-web-site.xml" />
+
+  <!-- Global application libraries -->
+  <shared-library name="global.libraries" version="1.0" library-compatible="true">
+    <code-source path="../applib"/>
+  </shared-library>
+
+  <!-- Global application JSP tag libraries -->
+	<shared-library name="global.tag.libraries" version="1.0" library-compatible="true">
+		<import-shared-library name="oracle.xml"/>
+		<import-shared-library name="oracle.jdbc"/>
+		<import-shared-library name="oracle.cache"/>
+		<import-shared-library name="soap"/>
+		<code-source path="${oracle.home}/j2ee/home/jsp/lib/taglib/"/>
+		<code-source path="${oracle.home}/j2ee/home/jsp/lib/taglib/"/>
+		<code-source path="${oracle.home}/lib/dsv2.jar"/>
+	</shared-library>
+
+        <!-- Java Persistence Reference Implementation libraries -->
+	<shared-library name="oracle.persistence" version="1.0" library-compatible="true">
+		<code-source path="${oracle.home}/toplink/jlib/toplink-essentials.jar"/>
+	</shared-library>
+
+	<shared-library name="oracle.expression-evaluator" version="10.1.3.1" library-compatible="true">
+		<code-source path="${oracle.home}/jlib/commons-el.jar"/>
+		<code-source path="${oracle.home}/jlib/oracle-el.jar"/>
+		<code-source path="${oracle.home}/jsp-el-api.jar"/>
+	</shared-library>
+
+	<shared-library name="adf.oracle.domain" version="10.1.3.1" library-compatible="true">
+		<code-source path="${oracle.home}/BC4J/lib"/>
+                <!-- BEGIN:
+                     Runtime jar files not in {JDEVHOME}/BC4J/lib in JDev installation.
+                     Need to list one by one.
+                -->   
+		<code-source path="${oracle.home}/adfp/lib/tidy.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/portlet-server-install.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/xstream-1.1.jar"/>
+		<code-source path="${oracle.home}/jlib/backport-util-concurrent.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.adapter.portal.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.datacontrol.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.jam.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.adapter.fs.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/jcr-1.0.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/vcrshare.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/vcrdav.jar"/>
+                <!-- END:
+                     Runtime jar files not in {JDEVHOME}/BC4J/lib in JDev installation.
+                     Need to list one by one.
+                -->   
+		<code-source path="${oracle.home}/jlib/commons-cli-1.0.jar"/>
+		<code-source path="${oracle.home}/mds/lib/concurrent.jar"/>
+		<code-source path="${oracle.home}/mds/lib/mdsrt.jar"/>
+		<code-source path="${oracle.home}/jlib/share.jar"/>
+		<code-source path="${oracle.home}/jlib/regexp.jar"/>
+		<code-source path="${oracle.home}/jlib/xmlef.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/adfmtl.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/adfui.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/adf-connections.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/dc-adapters.jar"/>
+		<code-source path="${oracle.home}/ord/jlib/ordim.jar"/>
+		<code-source path="${oracle.home}/ord/jlib/ordhttp.jar"/>
+		<code-source path="${oracle.home}/jlib/ojmisc.jar"/>
+		<code-source path="${oracle.home}/jlib/jdev-cm.jar"/>
+		<code-source path="${oracle.home}/lib/xsqlserializers.jar"/>
+		<import-shared-library name="oracle.xml"/>
+		<import-shared-library name="oracle.jdbc"/>
+		<import-shared-library name="oracle.gdk"/>
+		<import-shared-library name="oracle.cache"/>
+		<import-shared-library name="oracle.dms"/>
+		<import-shared-library name="oracle.sqlj"/>
+		<import-shared-library name="oracle.toplink"/>
+		<import-shared-library name="oracle.ws.core"/>
+		<import-shared-library name="oracle.ws.client"/>
+		<import-shared-library name="oracle.xml.security"/>
+		<import-shared-library name="oracle.ws.security"/>
+		<import-shared-library name="oracle.ws.reliability"/>
+		<import-shared-library name="oracle.jwsdl"/>
+		<import-shared-library name="oracle.http.client"/>
+		<import-shared-library name="oracle.expression-evaluator"/>
+	</shared-library>
+
+	<shared-library name="adf.generic.domain" version="10.1.3.1" library-compatible="true">
+		<code-source path="${oracle.home}/BC4J/jlib/bc4jdomgnrc.jar"/>
+		<code-source path="${oracle.home}/BC4J/lib"/>
+                <!-- BEGIN:
+                     Runtime jar files not in {JDEVHOME}/BC4J/lib in JDev installation.
+                     Need to list one by one.
+                -->   
+		<code-source path="${oracle.home}/adfp/lib/tidy.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/portlet-server-install.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/xstream-1.1.jar"/>
+		<code-source path="${oracle.home}/jlib/backport-util-concurrent.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.adapter.portal.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.datacontrol.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.jam.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/oracle.vcr.adapter.fs.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/jcr-1.0.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/vcrshare.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/vcrdav.jar"/>
+                <!-- END:
+                     Runtime jar files not in {JDEVHOME}/BC4J/lib in JDev installation.
+                     Need to list one by one.
+                -->   
+		<code-source path="${oracle.home}/jlib/commons-cli-1.0.jar"/>
+		<code-source path="${oracle.home}/mds/lib/concurrent.jar"/>
+		<code-source path="${oracle.home}/mds/lib/mdsrt.jar"/>
+		<code-source path="${oracle.home}/jlib/share.jar"/>
+		<code-source path="${oracle.home}/jlib/regexp.jar"/>
+		<code-source path="${oracle.home}/jlib/xmlef.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/adfmtl.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/adfui.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/adf-connections.jar"/>
+		<code-source path="${oracle.home}/BC4J/jlib/dc-adapters.jar"/>
+		<code-source path="${oracle.home}/ord/jlib/ordim.jar"/>
+		<code-source path="${oracle.home}/ord/jlib/ordhttp.jar"/>
+		<code-source path="${oracle.home}/jlib/ojmisc.jar"/>
+		<code-source path="${oracle.home}/jlib/jdev-cm.jar"/>
+		<code-source path="${oracle.home}/lib/xsqlserializers.jar"/>
+		<import-shared-library name="oracle.xml"/>
+		<import-shared-library name="oracle.jdbc"/>
+		<import-shared-library name="oracle.gdk"/>
+		<import-shared-library name="oracle.cache"/>
+		<import-shared-library name="oracle.dms"/>
+		<import-shared-library name="oracle.sqlj"/>
+		<import-shared-library name="oracle.toplink"/>
+		<import-shared-library name="oracle.ws.core"/>
+		<import-shared-library name="oracle.ws.client"/>
+		<import-shared-library name="oracle.xml.security"/>
+		<import-shared-library name="oracle.ws.security"/>
+		<import-shared-library name="oracle.ws.reliability"/>
+		<import-shared-library name="oracle.jwsdl"/>
+		<import-shared-library name="oracle.http.client"/>
+		<import-shared-library name="oracle.expression-evaluator"/>
+	</shared-library>
+	<shared-library name="apache.webservices" version="1.0.0" library-compatible="true">
+		<code-source path="${oracle.home}/content/lib/axis/axis.jar"/>
+		<code-source path="${oracle.home}/content/lib/axis/commons-discovery-0.2.jar"/>
+		<code-source path="${oracle.home}/content/lib/axis/wsdl4j-1.5.1.jar"/>
+		<code-source path="${oracle.home}/content/lib/wss4j/bcprov-jdk13-128.jar"/>
+		<code-source path="${oracle.home}/content/lib/wss4j/opensaml-1.0.1.jar"/>
+		<code-source path="${oracle.home}/content/lib/wss4j/wss4j-patched.jar"/>
+		<code-source path="${oracle.home}/content/lib/wss4j/xalan-2.6.0-patched.jar"/>
+		<code-source path="${oracle.home}/content/lib/wss4j/xmlsec-1.2.1-patched.jar"/>
+		<import-shared-library name="oracle.xml"/>
+		<import-shared-library name="apache.commons.logging"/>
+	</shared-library>
+	<shared-library name="oracle.ifs.client" version="10.1.3.2.0" library-compatible="true">
+		<code-source path="${oracle.home}/content/lib/jcr/ojcr.jar"/>
+		<code-source path="${oracle.home}/content/lib/content-ws-client.jar"/>
+		<code-source path="${oracle.home}/content/lib/content-jcr.jar"/>
+		<import-shared-library name="oracle.xml"/>
+		<import-shared-library name="oracle.http.client"/>
+		<import-shared-library name="apache.webservices"/>
+		<import-shared-library name="adf.oracle.domain"/>
+		<import-shared-library name="apache.commons.logging"/>
+	</shared-library>
+	<shared-library name="oracle.portal" version="10.1.3.2.0" library-compatible="true">
+		<code-source path="${oracle.home}/j2ee/home/lib/ojsp.jar"/>
+		<code-source path="${oracle.home}/j2ee/home/lib/commons-el.jar"/>
+		<code-source path="${oracle.home}/jlib/regexp.jar"/>
+		<code-source path="${oracle.home}/jlib/ldapjclnt10.jar"/>
+		<code-source path="${oracle.home}/jlib/ojmisc.jar"/>
+		<code-source path="${oracle.home}/jlib/bigraphbean.jar"/>
+		<code-source path="${oracle.home}/jlib/jewt4.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/ohw.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/jawc.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/wce.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/pdkjava.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/ptlshare.jar"/>
+		<code-source path="${oracle.home}/adfp/lib/wcptg.jar"/>
+                <!-- BEGIN: jar files out-of-sync in jdev. Include them for now -->
+		<code-source path="../../../jlib/uix2.jar"/>
+                <!-- END: jar files out-of-sync in jdev. Include them for now -->
+		<code-source path="../../../portal/jlib/portaltools.jar"/>
+		<code-source path="../../../portal/jlib/wcwebdb.jar"/>
+		<code-source path="../../../ultrasearch/lib/searchlet.jar"/>
+		<code-source path="../../../bibeans/lib"/>
+		<import-shared-library name="adf.oracle.domain"/>
+		<import-shared-library name="oracle.xml"/>
+		<import-shared-library name="oracle.http.client"/>
+		<import-shared-library name="oracle.dms"/>
+		<import-shared-library name="oracle.gdk"/>
+		<import-shared-library name="oracle.jdbc"/>
+		<import-shared-library name="soap"/>
+	</shared-library>
+</application-server>

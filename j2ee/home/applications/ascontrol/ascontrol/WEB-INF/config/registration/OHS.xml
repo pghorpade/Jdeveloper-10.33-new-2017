@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logs xmlns="http://www.oracle.com/iAS/EMComponent/ojdl">
+  
+    <log path="Apache/Apache/logs/access_log" componentId="OHS">
+        <logreader class="oracle.core.ojdl.reader.AccessLogReaderFactory">
+            <property name="ComponentId" value="OHS"/>
+            <property name="ModuleId" value="access_log"/>
+            <property name="StatusCodeThreshold" value="100"/>
+        </logreader>
+        <logviewer LogType="ACCESS" ComponentType="HTTP Server"
+                   ComponentName="ID_VLOGS_VIEW_ACCESS_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg">
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+
+
+    <log path="Apache/Apache/logs/access_log.%*%" componentId="OHS">
+        <logreader class="oracle.core.ojdl.reader.AccessLogReaderFactory">
+            <property name="ComponentId" value="OHS"/>
+            <property name="ModuleId" value="access_log"/>
+            <property name="StatusCodeThreshold" value="100"/>
+        </logreader>
+        <logviewer LogType="ACCESS" ComponentType="HTTP Server"
+                   ComponentName="ID_VLOGS_VIEW_ACCESS_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg">
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+
+ <log path='Apache/Apache/logs/error_log.%*%' componentId='OHS'>
+  <logreader type='SimpleTextLog'>
+   <property name='TimestampFormat' value='[EEE MMM d HH:mm:ss yyyy]'/>
+   <property name='ModuleId' value='ohs'/>
+   <property name='ComponentId' value='OHS'/>
+   <property name='TimestampLocale' value='en_US'/>
+  </logreader>
+  <logviewer LogType='ERROR' ComponentType='HTTP Server' 
+             ComponentName='ID_VLOGS_VIEW_DIAG_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'>
+      <property name='category' value='diagnostic'/> 
+ </logviewer>
+ </log>
+
+  <log path='Apache/Apache/logs/error_log' componentId='OHS'>
+  <logreader type='SimpleTextLog'>
+   <property name='TimestampFormat' value='[EEE MMM d HH:mm:ss yyyy]'/>
+   <property name='ModuleId' value='ohs'/>
+   <property name='ComponentId' value='OHS'/>
+   <property name='TimestampLocale' value='en_US'/>
+  </logreader>
+  <logviewer LogType='ERROR' ComponentType='HTTP Server' 
+             ComponentName='ID_VLOGS_VIEW_DIAG_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'>
+     <property name='category' value='diagnostic'/> 
+  </logviewer>
+ </log>
+
+
+ <log path="Apache/Apache/logs/oracle" componentId="OHS">
+   <logreader type="ODL"/>
+   <logviewer LogType='ERROR' ComponentType='HTTP Server'            
+              ComponentName='ID_VLOGS_VIEW_DIAG_LOGS@oracle.sysman.ias.studio.logging.msg.LoggingMsg'>
+    <property name='category' value='diagnostic'/>
+  </logviewer>
+ </log> 
+
+</logs>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="ant-orabpel">
+
+  <import file="ant-deployapps.xml"/> <!-- for applications(EJB, JSP) -->
+  
+  <path id="orabpel.tasks.class.path">
+    <pathelement location="${bpel.home}/lib/orabpel-ant.jar"/>
+    <pathelement location="${bpel.home}/lib/orabpel.jar"/>
+    <pathelement location="${bpel.home}/lib/orabpel-thirdparty.jar"/>
+    <pathelement location="${bpel.home}/lib/orabpel-common.jar"/>
+    <pathelement location="${bpel.home}/lib/orabpel-exts.jar"/>
+    <pathelement location="${bpel.home}/lib/xmlparserv2.jar"/>
+    <pathelement location="${bpel.home}/lib/orawsdl.jar"/>
+    <pathelement location="${bpel.home}/lib/connector15.jar"/>
+
+	<!-- used by deployRemote -->
+	<pathelement location="${bpel.home}/lib/oracle_http_client.jar"/>
+
+	<!-- used by deployTaskForm -->
+	<pathelement location="${bpel.home}/system/appserver/oc4j/j2ee/home/lib/oc4j-internal.jar"/>
+
+	<!-- used by validateTask to load WorkflowTaskDefinition.xsd-->
+	<pathelement location="${bpel.home}/system/services/schema"/>
+  </path>
+  <property name="orabpel.tasks.class.path" refid="orabpel.tasks.class.path"/>
+
+  <taskdef resource="com/collaxa/cube/ant/orabpel-antlib.xml" loaderRef="orabpel.tasks.ClassLoader">
+    <classpath>
+      <pathelement path="${orabpel.tasks.class.path}"/>
+    </classpath>
+  </taskdef>
+
+</project>

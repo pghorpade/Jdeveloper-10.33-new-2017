@@ -1,0 +1,123 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.Date;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class VirtualCollections {
+
+    /**Map projects <-> edu.ucla.library.digital.dlcs.model.Projects
+     * @associates <{edu.ucla.library.digital.dlcs.model.Projects}>
+     */
+    private ValueHolderInterface projects;
+
+    /**Map users <-> edu.ucla.library.digital.dlcs.model.Users
+     * @associates <{edu.ucla.library.digital.dlcs.model.Users}>
+     */
+    private ValueHolderInterface users;
+    private Long vcidPk;
+    private String vcTitle;
+    private String vcOwner;
+    private Date vcDateStamp;
+    private String vcAccess;
+    private String vcAccessCode;
+    private String vcLock;
+    private String vcAdminCode;
+    private String vcClob;
+
+    public VirtualCollections() {
+        super();
+        this.projects = new ValueHolder();
+        this.users = new ValueHolder();
+    }
+
+    public Projects getProjects() {
+        return (Projects)this.projects.getValue();
+    }
+
+    public Users getUsers() {
+        return (Users)this.users.getValue();
+    }
+
+    public String getVcAccess() {
+        return this.vcAccess;
+    }
+
+    public String getVcAccessCode() {
+        return this.vcAccessCode;
+    }
+
+    public String getVcAdminCode() {
+        return this.vcAdminCode;
+    }
+
+    public String getVcClob() {
+        return this.vcClob;
+    }
+
+    public Date getVcDateStamp() {
+        return this.vcDateStamp;
+    }
+
+    public String getVcLock() {
+        return this.vcLock;
+    }
+
+    public String getVcOwner() {
+        return this.vcOwner;
+    }
+
+    public String getVcTitle() {
+        return this.vcTitle;
+    }
+
+    public Long getVcidPk() {
+        return this.vcidPk;
+    }
+
+    public void setProjects(Projects projects) {
+        this.projects.setValue(projects);
+    }
+
+    public void setUsers(Users users) {
+        this.users.setValue(users);
+    }
+
+    public void setVcAccess(String vcAccess) {
+        this.vcAccess = vcAccess;
+    }
+
+    public void setVcAccessCode(String vcAccessCode) {
+        this.vcAccessCode = vcAccessCode;
+    }
+
+    public void setVcAdminCode(String vcAdminCode) {
+        this.vcAdminCode = vcAdminCode;
+    }
+
+    public void setVcClob(String vcClob) {
+        this.vcClob = vcClob;
+    }
+
+    public void setVcDateStamp(Date vcDateStamp) {
+        this.vcDateStamp = vcDateStamp;
+    }
+
+    public void setVcLock(String vcLock) {
+        this.vcLock = vcLock;
+    }
+
+    public void setVcOwner(String vcOwner) {
+        this.vcOwner = vcOwner;
+    }
+
+    public void setVcTitle(String vcTitle) {
+        this.vcTitle = vcTitle;
+    }
+
+    public void setVcidPk(Long vcidPk) {
+        this.vcidPk = vcidPk;
+    }
+
+}

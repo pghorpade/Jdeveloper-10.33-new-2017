@@ -1,0 +1,165 @@
+#
+# This file creates the following OID entries in the default ID Mgmt Realm: 
+# 1. OC4J "oc4jadmin" user									
+# 2. OC4J "oc4j-administrators" group
+# 3. OC4J "oc4j-app-administrators" group
+# 4. ASControl "ascontrol_admin" group
+# 5. ASControl "ascontrol_appadmin" group
+# 6. ASControl "ascontrol_monitor" group
+# 7. Grant RMIPermission "login" to "administrators"
+# 8. Grant AdministrationPermission "administration" to "administrators"
+# 9. Grant RMIPermission "login" to "oc4j-app-administrators"
+#
+# Use oracle.security.jazn.util.LoadOidData program to load this script
+# which will take care of substituting the following variables:  
+# %s_subscriberDN% 
+# %s_subscriberName%
+# %s_orclActiveStartDate%  
+# %s_adminPassword%
+# %s_GUID1%
+# %s_GUID2%
+# %s_GUID3%
+# %s_GUID4%
+#
+# This file is also used during the association of OC4J with OID in
+# oracle.security.jazn.util.AssociateOID which assumes the location of
+# this file. This file should not be moved from this directory.
+# 
+# Created 09/23/04 pichan
+#
+#
+
+
+dn: cn=oc4jadmin,cn=users,%s_subscriberDN%
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: inetorgperson
+objectclass: organizationalperson
+objectclass: orcluser
+objectclass: orcluserv2
+orclactivestartdate: %s_orclActiveStartDate%
+sn: oc4jadmin
+cn: oc4jadmin
+uid: oc4jadmin
+mail: oc4jadmin
+description: OC4J administrator user
+displayname:  OC4J administrator
+userpassword: %s_adminPassword%
+
+dn: cn=oc4j-administrators,cn=groups,%s_subscriberDN%
+changetype: add
+uniquemember: cn=oc4jadmin,cn=users,%s_subscriberDN%
+cn: oc4j-administrators
+description: OC4J administrators group
+displayname: OC4J administrators
+orclisvisible: true
+objectclass: groupofuniquenames
+objectclass: orclGroup
+objectclass: top
+
+dn: cn=oc4j-app-administrators,cn=groups,%s_subscriberDN%
+changetype: add
+cn: oc4j-app-administrators
+description: OC4J application-level administrators
+displayname: OC4J Application Administrators
+orclisvisible: true
+objectclass: groupofuniquenames
+objectclass: orclGroup
+objectclass: top
+
+dn: cn=ascontrol_admin,cn=groups,%s_subscriberDN%
+changetype: add
+uniquemember: cn=oc4jadmin,cn=users,%s_subscriberDN%
+cn: ascontrol_admin
+description: Administrative role for ASControl
+displayname: ASControl Admin Role
+orclisvisible: true
+objectclass: groupofuniquenames
+objectclass: orclGroup
+objectclass: top
+
+dn: cn=ascontrol_appadmin,cn=groups,%s_subscriberDN%
+changetype: add
+cn: ascontrol_appadmin
+description: ASControl App Admin Role
+displayname: App Administrative role for ASControl
+orclisvisible: true
+objectclass: groupofuniquenames
+objectclass: orclGroup
+objectclass: top
+
+dn: cn=ascontrol_monitor,cn=groups,%s_subscriberDN%
+changetype: add
+cn: ascontrol_monitor
+description: Monitor role for ASControl
+displayname: ASControl Monitor Role
+orclisvisible: true
+objectclass: groupofuniquenames
+objectclass: orclGroup
+objectclass: top
+
+dn: orclguid=%s_GUID1%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+changetype: add
+orcljaznprincipal: oracle.security.jazn.spi.ldap.LDAPRealmRole$%s_subscriberName%/oc4j-administrators
+displayname: %s_GUID1%
+objectclass: orcljazngrantee
+objectclass: top
+orclGuid: %s_GUID1%
+
+dn: orclguid=%s_GUID2%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+changetype: add
+orcljaznprincipal: oracle.security.jazn.spi.ldap.LDAPRealmRole$%s_subscriberName%/oc4j-app-administrators
+displayname: %s_GUID2%
+objectclass: orcljazngrantee
+objectclass: top
+orclGuid: %s_GUID2%
+
+dn: orclguid=%s_GUID3%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+changetype: add
+orcljaznprincipal: oracle.security.jazn.spi.ldap.LDAPRealmRole$%s_subscriberName%/ascontrol_admin
+displayname: %s_GUID3%
+objectclass: orcljazngrantee
+objectclass: top
+orclGuid: %s_GUID3%
+
+dn: orclguid=%s_GUID4%,cn=Permissions,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+changetype: add
+objectclass: orcljaznpermission
+objectclass: groupofuniquenames
+objectclass: top
+orcljaznpermissionactions: administration
+orcljaznpermissiontarget: administration
+orcljaznjavaclass: com.evermind.server.AdministrationPermission
+uniquemember: orclguid=%s_GUID1%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+uniquemember: orclguid=%s_GUID3%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+cn: %s_GUID4%
+orclGuid: %s_GUID4%
+
+dn: orclguid=%s_GUID5%,cn=Permissions,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+changetype: add
+objectclass: orcljaznpermission
+objectclass: groupofuniquenames
+objectclass: top
+orcljaznpermissiontarget: login
+orcljaznjavaclass: com.evermind.server.rmi.RMIPermission
+uniquemember: orclguid=%s_GUID1%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+uniquemember: orclguid=%s_GUID2%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+uniquemember: orclguid=%s_GUID3%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+cn: %s_GUID5%
+orclGuid: %s_GUID5%
+
+
+dn: orclguid=%s_GUID6%,cn=Permissions,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+changetype: add
+objectclass: orcljaznpermission
+objectclass: groupofuniquenames
+objectclass: top
+orcljaznpermissiontarget: subject.propagation
+orcljaznjavaclass: com.evermind.server.rmi.RMIPermission
+uniquemember: orclguid=%s_GUID1%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+uniquemember: orclguid=%s_GUID3%,cn=Grantees,cn=Policy,cn=JAZNContext,cn=Products,cn=OracleContext,%s_subscriberDN%
+cn: %s_GUID6%
+orclGuid: %s_GUID6%
+
+

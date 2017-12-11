@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logs xmlns="http://www.oracle.com/iAS/EMComponent/ojdl">
+   
+    <log path="%OC4J_APP%/%OC4J_APP%-oc4j-app.log" componentId="j2ee">
+        <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss.SSS"/>
+            <property name="ModuleId" value="Embedded_OC4J_%OC4J_APP%"/>
+            <property name="ComponentId" value="j2ee"/>
+        </logreader>
+        <logviewer LogType="OC4J_APPLICATION" ComponentType="OC4J">
+            <property name="COMPONENT_TYPE" value="Embedded OC4J"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%//%OC4J_APP_DISPLAY%/%LOG_NAME%"/>
+            <property name="category" value="application|diagnostic"/>
+        </logviewer>
+    </log>
+</logs>

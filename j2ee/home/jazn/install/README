@@ -1,0 +1,11 @@
+1. oidSubDemoDataCreateJAZN.sbs 
+This file is used by the Oracle JAAS security demo ssoInfo, 
+available on Oracle OTN website, for loading demo data to the      
+Oracle Internet Directory.		                                      
+
+2. oidConfigForOc4j.sbs
+This file contains data which OC4J depend on which need
+to be loaded to OID when jazn-ldap provider is used.
+Refer to the Security Guide for more details. 
+
+

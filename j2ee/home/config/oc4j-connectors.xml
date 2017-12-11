@@ -1,0 +1,63 @@
+<?xml version="1.0" standalone='yes'?>
+
+<oc4j-connectors 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/oc4j-connectors-10_0.xsd"
+  schema-major-version="10"
+  schema-minor-version="0"
+>
+
+ <!--
+ An example JCA resource adapter that stores its native shared library or dll
+ in the lib directory
+
+ <connector name="myExampleAdpater" path="myExampleAdapter.rar">
+   <native-library>lib</native-library>
+ </connector>
+ -->
+
+ <!-- 
+ Comment this if you don't want to deploy Oracle's JCA 1.5 
+ compliant jms resource adapter to talk to OracleAS JMS
+ -->
+
+ <connector name="OracleASjms" path="OracleASjms.rar" >
+   <config-property name="lookupMethod" value="resourceProvider"/>
+   <config-property name="resourceProviderName" value="oc4jjms"/>
+
+   <adminobject-config location="OracleASjms/Queues">
+     <adminobject-class>
+       oracle.j2ee.ra.jms.generic.AdminObjectQueueImpl
+     </adminobject-class>
+     <config-property name="resourceProviderName" value="oc4jjms"/>
+   </adminobject-config>
+
+   <adminobject-config location="OracleASjms/MyQueue1">
+     <adminobject-class>
+       oracle.j2ee.ra.jms.generic.AdminObjectQueueImpl
+     </adminobject-class>
+     <config-property name="jndiName" value="jms/demoQueue"/>
+     <config-property name="resourceProviderName" value="oc4jjms"/>
+   </adminobject-config>
+
+   <adminobject-config location="OracleASjms/Topics">
+     <adminobject-class>
+       oracle.j2ee.ra.jms.generic.AdminObjectTopicImpl
+     </adminobject-class>
+     <config-property name="resourceProviderName" value="oc4jjms"/>
+   </adminobject-config>
+
+   <adminobject-config location="OracleASjms/MyTopic1">
+     <adminobject-class>
+       oracle.j2ee.ra.jms.generic.AdminObjectTopicImpl
+     </adminobject-class>
+     <config-property name="jndiName" value="jms/demoTopic"/>
+     <config-property name="resourceProviderName" value="oc4jjms"/>
+   </adminobject-config>
+
+ </connector>
+
+ <connector name="datasources" path="datasources.rar" />
+
+</oc4j-connectors>
+

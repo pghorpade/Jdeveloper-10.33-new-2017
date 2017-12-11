@@ -1,0 +1,189 @@
+#
+# An unexpected error has been detected by HotSpot Virtual Machine:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x6d79f384, pid=4748, tid=4832
+#
+# Java VM: Java HotSpot(TM) Client VM (1.5.0_20-b02 mixed mode)
+# Problematic frame:
+# V  [jvm.dll+0x5f384]
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0143ad38):  ConcurrentMarkSweepThread [id=4832]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0xff000008
+
+Registers:
+EAX=0x13fe34d8, EBX=0x002022e9, ECX=0xff000008, EDX=0x6d879924
+ESP=0x24d5fb4c, EBP=0x24d5fb88, ESI=0x24d5fbd0, EDI=0x24d5fb5c
+EIP=0x6d79f384, EFLAGS=0x00010282
+
+Top of Stack: (sp=0x24d5fb4c)
+0x24d5fb4c:   13fe34d8 24d5fb5c 13fe74a8 24d5fbd0
+0x24d5fb5c:   6d875cd4 24d79a88 0143a920 03ed0000
+0x24d5fb6c:   07e00000 0143a954 0143aa14 0143aa74
+0x24d5fb7c:   13fe77e0 00000000 24d5fbd0 24d5fbb0
+0x24d5fb8c:   6d79f2a5 13fe74a8 0143a998 04045d2a
+0x24d5fb9c:   6d74cab5 04045d2a 00000000 0143a920
+0x24d5fbac:   0143a948 24d5fc20 6d79c68b 24d5fbd0
+0x24d5fbbc:   003f0000 07e00000 003db790 0143a920 
+
+Instructions: (pc=0x6d79f384)
+0x6d79f374:   e8 4c 11 00 00 8b 48 04 8d 7d d4 83 c1 08 57 50
+0x6d79f384:   8b 11 ff 92 cc 00 00 00 8b ce e8 08 00 00 00 eb 
+
+
+Stack: [0x24c60000,0x24d60000),  sp=0x24d5fb4c,  free space=1022k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x5f384]
+V  [jvm.dll+0x5f2a5]
+V  [jvm.dll+0x5c68b]
+V  [jvm.dll+0x5c54d]
+V  [jvm.dll+0x5b592]
+V  [jvm.dll+0x60ae5]
+V  [jvm.dll+0xdd623]
+C  [msvcrt.dll+0x2a3b0]
+C  [kernel32.dll+0xb729]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x2b201930 JavaThread "Image Fetcher 1" daemon [_thread_blocked, id=6020]
+  0x2b2017a8 JavaThread "IconOverlayTracker Timer" [_thread_blocked, id=1668]
+  0x2b40df00 JavaThread "Image Fetcher 0" daemon [_thread_blocked, id=2228]
+  0x2b072760 JavaThread "AuditExecutor-1" daemon [_thread_blocked, id=2656]
+  0x2b07f648 JavaThread "BufferDomModel background parse thread" daemon [_thread_blocked, id=5208]
+  0x2b72d800 JavaThread "WaitCursorTimer" daemon [_thread_blocked, id=5020]
+  0x2b71c7e0 JavaThread "Native Directory Watcher" [_thread_in_native, id=5624]
+  0x2b0212a0 JavaThread "WeakDataReference polling" [_thread_blocked, id=5212]
+  0x2afccf78 JavaThread "WaitCursorTimer" daemon [_thread_blocked, id=4776]
+  0x2af23708 JavaThread "IconOverlayTracker Timer" [_thread_blocked, id=2172]
+  0x2afdb780 JavaThread "Timer-2" [_thread_blocked, id=2100]
+  0x2ad65b10 JavaThread "Timer-1" [_thread_blocked, id=4940]
+  0x24f11f50 JavaThread "TimerQueue" daemon [_thread_blocked, id=5084]
+  0x24f02900 JavaThread "AWT-EventQueue-0" [_thread_in_vm, id=1944]
+  0x24ef68e8 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=4232]
+  0x24edba78 JavaThread "AWT-Windows" daemon [_thread_in_native, id=1220]
+  0x24e541c0 JavaThread "AWT-Shutdown" [_thread_blocked, id=2376]
+  0x24daec30 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=6100]
+  0x24dad8b8 JavaThread "CompilerThread0" daemon [_thread_blocked, id=3436]
+  0x24d8c978 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3500]
+  0x24d8c670 JavaThread "Surrogate Locker Thread (CMS)" daemon [_thread_blocked, id=5560]
+  0x24d7e268 JavaThread "Finalizer" daemon [_thread_blocked, id=4924]
+  0x24d7ce30 JavaThread "Reference Handler" daemon [_thread_blocked, id=3000]
+  0x003dca28 JavaThread "main" [_thread_blocked, id=4300]
+
+Other Threads:
+  0x24d7a410 VMThread [id=3976]
+  0x24daff28 WatcherThread [id=5636]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x003dbde0/0x000004d8] Heap_lock - owner thread: 0x24f02900
+
+Heap
+ par new generation   total 5376K, used 2982K [0x036d0000, 0x03c20000, 0x03ed0000)
+  eden space 5312K,  56% used [0x036d0000, 0x039b9b28, 0x03c00000)
+  from space 64K,   0% used [0x03c00000, 0x03c00000, 0x03c10000)
+  to   space 64K,   0% used [0x03c10000, 0x03c10000, 0x03c20000)
+ concurrent mark-sweep generation total 80624K, used 46163K [0x03ed0000, 0x08d8c000, 0x136d0000)
+ concurrent-mark-sweep perm gen total 104104K, used 63165K [0x136d0000, 0x19c7a000, 0x236d0000)
+
+Dynamic libraries:
+0x00400000 - 0x0041d000 	C:\jdevstudio10133\jdev\bin\jdevw.exe
+0x7c900000 - 0x7c9b2000 	C:\WINDOWS\system32\ntdll.dll
+0x7c800000 - 0x7c8f6000 	C:\WINDOWS\system32\kernel32.dll
+0x7e410000 - 0x7e4a1000 	C:\WINDOWS\system32\USER32.dll
+0x77f10000 - 0x77f59000 	C:\WINDOWS\system32\GDI32.dll
+0x763b0000 - 0x763f9000 	C:\WINDOWS\system32\comdlg32.dll
+0x77dd0000 - 0x77e6b000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x77e70000 - 0x77f02000 	C:\WINDOWS\system32\RPCRT4.dll
+0x77fe0000 - 0x77ff1000 	C:\WINDOWS\system32\Secur32.dll
+0x5d090000 - 0x5d12a000 	C:\WINDOWS\system32\COMCTL32.dll
+0x7c9c0000 - 0x7d1d7000 	C:\WINDOWS\system32\SHELL32.dll
+0x77c10000 - 0x77c68000 	C:\WINDOWS\system32\msvcrt.dll
+0x77f60000 - 0x77fd6000 	C:\WINDOWS\system32\SHLWAPI.dll
+0x76390000 - 0x763ad000 	C:\WINDOWS\system32\IMM32.DLL
+0x629c0000 - 0x629c9000 	C:\WINDOWS\system32\LPK.DLL
+0x74d90000 - 0x74dfb000 	C:\WINDOWS\system32\USP10.dll
+0x773d0000 - 0x774d3000 	C:\WINDOWS\WinSxS\x86_Microsoft.Windows.Common-Controls_6595b64144ccf1df_6.0.2600.5512_x-ww_35d4ce83\comctl32.dll
+0x76c90000 - 0x76cb8000 	C:\WINDOWS\system32\imagehlp.dll
+0x774e0000 - 0x7761d000 	C:\WINDOWS\system32\ole32.dll
+0x3d930000 - 0x3da16000 	C:\WINDOWS\system32\WININET.dll
+0x003f0000 - 0x003f9000 	C:\WINDOWS\system32\Normaliz.dll
+0x78130000 - 0x78262000 	C:\WINDOWS\system32\urlmon.dll
+0x77120000 - 0x771ab000 	C:\WINDOWS\system32\OLEAUT32.dll
+0x3dfd0000 - 0x3e1b8000 	C:\WINDOWS\system32\iertutil.dll
+0x71ab0000 - 0x71ac7000 	C:\WINDOWS\system32\ws2_32.dll
+0x71aa0000 - 0x71aa8000 	C:\WINDOWS\system32\WS2HELP.dll
+0x76ee0000 - 0x76f1c000 	C:\WINDOWS\system32\RASAPI32.dll
+0x76e90000 - 0x76ea2000 	C:\WINDOWS\system32\rasman.dll
+0x5b860000 - 0x5b8b5000 	C:\WINDOWS\system32\NETAPI32.dll
+0x76eb0000 - 0x76edf000 	C:\WINDOWS\system32\TAPI32.dll
+0x76e80000 - 0x76e8e000 	C:\WINDOWS\system32\rtutils.dll
+0x76b40000 - 0x76b6d000 	C:\WINDOWS\system32\WINMM.dll
+0x769c0000 - 0x76a74000 	C:\WINDOWS\system32\USERENV.dll
+0x77c70000 - 0x77c95000 	C:\WINDOWS\system32\msv1_0.dll
+0x76790000 - 0x7679c000 	C:\WINDOWS\system32\cryptdll.dll
+0x76d60000 - 0x76d79000 	C:\WINDOWS\system32\iphlpapi.dll
+0x5ad70000 - 0x5ada8000 	C:\WINDOWS\system32\uxtheme.dll
+0x722b0000 - 0x722b5000 	C:\WINDOWS\system32\sensapi.dll
+0x74720000 - 0x7476c000 	C:\WINDOWS\system32\MSCTF.dll
+0x6d740000 - 0x6d8de000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\client\jvm.dll
+0x755c0000 - 0x755ee000 	C:\WINDOWS\system32\msctfime.ime
+0x6d300000 - 0x6d308000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\hpi.dll
+0x76bf0000 - 0x76bfb000 	C:\WINDOWS\system32\PSAPI.DLL
+0x6d710000 - 0x6d71c000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\verify.dll
+0x6d380000 - 0x6d39d000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\java.dll
+0x6d730000 - 0x6d73f000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\zip.dll
+0x6d070000 - 0x6d1e0000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\awt.dll
+0x73000000 - 0x73026000 	C:\WINDOWS\system32\WINSPOOL.DRV
+0x73760000 - 0x737ab000 	C:\WINDOWS\system32\ddraw.dll
+0x73bc0000 - 0x73bc6000 	C:\WINDOWS\system32\DCIMAN32.dll
+0x6d2b0000 - 0x6d300000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\fontmanager.dll
+0x6d540000 - 0x6d553000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\net.dll
+0x6d560000 - 0x6d569000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\nio.dll
+0x25a80000 - 0x25a9a000 	C:\jdevstudio10133\jdev\lib\jdevnative.dll
+0x6d280000 - 0x6d288000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\dt_shmem.dll
+0x71a50000 - 0x71a8f000 	C:\WINDOWS\System32\mswsock.dll
+0x76f20000 - 0x76f47000 	C:\WINDOWS\system32\DNSAPI.dll
+0x76fb0000 - 0x76fb8000 	C:\WINDOWS\System32\winrnr.dll
+0x76f60000 - 0x76f8c000 	C:\WINDOWS\system32\WLDAP32.dll
+0x64000000 - 0x64025000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x76fc0000 - 0x76fc6000 	C:\WINDOWS\system32\rasadhlp.dll
+0x662b0000 - 0x66308000 	C:\WINDOWS\system32\hnetcfg.dll
+0x71a90000 - 0x71a98000 	C:\WINDOWS\System32\wshtcpip.dll
+0x6d230000 - 0x6d253000 	C:\Program Files\Java\jdk1.5.0_20\jre\bin\dcpr.dll
+0x605d0000 - 0x605d9000 	C:\WINDOWS\system32\mslbui.dll
+
+VM Arguments:
+jvm_args: -Dide.product=oracle.jdeveloper -Dide.splash.screen=splash.gif -Xverify:none -Xmx256M -XX:MaxPermSize=256M -XX:JavaPriority10_To_OSPriority=10 -XX:JavaPriority9_To_OSPriority=9 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSIncrementalMode -XX:+CMSIncrementalPacing -XX:CMSIncrementalDutyCycleMin=0 -XX:CMSIncrementalDutyCycle=10 -Dsun.awt.keepWorkingSetOnMinimize=true -Dice.browser.forcegc=false -Dice.pilots.html4.tileOptThreshold=0 -Xbootclasspath/p:../lib/lwawt.jar -Dreserved_filenames=con,aux,prn,lpt1,lpt2,lpt3,lpt4,lpt5,lpt6,lpt7,lpt8,lpt9,com1,com2,com3,com4,com5,com6,com7,com8,com9,conin$,conout$ -DEDITOR_J2SE_VERSION=1.5 -DINSIGHT_OMIT_HIDDEN=true -Doracle.xdkjava.compatibility.version=9.0.4 -Doracle.translated.locales=ja -Dwindows.shell.font.languages=en -Dide.debug.controller.stack=false -Dceditor.java.parse.small=300 -Dceditor.java.parse.large=1500 -Dide.extension.cpmissing.nowarn=true -Dcompiler.vmargs=-mx512m -Doracle.soap.transport.noHTTPClient=true -Djbo.debugoutput=silent -Djbo.showdebugwarningbanner=false -Djava.library.path=c:\imagemagick;C:\oracle\instantclient_10_2;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Diskeeper Corporation\Diskeeper\;C:\ant\apache-ant-1.7.1\bin;C:\TOPLINK10.1.3\toplink\bin;C:\Program Files\Java\jdk1.6.0_10\bin;C:\jboss-4.0.2\bin;C:\Program Files\TortoiseSVN\bin;C:\Sun\AppServer\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Program Files\QuickTime\QTSystem\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\IBM\Page Detailer\;C:\WINDOWS\system32\WindowsPowerShell\v1.0;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;..\lib\ext;..\..\lib -Dide.user.dir= -Dide.startingArg0=C:\jdevstudio10133\jdev\bin\jdevw.exe -Dide.launcherProcessId=4748 -Dide.config_pathname=C:\jdevstudio10133\jdev\bin\jdev.conf -Dide.startingcwd=C:\jdevstud
+java_command: <unknown>
+Launcher Type: generic
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.6.0_10
+CLASSPATH=.;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb1-impl.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-api.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-impl.jar;C:\Sun\jwsdp-2.0\jaxb\lib\jaxb-xjc.jar;C:\Sun\jwsdp-2.0\jwsdp-shared\lib\relaxngDatatype.jar;C:\Program Files\Java\jre6\lib\ext\QTJava.zip
+PATH=c:\imagemagick;C:\oracle\instantclient_10_2;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Diskeeper Corporation\Diskeeper\;C:\ant\apache-ant-1.7.1\bin;C:\TOPLINK10.1.3\toplink\bin;C:\Program Files\Java\jdk1.6.0_10\bin;C:\jboss-4.0.2\bin;C:\Program Files\TortoiseSVN\bin;C:\Sun\AppServer\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Program Files\QuickTime\QTSystem\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\IBM\Page Detailer\;C:\WINDOWS\system32\WindowsPowerShell\v1.0;C:\Sun\jwsdp-2.0\jwsdp-shared\bin;C:\Sun\AppServer\lib\ant\bin;C:\Sun\jwsdp-2.0\jaxb\bin
+USERNAME=pghorpade
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 15 Model 6 Stepping 4, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows XP Build 2600 Service Pack 3
+
+CPU:total 2 (cores per cpu 1, threads per core 2) family 15 model 6 stepping 4, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ht
+
+Memory: 4k page, physical 1047884k(216152k free), swap 4092964k(2614240k free)
+
+vm_info: Java HotSpot(TM) Client VM (1.5.0_20-b02) for windows-x86, built on Jul 25 2009 02:30:20 by "java_re" with MS VC++ 6.0
+
+time: Thu Jun 24 13:15:59 2010
+elapsed time: 369 seconds
+

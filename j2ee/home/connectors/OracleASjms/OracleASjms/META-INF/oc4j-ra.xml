@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<oc4j-connector-factories xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.oracle.com/technology/oracleas/schema/oc4j-connector-factories-10_0.xsd" schema-major-version="10" schema-minor-version="0" >
+	<connector-factory location="OracleASjms/MyXAQCF" connector-name="OracleASjms">
+		<config-property name="jndiLocation" value="jms/XAQueueConnectionFactory"/>
+		<connection-pooling use="private">
+			<property name="waitTimeout" value="300" />
+			<property name="scheme" value="fixed_wait" />
+			<property name="maxConnections" value="50" />
+			<property name="minConnections" value="0" />
+		</connection-pooling>
+		<security-config use="principal-mapping-entries">
+			<principal-mapping-entries>
+				<principal-mapping-entry>
+					<initiating-user>servletuser</initiating-user>
+					<res-user>jmsuser</res-user>
+					<res-password>-&gt;jmsuser</res-password>
+				</principal-mapping-entry>
+			</principal-mapping-entries>
+		</security-config>
+		<connectionfactory-interface>javax.jms.XAQueueConnectionFactory</connectionfactory-interface>
+	</connector-factory>
+	<connector-factory location="OracleASjms/MyXACF" connector-name="OracleASjms">
+		<config-property name="jndiLocation" value="jms/XAConnectionFactory"/>
+		<connection-pooling use="private">
+			<property name="waitTimeout" value="300" />
+			<property name="scheme" value="fixed_wait" />
+			<property name="maxConnections" value="50" />
+			<property name="minConnections" value="0" />
+		</connection-pooling>
+		<security-config use="principal-mapping-entries">
+			<principal-mapping-entries>
+				<principal-mapping-entry>
+					<initiating-user>servletuser</initiating-user>
+					<res-user>jmsuser</res-user>
+					<res-password>-&gt;jmsuser</res-password>
+				</principal-mapping-entry>
+			</principal-mapping-entries>
+		</security-config>
+		<connectionfactory-interface>oracle.j2ee.ra.jms.generic.XABackedConnectionFactory</connectionfactory-interface>
+	</connector-factory>
+	<connector-factory location="OracleASjms/MyXATCF" connector-name="OracleASjms">
+		<config-property name="jndiLocation" value="jms/XATopicConnectionFactory"/>
+		<connection-pooling use="private">
+			<property name="waitTimeout" value="300" />
+			<property name="scheme" value="fixed_wait" />
+			<property name="maxConnections" value="50" />
+			<property name="minConnections" value="0" />
+		</connection-pooling>
+		<security-config use="principal-mapping-entries">
+			<principal-mapping-entries>
+				<principal-mapping-entry>
+					<initiating-user>servletuser</initiating-user>
+					<res-user>jmsuser</res-user>
+					<res-password>-&gt;jmsuser</res-password>
+				</principal-mapping-entry>
+			</principal-mapping-entries>
+		</security-config>
+		<connectionfactory-interface>javax.jms.XATopicConnectionFactory</connectionfactory-interface>
+	</connector-factory>
+	<connector-factory location="OracleASjms/MyCF" connector-name="OracleASjms">
+		<config-property name="jndiLocation" value="jms/ConnectionFactory"/>
+		<connection-pooling use="private">
+			<property name="waitTimeout" value="300" />
+			<property name="scheme" value="fixed_wait" />
+			<property name="maxConnections" value="50" />
+			<property name="minConnections" value="0" />
+		</connection-pooling>
+		<security-config use="principal-mapping-entries">
+			<principal-mapping-entries>
+				<principal-mapping-entry>
+					<initiating-user>servletuser</initiating-user>
+					<res-user>jmsuser</res-user>
+					<res-password>-&gt;jmsuser</res-password>
+				</principal-mapping-entry>
+			</principal-mapping-entries>
+		</security-config>
+		<connectionfactory-interface>javax.jms.ConnectionFactory</connectionfactory-interface>
+	</connector-factory>
+	<connector-factory location="OracleASjms/MyTCF" connector-name="OracleASjms">
+		<config-property name="jndiLocation" value="jms/TopicConnectionFactory"/>
+		<connection-pooling use="private">
+			<property name="waitTimeout" value="300" />
+			<property name="scheme" value="fixed_wait" />
+			<property name="maxConnections" value="50" />
+			<property name="minConnections" value="0" />
+		</connection-pooling>
+		<security-config use="principal-mapping-entries">
+			<principal-mapping-entries>
+				<principal-mapping-entry>
+					<initiating-user>servletuser</initiating-user>
+					<res-user>jmsuser</res-user>
+					<res-password>-&gt;jmsuser</res-password>
+				</principal-mapping-entry>
+			</principal-mapping-entries>
+		</security-config>
+		<connectionfactory-interface>javax.jms.TopicConnectionFactory</connectionfactory-interface>
+	</connector-factory>
+	<connector-factory location="OracleASjms/MyQCF" connector-name="OracleASjms">
+		<config-property name="jndiLocation" value="jms/QueueConnectionFactory"/>
+		<connection-pooling use="private">
+			<property name="waitTimeout" value="300" />
+			<property name="scheme" value="fixed_wait" />
+			<property name="maxConnections" value="50" />
+			<property name="minConnections" value="0" />
+		</connection-pooling>
+		<security-config use="principal-mapping-entries">
+			<principal-mapping-entries>
+				<principal-mapping-entry>
+					<initiating-user>servletuser</initiating-user>
+					<res-user>jmsuser</res-user>
+					<res-password>-&gt;jmsuser</res-password>
+				</principal-mapping-entry>
+			</principal-mapping-entries>
+		</security-config>
+		<connectionfactory-interface>javax.jms.QueueConnectionFactory</connectionfactory-interface>
+	</connector-factory>
+</oc4j-connector-factories>

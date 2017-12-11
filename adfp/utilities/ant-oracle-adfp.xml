@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="adfpAntTasks">
+  <property environment="env"/>
+  <property name="ORACLE_HOME" value="${env.ORACLE_HOME}"/>
+  <path id="tasks.class.path">
+    <!-- task classes jar -->
+    <pathelement location="${ORACLE_HOME}/adfp/utilities/ant-adfp-classes.jar"/>
+    <!-- adfp dependencies -->
+    <pathelement location="${ORACLE_HOME}/adfp/lib/portlet-client-deploy.jar"/>
+    <pathelement location="${ORACLE_HOME}/adfp/lib/portlet-client-core.jar"/>
+    <pathelement location="${ORACLE_HOME}/adfp/lib/portlet-client-mds.jar"/>
+    <pathelement location="${ORACLE_HOME}/adfp/lib/portlet-client-web.jar"/>
+    <pathelement location="${ORACLE_HOME}/adfp/lib/portlet-client-wsrp.jar"/>
+    <pathelement location="${ORACLE_HOME}/adfp/lib/wsrp-types.jar"/>
+    <pathelement location="${ORACLE_HOME}/adfp/lib/wsrp-stubs.jar"/>
+    <pathelement location="${ORACLE_HOME}/adfp/lib/wsrp-jaxb.jar"/>
+    <!-- adfm dependencies -->
+    <pathelement location="${ORACLE_HOME}/BC4J/lib/adfcm.jar"/>
+    <pathelement location="${ORACLE_HOME}/BC4J/lib/adfs.jar"/>
+    <pathelement location="${ORACLE_HOME}/BC4J/jlib/adf-connections.jar"/>
+    <pathelement location="${ORACLE_HOME}/BC4J/lib/adfm.jar"/>
+    <pathelement location="${ORACLE_HOME}/BC4J/lib/adfshare.jar"/>
+    <pathelement location="${ORACLE_HOME}/jlib/share.jar"/>
+    <!-- ide dependencies -->
+    <pathelement location="${ORACLE_HOME}/ide/lib/ide.jar"/>
+    <pathelement location="${ORACLE_HOME}/ide/lib/javatools.jar"/>
+    <!-- mds dependencies -->
+    <pathelement location="${ORACLE_HOME}/mds/lib/mdsrt.jar"/>
+    <pathelement location="${ORACLE_HOME}/mds/lib/concurrent.jar"/>
+    <pathelement location="${ORACLE_HOME}/jlib/backport-util-concurrent.jar"/>
+    <!-- cache dependencies -->
+    <pathelement location="${ORACLE_HOME}/javacache/lib/cache.jar"/>
+    <!-- J2EE dependencies, for JAZN migration -->
+    <pathelement location="${ORACLE_HOME}/j2ee/home/jazn.jar"/>
+    <pathelement location="${ORACLE_HOME}/j2ee/home/jazncore.jar"/>
+  </path>
+  <property name="tasks.class.path" refid="tasks.class.path"/>
+  <taskdef resource="oracle/adfp/antlib.xml" uri="antlib:oracle.adfp"
+           loaderref="oracle.tasks.adfp">
+    <classpath>
+      <pathelement path="${tasks.class.path}"/> 
+     </classpath>
+  </taskdef>
+</project>

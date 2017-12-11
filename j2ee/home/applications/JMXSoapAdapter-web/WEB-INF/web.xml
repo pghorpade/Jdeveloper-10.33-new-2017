@@ -1,0 +1,30 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+     version="2.4">
+    <servlet>
+        <description>Web Service HttpSoap12</description>
+        <display-name>Web Service HttpSoap12</display-name>
+        <servlet-name>HttpSoap12</servlet-name>
+        <servlet-class>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpointImpl</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HttpSoap12</servlet-name>
+        <url-pattern>JMXSoapAdapter</url-pattern>
+    </servlet-mapping>
+    <security-role>
+        <role-name>jmx-soap-administrators</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>HttpSoap12</web-resource-name>
+            <url-pattern>/JMXSoapAdapter</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>jmx-soap-administrators</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+</web-app>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<schema targetNamespace="http://xmlns.oracle.com/bpel/workflow/taskMetadata"
+     xmlns:tns="http://xmlns.oracle.com/bpel/workflow/taskMetadata"
+     xmlns="http://www.w3.org/2001/XMLSchema" 
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+     elementFormDefault="qualified" blockDefault="#all">
+
+    <element name="taskMetadata">
+      <complexType>
+        <sequence>
+          <element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <element name="uri" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <element name="title" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+          <element name="domainId" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+          <element name="processId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+          <element name="processName" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+          <element name="processVersion" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </sequence>
+      </complexType>
+    </element>
+</schema>
+

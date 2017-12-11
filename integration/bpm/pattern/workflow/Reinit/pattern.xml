@@ -1,0 +1,46 @@
+<typedef pattern="com.oracle.bpel.pattern.notification.email"
+         name="WFReinitiate" 
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpeld="http://schemas.oracle.com/bpel/eclipse/designer"
+         xmlns:picasso="http://schemas.oracle.com/bpel/eclipse/designer/picasso"
+>
+    <!--  BPEL Fragment that is used as this pattern -->
+    <fragment>
+        <scope name="${scopeName}">
+            <bpelx:annotation>
+                <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+            </bpelx:annotation>
+            <variables>
+                <variable name="reinitiateTaskInput"
+                    messageType="${taskSvcPrefix}:reinitiateTaskMessage"/>
+                <variable name="reinitiateTaskResponseMessage"
+                    messageType="${taskSvcPrefix}:reinitiateTaskResponseMessage"/>
+            </variables>
+            <correlationSets>
+                <correlationSet name="WorkflowTaskIdCor" properties="${taskSvcPrefix}:taskId"/>
+            </correlationSets>
+            <sequence>
+                <assign name="${scopeName}_AssignTaskAttributes">
+                    ${userCPRules}
+                    ${payloadCPRules}
+                </assign>
+                <invoke name="reinitiateTask_${scopeName}" partnerLink="TaskService"
+                        portType="${taskSvcPrefix}:TaskService" operation="reinitiateTask"
+                        inputVariable="reinitiateTaskInput"
+                        outputVariable="reinitiateTaskResponseMessage">
+                    <correlations>
+                        <correlation initiate="yes" set="WorkflowTaskIdCor" pattern="in"/>
+                    </correlations>
+                </invoke>                        
+                <receive name="receiveCompletedTask_${scopeName}" partnerLink="TaskService"
+                         portType="${taskSvcPrefix}:TaskServiceCallback"
+                         operation="onTaskCompleted" variable="${variableName}"
+                         createInstance="no">
+                    <correlations>
+                        <correlation initiate="no" set="WorkflowTaskIdCor"/>
+                    </correlations>
+                </receive>                         
+            </sequence>
+        </scope>
+    </fragment>
+</typedef>

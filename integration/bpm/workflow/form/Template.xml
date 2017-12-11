@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<templates  xmlns:tn="http://www.oracle.com/pcbpel/workflow//display/templates"
+            targetNamespace="http://www.oracle.com/pcbpel/workflow//display/templates">
+      <template>
+        <displayName>ThreeRegionJSP</displayName>
+        <fileName>Template1.jsp</fileName>
+        <imageName>Template1.png</imageName>
+      </template>
+      <template>
+        <displayName>TwoRegionJSP</displayName>
+        <fileName>TwoRegionTemplate.jsp</fileName>
+        <imageName></imageName>
+      </template>
+      <template>
+        <displayName>OneRegionJSP</displayName>
+        <fileName>OneRegionTemplate.jsp</fileName>
+        <imageName></imageName>
+      </template>
+</templates>            

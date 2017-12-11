@@ -1,0 +1,195 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="pageData">
+     <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+             method="getGeneralData"/>
+    </data>
+        
+    <!-- data provider for ServerConfiguration table -->
+    <data name="scTableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="ABSTRACT@strings" sort="yes" value="abstract"/>
+      <column data:text="ACL@strings" sort="yes" value="acl"/>
+      <column data:text="MODIFIED_DATE@strings" sort="yes" value="modified_date"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="scTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+             method="getServerConfigurationTableData" />
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="SEARCHINPUT"
+                           data:title="pageHeader@pageData">
+
+     <pageStatus>
+      <include ctrl:node="../timestamp"/>
+     </pageStatus>
+
+     <contents>
+
+      <styledText data:text="SERVERS_IN_DOMAIN_INSTRUCTION_TEXT@strings"
+                  styleClass="OraInstructionText"/>
+
+      <!-- ........ ServerConfiguration Table ....... -->
+
+       <!-- Table Filter -->
+        <include ctrl:node="include/TableFilter"/>
+        <formValue name="table_level" value="outer"/>
+
+      <table name="ServerConfigurationTable"
+             id="table_ServerConfigurationTable"
+             partialRenderMode="self"
+             width="100%"
+             data:alternateText="NO_ITEMS_FOUND@strings"
+             data:summary="SERVERS_IN_DOMAIN_TABLE_SUMMARY@strings"
+             data:tableData="row@scTableData"
+             data:columnHeaderData="column@scTableColumnHeaderData"
+             data:value="startingCount@scTableData"
+             data:maxValue="totalCount@scTableData"
+             data:blockSize="blockSize@scTableData"
+             showAll="yes"
+             formSubmitted="true">
+
+       <columnHeaderStamp>
+         <sortableHeader data:text="text" data:value="value">
+           <boundAttribute name="sortable">
+             <defaulting>
+               <dataObject data:select="value" source="sortColumnHeader"/>
+               <dataObject data:source="(value)@sortColumnHeader"/>
+               <dataObject select="sort"/>
+             </defaulting>
+           </boundAttribute>
+         </sortableHeader>
+       </columnHeaderStamp>
+
+       <columnFormats>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="iconButtonFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+       </columnFormats>
+
+       <tableFormat tableBanding="rowBanding"/>
+
+       <tableSelection>
+        <singleSelection data:shortDesc="SELECT@strings"
+			 selectedIndex="0">
+         <contents>
+          <submitButton data:text="CREATE_LIKE@strings"
+                        name="event" value="createServerConfigLike" />
+<!--
+          <submitButton data:text="EDIT@strings"
+                        name="event" value="editServerConfig" />
+-->
+          <submitButton data:text="DELETE@strings"
+                        name="event" value="deleteServerConfig" />
+         </contents>
+        </singleSelection>
+       </tableSelection>
+
+       <tableActions>
+        <submitButton data:text="CREATE@strings"
+                      name="event" value="createServerConfig" />
+       </tableActions>
+
+       <contents>
+        <link data:text="scName"
+              data:destination="scDestination"/>
+<!--
+        <styledText data:text="abstract"/>
+-->
+        <image data:source="abstractTrueIcon"
+               data:shortDesc="TRUE@strings"
+               data:rendered="abstract"/>
+        <styledText data:text="acl"/>
+        <styledText data:text="modifiedDate"/>
+        <formValue name="hiddenScId"
+                   data:value="scId"/>
+        <formValue name="hiddenScName"
+                   data:value="scName"/>
+       </contents>
+      </table>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="null">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doLoad"/>
+  </event>
+
+  <event name="createServerConfigLike">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doServerEvent"/>
+  </event>
+
+  <event name="deleteServerConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doServerEvent"/>
+  </event>
+
+  <event name="createServerConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doServerEvent"/>
+  </event>
+
+<!--
+  <event name="editServerConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doServerEvent"/>
+  </event>
+-->
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.ServersInDomainData"
+           method="doSearch"/>
+  </event>
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

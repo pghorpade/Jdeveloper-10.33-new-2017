@@ -1,0 +1,9 @@
+<?xml version = '1.0' standalone = 'yes'?>
+<!DOCTYPE jms PUBLIC "Orion JMS server" "http://xmlns.oracle.com/ias/dtds/jms-server.dtd">
+<jms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.oracle.com/technology/oracleas/schema/jms-server-10_1.xsd" schema-major-version="10" schema-minor-version="1">
+
+  <jms-server port="9228">
+
+  </jms-server>
+
+</jms>

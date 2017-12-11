@@ -1,0 +1,176 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="linkDestinationData">
+     <method class="oracle.ifs.admin.em.ias.uix.EditFormatData"
+             method="getLinkDestinationData"/>
+    </data>
+
+    <data name="selectedFormatData">
+     <method class="oracle.ifs.admin.em.ias.uix.EditFormatData"
+             method="getSelectedFormatData"/>
+    </data>
+
+    <data name="onClickMimeypteLovData">
+     <method class="oracle.ifs.admin.em.ias.uix.ChooseMimetypeLovData"
+             method="getOnClickLinkData"/>
+    </data>
+
+    <data name="onClickExtensionLovData">
+     <method class="oracle.ifs.admin.em.ias.uix.ChooseExtensionLovData"
+             method="getOnClickLinkData"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout data:title="pageHeader@selectedFormatData"
+                           initialFocusComponentId="MIMELOVFIELD">
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                data:destination="formatsLinkDestination@linkDestinationData"/>
+        <submitButton data:text="OK@strings"
+                      ctrl:event="editFormat" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ...... Instruction Text ...... -->
+
+      <styledText styleClass="OraInstructionText"
+                  data:text="EDIT_OBJECT_INSTRUCTION@strings"/>
+            
+      <spacer height="10" />
+   
+      <!--.......... Script for MIMETYPE LOV field -->
+
+      <script>
+       <contents>
+        function mimetypeLovCallBack(lovwin, event)
+        {
+          var value = lovwin.myData;
+          if (value!=(void 0))
+            document.iFSForm.MIMETYPE.value = lovwin.myData;
+        }
+       </contents>
+      </script>
+
+      <!--.......... Script for EXTENSION LOV field -->
+
+      <script>
+       <contents>
+        function extensionLovCallBack(lovwin, event)
+        {
+          var value = lovwin.myData;
+          if (value!=(void 0))
+            document.iFSForm.EXTENSION.value = lovwin.myData;
+        }
+       </contents>
+      </script>
+
+      <!-- .......... Entry Information .......... -->
+
+      <labeledFieldLayout width="70%">
+       <contents>
+
+        <!-- NAME -->
+        <messageStyledText 
+               styleClass="OraDataText"
+               data:prompt="FORMAT_TABLE_NAME_COLUMN_HEADER@strings"
+               data:text="NAME@selectedFormatData" />
+
+        <!-- MIMETYPE -->
+        <messageLovField id="MIMELOVFIELD"
+               name="MIMETYPE"
+               columns="30"
+               required="yes"
+               data:shortDesc="MIMETYPE_LOV_TIP@strings"
+               data:searchDesc="MIMETYPE_LOV_TIP@strings"
+               data:prompt="FORMAT_TABLE_MIMETYPE_COLUMN_HEADER@strings"
+               data:text="MIMETYPE@selectedFormatData"
+               data:onClick="onClickCallDestination@onClickMimeypteLovData" />
+
+        <!-- EXTENSION -->
+        <messageLovField 
+               name="EXTENSION"
+               columns="10"
+               required="yes"
+               data:shortDesc="EXTENSION_LOV_TIP@strings"
+               data:searchDesc="EXTENSION_LOV_TIP@strings"
+               data:prompt="FORMAT_TABLE_EXTENSION_COLUMN_HEADER@strings"
+               data:text="EXTENSION@selectedFormatData"
+               data:onClick="onClickCallDestination@onClickExtensionLovData" />
+
+        <!-- BINARY -->
+        <messageCheckBox 
+               name="BINARY"
+               data:checked="BINARY@selectedFormatData"
+               value="true"
+               data:text="FORMAT_TABLE_BINARY_COLUMN_HEADER@strings" />
+
+        <!-- OMIT VIRUS SCAN -->
+        <messageCheckBox 
+               name="OMITVIRUSSCAN"
+               data:checked="OMITVIRUSSCAN@selectedFormatData"
+               value="true"
+               data:text="FORMAT_TABLE_OMIT_VIRUS_SCAN_COLUMN_HEADER@strings" />
+
+        <!-- INDEXED -->
+        <messageCheckBox 
+               name="INDEXED"
+               data:checked="INDEXED@selectedFormatData"
+               value="true"
+               data:rendered="INDEXED_RENDERED@selectedFormatData"
+               data:disabled="INDEXED_DISABLED@selectedFormatData"
+               data:tip="indexTip@selectedFormatData"
+               data:text="FORMAT_TABLE_INDEXED_COLUMN_HEADER@strings" />
+
+        <!-- workaround to pass format ID and INDEX_DISABLED around -->
+        <formValue name="ID" data:value="ID@selectedFormatData"/>
+
+        <formValue name="INDEXED_DISABLED"
+                   data:value="INDEXED_DISABLED@selectedFormatData"/>
+       </contents>
+      </labeledFieldLayout>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <null/>
+  </event>
+
+  <event name="editFormat">
+   <method class="oracle.ifs.admin.em.ias.uix.EditFormatData"
+           method="doEditFormat"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

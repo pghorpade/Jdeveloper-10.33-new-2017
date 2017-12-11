@@ -1,0 +1,11 @@
+file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar^1181541198000^true^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/ejbtaglib.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/ejbtaglib.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/email.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/email.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/fileaccess.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/fileaccess.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/jesitaglib.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/jesitaglib.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/jwcache.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/jwcache.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/personalization.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/personalization.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/sqltaglib.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/sqltaglib.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/utiltaglib.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/utiltaglib.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/wstaglib.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/wstaglib.tld^
+jar:file:/C:/jdevstudio10133/j2ee/home/jsp/lib/taglib/ojsputil.jar!/META-INF/xml.tld^1181541184000^http://xmlns.oracle.com/j2ee/jsp/tld/ojsp/xml.tld^

@@ -1,0 +1,38 @@
+<annotations>
+	
+	<!--Example: <activity> tag is for activity name, "*" is the wildcard which applies to 		all the activities. <documentation> tag is for documentation annotation 		element. <general> tag is for general annotation element, which contains a list 		of name-value pair properties.  <analysis> tag is for analysis annotation 			element, which also contains a list of name-value pair properties. -->
+
+	<annotation>
+		<activity>*</activity>
+		<documentation>default documentation</documentation>
+		<general>
+			<property name="id-default">id-default-value</property>
+                        <property name="label-default">label-default-value</property>
+		</general>
+	        <analysis>
+                    	<property name="analysis-default">analysis-default-value</property>
+	        </analysis>
+	</annotation>
+	<annotation>
+		<activity>assign</activity>
+		<documentation>assign documentation</documentation>
+		<general>
+			<property name="id-assign">id-assign-value</property>
+                        <property name="label-assign">label-assign-value</property>
+		</general>
+	        <analysis>
+                    	<property name="analysis-assign">analysis-assign-value</property>
+	        </analysis>
+	</annotation>
+	<annotation>
+		<activity>receive</activity>
+		<documentation>receive documentation</documentation>
+		<general>
+			<property name="id-receive">id-receive-value</property>
+                        <property name="label-receive">label-receive-value</property>
+		</general>
+	        <analysis>
+                    	<property name="analysis-receive">analysis-receive-value</property>
+	        </analysis>
+	</annotation>
+</annotations>

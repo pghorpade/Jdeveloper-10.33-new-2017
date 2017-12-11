@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logs xmlns="http://www.oracle.com/iAS/EMComponent/ojdl">
+    <log path="log/global-application.log" componentId="j2ee">
+        <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss.SSS"/>
+            <property name="ModuleId" value="Embedded OC4J_%OC4J_APP%"/>
+            <property name="ComponentId" value="j2ee"/>
+        </logreader>
+        <logviewer LogType="OC4J_APPLICATION" ComponentType="Embedded OC4J">
+            <property name="COMPONENT_TYPE" value="Embedded OC4J"/>
+            <property name="OC4J_APP" value="default"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%OC4J_APP_DISPLAY%/%LOG_NAME%"/>
+            <property name="category" value="application|diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/ascontrol-application.log" componentId="j2ee">
+        <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss.SSS"/>
+            <property name="ModuleId" value="Embedded OC4J_%OC4J_APP%"/>
+            <property name="ComponentId" value="j2ee"/>
+        </logreader>
+        <logviewer LogType="OC4J_APPLICATION" ComponentType="Embedded OC4J">
+            <property name="COMPONENT_TYPE" value="Embedded OC4J"/>
+            <property name="OC4J_APP" value="ascontrol"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%OC4J_APP_DISPLAY%/%LOG_NAME%"/>
+            <property name="category" value="application|diagnostic|management"/>
+        </logviewer>
+    </log>
+    <log path="log/%OC4J_APP%-application.log" componentId="j2ee">
+        <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss.SSS"/>
+            <property name="ModuleId" value="Embedded OC4J_%OC4J_APP%"/>
+            <property name="ComponentId" value="j2ee"/>
+        </logreader>
+        <logviewer LogType="OC4J_APPLICATION" ComponentType="Embedded OC4J">
+            <property name="COMPONENT_TYPE" value="Embedded OC4J"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%OC4J_APP_DISPLAY%/%LOG_NAME%"/>
+            <property name="category" value="application|diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/rmi.log" componentId="j2ee">
+        <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss.SSS"/>
+            <property name="ModuleId" value="Embedded OC4J_rmi"/>
+            <property name="ComponentId" value="j2ee"/>
+        </logreader>
+        <logviewer LogType="SERVER" ComponentType="Embedded OC4J">
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/server.log" componentId="j2ee">
+        <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss.SSS"/>
+            <property name="ModuleId" value="Embedded OC4J_server"/>
+            <property name="ComponentId" value="j2ee"/>
+        </logreader>
+        <logviewer LogType="SERVER" ComponentType="Embedded OC4J">
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/jms.log" componentId="j2ee">
+        <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss.SSS"/>
+            <property name="ModuleId" value="Embedded OC4J_jms"/>
+            <property name="ComponentId" value="OC4J"/>
+        </logreader>
+        <logviewer LogType="SERVER" ComponentType="Embedded OC4J">
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/ascontrol-web-access.log" componentId="j2ee">
+        <logreader class="oracle.core.ojdl.reader.AccessLogReaderFactory">
+            <property name="ModuleId"
+                      value="Embedded OC4J_ascontrol_http_listener"/>
+            <property name="ComponentId" value="j2ee"/>
+            <property name="StatusCodeThreshold" value="100"/>
+        </logreader>
+        <logviewer LogType="ACCESS" ComponentType="Embedded OC4J">
+            <property name="category" value="management"/>
+        </logviewer>
+    </log>
+    <log path="log/%*%-web-access.log" componentId="j2ee">
+        <logreader class="oracle.core.ojdl.reader.AccessLogReaderFactory">
+            <property name="ModuleId" value="Embedded OC4J_http_listener"/>
+            <property name="ComponentId" value="j2ee"/>
+            <property name="StatusCodeThreshold" value="100"/>
+        </logreader>
+        <logviewer LogType="ACCESS" ComponentType="Embedded OC4J">
+        </logviewer>
+    </log>
+    <log path="log/oc4j" componentId="j2ee" encoding="UTF-8">
+        <logreader type="ODL"/>
+        <logviewer LogType="SERVER" ComponentType="Embedded OC4J">
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/rmi" componentId="j2ee">
+        <logreader type="ODL"/>
+        <logviewer LogType="SERVER" ComponentType="Embedded OC4J">
+            <property name="OC4J_RMI" value="rmi"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%OC4J_RMI%/%LOG_NAME%"/>
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/jms" componentId="j2ee">
+        <logreader type="ODL"/>
+        <logviewer LogType="SERVER" ComponentType="Embedded OC4J">
+            <property name="OC4J_JMS" value="jms"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%OC4J_JMS%/%LOG_NAME%"/>
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/server" componentId="j2ee">
+        <logreader type="ODL"/>
+        <logviewer LogType="SERVER" ComponentType="Embedded OC4J">
+            <property name="OC4J_SERVER" value="server"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%OC4J_SERVER%/%LOG_NAME%"/>
+            <property name="category" value="diagnostic"/>
+        </logviewer>
+    </log>
+    <log path="log/http-web-access" componentId="j2ee">
+        <logreader type="ODL"/>
+        <logviewer LogType="ACCESS" 
+                   ComponentType="Embedded OC4J">
+            <property name="HTTP_WEB_ACCESS" value="default web site"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%HTTP_WEB_ACCESS%/%LOG_NAME%"/>
+        </logviewer>
+    </log>
+    <log path="log/global-application" componentId="j2ee">
+        <logreader type="ODL"/>
+        <logviewer LogType="OC4J_APPLICATION" ComponentType="Embedded OC4J">
+            <property name="COMPONENT_TYPE" value="Embedded OC4J"/>
+            <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%OC4J_APP_DISPLAY%/%LOG_NAME%"/>
+            <property name="category" value="application|diagnostic"/>
+        </logviewer>
+    </log>
+</logs>

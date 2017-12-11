@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logs xmlns="http://www.oracle.com/iAS/EMComponent/ojdl">
+    <log path="opmn/logs/ipm.log" componentId="OPMN">
+        <logreader class="oracle.core.ojdl.reader.TextLogReaderFactory">
+            <property name="FilenameFormat"
+                      value="ipm.log.{0,date,yy-MM-dd_HH:mm:ss}"/>
+            <property name="MessageFormat"
+                      value="{0,time,yy/MM/dd HH:mm:ss} [{1,number}] {2}"/>
+            <property name="MessageTypeMap"
+                      value="0=INTERNAL_ERROR:1,1=ERROR:1,2=ERROR:16,3=WARNING:1,4=NOTIFICATION:1,5=TRACE:1,6=TRACE:8,7=TRACE:16,8=TRACE:24,9=TRACE:32"/>
+            <property name="MessageFields"
+                      value="TSTZ_ORIGINATING, MSG_TYPE, MSG_TEXT"/>
+            <property name="ModuleId" value="pm"/>
+            <property name="ComponentId" value="OPMN"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+    <log path="opmn/logs/ipm.log.%*%" componentId="OPMN">
+        <logreader class="oracle.core.ojdl.reader.TextLogReaderFactory">
+            <property name="FilenameFormat"
+                      value="ipm.log.{0,date,yy-MM-dd_HH:mm:ss}"/>
+            <property name="MessageFormat"
+                      value="{0,time,yy/MM/dd HH:mm:ss} [{1,number}] {2}"/>
+            <property name="MessageTypeMap"
+                      value="0=INTERNAL_ERROR:1,1=ERROR:1,2=ERROR:16,3=WARNING:1,4=NOTIFICATION:1,5=TRACE:1,6=TRACE:8,7=TRACE:16,8=TRACE:24,9=TRACE:32"/>
+            <property name="MessageFields"
+                      value="TSTZ_ORIGINATING, MSG_TYPE, MSG_TEXT"/>
+            <property name="ModuleId" value="pm"/>
+            <property name="ComponentId" value="OPMN"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+    <log path="opmn/logs/ons.log" componentId="OPMN">
+        <logreader class="oracle.core.ojdl.reader.TextLogReaderFactory">
+            <property name="FilenameFormat"
+                      value="ons.log.{0,date,yy-MM-dd_HH:mm:ss}"/>
+            <property name="MessageFormat"
+                      value="{0,time,yy/MM/dd HH:mm:ss} [{1,number}] {2}"/>
+            <property name="MessageTypeMap"
+                      value="0=INTERNAL_ERROR:1,1=ERROR:1,2=ERROR:16,3=WARNING:1,4=NOTIFICATION:1,5=TRACE:1,6=TRACE:8,7=TRACE:16,8=TRACE:24,9=TRACE:32"/>
+            <property name="MessageFields"
+                      value="TSTZ_ORIGINATING, MSG_TYPE, MSG_TEXT"/>
+            <property name="ModuleId" value="ons"/>
+            <property name="ComponentId" value="OPMN"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_NOTIF_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+    <log path="opmn/logs/ons.log.%*%" componentId="OPMN">
+        <logreader class="oracle.core.ojdl.reader.TextLogReaderFactory">
+            <property name="FilenameFormat"
+                      value="ons.log.{0,date,yy-MM-dd_HH:mm:ss}"/>
+            <property name="MessageFormat"
+                      value="{0,time,yy/MM/dd HH:mm:ss} [{1,number}] {2}"/>
+            <property name="MessageTypeMap"
+                      value="0=INTERNAL_ERROR:1,1=ERROR:1,2=ERROR:16,3=WARNING:1,4=NOTIFICATION:1,5=TRACE:1,6=TRACE:8,7=TRACE:16,8=TRACE:24,9=TRACE:32"/>
+            <property name="MessageFields"
+                      value="TSTZ_ORIGINATING, MSG_TYPE, MSG_TEXT"/>
+            <property name="ModuleId" value="ons"/>
+            <property name="ComponentId" value="OPMN"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_NOTIF_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+    <log path="opmn/logs/opmn.log" componentId="OPMN">
+        <logreader type="SimpleTextLog">
+            <property name="ComponentId" value="OPMN"/>
+            <property name="ModuleId" value="OPMN"/>
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+    <log path="opmn/logs/opmn.log.%*%" componentId="OPMN">
+        <logreader type="SimpleTextLog">
+            <property name="ComponentId" value="OPMN"/>
+            <property name="ModuleId" value="OPMN"/>
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+    <log path="opmn/logs/service.log" componentId="OPMN">
+        <logreader type="SimpleTextLog">
+            <property name="ComponentId" value="OPMN"/>
+            <property name="ModuleId" value="OPMN"/>
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+    <log path="opmn/logs/service.log.%*%" componentId="OPMN">
+        <logreader type="SimpleTextLog">
+            <property name="ComponentId" value="OPMN"/>
+            <property name="ModuleId" value="OPMN"/>
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss"/>
+        </logreader>
+        <logviewer LogType="EVENT" ComponentType="OPMN"
+                   ComponentName="ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg"/>
+    </log>
+                            
+
+ <log path='opmn/logs/HTTP_Server~1' componentId='OHS'>
+  <logreader class='oracle.core.ojdl.reader.UnformattedTextLogReaderFactory'>
+    <property name='ComponentId' value='OHS'/>
+    <property name='ModuleId' value='console'/>
+  </logreader>
+   <logviewer LogType='SERVER' ComponentType='HTTP Server'            
+              ComponentName='ID_VLOGS_OPMN_STDOUT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'>
+    <property name='category' value='diagnostic'/>
+  </logviewer>  
+ </log>
+ 
+ <log path='opmn/logs/%COMPONENT_TYPE%~%COMPONENT_NAME%~%OPMN_PROCESS_SET%~%OPMN_PROCESS_ID%' componentId='OPMN'>
+    <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss"/>
+            <property name="ModuleId" value="console"/>
+            <property name="ComponentId" value="OPMN"/>
+    </logreader>  
+   <logviewer LogType='SERVER' ComponentType='OPMN'            
+              ComponentName='ID_VLOGS_OPMN_STDOUT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'>
+    <property name="COMPONENT_TYPE" value="OPMN"/>
+    <property name="COMPONENT_NAME" value='ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+    <property name="OPMN_STDOUT_STDERR" value='ID_VLOGS_OPMN_STDOUT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+    <property name='category' value='diagnostic'/>
+    <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%COMPONENT_NAME%/%OPMN_STDOUT_STDERR%/%LOG_NAME%"/>
+  </logviewer>  
+ </log>
+
+
+<log path='opmn/logs/%COMPONENT_TYPE%~%COMPONENT_NAME%~%OPMN_PROCESS_ID%' componentId='OPMN'>
+    <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss"/>
+            <property name="ModuleId" value="console"/>
+            <property name="ComponentId" value="OPMN"/>
+    </logreader>  
+    <logviewer LogType='SERVER' ComponentType='OPMN'            
+              ComponentName='ID_VLOGS_OPMN_STDOUT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'>
+    <property name="COMPONENT_TYPE" value="OPMN"/>
+    <property name="COMPONENT_NAME" value='ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+    <property name="OPMN_STDOUT_STDERR" value='ID_VLOGS_OPMN_STDOUT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+    <property name='category' value='diagnostic'/>
+    <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%COMPONENT_NAME%/%OPMN_STDOUT_STDERR%/%LOG_NAME%"/>
+  </logviewer>
+ </log>
+ 
+ <log path='opmn/logs/%COMPONENT_TYPE%~%OPMN_PROCESS_ID%' componentId='OPMN'>
+    <logreader type="SimpleTextLog">
+            <property name="TimestampFormat" value="yy/MM/dd HH:mm:ss"/>
+            <property name="ModuleId" value="console"/>
+            <property name="ComponentId" value="OPMN"/>
+    </logreader>  
+    <logviewer LogType='SERVER' ComponentType='OPMN'            
+              ComponentName='ID_VLOGS_OPMN_STDOUT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'>
+    <property name="COMPONENT_TYPE" value="OPMN"/>
+    <property name="COMPONENT_NAME" value='ID_VLOGS_PROCESS_MGR@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+    <property name="OPMN_STDOUT_STDERR" value='ID_VLOGS_OPMN_STDOUT@oracle.sysman.ias.studio.logging.msg.LoggingMsg'/>
+    <property name='category' value='diagnostic'/>
+    <property name="displayPath"
+                      value="/%COMPONENT_TYPE%/%COMPONENT_NAME%/%OPMN_STDOUT_STDERR%/%LOG_NAME%"/>
+  </logviewer>
+ </log>
+
+ 
+</logs>

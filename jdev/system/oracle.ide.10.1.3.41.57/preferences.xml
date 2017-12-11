@@ -1,0 +1,350 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<client-settings class="java.util.HashMap" xmlns="http://xmlns.oracle.com/jdeveloper/101303/client-preferences">
+   <Item>
+      <Key>DockingConfigOptions</Key>
+      <Value class="oracle.ideimpl.docking.DockingConfigOptions">
+         <style>13</style>
+      </Value>
+   </Item>
+   <Item>
+      <Key>editors-options</Key>
+      <Value class="oracle.ide.editor.EditorsOptions">
+         <editorsData/>
+         <lruFiles>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/sheetmusic2.0/Model/src/commons-logging.properties"/>
+               <projectURL path="../../mywork/sheetmusic2.0/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/sheetmusic2.0/smc2.0.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/sheetmusic2.0/Model/src/edu/ucla/library/sheetmusic/util/Constants.java"/>
+               <projectURL path="../../mywork/sheetmusic2.0/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/sheetmusic2.0/smc2.0.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.bali.xml.addin.XMLEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/ViewController/public_html/WEB-INF/struts-config.xml"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/core/ContentProcessor.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/sheetmusic2.0/ViewController/src/edu/ucla/library/sheetmusic/action/UserSuppliedMetadataAction.java"/>
+               <projectURL path="../../mywork/sheetmusic2.0/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/sheetmusic2.0/smc2.0.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/sheetmusic2.0/ViewController/src/edu/ucla/library/sheetmusic/action/ActivityStreamAction.java"/>
+               <projectURL path="../../mywork/sheetmusic2.0/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/sheetmusic2.0/smc2.0.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/sheetmusic2.0/ViewController/src/edu/ucla/library/sheetmusic/action/Constants.java"/>
+               <projectURL path="../../mywork/sheetmusic2.0/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/sheetmusic2.0/smc2.0.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/sheetmusic2.0/ViewController/src/edu/ucla/library/sheetmusic/action/SearchAction.java"/>
+               <projectURL path="../../mywork/sheetmusic2.0/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/sheetmusic2.0/smc2.0.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.bali.xml.addin.XMLEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/sheetmusic2.0/ViewController/public_html/WEB-INF/struts-config.xml"/>
+               <projectURL path="../../mywork/sheetmusic2.0/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/sheetmusic2.0/smc2.0.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/app/StittHarper.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/app/Split.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/core/Item.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/core/DescriptiveMD.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/model/CoreDescControlValues.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/util/Constants.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/app/ItemClobBuilder.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/ViewController/src/edu/ucla/library/digital/dlcs/controller/reporting/AdminReportsAction.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/service/impl/ProjectItemServiceImpl.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/log4j.properties"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/commons-logging.properties"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.bali.xml.addin.XMLEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/META-INF/tlMap1.xml"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.toplink.addin.TopLinkMappingsAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/META-INF/sessions.xml"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLCS Staff/trunk/Model/src/edu/ucla/library/digital/dlcs/dao/toplink/ProjectItemDaoImpl.java"/>
+               <projectURL path="../../mywork/DLCS Staff/trunk/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLCS Staff/trunk/DLCS Staff.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/commons-logging.properties"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/dao/toplink/SearchDaoImpl.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/core/FilterVO.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/jaxb/generateOAIXML.java"/>
+               <projectURL path="../../mywork/DLWebApp/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/core/Item.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/core/ContentFileCollection.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/ViewController/src/edu/ucla/library/digital/action/DataProviderAction.java"/>
+               <projectURL path="../../mywork/DLWebApp/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/core/OAIDataProvider.java"/>
+               <projectURL path="../../mywork/DLWebApp/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/jaxb/generateOAIDCXML.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/core/search/SearchSQLGenerator.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>false</explicit>
+               <nodeURL path="../../../../Java/jdk1.6.0_45/src.zip" jar-entry="java/lang/String.java"/>
+               <projectURL path="../../mywork/DLWebApp/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/dao/toplink/ItemDaoImpl.java"/>
+               <projectURL path="../../mywork/DLWebApp/ViewController/ViewController.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/util/DBUtil.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.ide.ceditor.CodeEditorAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/edu/ucla/library/digital/util/Constants.java"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.toplink.addin.TopLinkMappingsAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/src/META-INF/sessions.xml"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+            <Item class="oracle.ide.editor.RecentFile">
+               <editor>oracle.toplink.addin.TopLinkMappingsAddin</editor>
+               <explicit>true</explicit>
+               <nodeURL path="../../mywork/DLWebApp/Model/toplink/tlMap1/tlMap1.mwp"/>
+               <projectURL path="../../mywork/DLWebApp/Model/Model.jpr"/>
+               <workspaceURL path="../../mywork/DLWebApp/DLWebApp.jws"/>
+            </Item>
+         </lruFiles>
+         <recentFilesShowAll>false</recentFilesShowAll>
+      </Value>
+   </Item>
+   <Item>
+      <Key>HistoryOptions</Key>
+      <Value class="oracle.ideimpl.history.HistoryOptions">
+         <enabled>true</enabled>
+         <lifespan>7</lifespan>
+         <revisions>50</revisions>
+      </Value>
+   </Item>
+   <Item>
+      <Key>jsr198</Key>
+      <Value class="oracle.ideimpl.jsr198.prefs.JSR198Preferences">
+         <hashStructure class="oracle.javatools.data.HashStructure"/>
+      </Value>
+   </Item>
+   <Item>
+      <Key>proxy-options</Key>
+      <Value class="oracle.ide.webbrowser.ProxyOptions">
+         <proxyData class="java.lang.String"/>
+         <proxyExceptions>|POW-L-DEV106|POW-WL-SPR608</proxyExceptions>
+         <proxyHost class="java.lang.String"/>
+         <proxyPort class="java.lang.String"/>
+         <proxyUserName class="java.lang.String"/>
+         <useProxy>false</useProxy>
+         <useProxyAuthentication/>
+      </Value>
+   </Item>
+   <Item>
+      <Key>WebBrowserOptions</Key>
+      <Value class="oracle.ideimpl.webbrowser.BrowserOptions">
+         <browserCmdLine class="java.lang.String"/>
+      </Value>
+   </Item>
+   <Item>
+      <Key>WizardSettings</Key>
+      <Value class="oracle.ide.wizard.WizardWelcomeSettings">
+         <map>
+            <Item>
+               <Key>OFFLINEDB_GENERATE_WELCOME</Key>
+               <Value class="java.lang.Boolean">true</Value>
+            </Item>
+            <Item>
+               <Key>OFFLINEDB_IMPORT_WELCOME</Key>
+               <Value class="java.lang.Boolean">true</Value>
+            </Item>
+            <Item>
+               <Key>OFFLINEDB_TABLE_WELCOME</Key>
+               <Value class="java.lang.Boolean">true</Value>
+            </Item>
+            <Item>
+               <Key>oracle.jdeveloper.cm.dt.ConnectionEditor</Key>
+               <Value class="java.lang.Boolean">true</Value>
+            </Item>
+            <Item>
+               <Key>oracle.toplink.addin.wizard.jobgeneration.welcome</Key>
+               <Value class="java.lang.Boolean">true</Value>
+            </Item>
+         </map>
+      </Value>
+   </Item>
+</client-settings>

@@ -1,0 +1,88 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdminTypes {
+
+    /**Map adminTermsCollection <-> edu.ucla.library.digital.dlcs.model.AdminTerms
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminTerms}>
+     */
+    private List adminTermsCollection;
+
+    /**Map adminGroupsCollection <-> edu.ucla.library.digital.dlcs.model.AdminGroups
+     * @associates <{edu.ucla.library.digital.dlcs.model.AdminGroups}>
+     */
+    private List adminGroupsCollection;
+    private Integer adminTypeidPk;
+    private String adminType;
+
+    public AdminTypes() {
+        super();
+        this.adminTermsCollection = new ArrayList();
+        this.adminGroupsCollection = new ArrayList();
+    }
+
+    public void addAdminGroups(int index, AdminGroups anAdminGroups) {
+        this.adminGroupsCollection.add(index, anAdminGroups);
+        anAdminGroups.setAdminTypes(this);
+    }
+
+    public void addAdminGroups(AdminGroups anAdminGroups) {
+        this.adminGroupsCollection.add(anAdminGroups);
+        anAdminGroups.setAdminTypes(this);
+    }
+
+    public void addAdminTerms(int index, AdminTerms anAdminTerms) {
+        this.adminTermsCollection.add(index, anAdminTerms);
+        anAdminTerms.setAdminTypes(this);
+    }
+
+    public void addAdminTerms(AdminTerms anAdminTerms) {
+        this.adminTermsCollection.add(anAdminTerms);
+        anAdminTerms.setAdminTypes(this);
+    }
+
+    public List<AdminGroups> getAdminGroupsCollection() {
+        return this.adminGroupsCollection;
+    }
+
+    public List<AdminTerms> getAdminTermsCollection() {
+        return this.adminTermsCollection;
+    }
+
+    public String getAdminType() {
+        return this.adminType;
+    }
+
+    public Integer getAdminTypeidPk() {
+        return this.adminTypeidPk;
+    }
+
+    public void removeAdminGroups(AdminGroups anAdminGroups) {
+        this.adminGroupsCollection.remove(anAdminGroups);
+        anAdminGroups.setAdminTypes(null);
+    }
+
+    public void removeAdminTerms(AdminTerms anAdminTerms) {
+        this.adminTermsCollection.remove(anAdminTerms);
+        anAdminTerms.setAdminTypes(null);
+    }
+
+    public void setAdminGroupsCollection(List<AdminGroups> adminGroupsCollection) {
+        this.adminGroupsCollection = adminGroupsCollection;
+    }
+
+    public void setAdminTermsCollection(List<AdminTerms> adminTermsCollection) {
+        this.adminTermsCollection = adminTermsCollection;
+    }
+
+    public void setAdminType(String adminType) {
+        this.adminType = adminType;
+    }
+
+    public void setAdminTypeidPk(Integer adminTypeidPk) {
+        this.adminTypeidPk = adminTypeidPk;
+    }
+
+}

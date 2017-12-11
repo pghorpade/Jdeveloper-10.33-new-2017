@@ -1,0 +1,550 @@
+#!/bin/sh
+
+# ===========================================================================
+# Oracle10g JDeveloper v10.1.3 Launch Script.
+# Copyright (c) 2000, 2005, Oracle. All rights reserved.  
+# ===========================================================================
+#
+# Available Directives.
+#
+# AddJavaLibFile
+# AddJavaLibPath
+# AddVMOption
+# AddNativeCodePath
+# SetJavaHome
+# SetJavaVM
+# SetMainClass
+# SetUserHomeVariable
+# RegisterEnvVar
+# SetUpdateMainClass
+# SetUpdateClassPath
+# SetSkipJ2SDKCheck
+# SetBuiltRoot
+
+
+SetBuiltRoot()
+{
+  if ( [ -d $1 ] )
+  then
+    for i in $1/*
+    do
+      if ( [ -d $i ] )
+      then
+        AddJavaLibFile $i/classes/
+      fi
+    done
+  fi
+}
+
+SetUpdateMainClass()
+{
+  JDEV_UPDATE_MAIN_CLASS="$1"
+}
+
+SetUpdateClassPath()
+{
+  JDEV_UPDATE_CLASS_PATH="$1"
+}
+
+
+AddJavaLibFile()
+{
+  if ( [ -f $1 ] || [ -d $1 ] )
+  then
+    if [ "X$JDEV_CLASSPATH" = "X" ]
+    then
+      JDEV_CLASSPATH=$1
+    else
+      JDEV_CLASSPATH=${JDEV_CLASSPATH}:$1
+    fi
+  fi
+}   
+
+
+AddJavaLibPath()
+{
+  if ( [ -f $1 ] || [ -d $1 ] )
+  then
+    ## Add jar files
+    for i in $1/*.jar
+    do
+      AddJavaLibFile $i
+    done
+    ## Add zip files
+    for i in $1/*.zip
+    do
+      AddJavaLibFile $i
+    done
+  fi
+}   
+
+
+
+AddVMOption()
+{
+  if [ "X$JDEV_VM_OPTS" = "X" ]
+  then
+    JDEV_VM_OPTS=$1
+  else
+    JDEV_VM_OPTS="${JDEV_VM_OPTS} $1"
+  fi
+}
+
+
+AddNativeCodePath() 
+{
+  if [ "X$JDEV_NATIVE_PATH" = "X" ]
+  then
+    JDEV_NATIVE_PATH="-Djava.library.path=$1"
+  else
+    JDEV_NATIVE_PATH=${JDEV_NATIVE_PATH}:$1
+  fi
+}
+
+SetJavaHome() 
+{
+  JDEV_JAVA_HOME="$1"
+}
+
+
+SetJavaVM() 
+{
+  JDEV_JAVA_VM="$1"
+}
+
+
+SetMainClass() 
+{
+  JDEV_MAIN_CLASS="$1"
+}
+
+
+SetUserHomeVariable() 
+{
+  jtemp2='JDEV_JTEMP2=$'$1
+  eval $jtemp2
+  if [ X"$JDEV_JTEMP2" = "X" ]
+  then
+    if [ X"$JDEV_USER_HOME" = "X" ]
+    then
+      EchoIfVerbose "$1 is not defined, ignoring SetUserHomeVariable line"
+    else
+      jtmp='JDEV_SCRIPT_USER_HOME_DIR="$'JDEV_USER_HOME'"'
+      eval $jtmp
+      JDEV_SCRIPT_USER_HOME="-Dide.user.dir=${JDEV_SCRIPT_USER_HOME_DIR}"
+    fi
+  else
+    jtmp='JDEV_SCRIPT_USER_HOME_DIR="$'$1'"'
+    eval $jtmp
+    JDEV_SCRIPT_USER_HOME="-Dide.user.dir=${JDEV_SCRIPT_USER_HOME_DIR}"
+  fi
+}
+
+
+RegisterEnvVar() 
+{
+  jtmp='JDEV_ENV_VARS="${JDEV_ENV_VARS} "-Denv.$1=$'$1
+  eval $jtmp
+}
+
+SetSkipJ2SDKCheck()
+{
+  JDEV_SKIP_J2SE_TEST=$1
+}
+
+EchoIfVerbose()
+{
+  if [ "X${JDEV_VERBOSE_MODE}" != "X" ]
+  then
+    echo "$@"
+  fi
+}
+
+SetConfigFiles()
+{
+  PRODUCT_NAME=`basename $0`
+
+  # set default configuration file
+  JDEV_CONF_FILE="${PRODUCT_NAME}.conf"
+
+  if [ -f "${JDEV_CONF_FILE}" ]
+  then
+    JDEV_CONF_FILE="$JDEV_BASE_DIR/${PRODUCT_NAME}.conf"
+  fi
+
+  # set platform configuration file
+  JDEV_UNAME_VALUE=`uname`
+  JDEV_PLATFORM_CONF_FILE="${PRODUCT_NAME}-${JDEV_UNAME_VALUE}.conf"
+  if [ -f "${JDEV_PLATFORM_CONF_FILE}" ]
+  then
+    JDEV_PLATFORM_CONF_FILE="${JDEV_BASE_DIR}/${PRODUCT_NAME}-${JDEV_UNAME_VALUE}.conf"
+  fi
+}
+
+
+Startup()
+{
+  JDEV_MAIN_CLASS="oracle.ideimpl.IdeMain"
+  JDEV_SCRIPT_USER_HOME_DIR="${HOME}/jdevhome"
+  JDEV_SCRIPT_USER_HOME="-Dide.user.dir=${JDEV_SCRIPT_USER_HOME_DIR}"
+  if [ "X$PATH" != "X" ]
+  then
+    AddNativeCodePath $PATH
+  fi
+  ReadConfig
+}
+
+ReadConfig()
+{
+  if [ -f "${JDEV_CONF_FILE}" ]
+  then
+    EchoIfVerbose "Reading configuration from: ${JDEV_CONF_FILE}"
+    . "${JDEV_CONF_FILE}"
+  else
+    echo "Unable to find configuration file: ${JDEV_CONF_FILE}"
+    exit 1
+  fi
+
+  if [ -f "${JDEV_PLATFORM_CONF_FILE}" ]
+  then
+    EchoIfVerbose "Reading platform specific configuration from: ${JDEV_PLATFORM_CONF_FILE}"
+    . "${JDEV_PLATFORM_CONF_FILE}"
+  fi      
+}
+
+ReadJDevConfig()
+{
+  #echo `pwd`
+  PRODUCT_NAME=`basename $0`
+  tmpfname=`echo ${JDEV_CONF_FILE} | sed -e "s/${PRODUCT_NAME}\.conf/jdev\.conf/g"`
+  #echo ${tmpfname}
+  tmpvar=`cat ${tmpfname} | sed -e "s/\t/ /g" | grep -i "^ *SetJavaHome"`
+  tmpvar=`expr "${tmpvar}" : '.* \(.*\)'`
+  if [ "X" != "X${tmpvar}" ]
+  then
+    SetJavaHome ${tmpvar}
+  fi
+}
+
+SetConfFile()
+{
+  case $1 in 
+    /*)
+      # Absolute path
+      JDEV_CONF_FILE="$1"
+    ;;
+    *)
+      # Relative path
+      if [ "$JDEV_BASE_DIR" = "" ]
+      then
+        JDEV_CONF_FILE="$1";
+      else
+        JDEV_CONF_FILE="$JDEV_BASE_DIR/$1"
+      fi
+    ;;
+  esac
+}
+
+
+AddAppOption()
+{
+  if [ "X$JDEV_APP_OPTS" = "X" ]
+  then
+    JDEV_APP_OPTS=$1
+  else
+    JDEV_APP_OPTS="${JDEV_APP_OPTS} $1"
+  fi
+}
+
+ProcessArgs()
+{
+  while [ $# -gt 0 ]
+  do
+    case $1 in 
+      --*)
+        NEWARG=`echo $1 | sed -e s/--//g`
+        NEWOPD=`expr "$NEWARG" : '.*\=\(.*\)'`
+        NEWARG=`expr "$NEWARG" : '\(.*\)\=.*'`
+        NEWARG=`echo $NEWARG | tr "[:upper:]" "[:lower:]"`
+        case $NEWARG in
+          addjavalibfile)      NEWARG="AddJavaLibFile" ;;
+          addjavalibpath)      NEWARG="AddJavaLibPath" ;;
+          addvmoption)         NEWARG="AddVMOption" ;;
+          addnativecodepath)   NEWARG="AddNativeCodePath" ;;
+          setjavahome)         NEWARG="SetJavaHome" ;;
+          setjavavm)           NEWARG="SetJavaVM" ;;
+          setmainclass)        NEWARG="SetMainClass" ;;
+          setuserhomevariable) NEWARG="SetUserHomeVariable" ;;
+          registerenvvar)      NEWARG="RegisterEnvVar" ;;
+          setupdatemainclass)  NEWARG="SetUpdateMainClass" ;;
+          setupdateclasspath)  NEWARG="SetUpdateClassPath" ;;
+          setskipj2sdkcheck)   NEWARG="SetSkipJ2SDKCheck" ;;
+        esac
+        ${NEWARG} "$NEWOPD"
+        EchoIfVerbose "* Added ${NEWARG}"
+      ;;
+      -J*)
+        NEWARG=`echo $1 | sed -e s/-J//g`
+        AddVMOption ${NEWARG}
+        EchoIfVerbose "* Added VM Option ${NEWARG}"
+      ;;
+      -debug)
+        SetJavaVM "ojvm"
+        AddVMOption "-XXdebug"
+      ;;
+      -uidebug)
+        AddJavaLibFile ../lib/jdev-remote.jar
+        SetJavaVM "ojvm"
+        AddVMOption "-XXdebug"
+        AddAppOption $1
+        EchoIfVerbose "* Added Application Option $1"
+      ;;
+      -classic)
+        NEWARG=`echo $1 | sed -e s/-//g`
+        SetJavaVM ${NEWARG}
+      ;;
+      -hotspot)
+        NEWARG=`echo $1 | sed -e s/-//g`
+        SetJavaVM ${NEWARG}
+      ;;
+      -client)
+        NEWARG=`echo $1 | sed -e s/-//g`
+        SetJavaVM ${NEWARG}
+      ;;
+      -server)
+        NEWARG=`echo $1 | sed -e s/-//g`
+        SetJavaVM ${NEWARG}
+      ;;
+      -ojvm)
+        NEWARG=`echo $1 | sed -e s/-//g`
+        SetJavaVM ${NEWARG}
+      ;;
+      -conf | -configure)
+        if [ $# -gt 1 ]
+        then
+          # Extra shift
+          shift
+        fi
+      ;;
+      -verbose | --verbose)
+        # Skip. Handled in PreProcessArgs
+      ;;
+      *)
+        AddAppOption $1
+        EchoIfVerbose "* Added Application Option $1"
+      ;;
+    esac
+    shift
+  done
+}
+
+
+PreProcessArgs()
+{
+  while [ $# -gt 0 ]
+  do
+    case $1 in 
+      -conf | -configure)
+        if [ $# -gt 1 ]
+        then
+          SetConfFile "$2"
+          shift
+        fi
+      ;;
+      -help | --help | -?)
+        ShowHelp
+      ;;
+      -verbose | --verbose)
+        SetVerbose
+      ;;
+      *)
+        break
+      ;;
+    esac
+    shift
+  done
+}
+
+ShowHelp()
+{
+  echo "Commands:"
+  echo ""
+  echo "The following commands must appear first:"
+  echo "-verbose              Show java command line options"
+  echo "-conf[igure] <fname>  Use the specified configuration file"
+  echo ""
+  echo "The following commands must appear last:"
+  echo "-classic              Use Classic as the Java VM"
+  echo "-hotspot              Use Hotspot client as the Java VM"
+  echo "-server               Use Hotspot server as the Java VM"
+  echo "-client               Use Hotspot client as the Java VM"
+  echo "--<directive>=<value> Override a directive from the configuration file"
+  echo "-J<flag>              Pass <flag> directly to the runtime system"
+  echo "-migrate              Migrate user settings from a previous installation"
+  ShowExtraHelp
+  exit 0;
+}
+
+CheckDISPLAY()
+{
+  JDEV_UNAME_VALUE=`uname`
+
+  if [ "X$JDEV_UNAME_VALUE" = "XDarwin" ]
+  then
+    EchoIfVerbose "Running under Mac OS/X, No DISPLAY environment variable required."
+  else
+    if [ "X$DISPLAY" = "X" ]
+    then
+      echo "The DISPLAY environment variable is not set, JDeveloper requires"
+      echo "That this environment variable be set on UNIX."
+      echo "Please correct this problem before launching JDeveloper"
+      exit 1
+    fi
+  fi
+}
+
+
+CheckOracleHome()
+{
+  if [ "X$ORACLE_HOME" != "X" ]
+  then
+    AddNativeCodePath ${ORACLE_HOME}/lib
+  fi
+}
+
+
+WorkaroundULimit()
+{
+  JDEV_UNAME_VALUE=`uname`
+
+  if [ "X$JDEV_UNAME_VALUE" = "XLinux" ]
+  then
+    EchoIfVerbose "Running under Linux, Setting stack size to 4096."
+    ulimit -s 4096
+  fi
+}
+
+
+SetVerbose()
+{
+  JDEV_VERBOSE_MODE="true"
+}
+
+GetDefaultJDK()
+{
+  #
+  # Look for java on the PATH and if found, the make sure it isn't
+  # a symlink to some other bin/java location somewhere, if it is
+  # follow it, and follow it as long as the new path ends with /bin/java
+  #
+  # Once the new path for java has been determined, truncate the /bin/java
+  # ending portion of it and set javahome with the trucated path
+  #
+  tmpvar=`which "java" 2>/dev/null`
+  if [ -f "$tmpvar" ]
+  then
+      while [ -h "$tmpvar" ]
+      do
+          tmpvar2=`ls -ls "$tmpvar"`
+          tmpvar2=`expr "$tmpvar2" : '.*-> \(.*\)$'`
+          if [ `expr "$tmpvar2" : "\.\/"` -gt 0 -o `expr "$tmpvar2" : "\.\.\/"` -gt 0 -o `expr "$tmpvar2" : ".*/.*"` -le 0 ]
+          then
+            tmpvar="`dirname $tmpvar`/$tmpvar2"
+          else
+            tmpvar="$tmpvar2"
+          fi
+      done
+      tmpvar=`expr "$tmpvar" : '\(.*\)\/bin\/[^\/]*$'`
+      SetJavaHome "$tmpvar"
+  fi
+}
+
+CheckJavaHome()
+{
+  if [ "X$JDEV_JAVA_HOME" != "X" ]; then
+    if [ "X$JDEV_SKIP_J2SE_TEST" != "X" ]; then
+      [ -f "${JDEV_JAVA_HOME}/bin/java" ] && return 1
+    else
+      [ -f "${JDEV_JAVA_HOME}/bin/java" ] &&
+      [ -f "${JDEV_JAVA_HOME}/jre/bin/java" ] && return 1
+    fi
+  fi
+  return 0
+}
+
+CheckJDK()
+{
+  # if jdev home is not defined then try to define it using
+  # the first found java command on the path
+  if [ "X$JDEV_JAVA_HOME" = "X" ]
+  then
+    GetDefaultJDK
+  fi
+
+  # if java wasn't found on the path then ask the user for it
+  if CheckJavaHome
+  then
+    JDEV_JAVA_HOME=""
+    if [ -f "$HOME/.jdev_jdk" ]
+    then
+      JDEV_JAVA_HOME=`cat < "$HOME/.jdev_jdk"`
+    fi
+    if [ "X$JDEV_JAVA_HOME" != "X" ]
+    then
+      if [ ! -d ${JDEV_JAVA_HOME} ]
+      then
+        JDEV_JAVA_HOME=""
+      fi
+	fi
+    while [ "X$JDEV_JAVA_HOME" = "X" ]
+    do
+      echo "Type the full pathname of a J2SE installation (or Ctrl-C to quit), the path will be stored in ~/.jdev_jdk"
+      read JDEV_JAVA_HOME
+      if [ -f "${JDEV_JAVA_HOME}/bin/java" ]
+      then
+		echo ${JDEV_JAVA_HOME} > "$HOME/.jdev_jdk"
+        break
+      fi
+      echo "Error: ${JDEV_JAVA_HOME}/bin/java not found"
+      JDEV_JAVA_HOME=""
+    done
+  fi
+
+  JDEV_JAVA_EXE="${JDEV_JAVA_HOME}/bin/java"
+  if [ -f ${JDEV_JAVA_EXE} ]
+  then
+    if ( [ -f "${JDEV_JAVA_HOME}/jre/bin/java" ] || [ "X${JDEV_SKIP_J2SE_TEST}" != "X" ] )
+    then
+      # Uncomment the following two lines to run with -ojvm by default
+      #[ "X$JDEV_JAVA_VM" = "X" -a -d "${JDEV_JAVA_HOME}/jre/lib/i386/ojvm" ] &&
+      #  JDEV_JAVA_VM="ojvm";
+      if [ "X$JDEV_JAVA_VM" = "X" ]
+      then
+        JAVA="${JDEV_JAVA_HOME}/bin/java "
+      else
+        JAVA="${JDEV_JAVA_HOME}/bin/java -${JDEV_JAVA_VM} "
+      fi
+    else
+      echo "Error: Java home ${JDEV_JAVA_EXE} is not a J2SE SDK."
+      echo "Running Oracle JDeveloper 10g under a JRE is not supported."
+      echo ""
+      echo "If the Java VM specified by the SetJavaHome is actually a full J2SDK installation"
+      echo "then add 'SetSkipJ2SDKCheck true' to the jdev.conf configuration file"
+      echo ""
+      JAVA=""
+      exit 1;
+    fi
+  else
+    echo "Error: No JDK found on PATH"
+    echo "Please correct the SetJavaHome directive or add the directive"
+    echo "in the jdev.conf or jdev-{platform name}.conf configuration file"
+    echo "to point to the JDK installation."
+    echo ""
+    JAVA=""
+    exit 1;
+  fi
+
+  AddJavaLibFile ${JDEV_JAVA_HOME}/lib/tools.jar
+  AddJavaLibFile ${JDEV_JAVA_HOME}/lib/dt.jar
+}
+

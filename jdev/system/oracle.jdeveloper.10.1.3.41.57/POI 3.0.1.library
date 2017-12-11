@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="false" xmlns="http://xmlns.oracle.com/jdeveloper/101303/jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../lib/ext/poi-3.0.1-FINAL-20070705.jar" jar-entry=""/>
+         <Item path="../../lib/ext/poi-contrib-3.0.1-FINAL-20070705.jar" jar-entry=""/>
+         <Item path="../../lib/ext/poi-scratchpad-3.0.1-FINAL-20070705.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath>
+      <entries class="[Ljava.net.URL;"/>
+   </docPath>
+   <locked>false</locked>
+   <name>POI 3.0.1</name>
+   <sourcePath>
+      <entries class="[Ljava.net.URL;"/>
+   </sourcePath>
+</JLibraryNode>

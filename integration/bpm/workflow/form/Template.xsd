@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.oracle.com/pcbpel/workflow//display/templates"
+            xmlns="http://www.oracle.com/pcbpel/workflow/display/templates"
+            elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:complexType name="templateType">
+    <xsd:sequence>
+      <xsd:element name="displayName" type="xsd:string" minOccurs="1"
+                   maxOccurs="1"/>
+      <xsd:element name="fileName" type="xsd:string" minOccurs="1"
+                   maxOccurs="1"/>
+      <xsd:element name="imageName" type="xsd:string" minOccurs="0"
+                   maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="templates">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="template" type="templateType" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

@@ -1,0 +1,148 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui" 
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller" 
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <ctrl:content>
+  <dataScope>
+
+   <provider>
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+
+    <data name="getFilterData">
+     <method class="oracle.ifs.admin.em.ias.uix.TableFilterData"
+             method="getFilterData" />
+    </data>
+
+  </provider>
+ 
+  <contents>
+
+   <script>
+    <contents>
+      function getKeyCode(event) 
+      { 
+         e = (window.event) ? window.event.keyCode : event.which; 
+         if (e == 13) 
+         { 
+           submitForm('iFSForm', 0, {'event' : 'doSearch'}); 
+           return false; 
+         } 
+         return true; 
+      } 
+    </contents>
+   </script>
+
+   <spacer height="10" />
+   <switcher data:childName="TableLevel@getFilterData">
+    <default>
+     <rowLayout>
+      <contents>
+       <styledText styleClass="OraPromptText" data:text="SEARCH@strings" />
+       <spacer width="10"/> 
+       <choice name="ColumnChoice" 
+	       selectedIndex="0"
+	       required="yes"
+               data:shortDesc="SEARCH_COLUMN_CHOICE@strings" >
+        <contents>
+         <option data:text="NAME@strings" 
+	         value="Name" />
+         <option data:text="MIDDLE_TIER@strings"
+		 value="MiddleTier" />
+        </contents>
+       </choice>
+       <textInput id="SEARCHINPUT"
+                  data:shortDesc="SEARCH_DESCRIPTION@strings"
+                  name= "search"
+                  columns="30" 
+                  onKeyPress="return getKeyCode(event)"/> 
+       <spacer width="10"/>
+       <submitButton data:text="GO@strings">
+        <primaryClientAction>
+         <firePartialAction data:targets="tableId@tableIdData"
+                            event="doSearch" />
+        </primaryClientAction>
+       </submitButton>
+      </contents>
+     </rowLayout>
+    </default>
+
+    <case name="outer">
+     <rowLayout>
+      <contents>
+       <styledText styleClass="OraPromptText" data:text="SEARCH@strings" />
+       <spacer width="10"/>
+       <choice  name="ColumnChoice" 
+                data:selectedValue="SelectedChoice@getFilterData" 
+                data:shortDesc="SEARCH_COLUMN_CHOICE@strings" >
+        <contents>
+         <option data:text="NAME@strings"
+                 value="Name" />
+         <option data:text="MIDDLE_TIER@strings"
+                 value="MiddleTier" />
+        </contents>
+       </choice>
+       <textInput id="SEARCHINPUT"
+                  data:shortDesc="SEARCH_DESCRIPTION@strings"
+                  name="search"
+                  columns="30"
+                  data:text="Filter@getFilterData"
+                  onKeyPress="return getKeyCode(event)"/>
+       <spacer width="10"/>
+       <submitButton data:text="GO@strings">
+        <primaryClientAction>
+         <firePartialAction data:targets="tableId@tableIdData"
+                            event="doSearch" />
+        </primaryClientAction>
+       </submitButton>
+      </contents>
+     </rowLayout>
+    </case>
+
+    <case name="inner">
+     <rowLayout>
+      <contents>
+       <styledText styleClass="OraPromptText" data:text="SEARCH@strings" />
+       <spacer width="10"/>
+       <choice name="ColumnChoice"
+               data:selectedValue="SelectedChoice@getFilterData"
+               data:shortDesc="SEARCH_COLUMN_CHOICE@strings" >
+        <contents>
+         <option data:text="NAME@strings"
+                 value="Name" />
+         <option data:text="MIDDLE_TIER@strings"
+                 value="MiddleTier" />
+        </contents>
+       </choice>
+       <textInput id="SEARCHINPUT"
+                  data:shortDesc="SEARCH_DESCRIPTION@strings"
+                  name="search"
+                  columns="30"
+                  data:text="Filter@getFilterData"
+                  onKeyPress="return getKeyCode(event)"/>
+       <spacer width="10"/>
+       <submitButton data:text="GO@strings">
+        <primaryClientAction>
+         <firePartialAction data:targets="tableId@tableIdData"
+                            event="doSearch" />
+        </primaryClientAction>
+       </submitButton>
+      </contents>
+     </rowLayout>
+    </case>
+   </switcher>  
+  </contents>
+ 
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.TableFilterData"
+           method="doSearch"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

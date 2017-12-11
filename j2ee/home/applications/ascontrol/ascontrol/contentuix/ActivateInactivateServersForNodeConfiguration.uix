@@ -1,0 +1,110 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="shuttleData">
+     <method class="oracle.ifs.admin.em.ias.uix.ActivateInactivateServersForNodeConfigurationData"
+             method="getActivatedInactivatedServerConfigData"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="NAMEMSGINPUT">
+     <boundAttribute name="title">
+      <if>
+       <dataObject select="isNew" source="shuttleData"/>
+       <dataObject select="ACTIVATE_DEACTIVATE_SERVER_FOR_NEW_NODE_CONFIGURATION_HEADER"
+                   source="strings"/>
+       <messageFormat data:format="ACTIVATE_DEACTIVATE_SERVER_FOR_EDIT_NODE_CONFIGURATION_HEADER@strings"
+                      fast="true">
+        <dataObject select="NCNAME" source="shuttleData"/>
+       </messageFormat>
+      </if>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancelActivateInactivateServers"/>
+        <submitButton data:text="OK@strings"
+                      ctrl:event="doSubmit"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ........ Content Body ........ -->
+      <!-- .......... Activate / Inactivate Server Configuration .......... -->
+           <shuttle name="ACTIVATE_DEACTIVATE_SERVERS"
+                    reorderable="false"
+                    data:leadingHeader="ACTIVATE_DEACTIVATE_ACTIVE_SERVERS@strings"
+                    data:trailingHeader="ACTIVATE_DEACTIVATE_INACTIVE_SERVERS@strings"
+                    size="3">
+            <leading>
+             <list multiple="true"
+                   data:shortDesc="ACTIVATE_DEACTIVATE_ACTIVE_SERVERS@strings">
+              <contents data:childData="activeServers@shuttleData">
+               <option data:text="activeOptionText"
+                       data:value="activeOptionValue"
+                       data:longDesc="activeOptionLongDesc"/>
+              </contents>
+             </list>
+            </leading>
+            <trailing>
+             <list multiple="true"
+                   data:shortDesc="ACTIVATE_DEACTIVATE_INACTIVE_SERVERS@strings">
+              <contents data:childData="inactiveServers@shuttleData">
+               <option data:text="inactiveOptionText"
+                       data:value="inactiveOptionValue"
+                       data:longDesc="inactiveOptionLongDesc"/>
+              </contents>
+             </list>
+            </trailing>
+           </shuttle>          
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.ActivateInactivateServersForNodeConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doSubmit">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.ActivateInactivateServersForNodeConfigurationData"
+           method="doSubmit"/>
+  </event>
+
+  <event name="cancelActivateInactivateServers">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.ActivateInactivateServersForNodeConfigurationData"
+           method="cancelActivateInactivateServers"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

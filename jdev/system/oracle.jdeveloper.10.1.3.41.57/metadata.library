@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="false" xmlns="http://xmlns.oracle.com/jdeveloper/101303/jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/mets-1_3_9.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/mets.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/mix.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/mods3_4.jar" jar-entry=""/>
+         <Item path="../../mywork/DLCS Staff/trunk/jars/copyrightMD.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath>
+      <entries class="[Ljava.net.URL;"/>
+   </docPath>
+   <locked>false</locked>
+   <name>metadata</name>
+   <sourcePath>
+      <entries class="[Ljava.net.URL;"/>
+   </sourcePath>
+</JLibraryNode>

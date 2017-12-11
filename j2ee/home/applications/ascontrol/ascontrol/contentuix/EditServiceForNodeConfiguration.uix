@@ -1,0 +1,118 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the service -->
+    <data name="pageData">
+     <method class=
+             "oracle.ifs.admin.em.ias.uix.EditServiceForNodeConfigurationData"
+             method="getServiceData" />
+    </data>
+
+    <!-- data provider for service configurations -->
+    <data name="configData">
+     <method class=
+             "oracle.ifs.admin.em.ias.uix.ServiceConfigurationOptionsData"
+             method="getServiceConfigurationData" />
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="CONFIGMSGCHOICE">
+     <boundAttribute name="title">
+      <if>
+       <dataObject select="isNew" source="pageData"/>
+       <dataObject select="EDIT_SERVICE_FOR_NEW_NODE_CONFIGURATION_HEADER"
+                   source="strings"/>
+       <messageFormat data:format=
+                      "EDIT_SERVICE_FOR_EDIT_NODE_CONFIGURATION_HEADER@strings"
+                      fast="true">
+        <dataObject select="NCNAME" source="pageData"/>
+       </messageFormat>
+      </if>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                ctrl:event="cancelEdit"/>
+        <submitButton data:text="OK@strings"
+                      ctrl:event="updateService"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ........ Content Body ........ -->
+
+      <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+       <contents>
+        <messageStyledText data:prompt="NAME@strings"
+                           data:text="NAME@pageData"
+                           styleClass="OraDataText"/>
+        <messageChoice id="CONFIGMSGCHOICE"
+                       name="CONFIGURATION" required="yes"
+                       data:prompt="CONFIGURATION@strings"
+                       data:selectedValue="CONFIGURATION@pageData">
+         <contents data:childData="options@configData">
+          <option data:text="optionTextString" 
+                  data:value="optionValueString"/>
+         </contents>
+        </messageChoice>
+        <messageCheckBox name="ACTIVE"
+                         data:text="ACTIVE@strings"
+                         data:checked="ACTIVE@pageData"
+                         value="true"
+                         data:disabled="ACTIVE_DISABLED@pageData"/>
+        <formValue name="NAME" data:value="NAME@pageData"/>
+        <formValue name="ACTIVE" data:value="ACTIVE@pageData"
+                   data:rendered="ACTIVE_DISABLED@pageData"/>
+       </contents>
+      </labeledFieldLayout>
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.EditServiceForNodeConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="updateService">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.EditServiceForNodeConfigurationData"
+           method="updateService"/>
+  </event>
+
+  <event name="cancelEdit">
+   <method class=
+           "oracle.ifs.admin.em.ias.uix.EditServiceForNodeConfigurationData"
+           method="cancelEdit"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

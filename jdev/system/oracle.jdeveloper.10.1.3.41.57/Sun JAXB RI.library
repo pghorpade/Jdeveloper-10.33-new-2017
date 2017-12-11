@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="false" xmlns="http://xmlns.oracle.com/jdeveloper/101303/jlibrarynode">
+   <classPath>
+      <entries>
+         <Item path="../../../jaxb-ri-20071219/lib/jaxb-impl.jar" jar-entry=""/>
+         <Item path="../../../jaxb-ri-20071219/lib/jaxb-api.jar" jar-entry=""/>
+         <Item path="../../../jaxb-ri-20071219/lib/jsr173_1.0_api.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath>
+      <entries>
+         <Item path="../../../jaxb-ri-20071219/lib/jaxb-api-doc.zip" jar-entry=""/>
+      </entries>
+   </docPath>
+   <locked>false</locked>
+   <name>Sun JAXB RI</name>
+   <sourcePath>
+      <entries>
+         <Item path="../../../jaxb-ri-20071219/lib/jaxb-impl.src.zip" jar-entry=""/>
+         <Item path="../../../jaxb-ri-20071219/lib/jaxb-xjc.src.zip" jar-entry=""/>
+         <Item path="../../../jaxb-ri-20071219/lib/jaxb-api-src.zip" jar-entry=""/>
+      </entries>
+   </sourcePath>
+</JLibraryNode>

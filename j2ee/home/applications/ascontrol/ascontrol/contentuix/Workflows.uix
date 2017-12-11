@@ -1,0 +1,195 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="overviewData">
+     <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+             method="getOverviewData"/>
+    </data>
+
+    <data name="workflowsTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+             method="getWorkflowsTableData"/>
+    </data>
+
+    <!-- data provider for Workflows table -->
+    <data name="workflowsTableColumnHeaderData">
+     <inline>
+      <column data:text="WORKFLOWS_TABLE_NAME_COLUMN_HEADER@strings" 
+              sort="yes" value="name"/>
+      <column data:text="WORKFLOWS_TABLE_DESCRIPTION_COLUMN_HEADER@strings" 
+              sort="yes" value="description"/>
+      <column data:text="WORKFLOWS_TABLE_BLOCKING_COLUMN_HEADER@strings" 
+              sort="yes" value="blocking"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="SEARCHINPUT"
+                           data:title="pageHeader@overviewData">
+
+     <pageStatus>
+      <include ctrl:node="../timestamp"/>
+     </pageStatus>
+
+     <contents>
+
+      <styledText data:text="instructions@overviewData"
+                  styleClass="OraInstructionText"/>
+
+       <!-- Table Filter -->
+
+      <include ctrl:node="include/TableFilter"/>
+
+      <formValue name="table_level" value="outer"/>
+
+
+      <!-- .......... Workflows Table .......... -->
+
+      <table name="WorkflowsTable"
+             id="table_WorkflowsTable"
+             partialRenderMode="self"
+             width="100%"
+             data:summary="WORKFLOWS_TABLE_SUMMARY@strings"
+             data:tableData="table@workflowsTableData"
+             data:columnHeaderData="column@workflowsTableColumnHeaderData"
+             data:value="startingCount@workflowsTableData"
+             data:maxValue="totalCount@workflowsTableData"
+             data:blockSize="blockSize@workflowsTableData"
+             data:alternateText="NO_ITEMS_FOUND@strings"
+             formSubmitted="true" >
+
+       <columnHeaderStamp>
+        <sortableHeader data:text="text" data:value="value">
+         <boundAttribute name="sortable">
+          <defaulting>
+           <dataObject data:select="value" source="sortColumnHeader"/>
+           <dataObject data:source="(value)@sortColumnHeader"/>
+           <dataObject select="sort"/>
+          </defaulting>
+         </boundAttribute>
+        </sortableHeader>
+       </columnHeaderStamp>
+
+       <columnFormats>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="iconButtonFormat"/>
+       </columnFormats>
+
+       <tableFormat tableBanding="rowBanding"/>
+
+       <tableSelection>
+        <singleSelection data:shortDesc="SELECT@strings"
+		         selectedIndex="0">
+         <contents>
+          <submitButton data:text="DELETE@strings"
+                        name="event" value="deleteWorkflow" />
+         </contents>
+        </singleSelection>               
+       </tableSelection>
+
+       <tableActions>
+        <flowLayout>
+         <contents>
+          <submitButton data:text="NEW_WORKFLOW_BUTTON@strings"
+                        name="event" value="createWorkflow"/>
+         </contents>
+        </flowLayout>
+       </tableActions>
+
+       <contents>
+        <link data:text="NAME">
+         <primaryClientAction>
+          <fireAction event="viewWorkflow">
+           <parameters>
+            <parameter key="WorkflowName" data:value="NAME"/>
+            <parameter key="WorkflowID" data:value="ID"/>
+           </parameters>
+          </fireAction>
+         </primaryClientAction>
+        </link>
+
+        <styledText data:text="DESCRIPTION" />
+
+        <image data:source="blockingTrueIcon"
+               data:shortDesc="TRUE@strings"
+               data:rendered="BLOCKING"/>
+
+        <formValue name="hiddenWfId" data:value="ID" />
+        <formValue name="hiddenWfName" data:value="NAME" />
+       </contents>
+      </table>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="null">
+   <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+           method="doLoad"/>
+  </event>
+
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+           method="doLoad"/>
+  </event>
+
+  <event name="createWorkflow">
+   <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+           method="doCreateWorkflow"/>
+  </event>
+
+  <event name="deleteWorkflow">
+   <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+           method="doDeleteWorkflow"/>
+  </event>
+
+  <event name="viewWorkflow">
+   <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+           method="doViewWorkflow"/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.WorkflowsData"
+           method="doSearch"/>
+  </event>
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+           method="doSortEvent"/>
+  </event>
+
+ </ctrl:handlers>
+
+</ctrl:page>

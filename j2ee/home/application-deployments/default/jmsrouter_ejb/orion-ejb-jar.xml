@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<orion-ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/orion-ejb-jar-10_0.xsd" deployment-version="" deployment-time="125056f4c65" schema-major-version="10" schema-minor-version="0" >
+	<enterprise-beans>
+		<session-deployment name="AdminMgrBean" location="ejb/AdminMgrBean" local-location="jmsrouter_ejb_AdminMgrBeanLocal" persistence-filename="ejb/AdminMgrBean">
+			<ejb-ref-mapping name="ejb/enqueuer" />
+			<ejb-ref-mapping name="ejb/timerHandler" />
+			<resource-ref-mapping name="jms/routerCF" location="OracleASjms/MyCF" />
+		</session-deployment>
+		<session-deployment name="EnqueuerBean" location="EnqueuerBean" local-location="jmsrouter_ejb_EnqueuerBeanLocal" persistence-filename="EnqueuerBean">
+		</session-deployment>
+		<session-deployment name="TimerHandlerBean" location="TimerHandlerBean" local-location="jmsrouter_ejb_TimerHandlerBeanLocal" persistence-filename="TimerHandlerBean">
+		</session-deployment>
+	</enterprise-beans>
+	<assembly-descriptor>
+		<security-role-mapping name="jmsRouter">
+			<group name="oc4j-administrators" />
+		</security-role-mapping>
+		<default-method-access>
+			<security-role-mapping name="&lt;default-ejb-caller-role&gt;" impliesAll="true" />
+		</default-method-access>
+	</assembly-descriptor>
+</orion-ejb-jar>

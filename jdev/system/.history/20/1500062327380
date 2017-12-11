@@ -1,0 +1,68 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class CoreDescQualifiers {
+
+	private List descQualifiersCollection;
+	private ValueHolderInterface coreDescTerms;
+	private Integer coreDescQualifieridPk;
+	private String descQualifier;
+
+public CoreDescQualifiers() {
+	super();
+	this.descQualifiersCollection = new ArrayList();
+	this.coreDescTerms = new ValueHolder();
+}
+
+public void addDescQualifiers(int index, DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.add(index, aDescQualifiers);
+	aDescQualifiers.setCoreDescQualifiers(this);
+}
+
+public void addDescQualifiers(DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.add(aDescQualifiers);
+	aDescQualifiers.setCoreDescQualifiers(this);
+}
+
+public Integer getCoreDescQualifieridPk() {
+	return this.coreDescQualifieridPk;
+}
+
+public CoreDescTerms getCoreDescTerms() {
+	return (CoreDescTerms) this.coreDescTerms.getValue();
+}
+
+public String getDescQualifier() {
+	return this.descQualifier;
+}
+
+public List getDescQualifiersCollection() {
+	return this.descQualifiersCollection;
+}
+
+public void removeDescQualifiers(DescQualifiers aDescQualifiers) {
+	this.descQualifiersCollection.remove(aDescQualifiers);
+	aDescQualifiers.setCoreDescQualifiers(null);
+}
+
+public void setCoreDescQualifieridPk(Integer coreDescQualifieridPk) {
+	this.coreDescQualifieridPk = coreDescQualifieridPk;
+}
+
+public void setCoreDescTerms(CoreDescTerms coreDescTerms) {
+	this.coreDescTerms.setValue(coreDescTerms);
+}
+
+public void setDescQualifier(String descQualifier) {
+	this.descQualifier = descQualifier;
+}
+
+public void setDescQualifiersCollection(List descQualifiersCollection) {
+	this.descQualifiersCollection = descQualifiersCollection;
+}
+
+}

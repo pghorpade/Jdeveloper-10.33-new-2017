@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logs xmlns='http://www.oracle.com/iAS/EMComponent/ojdl'>
+   <log path='toplink/config/toplink.log' componentId='TOPLINK' encoding='utf-8'>     
+       <logviewer LogType='TRACE' 
+                  ComponentName='TopLink'/>
+   </log> 
+</logs> 

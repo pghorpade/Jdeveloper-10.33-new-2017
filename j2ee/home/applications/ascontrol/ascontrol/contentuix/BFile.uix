@@ -1,0 +1,115 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+  <dataScope>
+
+   <provider>
+    <data name="bfileData">
+     <method class="oracle.ifs.admin.em.ias.uix.BFileData"
+             method="getBFileData"/>
+    </data>
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+    <data name="bfileRadioData">
+     <inline>
+      <option data:text="BFILE_POLICY_CHOICE_1@strings" value="BFILE_DELETE_OPERATING_FILES"/>
+      <option data:text="BFILE_POLICY_CHOICE_2@strings" value="BFILE_RETAIN_OPERATING_FILES"/>
+     </inline>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout
+     data:title="BFILE_LINK@strings"
+     initialFocusComponentId="BFILEMSGINPUT">
+
+     <pageStatus>
+      <styledText data:text="BFILE_INSTRUCTION@strings"
+                  styleClass="OraInstructionText"/>
+     </pageStatus>
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="REVERT@strings"
+                ctrl:event="revert" />
+        <submitButton data:text="APPLY@strings"
+                      ctrl:event="doSubmit" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+      <contents>
+        <!--BFILE Location-->
+        <header data:text="BFILE_LOCATION_HEADER@strings">
+          <contents>
+            <styledText styleClass="OraInstructionText"
+                    data:text="BFILE_LOCATION_INSTRCUTION@strings"/>
+            <messageTextInput id="BFILEMSGINPUT" name="BFILE_LOCATION"
+                required="yes"
+                data:tip="BFILE_LOCATION_LABEL_TIP@strings"
+                maximumLength="2000"
+                data:prompt="BFILE_LOCATION_LABEL@strings"
+                data:text="BFILE_LOCATION@bfileData"
+                columns="38">
+            </messageTextInput>
+          </contents>
+        </header>
+
+        <!--BFILE Policy-->
+        <header data:text="BFILE_POLICY_HEADER@strings">
+          <contents>
+            <styledText styleClass="OraInstructionText"
+                    data:text="BFILE_POLICY_INSTRUCTION@strings"/>
+              <spacer height="10"/>
+            <rowLayout>
+             <contents>
+              <messageStyledText data:text="BFILE_POLICY_LABEL@strings" 
+                                 styleClass="OraFieldText"/>
+              <radioSet name="BFILE_POLICY"
+                        data:selectedIndex="BFILE_POLICY_SELECTED_INDEX@bfileData">
+               <contents data:childData="option@bfileRadioData">
+                 <option data:text="text" data:value="value"/>
+               </contents>
+              </radioSet>
+             </contents> 
+           </rowLayout> 
+          </contents>
+        </header>
+      </contents>
+
+     </ifsemui:oemPageLayout>
+    </contents>
+   </dataScope>
+  </ctrl:content>
+
+  <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+   <event name="null">
+    <method class="oracle.ifs.admin.em.ias.uix.BFileData"
+            method="doLoad"/>
+   </event>
+   <event name="doLoad">
+    <method class="oracle.ifs.admin.em.ias.uix.BFileData"
+            method="doLoad"/>
+   </event>
+   <event name="revert">
+    <method class="oracle.ifs.admin.em.ias.uix.BFileData"
+            method="doRevert"/>
+   </event>
+   <event name="doSubmit">
+    <method class="oracle.ifs.admin.em.ias.uix.BFileData"
+            method="doSubmit"/>
+   </event>
+  </ctrl:handlers>
+
+</ctrl:page>

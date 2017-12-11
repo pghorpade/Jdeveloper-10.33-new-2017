@@ -1,0 +1,80 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class AdminValues {
+
+	private ValueHolderInterface adminControlValues;
+	private ValueHolderInterface adminQualifiers;
+	private ValueHolderInterface adminTerms;
+	private ValueHolderInterface adminGroups;
+	private Long adminValueidPk;
+	private String adminValue;
+	private String adminProfile;
+
+public AdminValues() {
+	super();
+	this.adminControlValues = new ValueHolder();
+	this.adminQualifiers = new ValueHolder();
+	this.adminTerms = new ValueHolder();
+	this.adminGroups = new ValueHolder();
+}
+
+public AdminControlValues getAdminControlValues() {
+	return (AdminControlValues) this.adminControlValues.getValue();
+}
+
+public AdminGroups getAdminGroups() {
+	return (AdminGroups) this.adminGroups.getValue();
+}
+
+public String getAdminProfile() {
+	return this.adminProfile;
+}
+
+public AdminQualifiers getAdminQualifiers() {
+	return (AdminQualifiers) this.adminQualifiers.getValue();
+}
+
+public AdminTerms getAdminTerms() {
+	return (AdminTerms) this.adminTerms.getValue();
+}
+
+public String getAdminValue() {
+	return this.adminValue;
+}
+
+public Long getAdminValueidPk() {
+	return this.adminValueidPk;
+}
+
+public void setAdminControlValues(AdminControlValues adminControlValues) {
+	this.adminControlValues.setValue(adminControlValues);
+}
+
+public void setAdminGroups(AdminGroups adminGroups) {
+	this.adminGroups.setValue(adminGroups);
+}
+
+public void setAdminProfile(String adminProfile) {
+	this.adminProfile = adminProfile;
+}
+
+public void setAdminQualifiers(AdminQualifiers adminQualifiers) {
+	this.adminQualifiers.setValue(adminQualifiers);
+}
+
+public void setAdminTerms(AdminTerms adminTerms) {
+	this.adminTerms.setValue(adminTerms);
+}
+
+public void setAdminValue(String adminValue) {
+	this.adminValue = adminValue;
+}
+
+public void setAdminValueidPk(Long adminValueidPk) {
+	this.adminValueidPk = adminValueidPk;
+}
+
+}

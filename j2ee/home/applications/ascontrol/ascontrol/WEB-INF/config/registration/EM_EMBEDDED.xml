@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<logs xmlns='http://www.oracle.com/iAS/EMComponent/ojdl'
+      helpIDLogs='http://otn.oracle.com/pls/ias904/ias904.to_xlink?xlink=OEMCG0112'>
+
+<!-- This is the Log Config document for Enterprise Manager Logs -->
+
+  <!-- error log in ODL format -->
+  <log path='log/ascontrol' componentId='EM'>
+    <logreader type='ODL'/>
+    <logviewer  ComponentName='Application Server Control' 
+                ComponentType='Enterprise Manager'
+                LogType='ERROR'>
+     <property name='category' value='diagnostic|management'/> 
+   </logviewer>                 
+  </log> 
+
+    <log path='log/ascontrol.log' componentId='EM'> 
+        <logreader class='oracle.core.ojdl.reader.TextLogReaderFactory'>                     
+            <property name='MessageFormat' value='{0,time,yyyy-MM-dd hh:mm:ss,SSS} [{1}] {2} {3} {4} - {5}'/> 
+            <property name='MessageTypeMap' 
+                      value='FATAL=INTERNAL_ERROR:1,ERROR=ERROR:1,WARN=WARNING:1,INFO=NOTIFICATION:1,DEBUG=TRACE:1'/> 
+            <property name='MessageFields' 
+                      value='TSTZ_ORIGINATING, PROCESS_ID, MSG_TYPE, MODULE_ID, , MSG_TEXT'/> 
+            <property name='ComponentId' value='EM'/> 
+        </logreader> 
+         <logviewer  ComponentName='Application Server Control'
+                     ComponentType='Enterprise Manager'
+                     LogType='ERROR'>
+            <property name='category' value='diagnostic|management'/> 
+         </logviewer>    
+    </log> 
+
+    <log path='log/ascontrol.log.%LOG_SEGMENT_ID%' componentId='EM'> 
+        <logreader class='oracle.core.ojdl.reader.TextLogReaderFactory'>           
+            <property name='MessageFormat' value='{0,time,yyyy-MM-dd hh:mm:ss,SSS} [{1}] {2} {3} {4} - {5}'/> 
+            <property name='MessageTypeMap' 
+                      value='FATAL=INTERNAL_ERROR:1,ERROR=ERROR:1,WARN=WARNING:1,INFO=NOTIFICATION:1,DEBUG=TRACE:1'/> 
+            <property name='MessageFields' 
+                      value='TSTZ_ORIGINATING, PROCESS_ID, MSG_TYPE, MODULE_ID, MSG_TEXT'/> 
+            <property name='ComponentId' value='EM'/> 
+        </logreader> 
+         <logviewer  ComponentName='Application Server Control'
+                     ComponentType='Enterprise Manager'
+                     LogType='ERROR'>
+            <property name='category' value='diagnostic|management'/> 
+         </logviewer>    
+    </log> 
+
+</logs>
+

@@ -1,0 +1,324 @@
+package edu.ucla.library.digital.dlcs.util;
+
+
+/**
+ * Provides constants that the DLCS application can use.
+ * @note: To create a production build replace lit304v w/ lit308v and uncomment/comment the appropiate block of code.
+ */
+public final class Constants {
+    private Constants() {}
+
+    /** Constants used in controller. **/
+    public static final String VIEW_ITEM = "ViewItem";
+    public static final String TREE_LIST = "treeList";
+    public static final String TREE_DAO = "tdao";
+    public static final String ITEM_DETAIL = "itemDetail";
+    public static final String EDIT_SUCCESS_KEY = "EditSuccess";
+    public static final String SUCCESS_KEY = "Success";
+    public static final String FAILURE_KEY = "Failure";
+    public static final String LOG_ME_IN = "LogMeIn";
+    public static final String TREE_MODEL_KEY = "tree.model";
+    public static final String PROJECT_DETAILS = "projectDetails";
+    public static final String PROJECT_ID = "projectId";
+    public static final String PROJECT_TITLE = "projectTitle";
+    public static final String INVALID_LOGIN = "InvalidLogin";
+    public static final String SESSION_ENDED = "SessionEnded";
+    public static final String IMAGE_BREAK_AWAY = "ImageBreakaway";
+    public static final String ADD_CONTROLVALUES = "AddControlValues";
+    public static final String EDIT_CONTROLVALUES = "EditControlValues";
+    public static final String DELETE_CONTROLVALUES = "DeleteControlValues";
+    public static final String MANAGE_CONTROLVALUES = "ManageControlValues";
+
+    public static final String ADMIN_AAC_MGMT = "AdminAccMgmt";
+    public static final String USER_AAC_MGMT = "UserAccMgmt";
+    public static final String PM_AAC_MGMT = "PmAccMgmt";
+    public static final String ACC_MGMT_MAIN = "AccMgmtMain";
+
+    /** File extension regular expression constants **/
+    public static final String TIF = "^.*\\.tif$";
+    public static final String TIFF = "^.*\\.tiff$";
+    public static final String WAV = "^.*\\.wav$";
+    public static final String TXT = "^.*\\.txt$";
+    public static final String XML = "^.*\\.xml$";
+    public static final String HTM = "^.*\\.htm$";
+    public static final String HTML = "^.*\\.html$";
+    public static final String SGML = "^.*\\.sgml$";
+    public static final String PDF_EXT = "^.*\\.pdf$";
+    public static final String DOC = "^.*\\.doc$";
+    public static final String AVI = "^.*\\.avi$";
+    public static final String MPEG = "^.*\\.mpeg$";
+
+    /** User Roles **/
+    /** Needs to correspond to values used in the DB **/
+    public static final String USER_ROLE = "User";
+    public static final String DATAENTRY_ROLE = "Data Entry";
+    public static final String PROJECTMANAGER_ROLE = "Project Manager";
+    public static final String ADMIN_ROLE = "Admin";
+
+    /** Constants used in *.core **/
+    public static final String DLCS_TRASH = "\\\\lit308v\\d$\\DLCS\\trash\\";
+    public static final String IMAGE_CONVERT_PROG = "C:\\ImageMagick\\convert";
+    public static final String AUDIO_CONVERT_PROG = "D:\\DLCS\\Cleaner XL 1.5";
+    public static final String AUDIO_CONVERT_INPUT_PROFILES = "D:\\DLCS\\inputProfiles";
+    public static final String AUDIO_CONVERT_OUTPUT_PROFILES = "D:\\DLCS\\outputProfiles";
+    public static final String AUDIO_CONVERT_OUTPUT = "D:\\DLCS\\outputContent";
+
+    public static final String VIDEO_CONVERT_PROG = "D:\\DLCS\\Cleaner XL 1.5";
+    public static final String VIDEO_CONVERT_INPUT_PROFILES = "D:\\DLCS\\inputProfiles";
+    public static final String VIDEO_CONVERT_OUTPUT_PROFILES = "D:\\DLCS\\outputProfiles";
+     
+    public static final String AUDIO_VIDEO_FTP_SERVER = "audio-ftp.library.ucla.edu";
+    public static final String AUDIO_FTP_SERVER_LOGIN = "auddlcs";
+    public static final String REALSERVER_BASE_URL = "rtsp://audio.library.ucla.edu/audio/dlcs/";
+    public static final String ARCHIVE_MASTER = "Master";
+    public static final String SUBMASTER = "Submaster";
+	public static final String MASTER = "Master";
+    public static final String DFS = "DFS";
+    public static final String THUMBNAIL = "Thumbnail";
+    public static final String IMAGE = "Image";
+    public static final String AUDIO = "Audio";
+    public static final String VIDEO = "Video";
+    public static final String TEXT = "Text";
+    public static final String PDF = "PDF";
+    public static final String CAD = "CAD";
+    public static final String WEBSITE = "Website";
+    public static final String MASTER_BASE_URL = "http://digilib.library.ucla.edu/";
+    public static final String MAPS_MASTER_BASE_URL = "http://digilib.library.ucla.edu/maps/";
+    public static final String MASTER_BASE_URL2 = "http://digilib.library.ucla.edu/g2/";
+
+    /* JDBC */
+    public static final String CACHE_NAME = "DLCS_DB_CONNECTION_POOL_CACHE";
+    public static final String JNDI_DATASOURCE = "dlcsDS";
+    // Development: jdbc:oracle:thin:@lit107.library.ucla.edu:1521:O10gDL107
+    // Production: jdbc:oracle:thin:@lit106.library.ucla.edu:1521:DLCS
+   // public static final String CONNECTION_URL = "jdbc:oracle:thin:@localhost:9000:DLCS";
+    public static final String CONNECTION_URL = "jdbc:oracle:thin:@localhost:9001:DLCS";
+    // public static final String CONNECTION_URL = "jdbc:oracle:thin:@lit106.library.ucla.edu:1521:DLCS"; // service name
+    public static final String DB_USER = "dlcs";
+    public static final String DB_PASSWORD = "ajoatmbw1s";
+    public static final String JDBC_CONNECTION_POOL_INIT_SIZE = "5"; // create 3 connections at startup
+    public static final String JDBC_CONNECTION_POOL_MIN_SIZE = "10";  // the cache size is 5 at least
+    public static final String JDBC_CONNECTION_POOL_MAX_SIZE = "25"; 
+    public static final String JDBC_CONNECTION_WAIT_TIMEOUT = "5";
+    public static final String JDBC_CONNECTION_INACTIVITY_TIMEOUT = "1800"; // seconds
+    public static final String JDBC_CONNECTION_ABANDONED_TIMEOUT = "900"; // seconds
+    public static final String VALIDATION_SQL = "SELECT 1 FROM XDUAL";
+    
+    // For Development use uncomment this block of code
+    /*public static final String WEBAPP_BASE_URL = "http://digidev.library.ucla.edu/";
+    public static final String THUMBNAIL_BASE_URL = "http://digidev.library.ucla.edu/dlcontent/";
+    public static final String DLCONTENT_BASE_URL = "http://digidev.library.ucla.edu/dlcontent/";
+    public static final String ZOOMIFY_DFS = "\\\\ad\\Dlib\\dlcontent-dev\\";*/
+    
+    // For Production use uncomment this block of code
+    public static final String WEBAPP_BASE_URL = "http://digital2.library.ucla.edu/";
+    public static final String THUMBNAIL_BASE_URL = "http://digital2.library.ucla.edu/dlcontent/";
+    public static final String DLCONTENT_BASE_URL = "http://digital2.library.ucla.edu/dlcontent/";
+    public static final String ZOOMIFY_DFS = "\\\\ad\\Dlib\\dlcontent-prod\\";
+    
+    /** Adminstrative Metadata constants **/
+    public static final String ADMIN_TECHNICAL = "Technical";
+    public static final String ADMIN_RIGHTS = "Rights";    
+    public static final String TERMS = "TERMS";
+    public static final String QUALIFIERS = "QUALIFIERS";
+
+    /** Core Descriptive Term constant **/
+    public static final String CORE_TERM_TITLE = "Title";
+
+    /** UserPreference Settings **/
+    public static final boolean IS_UPLOADED_FILE_RENAMED = true;
+
+    /** Tree Handler **/
+    public static final int MAX_NODES = 200;
+    // Projects to chunk
+    public static final String FRONTERA = "Frontera Collection";
+    public static final String ART_HISTORY = "Art History Visual Resources Collection";
+    public static final String LA_TIMES = "Los Angeles Times Photographic Archive";
+    
+    /** Search **/
+    public static final String SEARCH_RESULT = "searchResult";
+    public static final String SEARCH_DAO = "searchDao";
+    public static final int DEFAULT_SEARCH_RESULTS = 100;
+    public static final String TOTAL_RESULTS = "totalResults";
+    public static final String PAGING_SUCCESS_KEY = "PagingSuccess";
+
+
+    /**  Type Values */
+    public static final String TYPE_VALUES = "PN,CN";
+    public static final String ALPHANUMERIC_VALUES = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0,1,2,3,4,5,6,7,8,9, ";
+
+    public static String[] getTypeValues() {
+        return TYPE_VALUES.split(",");
+    }
+    
+    public static String[] getAlphanumericValues() {
+        return ALPHANUMERIC_VALUES.split(",");
+    }
+
+    public static final String NAME_PK = "5";
+    public static final String AUTHORITY_YES = "yes";
+    public static final String AUTHORITY_NO = "no";
+
+
+    /** What are the roles that a user can assign to new user */
+    public static final String ADMIN_pROLES = "Project Manager,Admin,Data Entry,User";
+    public static final String DATA_ENTRY_pROLES = "";
+    public static final String PM_pROLES = "Data Entry";
+    public static final String USER_pROLES = "User";
+
+    /** Role names **/
+    public static final String USER = "User";
+    public static final String ADMIN = "Admin";
+
+    /** UserReport types **/
+    public static final String LIST_ALL = "1";
+    public static final String ADMINISTRATOR_LIST = "2";
+    public static final String DATA_ENTRY_LIST = "3";
+    public static final String PROJECT_MANAGER_LIST = "4";
+    public static final String USER_LIST = "5";    
+    public static final String CORE_TERMS_AND_QUALIFIERS_LIST = "6";
+    public static final String PROJECT_CORE_TERMS_AND_QUALIFIERS = "7";    
+    public static final String ALL_COLLECTIONS_OBJECT_TYPES_LIST = "8";
+    public static final String ALL_COLLECTIONS_ITEM_STATUS_LIST = "9";
+    public static final String ALL_COLLECTIONS_ITEM_COUNT = "10";
+    public static final String ALL_CONTENT_TYPES_LIST = "11";
+    public static final String TOTAL_NO_OF_CONTENT_FILES_LIST = "12";   
+    public static final String ACTIVE_PROJECT_OBJECT_TYPES = "13";
+    public static final String ACTIVE_PROJECT_ITEM_STATUS = "14";
+    public static final String ACTIVE_PROJECT_ITEM_COUNT = "15";
+    public static final String PROJECT_CONTENT_FILE_GROUP_BY_CONTENT_TYPE = "16";
+    public static final String PROJECT_CONTENT_FILE_COUNT = "17";
+    public static final String LIST_PROJECT_CONTENT_FILES_GROUP_BY_FILE_GROUP = "18";
+    public static final String LIST_COL_CONTENT_FILES_BY_FILE_GROUPS = "19";
+    public static final String PROJECT_NAME_CV_REPORT = "20";
+    public static final String PROJECT_SUBJECT_CV_REPORT = "21";
+    public static final String PROJECT_STATUS_REPORT = "22";
+    public static final String LIST_ITEMS_WITHOUT_CONTENT = "23";
+    public static final String LIST_ITEMS_WITHOUT_TYPE = "24";
+    public static final String LIST_ITEMS_WITHOUT_SUBJECT = "25";
+    public static final String LIST_ORAL_HISTORY_INTERVIEWEE_WITH_CONTENT = "26";
+    public static final String LIST_COLLECTIONS_REPOSITORY_WITH_CONTENT_SUMMARY = "27";
+    public static final String PROJECT_COVERAGE_CV_REPORT = "28";
+    public static final String LIST_COLLECTION_PUBLISHED = "29";
+    public static final String LIST_COLLECTION_UNPUBLISHED = "30";
+    public static final String LIST_COMPLETED_ITEMS_WITH_MINIMAL_METADATA = "31";
+    public static final String LIST_PROJECT_CONTROLLED_VOCABULARY = "32";
+    public static final String LIST_ALL_CONTROLLED_VOCABULARY = "33";
+
+    /** Content Processor */
+    public static final String IMAGE_SAMPLING_FREQUENCY = "Image Sampling Frequency";
+    public static final String IMAGE_PIXELS_LONG_DIMENSION="Image Pixels Long Dimension";
+    public static final String BITS_PER_SAMPLE= "Bits Per Sample";
+    public static final String IMAGE_QUALITY="Image Quality";
+    public static final String MIME_TYPE="MIME Type";
+    public static final String AUDIO_DATA_ENCODING = "Audio Data Encoding";
+    public static final String DATA_RATE="Data Rate";
+    
+    /** File ext */
+    public static final String DOT_MP3=".mp3";
+    public static final String DOT_TIF=".tif";
+    public static final String DOT_WAV=".wav";
+    public static final String DOT_AVI=".avi";
+    public static final String DOT_XML=".xml";
+    public static final String DOT_TXT=".txt";
+    public static final String DOT_ATF=".atf";
+    public static final String DOT_HTML=".html";
+    public static final String DOT_HTM=".htm";
+    public static final String DOT_SGML=".sgml";
+    public static final String DOT_PDF=".pdf";
+    public static final String DOT_DWG=".dwg";
+    public static final String DOT_PNG=".png";
+    public static final String DOT_ZIP =".zip";
+    
+    public static final String URL="URL";
+        
+    /** mime types     */
+    public static final String IMAGE_JPEG ="image/jpeg";
+    public static final String IMAGE_TIFF ="image/tiff";
+    public static final String IMAGE_X_DWG ="image/x-dwg";
+    public static final String IMAGE_PNG ="image/png";
+    public static final String AUDIO_X_WAV ="audio/x-wav";
+    public static final String VIDEO_AVI ="video/avi";
+    public static final String TEXT_XML="text/xml";
+    public static final String TEXT_PLAIN="text/plain";
+    public static final String TEXT_HTML="text/html";
+    public static final String TEXT_SGML="text/sgml";
+    public static final String TEXT_ATF="application/x-photoshop";
+    public static final String APPLICATION_PDF="application/pdf";
+    
+    /** Toplink related */
+    public static final String TL_SESSIONS_XML_PATH = "META-INF/sessionsDLCS.xml";
+    public static final String TL_SESSION_NAME = "default";
+    //public static final String TL_DEPLOYMENT_PROJECT = "META-INF/tlMap1.xml";
+    
+    //** LazyForm related */
+    public static final String EMAIL_FIELD = "emailAddress";
+    public static final String USERNAME_FIELD = "userName";
+    public static final String ROLE_FIELD = "role";
+    
+    public static final String QUERY_FAILED = "Query failed";
+    public static final String DATABASE_ERROR = "Database error";
+    public static final String INVALID_USER = "Invalid user";
+    public static final String ARK_FAILED = "ARK Minter failed";
+    
+    // Qualifier
+    public static final String UNSTATED = "Unstated";
+    public static final String UNQUALIFIED = "Unqualified";
+    public static final String IS_PART_OF = "isPartOf";
+    
+    //Batch Processing
+    public static final String MIMEType="MIME Type";
+    public static final String ImageSamplingFrequency = "Image Sampling Frequency";
+    public static final String ImagePixelsLongDimension="Image Pixels Long Dimension";
+    public static final String BitsPerSample= "Bits Per Sample";
+    public static final String ImageQuality="Image Quality";
+    public static final String DataRate="Data Rate";   
+    //Prod
+   // public static final String SOLRCORE_ORALHISTORY_URL="http://digital2.library.ucla.edu/solr/oralhistory";
+    //Dev
+   // public static final String SOLRCORE_ORALHISTORY_URL="http://digidev.library.ucla.edu/solr/oralhistory";
+   //solrcloud
+   // public static final String SOLRCORE_ORALHISTORY_URL="http://164.67.153.212:8080/solr/oralhistory";
+    
+    
+     //Prod
+     public static final String SOLRCORE_SHEETMUSIC_URL="http://digital2.library.ucla.edu/solr/sheetmusic";
+     
+     //DEV
+     
+      //public static final String SOLRCORE_SHEETMUSIC_URL="http://solrcloud.library.ucla.edu/solr/sheetmusic";
+      // solr cloud
+      //public static final String SOLRCORE_SHEETMUSIC_URL = "http://164.67.153.212:8080/solr/sheetmusic";
+     
+    
+    public static final int TEXTTRANSCRIPT = 317;
+    public static final int TEXTBIOGRAPHY = 550;
+    public static final int TEXTINTERVIEWHISTORY = 551;
+    public static final int TEXTAPPENDIX = 552;
+    public static final int TEXTINTRODUCTION = 549;
+    public static final int TEXTINDEX = 561;
+    public static final int TEXTPDF = 316;
+     public static final int transcript_objectid=239;
+     
+     //Fake dev ids
+    /*public static final int TEXTTRANSCRIPT = 3170;
+    public static final int TEXTBIOGRAPHY = 5500;
+    public static final int TEXTINTERVIEWHISTORY = 5510;
+    public static final int TEXTAPPENDIX = 5520;
+    public static final int TEXTINTRODUCTION = 5490;
+    public static final int TEXTINDEX = 5610;
+    public static final int TEXTPDF = 3160;
+     public static final int transcript_objectid=2390;*/
+     public static final String COMPLETED_STATUS = "2";
+    public static final String COMPLETED_MINIMAL_DATA_STATUS = "10";
+    
+    /* Users constants, moved from Users.java model generation */
+     public static final String USERIDPK = "useridPk";
+     public static final String USERNAME = "userName";
+     public static final String PASSCODE = "passCode";
+     public static final String EMAIL = "email";
+     public static final String LASTACCESSDATE = "lastAccessDate";
+     public static final String USERHANDLE = "userHandle";
+     public static final String USERROLE = "userRole";
+     
+}

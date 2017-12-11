@@ -1,0 +1,51 @@
+package aegaron.service;
+
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
+
+public class Xml2Json {
+
+    public static void main(String[] args) throws JSONException, IOException, 
+                                                  JsonGenerationException, 
+                                                  JsonMappingException {
+        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + 
+        "<record>" + 
+        "  <metadata>" + 
+        "    <dc>" + 
+        "      <identifier>21198/zz002dq9xs</identifier>" + 
+        "      <altIdentifier>" + 
+        "        <drawing>0167</drawing>" + 
+        "      </altIdentifier>" + 
+        "      <title>Fortress, New Kingdom Temple</title>" + 
+        "      <altTitle>" + 
+        "        <planTitle>Reconstruction 1</planTitle>" + 
+        "      </altTitle>" + 
+        "      <type>" + 
+        "        <printSize>A4/Letter</printSize>" + 
+        "        <ideal>Ideal</ideal>" + 
+        "      </type>" + 
+        "      <coverage>" + 
+        "        <geoscale>1:250</geoscale>" + 
+        "      </coverage>" + 
+        "    </dc>" + 
+        "  </metadata>" + 
+        "</record>";
+        JSONObject obj = XML.toJSONObject(xml);
+        System.out.println("JSON: " + obj.toString());
+        
+        String xml2 = XML.toString(obj);        
+        System.out.println("XML: " + xml2);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println("mapper: " + mapper.defaultPrettyPrintingWriter().writeValueAsString(obj));
+
+    }
+
+}

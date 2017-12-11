@@ -1,0 +1,29 @@
+<page xmlns="http://bali.us.oracle.com/cabo/baja" 
+      xmlns:baja="http://bali.us.oracle.com/cabo/baja"
+      xmlns:marlin="http://bali.us.oracle.com/cabo/marlin" 
+      xmlns:html="http://www.w3.org/TR/REC-html40"
+      xmlns:data="http://bali.us.oracle.com/cabo/marlin">
+
+  <baja:head xmlns="http://xmlns.oracle.com/cabo/marlin">
+    <dataScope>
+      <contents>
+	<head data:title="INTERNAL_ERROR@NLS"/>
+      </contents>
+      <provider>
+        <data name="NLS">
+          <bundle class="oracle.sysman.ias.studio.app.msg.AppMsg"/>
+        </data>
+      </provider>
+    </dataScope>
+  </baja:head>
+
+  <baja:content xmlns="http://bali.us.oracle.com/cabo/marlin">
+
+    <dataScope>
+      <contents>
+        <messageBox automatic="true"/>
+      </contents>
+    </dataScope>
+
+  </baja:content>
+</page>

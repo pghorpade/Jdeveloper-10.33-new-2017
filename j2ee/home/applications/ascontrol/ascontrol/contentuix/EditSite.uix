@@ -1,0 +1,189 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="overviewData">
+     <method class="oracle.ifs.admin.em.ias.uix.EditSiteData"
+             method="getOverviewData"/>
+    </data>
+
+    <data name="editSiteData">
+     <method class="oracle.ifs.admin.em.ias.uix.EditSiteData"
+             method="getEditSiteData"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+
+    <!-- data provider for quota denominators -->
+    <data name="quotaDenomOptionData">
+     <inline>
+      <option data:text="UNIT_MB@strings" value="MB"/>
+      <option data:text="UNIT_GB@strings" value="GB"/>
+      <option data:text="UNIT_TB@strings" value="TB"/>
+     </inline>
+    </data>
+
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout data:title="pageHeader@overviewData"
+                           initialFocusComponentId="NAMEMSGINPUT">
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="REVERT@strings"
+                ctrl:event="revert" />
+        <submitButton data:text="APPLY@strings"
+                      ctrl:event="editSite" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <spacer height="10" />
+
+      <!-- .......... General .......... -->
+
+      <header data:text="GENERAL@strings">
+       <contents>
+        <labeledFieldLayout width="60%">
+         <contents>
+
+          <!-- NAME -->
+          <messageTextInput id="NAMEMSGINPUT"
+              name="SITE_NAME" 
+              columns="60"
+              required="yes"
+              data:prompt="SITE_TABLE_NAME_COLUMN_HEADER@strings"
+              data:text="NAME@editSiteData"/>
+
+          <!-- REALM -->
+          <messageStyledText 
+               styleClass="OraDataText"
+               data:prompt="SITE_TABLE_REALM_COLUMN_HEADER@strings"
+               data:text="REALM@editSiteData" />
+
+          <!-- ALLOCATED QUOTA -->
+          <messageTextInput
+               name="QUOTA_VALUE" columns="10" maximumLength="25"
+	       data:text="ALLOC_QUOTA_VALUE@editSiteData"
+               required="yes"
+               data:prompt="SITE_TABLE_ALLOCATED_QUOTA_COLUMN_HEADER@strings">
+           <onSubmitValidater>
+            <decimal maxScale="0" minValue="0" />
+           </onSubmitValidater>
+           <end>
+            <flowLayout>
+             <contents>
+              <choice name="QUOTA_DENOM"
+                     data:shortDesc="SITE_TABLE_QUOTA_SIZE_UNIT@strings"
+                     data:selectedValue="ALLOC_QUOTA_DENOM@editSiteData">
+               <contents data:childData="option@quotaDenomOptionData">
+                <option data:text="text" 
+                        data:value="value"/>
+               </contents>
+              </choice>
+             </contents>
+            </flowLayout>
+           </end>
+          </messageTextInput>
+
+          <!-- USED QUOTA -->
+          <messageStyledText 
+               styleClass="OraDataText"
+               data:prompt="SITE_TABLE_USED_QUOTA_COLUMN_HEADER@strings"
+               data:text="USED_QUOTA@editSiteData" />
+
+          <!-- ACTIVE USERS -->
+          <messageStyledText 
+               styleClass="OraDataText"
+               data:prompt="SITE_TABLE_ACTIVE_USERS_COLUMN_HEADER@strings"
+               data:text="ACTIVE_USERS@editSiteData" />
+
+          <!-- ENABLED -->
+          <messageCheckBox 
+               name="ENABLED"
+               value="true"
+               readOnly="true"
+               data:text="SITE_TABLE_ENABLED_COLUMN_HEADER@strings" 
+               data:checked="IS_ENABLED@editSiteData"/>
+
+         </contents>
+        </labeledFieldLayout>
+       </contents>
+      </header>
+
+      <!-- .......... Personal Libraries .......... -->
+
+      <header data:text="EDIT_SITE_PERSONAL_LIBRARIES_HEADER@strings">
+       <contents>
+
+        <styledText 
+            styleClass="OraInstructionText"
+            data:text="EDIT_SITE_PERSONAL_LIBRARIES_INSTRUCTIONS@strings"/>
+            
+        <labeledFieldLayout vAlign="top" width="60%">
+         <contents>
+
+	  <spacer height="10" />
+
+	  <!-- Locator Class Name -->
+          <messageTextInput name="LOCATOR_CLASSNAME" 
+              columns="60"
+              required="yes"
+              data:prompt="EDIT_SITE_LOCATOR_CLASSNAME@strings"
+              data:text="LOCATOR_CLASSNAME@editSiteData"/>
+
+	  <!-- Root Path -->
+          <messageTextInput name="ROOT_PATH" 
+              columns="60"
+              required="yes"
+              data:prompt="EDIT_SITE_ROOT_PATH@strings"
+              data:text="ROOT_PATH@editSiteData"/>
+
+         </contents>
+        </labeledFieldLayout>
+       </contents>
+      </header>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <null/>
+  </event>
+
+  <event name="revert">
+   <method class="oracle.ifs.admin.em.ias.uix.EditSiteData"
+           method="doRevert"/>
+  </event>
+
+  <event name="editSite">
+   <method class="oracle.ifs.admin.em.ias.uix.EditSiteData"
+           method="doEditSite"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

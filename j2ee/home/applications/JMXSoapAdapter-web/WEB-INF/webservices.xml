@@ -1,0 +1,17 @@
+<webservices xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://www.ibm.com/webservices/xsd/j2ee_web_services_1_1.xsd"
+     version="1.1">
+    <webservice-description>
+        <webservice-description-name>JMXSoapAdapterService</webservice-description-name>
+        <wsdl-file>WEB-INF/wsdl/JMXSoapAdapterService.wsdl</wsdl-file>
+        <jaxrpc-mapping-file>WEB-INF/JMXSoapAdapterService-java-wsdl-mapping.xml</jaxrpc-mapping-file>
+        <port-component>
+            <port-component-name>HttpSoap12</port-component-name>
+            <wsdl-port xmlns:wsa0="http://oracle.com/j2ee.jmx.remote.soapadapter.service/JMXSoapAdapter">wsa0:HttpSoap12</wsdl-port>
+            <service-endpoint-interface>oracle.j2ee.jmx.remote.soapadapter.service.JMXSoapAdapterServiceEndpoint</service-endpoint-interface>
+            <service-impl-bean>
+                <servlet-link>HttpSoap12</servlet-link>
+            </service-impl-bean>
+        </port-component>
+    </webservice-description>
+</webservices>

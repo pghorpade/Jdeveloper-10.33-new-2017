@@ -1,0 +1,77 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class AdminControlValues {
+
+	private List adminValuesCollection;
+	private ValueHolderInterface adminTerms;
+	private Long adminCvidPk;
+	private String adminCv;
+	private String adminCvSource;
+
+public AdminControlValues() {
+	super();
+	this.adminValuesCollection = new ArrayList();
+	this.adminTerms = new ValueHolder();
+}
+
+public void addAdminValues(int index, AdminValues anAdminValues) {
+	this.adminValuesCollection.add(index, anAdminValues);
+	anAdminValues.setAdminControlValues(this);
+}
+
+public void addAdminValues(AdminValues anAdminValues) {
+	this.adminValuesCollection.add(anAdminValues);
+	anAdminValues.setAdminControlValues(this);
+}
+
+public String getAdminCv() {
+	return this.adminCv;
+}
+
+public String getAdminCvSource() {
+	return this.adminCvSource;
+}
+
+public Long getAdminCvidPk() {
+	return this.adminCvidPk;
+}
+
+public AdminTerms getAdminTerms() {
+	return (AdminTerms) this.adminTerms.getValue();
+}
+
+public List getAdminValuesCollection() {
+	return this.adminValuesCollection;
+}
+
+public void removeAdminValues(AdminValues anAdminValues) {
+	this.adminValuesCollection.remove(anAdminValues);
+	anAdminValues.setAdminControlValues(null);
+}
+
+public void setAdminCv(String adminCv) {
+	this.adminCv = adminCv;
+}
+
+public void setAdminCvSource(String adminCvSource) {
+	this.adminCvSource = adminCvSource;
+}
+
+public void setAdminCvidPk(Long adminCvidPk) {
+	this.adminCvidPk = adminCvidPk;
+}
+
+public void setAdminTerms(AdminTerms adminTerms) {
+	this.adminTerms.setValue(adminTerms);
+}
+
+public void setAdminValuesCollection(List adminValuesCollection) {
+	this.adminValuesCollection = adminValuesCollection;
+}
+
+}

@@ -1,0 +1,236 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+  <xsd:element name="jazn-data" type="JAZN-DATAjazn-dataType"/>
+  <xsd:complexType name="JAZN-DATAjazn-dataType">
+    <xsd:sequence >
+      <xsd:element name="jazn-realm" type="JAZN-DATAjazn-realmType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="jazn-policy" type="JAZN-DATAjazn-policyType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="jazn-permission-classes" type="JAZN-DATAjazn-permission-classesType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="jazn-principal-classes" type="JAZN-DATAjazn-principal-classesType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="jazn-loginconfig" type="JAZN-DATAjazn-loginconfigType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key"  type="JAZN-DATAkeyset" fixed="filepath OC4J_INSTANCE_ID APPLICATION_NAME"/>
+    <xsd:attribute name="filepath" type="xsd:string" use="required"/>
+    <xsd:attribute name="OC4J_INSTANCE_ID" type="xsd:string" use="required"/>
+    <xsd:attribute name="APPLICATION_NAME" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAjazn-realmType">
+    <xsd:sequence>
+      <xsd:element name="realm" type="JAZN-DATArealmType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATArealmType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="users" type="JAZN-DATAusersType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="roles" type="JAZN-DATArolesType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="jazn-policy" type="JAZN-DATAjazn-policyType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAusersType">
+    <xsd:sequence>
+      <xsd:element name="user" type="JAZN-DATAuserType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAuserType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="display-name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="credentials" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATArolesType">
+    <xsd:sequence>
+      <xsd:element name="role" type="JAZN-DATAroleType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAroleType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="display-name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="members" type="JAZN-DATAmembersType" />
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAmembersType">
+    <xsd:sequence>
+      <xsd:element name="member" type="JAZN-DATAmemberType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAmemberType">
+    <xsd:sequence >
+      <xsd:element name="type" type="xsd:string" />
+      <xsd:element name="name" type="xsd:string" />
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAjazn-policyType">
+    <xsd:sequence>
+      <xsd:element name="grant" type="JAZN-DATAgrantType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+<!-- no way to define key attribute for grant type -->
+  <xsd:complexType name="JAZN-DATAgrantType">
+    <xsd:sequence >
+      <xsd:element name="grantee" type="JAZN-DATAgranteeType" />
+      <xsd:element name="permissions" type="JAZN-DATApermissionsType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="grantee-names" type="xsd:string" default=""/>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="grantee-names"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAgranteeType">
+    <xsd:sequence >
+      <xsd:element name="display-name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="principals" type="JAZN-DATAprincipalsType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="codesource" type="JAZN-DATAcodesourceType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAprincipalsType">
+    <xsd:sequence>
+      <xsd:element name="principal" type="JAZN-DATAprincipalType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAprincipalType">
+    <xsd:sequence >
+      <xsd:element name="realm-name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="type" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="class" type="xsd:string" />
+      <xsd:element name="name" type="xsd:string" />
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAcodesourceType">
+    <xsd:sequence>
+      <xsd:element name="url" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATApermissionsType">
+    <xsd:sequence>
+      <xsd:element name="permission" type="JAZN-DATApermissionType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATApermissionType">
+    <xsd:sequence >
+      <xsd:element name="class" type="xsd:string" />
+      <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="actions" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAjazn-permission-classesType">
+    <xsd:sequence>
+      <xsd:element name="permission-class" type="JAZN-DATApermission-classType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATApermission-classType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="type" type="xsd:string" />
+      <xsd:element name="class" type="xsd:string" />
+      <xsd:element name="target-descriptors" type="JAZN-DATAtarget-descriptorsType" />
+      <xsd:element name="action-descriptors" type="JAZN-DATAaction-descriptorsType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAtarget-descriptorsType">
+    <xsd:sequence>
+      <xsd:element name="target-descriptor" type="JAZN-DATAtarget-descriptorType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAtarget-descriptorType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAaction-descriptorsType">
+    <xsd:sequence>
+      <xsd:element name="action-descriptor" type="JAZN-DATAaction-descriptorType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAaction-descriptorType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAjazn-principal-classesType">
+    <xsd:sequence>
+      <xsd:element name="principal-class" type="JAZN-DATAprincipal-classType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAprincipal-classType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="type" type="xsd:string" />
+      <xsd:element name="class" type="xsd:string" />
+      <xsd:element name="name-description-map" type="JAZN-DATAname-description-mapType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAname-description-mapType">
+    <xsd:sequence>
+      <xsd:element name="name-description-pair" type="JAZN-DATAname-description-pairType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAname-description-pairType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAjazn-loginconfigType">
+    <xsd:sequence>
+      <xsd:element name="application" type="JAZN-DATAapplicationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAapplicationType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="login-modules" type="JAZN-DATAlogin-modulesType" />
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAlogin-modulesType">
+    <xsd:sequence>
+      <xsd:element name="login-module" type="JAZN-DATAlogin-moduleType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAlogin-moduleType">
+    <xsd:sequence >
+      <xsd:element name="class" type="xsd:string" />
+      <xsd:element name="control-flag" type="xsd:string" />
+      <xsd:element name="options" type="JAZN-DATAoptionsType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="class control-flag"/>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAoptionsType">
+    <xsd:sequence>
+      <xsd:element name="option" type="JAZN-DATAoptionType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="JAZN-DATAoptionType">
+    <xsd:sequence >
+      <xsd:element name="name" type="xsd:string" />
+      <xsd:element name="value" type="xsd:string" />
+    </xsd:sequence>
+    <xsd:attribute name="Key" type="JAZN-DATAkeyset" fixed="name value"/>
+  </xsd:complexType>
+
+  
+  <xsd:simpleType name="JAZN-DATAkeyset">
+    <xsd:list itemType="xsd:string"/>
+  </xsd:simpleType>
+
+
+
+</xsd:schema>

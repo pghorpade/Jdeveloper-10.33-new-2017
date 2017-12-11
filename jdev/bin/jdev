@@ -1,0 +1,155 @@
+#!/bin/sh
+
+# ===========================================================================
+# Oracle10g JDeveloper v10.1.3 Launch Script.
+# Copyright (c) 2000, 2007, Oracle. All rights reserved.  
+# ===========================================================================
+
+SetBaseDir()
+{
+	## set default value
+	JDEV_START_DIR=`dirname "$0"`
+	JDEV_BASE_DIR=${JDEV_START_DIR}
+	
+	## resolve links - $0 may be a link to  home
+	PRG=$0
+	progname=`basename "$0"`
+
+	while [ -h "$PRG" ] ; do
+		ls=`ls -ld "$PRG"`
+		link=`expr "$ls" : '.*-> \(.*\)$'`
+		if expr "$link" : '.*/.*' > /dev/null
+		then
+			PRG="$link"
+		else
+			PRG="`dirname $PRG`/$link"
+		fi
+	done
+
+	JDEV_BASE_DIR_1=`dirname "$PRG"`
+	if [ -d "${JDEV_BASE_DIR_1}" ]
+	then
+		JDEV_BASE_DIR=${JDEV_BASE_DIR_1}
+	fi
+	cd "${JDEV_BASE_DIR}"
+}
+
+ShowExtraHelp()
+{
+	echo ""
+}
+
+DisplayBanner()
+{
+	echo ""
+	echo "Oracle JDeveloper 10g 10.1.3.3"
+	echo "Copyright 1997, 2007 Oracle.  All Rights Reserved"
+	echo ""
+}
+
+CheckLibraryPath()
+{
+	#echo "Value of ORACLE_HOME is $ORACLE_HOME"
+	#echo "Value of LD_LIBRARY_PATH is $LD_LIBRARY_PATH"
+
+	if [ "X$ORACLE_HOME" = "X" ]
+	then
+		return
+	fi
+
+	if [ `uname -s` = 'HP-UX' ]
+	then
+		if [ "X$SHLIB_PATH" = "X" ]
+		then
+			SHLIB_PATH=$ORACLE_HOME/lib
+		else
+			echo $SHLIB_PATH | egrep -e "(^|\:)$ORACLE_HOME/lib($|\:)" > /dev/null
+			if [ $? != 0 ]
+			then
+				SHLIB_PATH=$SHLIB_PATH:$ORACLE_HOME/lib
+			fi
+		fi
+		export SHLIB_PATH
+		#echo $SHLIB_PATH
+	else
+		if [ "X$LD_LIBRARY_PATH" = "X" ]
+		then
+			LD_LIBRARY_PATH=$ORACLE_HOME/lib
+		else
+			echo $LD_LIBRARY_PATH | egrep -e "(^|\:)$ORACLE_HOME/lib($|\:)" > /dev/null
+			if [ $? != 0 ]
+			then
+				LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib
+			fi
+		fi
+		export LD_LIBRARY_PATH
+		#echo $LD_LIBRARY_PATH
+	fi
+}
+
+LaunchJDeveloper()
+{
+	DisplayBanner
+	SetConfigFiles
+	PreProcessArgs "$@"
+	Startup
+	ProcessArgs "$@"
+
+	# Pass the configuration pathname to the ide
+	AddVMOption -Dide.config_pathname=\"$JDEV_CONF_FILE\"
+
+	# Pass the starting directory (before it got changed to jdev/bin) to the ide
+	AddVMOption -Dide.startingcwd=\"$JDEV_START_DIR\"
+
+	CheckJDK
+	CheckDISPLAY
+	CheckLibraryPath
+
+	# JDeveloper requires a stack size of at least 4M on Linux. If you receive a 
+	# segmentation fault or other core dump at startup, uncomment the following
+	# command:
+	#WorkaroundULimit
+  
+	# If there are deferred updates, run jdev in update mode.
+	if ( [ -f "../lib/deferred-updates.xml" ] || [ -f "${JDEV_SCRIPT_USER_HOME_DIR}/lib/deferred-updates.xml" ] )
+	then
+		${JAVA} ${JDEV_VM_OPTS} ${JDEV_NATIVE_PATH} ${JDEV_SCRIPT_USER_HOME} ${JDEV_ENV_VARS} -classpath ${JDEV_UPDATE_CLASS_PATH} ${JDEV_UPDATE_MAIN_CLASS} ${JDEV_APP_OPTS}
+	fi
+
+	EchoIfVerbose "Running Command: ${JAVA} ${JDEV_VM_OPTS} ${JDEV_NATIVE_PATH} ${JDEV_SCRIPT_USER_HOME} ${JDEV_ENV_VARS} -classpath ${JDEV_CLASSPATH} ${JDEV_MAIN_CLASS} ${JDEV_APP_OPTS}"
+
+	# Under UNIX, we don't use our own class loader when running in non 
+	# US English as it wasn't working with JDK 1.4.2_03 under RedHat
+	# Advance Server 2.1, see bug3360355, bug3405136
+	if [ "$LANG" != "en_US.ISO-8859-1" ]
+        then
+		${JAVA} ${JDEV_VM_OPTS} ${JDEV_NATIVE_PATH} ${JDEV_SCRIPT_USER_HOME} ${JDEV_ENV_VARS} -classpath ${JDEV_CLASSPATH} ${JDEV_MAIN_CLASS} ${JDEV_APP_OPTS}
+	else
+		${JAVA} ${JDEV_VM_OPTS} ${JDEV_NATIVE_PATH} ${JDEV_SCRIPT_USER_HOME} ${JDEV_ENV_VARS} -classpath ../lib/jdev-loader.jar -Djdev.class.path=${JDEV_CLASSPATH} -Djava.system.class.loader=oracle.ideimpl.IdeClassLoader ${JDEV_MAIN_CLASS} ${JDEV_APP_OPTS}
+	fi
+
+	# In case java returns with an exit code greater than 0, make sure
+	# that we are running with an recognizable JDK version and that we
+	# are running with at least 1.4.x
+	if [ $? -gt 0 ]
+	then
+		s=`${JAVA} -version 2>&1`
+		if [ `expr "$s" : 'java version \"1\.[0-3]'` -gt 0 ]
+		then
+			echo "Error: JDeveloper doesn't run with JDK version prior to 1.4.x" 
+		fi
+		if [ `expr "$s" : 'java version \"1\.[0-5].*\"'` -le 0 ]
+		then
+			echo "Error: JDeveloper can't recognize the JDK version"
+		fi
+	fi
+}
+
+# ===========================================================================
+# Start of script.
+# ===========================================================================
+
+SetBaseDir
+. "${JDEV_BASE_DIR}"/jdev.common
+LaunchJDeveloper "$@"
+

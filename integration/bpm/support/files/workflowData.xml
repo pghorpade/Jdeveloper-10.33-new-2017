@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<workflow>
+	<notifications>
+		<!-- List of Task Status objects -->
+		<TaskStatusList>
+			<TaskStatus name="Assigned"/>
+			<TaskStatus name="Completed"/>
+			<TaskStatus name="Errored"/>	
+		</TaskStatusList>
+
+		<!-- List of Recipient objects -->
+		<RecipientList>
+			<Recipient name="Assignee"/>
+			<Recipient name="Creator"/>
+			<Recipient name="Error Assignee"/>
+		</RecipientList>
+	</notifications>
+
+	<outcomes>
+		<outcome name="OK"/>
+		<outcome name="NO"/>
+		<outcome name="YES"/>
+		<outcome name="ACCEPT"/>
+		<outcome name="APPROVE"/>
+		<outcome name="REJECT"/>
+		<outcome name="DEFER"/>
+	</outcomes>
+
+	<systemActions>
+		<systemAction name="Escalate"/>
+		<systemAction name="Release"/>
+		<systemAction name="Request Information"/>
+		<systemAction name="Reassign"/>
+		<systemAction name="Renew"/>
+		<systemAction name="Suspend"/>
+	</systemActions>
+
+	<priorities>
+		<priority value="1" highest="true"></priority>
+		<priority value="5"></priority>
+	</priorities>
+
+	<approvers>
+			<approver name="Manager"/>
+			<approver name="Director"/>
+			<approver name="CEO"/>
+	</approvers>
+
+</workflow>

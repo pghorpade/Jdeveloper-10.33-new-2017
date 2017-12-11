@@ -1,0 +1,37 @@
+<!--
+     Include this file to display a timestamp on a page.
+-->
+
+<dataScope xmlns="http://bali.us.oracle.com/cabo/marlin" xmlns:data="http://bali.us.oracle.com/cabo/marlin">
+  <contents>
+    <tableLayout width="100%">
+    <contents>
+      <rowLayout hAlign="right">
+        <contents>
+          <cellFormat width="97%" hAlign="right" vAlign="center">
+            <contents>
+              <styledText data:text="PAGE_REFRESHED_TIME@SdkResourceBundle"
+              styleClass="OraTipText"/>
+              <spacer width="4"/>
+              <styledText data:text="timestamp@timeData"
+              styleClass="OraTipLabel"/>
+            </contents>
+          </cellFormat>
+        </contents>
+      </rowLayout>
+    </contents>
+    </tableLayout>
+  </contents>
+  <provider>
+    <data name="ResourceBundle">
+      <bundle class="oracle.sysman.ias.ias.IASMsg"/>
+    </data>
+    <data name="timeData">
+      <method class="oracle.sysman.ias.studio.uixcompat.TimestampData"
+              method="getTimestamp"/>
+    </data>
+    <data name="SdkResourceBundle">
+      <bundle class="oracle.sysman.emSDK.eml.SDKUIMsg"/>
+    </data>
+  </provider>
+</dataScope>

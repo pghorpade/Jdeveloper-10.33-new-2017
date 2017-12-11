@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<jpr:project xmlns:jpr="http://xmlns.oracle.com/ide/project">
+   <value n="mostRecentPackage" v="edu.ucla.library.digital.dlcs.model"/>
+   <list n="recentlyUsedPackages">
+      <string v="edu.ucla.library.digital.dlcs.model"/>
+      <string v="edu.ucla.library.digital.dlcs.app"/>
+   </list>
+   <hash n="working-sets">
+      <value n=".current" v="Default"/>
+      <hash n="(All Files)">
+         <list n="pattern-filters">
+            <string v="+**"/>
+         </list>
+      </hash>
+      <hash n="Default">
+         <list n="pattern-filters">
+            <string v="+**"/>
+         </list>
+      </hash>
+   </hash>
+</jpr:project>

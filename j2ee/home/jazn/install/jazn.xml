@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone='yes'?>
+<!--<!DOCTYPE jazn PUBLIC "JAZN Config" "http://xmlns.oracle.com/ias/dtds/jazn-9_04.dtd">-->
+<jazn xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/jazn-10_0.xsd"
+    schema-major-version="10"
+    schema-minor-version="0"
+    provider="XML" location="%ORACLE_HOME%/j2ee/home/config/jazn-data.xml" default-realm="jazn.com" />
+

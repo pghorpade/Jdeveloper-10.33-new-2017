@@ -1,0 +1,213 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="pageData">
+     <method class="oracle.ifs.admin.em.ias.uix.NodesInDomainData"
+             method="getGeneralData"/>
+    </data>
+
+    <!-- data provider for NodeConfiguration table -->
+    <data name="ncTableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="DISPLAY_NAME@strings" sort="yes" value="display_name"/>
+      <column data:text="MIDDLE_TIER@strings" sort="yes" value="middle_tier"/>
+      <column data:text="ACTIVE@strings" sort="yes" value="active"/>
+      <column data:text="ACL@strings" sort="yes" value="acl"/>
+      <column data:text="MODIFIED_DATE@strings" sort="yes" value="modified_date"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="ncTableData">
+     <method class="oracle.ifs.admin.em.ias.uix.NodesInDomainData"
+             method="getNodeConfigurationTableData" />
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="SEARCHINPUT"
+                           data:title="pageHeader@pageData">
+
+     <pageStatus>
+      <include ctrl:node="../timestamp"/>
+     </pageStatus>
+
+     <contents>
+ 
+      <styledText data:text="NODES_IN_DOMAIN_INSTRUCTION_TEXT@strings"
+                  styleClass="OraInstructionText"/>
+
+      <!-- Table Filter -->
+       <dataScope>
+        <provider>
+         <data name="tableIdData">
+          <inline tableId="table_NodeConfigurationTable"/>
+          </data>
+         </provider>
+         <contents>
+          <spacer width="20"/>
+          <include ctrl:node="include/TableFilterDomain"/>
+          <formValue name="table_level" value="outer"/>
+         </contents>
+        </dataScope>
+
+      <!-- ........ NodeConfiguration Table ....... -->
+
+      <table name="NodeConfigurationTable"
+             id="table_NodeConfigurationTable"
+             partialRenderMode="self"             
+             width="100%"
+             data:alternateText="NO_ITEMS_FOUND@strings"
+             data:summary="NODES_IN_DOMAIN_TABLE_SUMMARY@strings"
+             data:tableData="row@ncTableData"
+             data:columnHeaderData="column@ncTableColumnHeaderData"
+             formSubmitted="true">
+
+       <columnHeaderStamp>
+         <sortableHeader data:text="text" data:value="value">
+           <boundAttribute name="sortable">
+             <defaulting>
+               <dataObject data:select="value" source="sortColumnHeader"/>
+               <dataObject data:source="(value)@sortColumnHeader"/>
+               <dataObject select="sort"/>
+             </defaulting>
+           </boundAttribute>
+         </sortableHeader>
+       </columnHeaderStamp>
+
+       <columnFormats>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="iconButtonFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+        <columnFormat columnDataFormat="textFormat"/>
+       </columnFormats>
+
+       <tableFormat tableBanding="rowBanding"/>
+
+       <!-- hidden for AS 10.1.3
+       <tableSelection>
+        <singleSelection data:shortDesc="SELECT@strings" 
+			 selectedIndex="0">
+         <contents>
+          <submitButton data:text="CREATE_LIKE@strings"
+                        name="event" value="createNodeConfigLike" />
+..
+          <submitButton data:text="EDIT@strings"
+                        name="event" value="editNodeConfig" />
+..
+          <submitButton data:text="DELETE@strings"
+                        name="event" value="deleteNodeConfig" />
+         </contents>
+        </singleSelection>
+       </tableSelection>
+       -->
+
+       <!-- hidden for AS 10.1.3
+       <tableActions>
+         <flowLayout>
+           <contents>
+            <button data:text="CREATE_OC4J_CONTENT@strings"
+                    data:destination="createOc4jFilesDestination@pageData"/>
+            <button data:text="CREATE_OC4J_RM@strings"
+                    data:destination="createOc4jRmDestination@pageData"/>
+            <button data:text="CREATE_NON_HTTP_NODE@strings"
+                    data:destination="createDestination@pageData"/>
+           </contents>
+         </flowLayout>
+       </tableActions>
+       -->
+
+       <contents>
+        <link data:text="ncName"
+              data:destination="ncDestination"/>
+        <styledText data:text="ncDisplayName"/>
+        <styledText data:text="ncIasInstanceName"/>
+        <image data:source="activeTrueIcon"
+               data:shortDesc="TRUE@strings"
+               data:rendered="active"/>
+        <styledText data:text="acl"/>
+        <styledText data:text="modifiedDate"/>
+        <formValue name="hiddenNcId"
+                   data:value="ncId"/>
+        <formValue name="hiddenNcName"
+                   data:value="ncName"/>
+        <formValue name="hiddenNcDisplayName"
+                   data:value="ncDisplayName"/>
+        <formValue name="hiddenNcIsLocal"
+                   data:value="isLocal"/>
+        <formValue name="hiddenNcIsHttpNode"
+                   data:value="isHttpNode"/>
+       </contents>
+      </table>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="null">
+   <method class="oracle.ifs.admin.em.ias.uix.NodesInDomainData"
+           method="doLoad"/>
+  </event>
+
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.NodesInDomainData"
+           method="doLoad"/>
+  </event>
+
+  <!-- hidden for AS 10.1.3
+  <event name="createNodeConfigLike">
+   <method class="oracle.ifs.admin.em.ias.uix.NodesInDomainData"
+           method="doNodeEvent"/>
+  </event>
+
+  <event name="deleteNodeConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.NodesInDomainData"
+           method="doNodeEvent"/>
+  </event>
+  -->
+
+  <!--
+  <event name="editNodeConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.NodesInDomainData"
+           method="doNodeEvent"/>
+  </event>
+  -->
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.TableFilterData"
+           method="doSearch"/>
+  </event>
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

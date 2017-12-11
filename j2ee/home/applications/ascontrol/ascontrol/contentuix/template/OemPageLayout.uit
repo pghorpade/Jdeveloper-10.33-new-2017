@@ -1,0 +1,142 @@
+<templateDefinition xmlns="http://xmlns.oracle.com/uix/ui"
+                    xmlns:data="http://xmlns.oracle.com/uix/ui"
+                    xmlns:html="http://www.w3.org/TR/REC-html40"
+                    xmlns:ui="http://xmlns.oracle.com/uix/ui"
+                    xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+                    xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+                    targetNamespace="http://xmlns.oracle.com/ifs/emui"
+                    localName="oemPageLayout">
+
+ <documentation>
+  This template defines the base page layout for iFS pages in EM standalone
+  console.
+  By default this page contains a form.
+ </documentation>
+
+ <type base="ui:pageLayout">
+  <attribute name="initialFocusComponentId"
+             javaType="string">
+   <documentation>
+    The intialFocusId.
+   </documentation>
+  </attribute>
+ </type>
+
+ <content>
+  <document>
+   <metaContainer>
+    <dataScope>
+     <provider>
+      <data name="strings">
+       <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+      </data>
+
+      <data name="userData">
+       <method class="oracle.ifs.admin.em.ias.uix.LoggedInUserNameData"
+	       method="getUsernameData"/>
+      </data>
+     </provider>
+
+     <contents>
+      <head>
+       <boundAttribute name="title">
+        <messageFormat data:format="OEM_BROWSER_TITLE@strings"
+                       fast="true">
+         <dataObject select="username" source="userData"/>
+         <dataObject select="title" source="ui:rootAttr"/>
+        </messageFormat>
+       </boundAttribute>
+      </head>
+     </contents>
+    </dataScope>
+   </metaContainer>
+
+   <contents>
+    <body data:initialFocusId="initialFocusComponentId@ui:rootAttr">
+     <contents>
+      <form name="iFSForm" method="POST">
+       <contents>
+        <ui:pageLayout>
+         <!-- Grab all the attributes and named children of pageLayout -->
+         <attributeMap><rootAttributeMap/></attributeMap>
+         <childMap><rootChildMap/></childMap>
+
+         <mediumAdvertisement>
+          <include ctrl:node="../oemBanner" />
+         </mediumAdvertisement>
+
+         <globalButtons>
+          <include ctrl:node="../globalButtonBar" />
+         </globalButtons>
+
+         <tabs>
+          <include ctrl:node="../globalTabs" />
+         </tabs>
+
+         <pageHeader>
+          <include ctrl:node="../globalHeader" />
+         </pageHeader>
+
+         <location>
+          <include ctrl:node="../breadCrumbs"/>
+         </location>
+
+         <copyright>
+          <include ctrl:node="../copyright"/>
+         </copyright>
+
+         <messages>
+          <dataScope>
+           <provider>
+            <data name="ifsMessageData">
+             <method class="oracle.ifs.admin.em.ias.uix.MessageData"
+                     method="getMessageData"/>
+            </data>
+           </provider>
+
+           <contents>
+            <switcher data:childName="rendered@ifsMessageData">
+             <case name="true">
+              <include ctrl:node="/contentuix/include/IfsMessageBox"/>
+             </case>
+             <default>
+              <messageBox automatic="true"/>
+             </default>
+            </switcher>
+           </contents>
+          </dataScope>
+         </messages>
+
+         <contents>
+          <dataScope>
+           <provider>
+            <data name="strings">
+             <bundle class=
+                     "oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+            </data>
+           </provider>
+
+           <contents>
+            <rowLayout>
+             <contents>
+              <html:noscript>
+               <text data:text="NO_JAVASCRIPT_MESSAGE@strings"/>
+              </html:noscript>
+             </contents>
+            </rowLayout>
+           </contents>
+          </dataScope>
+
+          <rootChild name="contents"/>
+         </contents>
+
+        </ui:pageLayout>
+       </contents>
+      </form>
+     </contents>
+    </body>
+   </contents>
+  </document>
+ </content>
+
+</templateDefinition>

@@ -1,0 +1,58 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+
+ <xsd:element name="jazn" type="jaznType"/>
+
+ <xsd:complexType name="jaznType">
+    <xsd:sequence >
+      <xsd:element name="property" type="jaznPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="jazn-web-app" type="jazn-web-appType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="Key"  type="jaznKeyset" fixed="filepath OC4J_INSTANCE_ID APPLICATION_NAME"/>
+    <xsd:attribute name="filepath" type="xsd:string" use="required"/>
+    <xsd:attribute name="OC4J_INSTANCE_ID" type="xsd:string" use="required"/>
+    <xsd:attribute name="APPLICATION_NAME" type="xsd:string" use="optional"/>
+    <xsd:attribute name="provider" type="xsd:string" use="optional"/>
+    <xsd:attribute name="location" type="xsd:string" use="optional"/>
+    <xsd:attribute name="default-realm" type="xsd:string" use="optional"/>
+    <xsd:attribute name="persistence" type="xsd:string" use="optional"/>
+    <xsd:attribute name="config" type="xsd:string" use="optional"/>
+  </xsd:complexType>
+  <xsd:complexType name="jazn-web-appType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="auth-method" type="xsd:string" use="optional"/>
+        <xsd:attribute name="runas-mode" type="runas-modeType" default="false"/>
+        <xsd:attribute name="doasprivileged-mode" type="doasprivileged-modeType" default="true"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="runas-modeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="true"/>
+      <xsd:enumeration value="false"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="doasprivileged-modeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="true"/>
+      <xsd:enumeration value="false"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+
+  <xsd:complexType name="jaznPropertyType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="Key" type="jaznKeyset" fixed="name"/>
+        <xsd:attribute name="name" type="xsd:string" use="optional"/>
+        <xsd:attribute name="value" type="xsd:string" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+
+  <xsd:simpleType name="jaznKeyset">
+    <xsd:list itemType = "xsd:string"/>
+  </xsd:simpleType>
+
+</xsd:schema>

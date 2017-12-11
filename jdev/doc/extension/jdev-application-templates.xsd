@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://xmlns.oracle.com/jdeveloper/1013/jdev-application-templates"
+           xmlns:ext="http://jcp.org/jsr/198/extension-manifest"
+           targetNamespace="http://xmlns.oracle.com/jdeveloper/1013/jdev-application-templates"
+           elementFormDefault="qualified">
+  <xs:import namespace="http://jcp.org/jsr/198/extension-manifest"
+             schemaLocation="extension.xsd"/>
+  <xs:element name="application-templates-hook">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="application-data" type="applicationTemplatesType"
+                    maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="applicationTemplatesType">
+    <xs:complexContent>
+      <xs:extension base="ext:customHookType">
+        <xs:sequence>
+          <xs:element name="name" type="ext:i18n_string" maxOccurs="1"
+                      minOccurs="1"/>
+          <xs:element name="description" type="ext:i18n_string"/>
+          <xs:element name="project-data" maxOccurs="unbounded"
+                      minOccurs="0" type="projectDataType">
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="projectDataType">
+    <xs:sequence>
+      <xs:element name="name" type="ext:i18n_string" maxOccurs="1"
+              minOccurs="1"/>
+      <xs:element name="packageName" type="xs:string" maxOccurs="1"
+              minOccurs="1"/>
+      <xs:element name="projectName" type="xs:string" maxOccurs="1"
+              minOccurs="1"/>
+      <xs:element name="technologyScope"
+                  type="technologyScopeType" maxOccurs="1"
+              minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="technologyScopeType">
+    <xs:sequence>
+      <xs:element name="technologyKey" type="xs:string" maxOccurs="unbounded"
+              minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+</xs:schema>

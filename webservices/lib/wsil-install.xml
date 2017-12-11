@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<project default="install-wsil" basedir=".">
+
+    <!--
+        This script will deploy the WSIL app into an OC4J.  The environment variable
+        ORACLE_HOME must point to a valid Oracle Home.  Further, the following parameters
+        must be defined on the command-line:
+        
+        HOST :          The hostname of the OC4J to deply into
+        OPMNPORT :      The OPMN port to contact the server
+        ADMIN_USER :    The user name of the administrator on the server
+        ADMIN_PW :      The password of the administrator on the server
+        OPMNINSTANCE :  The oc4j instance name to deploy to 
+    -->
+
+    <target name="init">
+	<echo message = "Initializing  Variables" />
+        <property environment="env" />
+        <property name="OracleHome" value="${env.ORACLE_HOME}" />
+        <condition property="jsso_option">
+	  <equals arg1="${ENABLE_JSSO}" arg2="true"  />
+      </condition>
+
+    </target>
+    
+    <target name="install-wsil" depends="init">
+    	
+    	<antcall target="install-wsil_nonjsso"/>
+    	<antcall target="install-wsil_jsso"/>
+    </target>
+    
+    <target name="install-wsil_nonjsso" unless= "jsso_option" >
+    	<echo message="Deploying WSIL App with JSSO disabled" />
+    	<java jar="${OracleHome}/j2ee/home/admin_client.jar" fork="true" failonerror="true">
+                <arg value="deployer:oc4j:opmn://${HOST}:${OPMNPORT}/${OPMNINSTANCE}"/>
+                <arg value="${ADMIN_USER}"/>
+                <arg value="${ADMIN_PW}"/>
+                <arg value="-deploy" />
+                <arg value="-file" />
+                <arg value="${OracleHome}/webservices/lib/wsil-ias.ear" />
+                <arg value="-deploymentName" />
+                <arg value="WSIL-App" />
+                <arg value="-bindAllWebApps" />
+                <arg value="-removeArchive" />
+        </java>
+    </target>
+   
+    <target name="install-wsil_jsso" if = "jsso_option">
+    	<echo message="Deploying WSIL App with JSSO enabled" />
+        <java jar="${OracleHome}/j2ee/home/admin_client.jar" fork="true" failonerror="true">
+	            <arg value="deployer:oc4j:opmn://${HOST}:${OPMNPORT}/${OPMNINSTANCE}"/>
+	            <arg value="${ADMIN_USER}"/>
+	            <arg value="${ADMIN_PW}"/>
+	            <arg value="-deploy" />
+	            <arg value="-file" />
+	            <arg value="${OracleHome}/webservices/lib/wsil-ias_jsso.ear" />
+	            <arg value="-deploymentName" />
+	            <arg value="WSIL-App" />
+	            <arg value="-bindAllWebApps" />
+	            <arg value="-removeArchive" />
+        </java>
+     </target>
+</project>

@@ -1,0 +1,58 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import oracle.toplink.indirection.ValueHolder;
+import oracle.toplink.indirection.ValueHolderInterface;
+
+public class UserAccess {
+
+    /**Map users <-> edu.ucla.library.digital.dlcs.model.Users
+     * @associates <{edu.ucla.library.digital.dlcs.model.Users}>
+     */
+    private ValueHolderInterface users;
+
+    /**Map projects <-> edu.ucla.library.digital.dlcs.model.Projects
+     * @associates <{edu.ucla.library.digital.dlcs.model.Projects}>
+     */
+    private ValueHolderInterface projects;
+    private Long userAccessPk;
+    private String userRole;
+
+    public UserAccess() {
+        super();
+        this.users = new ValueHolder();
+        this.projects = new ValueHolder();
+    }
+
+    public Projects getProjects() {
+        return (Projects)this.projects.getValue();
+    }
+
+    public Long getUserAccessPk() {
+        return this.userAccessPk;
+    }
+
+    public String getUserRole() {
+        return this.userRole;
+    }
+
+    public Users getUsers() {
+        return (Users)this.users.getValue();
+    }
+
+    public void setProjects(Projects projects) {
+        this.projects.setValue(projects);
+    }
+
+    public void setUserAccessPk(Long userAccessPk) {
+        this.userAccessPk = userAccessPk;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public void setUsers(Users users) {
+        this.users.setValue(users);
+    }
+
+}

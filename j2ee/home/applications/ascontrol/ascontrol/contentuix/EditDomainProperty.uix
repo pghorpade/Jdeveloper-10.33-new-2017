@@ -1,0 +1,533 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the (domain) property -->
+    <data name="propData">
+     <method class="oracle.ifs.admin.em.ias.uix.EditDomainPropertyData"
+             method="getPropertyData" />
+    </data>
+
+    <data name="tableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="TYPE@strings" sort="yes" value="type"/>
+      <column data:text="VALUE@strings" sort="no" value="value"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="VALUEMSGINPUT">
+     <boundAttribute name="title">
+      <messageFormat data:format="EDIT_HEADER@strings"
+                     fast="true">
+       <dataObject select="propName" source="propData"/>
+      </messageFormat>
+     </boundAttribute>
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <switcher data:childName="inputType@propData"
+                  defaultCase="otherinput">
+         <case name="bundleinput">
+          <button data:text="OK@strings"
+                  data:destination="cancelDestination@propData"/>
+         </case>
+         <case name="otherinput">
+          <rowLayout>
+           <contents>
+            <button data:text="CANCEL@strings"
+                    data:destination="cancelDestination@propData"/>
+            <submitButton data:text="OK@strings"
+                          ctrl:event="editProperty"/>
+           </contents>
+          </rowLayout>
+         </case>
+        </switcher>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- .......... Shuttle Scripts .......... -->
+      <script>
+       <boundAttribute name = "text">
+        <concat>
+         function addOption(inputName, shuttleName)
+         {
+           var shuttleProxy =
+             new ShuttleProxy(shuttleName,'iFSForm');
+           var inputField = 'this.document.iFSForm.'+inputName;
+           var inputString = inputField+'.value';
+           var newValue = eval(inputString);
+
+           if (newValue == '')
+           {
+             alert('<dataObject select="MUST_SPECIFY" source="strings"/>');
+           }
+           else
+           {
+             eval(inputString+'=""');
+             shuttleProxy.addItem(true,
+                                  shuttleProxy.getItemCount(true),
+                                  newValue);
+             eval(inputField+'.focus()');
+           }
+         }
+        </concat>
+       </boundAttribute>
+      </script>
+
+      <script>
+       <boundAttribute name = "text">
+        <concat>
+         function removeSelected(shuttleName)
+         {
+           var shuttleProxy =
+             new ShuttleProxy(shuttleName,'iFSForm');
+           shuttleProxy.deleteSelectedItems(true);
+         }
+        </concat>
+       </boundAttribute>
+      </script>
+
+      <formValue name="table_level" value="inner"/>
+
+      <!-- ........ Content Body ........ -->
+
+      <switcher data:childName="inputType@propData">
+
+       <case name="textinput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageTextInput id="VALUEMSGINPUT" name="newValue"
+                            data:prompt="VALUE@strings"
+                            data:text="propValue@propData"/>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="numberinput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <switcher data:childName="propType@propData"
+                    defaultCase="wholenumber">
+           <case name="DOUBLE">
+            <messageTextInput id="VALUEMSGINPUT" name="newValue"
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="propValue@propData">
+             <onSubmitValidater>
+              <decimal />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+           <case name="wholenumber">
+            <messageTextInput id="VALUEMSGINPUT" name="newValue"
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="propValue@propData">
+             <onSubmitValidater>
+              <decimal maxScale="0" />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+          </switcher>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="mb_numberinput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageTextInput  id="VALUEMSGINPUT" name="newValue"
+                             columns="10"
+                             data:prompt="VALUE@strings"
+                             data:text="propValue@propData"
+                             data:tip="UNIT_MB_TIP@strings">
+            <onSubmitValidater>
+              <decimal maxScale="0" minValue="0" maxValue="2047"/>
+            </onSubmitValidater>
+            <end>
+              <flowLayout>
+                <contents>
+                  <spacer width="5"/>
+                  <styledText data:text="UNIT_MB@strings"
+                              styleClass="OraDataText">
+                  </styledText>
+                </contents>
+              </flowLayout>
+            </end>         
+          </messageTextInput>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="seconds_numberinput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageTextInput  id="VALUEMSGINPUT" name="newValue"
+                             columns="10"
+                             data:prompt="VALUE@strings"
+                             data:text="propValue@propData">
+            <onSubmitValidater>
+              <decimal maxScale="0" minValue="0"/>
+            </onSubmitValidater>
+            <end>
+              <flowLayout>
+                <contents>
+                  <spacer width="5"/>
+                  <styledText data:text="UNIT_SECONDS@strings"
+                              styleClass="OraDataText">
+                  </styledText>
+                </contents>
+              </flowLayout>
+            </end>         
+          </messageTextInput>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="booleaninput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageChoice id="VALUEMSGINPUT" name="newValue"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="propValue@propData">
+           <contents>
+            <option text="true" value="true"/>
+            <option text="false" value="false"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="loglevelinput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageChoice id="VALUEMSGINPUT" name="newValue"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="propValue@propData">
+           <contents data:childData="logLevels@propData">
+            <option data:text="optionText"
+                    data:value="optionValue"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="serviceconfiginput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageChoice id="VALUEMSGINPUT" name="newValue"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="propValue@propData">
+           <contents data:childData="serviceConfigs@propData">
+            <option data:text="optionText"
+                    data:value="optionValue"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="hsmprimarydeviceinput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageChoice id="VALUEMSGINPUT" name="newValue"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="propValue@propData">
+           <contents data:childData="hsmPrimaryDevices@propData">
+            <option data:text="optionText"
+                    data:value="optionValue"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="defaultclassselection">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageChoice id="VALUEMSGINPUT" name="newValue"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="propValue@propData">
+           <contents data:childData="classesList@propData">
+            <option data:text="optionText"
+                    data:value="optionValue"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <case name="bundleinput">
+        <tableLayout width="100%">
+         <contents>
+          <rowLayout>
+           <contents>
+            <messageStyledText data:prompt="TYPE@strings"
+                               data:text="propType@propData"
+                               styleClass="OraDataText"/>
+           </contents>
+          </rowLayout>
+
+          <rowLayout>
+           <contents>
+            <header data:text="VALUE@strings">
+             <contents>
+              <styledText data:text=
+                          "DOMAIN_INNER_PROPERTY_BUNDLE_INSTRUCTION@strings"
+                          styleClass="OraInstructionText"/>
+
+              <!-- Table for nested propertybundle value -->
+
+              <table name="PropertyValueTable"
+                     id="table_PropertyValueTable"
+                     partialRenderMode="self"              
+                     width="100%"
+                     data:summary="INNER_PROPERTIES_TABLE_SUMMARY@strings"
+                     data:alternateText="NO_ITEMS_FOUND@strings"
+                     data:tableData="bundleData@propData"
+                     data:columnHeaderData="column@tableColumnHeaderData"
+                     data:value="startingCount@propData"
+                     data:maxValue="totalCount@propData"
+                     data:blockSize="blockSize@propData"
+                     showAll="yes"
+                     formSubmitted="true" >
+
+               <columnHeaderStamp>
+                <sortableHeader data:text="text" data:value="value">
+                 <boundAttribute name="sortable">
+                  <defaulting>
+                   <dataObject data:select="value" source="sortColumnHeader"/>
+                   <dataObject data:source="(value)@sortColumnHeader"/>
+                   <dataObject select="sort"/>
+                  </defaulting>
+                 </boundAttribute>
+                </sortableHeader>
+               </columnHeaderStamp>
+
+               <tableFormat tableBanding="rowBanding"/>
+
+               <tableSelection>
+                <multipleSelection data:shortDesc="REMOVE@strings">
+                 <contents>
+                  <submitButton data:text="REMOVE@strings"
+                                ctrl:event="removeInnerProperty" />
+                 </contents>
+                </multipleSelection>
+               </tableSelection>
+
+               <tableActions>
+                 <submitButton data:text="ADD@strings"
+                         ctrl:event="addInnerProperty"/>
+               </tableActions>
+
+               <contents>
+                <link data:text="nestedPropName"
+                      data:destination="nestedEditDestination"/>
+
+                <styledText data:text="nestedPropType" />
+
+                <switcher data:childName="nestedViewType"
+                          defaultCase="unsupportedview">
+                 <case name="scalarview">
+                  <styledText data:text="nestedPropValue" />
+                 </case>
+
+                 <case name="unsupportedview">
+                  <styledText styleClass="OraErrorText"
+                              data:text="UNSUPPORTED@strings" />
+                 </case>
+                </switcher>
+
+                <formValue name="hiddenNestedPropName"
+                           data:value="nestedPropName"/>
+
+               </contents>
+              </table>
+
+             </contents>
+            </header>
+           </contents>
+          </rowLayout>
+         </contents>
+        </tableLayout>
+       </case>
+
+       <!-- for String-Array datatype -->
+
+       <case name="arrayinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+
+          <styledText styleClass="OraPromptText"
+                      data:text="VALUE@strings" />
+          <shuttle name="editArray"
+                   reorderable="true">
+           <!-- ADD BUTTON -->
+           <filter>
+            <tableLayout>
+             <contents>
+              <rowLayout>
+               <contents>
+                <messageTextInput id="VALUEMSGINPUT" 
+                         name="editStringArrayValue"
+                         data:shortDesc="ADD_A_VALUE@strings"
+                         columns="20"/>
+                <spacer width = "5"/>
+                <button data:text="ADD@strings">
+                 <boundAttribute name = "destination">
+                  <concat>
+                   javascript:addOption('editStringArrayValue',
+                                        'editArray')
+                  </concat>
+                 </boundAttribute>
+                </button>
+               </contents>
+              </rowLayout>
+             </contents>
+            </tableLayout>
+           </filter>
+
+           <!-- String Array list display -->
+           <leading>
+            <list multiple="true"
+                  data:shortDesc="ENUM_LIST@strings">
+             <contents data:childData="VALUE@propData">
+              <option data:text="optionTextString"
+                      data:value="optionValueString" />
+             </contents>
+            </list>
+           </leading>
+
+           <!-- REMOVE BUTTON -->
+           <leadingFooter>
+            <button data:text = "REMOVE@strings">
+             <boundAttribute name = "destination">
+              <concat>
+               javascript:removeSelected('editArray')
+              </concat>
+             </boundAttribute>
+            </button>
+           </leadingFooter>
+          </shuttle>
+
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+
+       <case name="unsupportedinput">
+        <labeledFieldLayout labelWidth="30%" fieldWidth="70%">
+         <contents>
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="propType@propData"
+                             styleClass="OraDataText"/>
+          <messageStyledText data:prompt="VALUE@strings"
+                             data:text="UNSUPPORTED@strings"
+                             styleClass="OraErrorText"/>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+      </switcher>
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.EditDomainPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.EditDomainPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <event name="editProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.EditDomainPropertyData"
+           method="doEditProperty"/>
+  </event>
+
+  <event name="addInnerProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.EditDomainPropertyData"
+           method="addInnerProperty"/>
+  </event>
+
+  <event name="removeInnerProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.EditDomainPropertyData"
+           method="removeInnerProperty"/>
+  </event>
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

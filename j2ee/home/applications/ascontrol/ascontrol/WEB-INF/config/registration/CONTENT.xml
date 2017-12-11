@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logs xmlns="http://www.oracle.com/iAS/EMComponent/ojdl">
+  <log path="content/log/ContentConfig.log" componentId="CONTENT">
+    <logviewer ComponentType="Content DB"
+               ComponentName="ID_VLOGS_CONFIG_ASSIST@oracle.sysman.ias.studio.logging.msg.LoggingMsg"
+               LogType="CONFIGURATION" />
+  </log>
+
+  <log path="content/log/changehostname.log" componentId="CONTENT">
+    <logviewer ComponentType="Content DB"
+               ComponentName="ID_VLOGS_CONFIGURATION@oracle.sysman.ias.studio.logging.msg.LoggingMsg"
+               LogType="CONFIGURATION" />
+  </log>
+</logs> 

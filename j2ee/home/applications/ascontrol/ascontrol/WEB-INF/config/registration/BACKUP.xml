@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logs xmlns="http://www.oracle.com/iAS/EMComponent/ojdl">
+    <log path="backup_restore/logs/%*%.log" componentId="BACKUP">
+        <logviewer ComponentName="Backup/Recovery" LogType="TRACE">
+            <property name="SEARCH_DISABLED" value="true"/>
+        </logviewer>
+    </log>
+</logs>

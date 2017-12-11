@@ -1,0 +1,634 @@
+<html>
+
+
+
+<head>
+
+<meta http-equiv="Content-Language" content="en-us">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+
+<meta name="ProgId" content="FrontPage.Editor.Document">
+
+<title>Oracle Portal Tools Release Notes 10.1.3.2.0</title>
+
+
+
+<STYLE>
+
+
+
+      A:link { 
+
+        COLOR: #663300; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff 
+
+      }
+
+
+
+      A:active {
+
+        COLOR: #ff6600; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A:visited {
+
+        COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A.navigation:link {
+
+        FONT-SIZE: 65%; COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A.navigation:active {
+
+        FONT-SIZE: 65%; COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      A.navigation:visited {
+
+        FONT-SIZE: 65%; COLOR: #996633; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      BODY {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      P {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      LI {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      UL {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      OL {
+
+        FONT-SIZE: 11pt; COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H1 {
+
+        BORDER-RIGHT: #cccc99 0px solid; 
+
+        BORDER-TOP: #cccc99 0px solid; 
+
+        FONT-SIZE: 170%; 
+
+        BORDER-LEFT: #cccc99 0px solid; 
+
+        WIDTH: 100%; 
+
+        COLOR: #336699; 
+
+        BORDER-BOTTOM: #cccc99 2px solid; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H2 {
+
+        BORDER-RIGHT: #cccc99 0px solid; 
+
+        BORDER-TOP: #cccc99 0px solid; 
+
+        FONT-SIZE: 130%; 
+
+        BORDER-LEFT: #cccc99 0px solid; 
+
+        WIDTH: 100%; 
+
+        COLOR: #336699; 
+
+        BORDER-BOTTOM: #cccc99 2px solid; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H3 {
+
+        FONT-SIZE: 110%; 
+
+        WIDTH: 100%; 
+
+        COLOR: #336699; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      H4 {
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 11pt; 
+
+        WIDTH: 100%; 
+
+        COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      .CODE {
+
+        COLOR: #336699; 
+
+        FONT-FAMILY: "Courier New", "Courier", "monospace"
+
+      }
+
+
+
+      CODE.nocolor {
+
+        FONT-FAMILY: "Courier New", "Courier", "monospace"
+
+      }
+
+  
+
+      P.indent {
+
+        TEXT-INDENT: 9%
+
+      }
+
+
+
+      TABLE.borders {
+
+        BORDER-RIGHT: medium none; 
+
+        BORDER-TOP: medium none; 
+
+        BORDER-LEFT: medium none; 
+
+        BORDER-BOTTOM: medium none
+
+      }
+
+
+
+      TR {
+
+        VERTICAL-ALIGN: top; 
+
+        TEXT-ALIGN: left
+
+      }
+
+
+
+      TH {
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 11pt; 
+
+        COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      TD {
+
+        FONT-SIZE: 11pt; 
+
+        COLOR: #000000; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      .mediumtext { FONT-SIZE: 80% }
+
+      .smalltext { FONT-SIZE: 75% }
+
+      .tinytext { FONT-SIZE: 70% }
+
+
+
+      P.RelatedTopics {
+
+        DISPLAY: block; 
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 125%; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffcc
+
+      }
+
+
+
+      P.note {
+
+        DISPLAY: block; 
+
+        FONT-SIZE: 95%; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+
+      }
+
+
+
+      P.warning {
+
+        DISPLAY: block; 
+
+        FONT-SIZE: 95%; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+
+      }
+
+
+
+      PRE {
+
+        FONT-SIZE: 95%; 
+
+        FONT-FAMILY: "Courier New", Courier, mono
+
+      }
+
+ 
+
+      UL {
+
+        LIST-STYLE-POSITION: outside
+
+      }
+
+  
+
+      OL {
+
+        LIST-STYLE-POSITION: outside
+
+      }
+
+
+
+      .GUITag {
+
+        FONT-WEIGHT: bold; 
+
+        FONT-SIZE: 95%; 
+
+        FONT-STYLE: normal; 
+
+        FONT-FAMILY: Arial, Helvetica, Geneva, sans-serif
+
+      }
+
+
+
+      .PropertyName {
+
+        FONT-STYLE: normal; 
+
+        FONT-FAMILY: "Courier New", Courier, mono
+
+      }
+
+
+
+      .GlossaryItem {
+
+        COLOR: #008080; 
+
+        FONT-FAMILY: Arial, Helvetica, sans-serif; 
+
+        BACKGROUND-COLOR: #ffffff
+
+      }
+
+
+
+      P.RelatedTopics:unknown {
+
+        content: "Related Topics"
+
+      }
+
+
+
+      P.note:unknown {
+
+        content: "Note"
+
+      }
+
+
+
+      P.warning:unknown {
+
+        content: "Warning"
+
+      }
+
+    </STYLE>
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+    <!-- =========================== -->
+
+    <!-- =========================== -->
+
+    <!-- ====== Title Section ====== -->
+
+    <!-- =========================== -->
+
+    <!-- =========================== -->
+
+
+
+    <h1><A name=top></A>Oracle Portal Tools Release Notes </h1>
+    <h3>For Release 10.1.3.2.0 <FONT size="4" color="#000000">
+  
+      </FONT></h3>
+    <!-- Document Versioning Section -->
+
+    <TABLE width="100%" border=0>
+
+      <TBODY>
+
+        <TR>
+
+          <TD width="15%"><B>Last Updated: </B></TD>
+
+          <TD width="85%">November 13 , 2006 </TD>
+        </TR>
+
+        <TR>
+
+          <TD width="15%"><B>Status:</B></TD>
+
+          <TD width="85%">Production</TD></TR>
+
+        <TR>
+
+          <TD vAlign=top width="15%"><B>Version:</B></TD>
+
+          <TD width="85%">
+
+            10.1.3.2.0</TD>
+
+        </TR>
+
+      </TBODY>
+
+    </TABLE>
+
+
+
+
+
+<h2>What's New? </h2>
+<p> <br>
+  <strong>Web Clipping Uses File System as Default Repository</strong></p>
+<p>The Web Clipping producer now uses the file system as default repository storage and can work without database dependency. You can change the file system path of the repository or use a database as the repository. Please see the <a href="http://download.oracle.com/docs/cd/B32110_01/webcenter.1013/b31074/toc.htm">Oracle WebCenter Framework Developer's Guide</a> for details.&nbsp;</p>
+<p><strong>Portal Tools Uses the Portlet Consumer Application Cache</strong></p>
+<p>Both the OmniPortlet and Web Clipping producers now use the portlet consumer application cache, and thus you no longer need to install the Oracle Application Server Web Cache with the portlet producers.</p>
+<p><strong>Default OmniPortlet File Preference Store Path Changed</strong></p>
+<p>The default OmniPortlet File Preference Store path has changed from:</p>
+<p class="CODE">{ORACLE_HOME}/j2ee/OC4J_Portal/applications/portalTools/omniPortlet/WEB-INF/providers/omniPortlet</p>
+<p>To:</p>
+<p class="CODE">{ORACLE_HOME}/portal/portletdata/tools/omniPortlet</p>
+<p><strong>Note</strong>: The new path is outside of J2EE applications directory, so that deploying the Portal Tools EAR file does not overwrite your OmniPortlet customizations.</p>
+<p>You can change the File Preference Store path using the<span class="PropertyName"> &lt;rootDirectory&gt; </span>tag in OmniPortlet&rsquo;s <span class="PropertyName">provider.xml</span> file: </p>
+<p class="CODE">&nbsp;&nbsp; &lt;preferenceStore class=&quot;oracle.webdb.reformlet.ReformletFilePreferenceStore&quot;&gt;</p>
+<p class="CODE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;name&gt;omniPortletprefStore&lt;/name&gt;</p>
+<p class="CODE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;useHashing&gt;true&lt;/useHashing&gt;</p>
+<p class="CODE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;rootDirectory&gt;${oracle.home}/portal/portletdata/tools/omniPortlet&lt;/rootDirectory&gt;</p>
+<p> <span class="CODE">&nbsp;&nbsp;&lt;/preferenceStore&gt;</span></p>
+<p><strong>OmniPortlet Moves to Thick BI Graph Beans</strong></p>
+<p>OmniPortlet moves from Thin BI Graph Beans to Thick BI Graph Beans for its Chart layout. The Thick BI Graph Beans implementation generates the same output as the Thin BI Graph Bean..To use Thin BI Graph Beans for charting, simply copy the Thin Graph Beans libraries to:</p>
+<blockquote>
+  <p class="CODE">${ORACLE_HOME}/bibeans/lib/bicmn.jar</p>
+  <p class="CODE">${ORACLE_HOME}/bibeans/lib/bicmn-nls.zip</p>
+  <p class="CODE">${ORACLE_HOME}/bibeans/lib/bipres.jar</p>
+  <p class="CODE">${ORACLE_HOME}/bibeans/lib/bipres-nls.zip</p>
+</blockquote>
+<p><strong>New Sample Portlet Producer</strong></p>
+<p>Portal Tools  includes a sample portlet producer, which contains sample portlets created with OmniPortlet for demonstration purposes only. You can access this new Sample Portlet Producer via the Portal Tools Welcome Page. Note, these sample portlets reply on public web sites to provide data feed. Portlet timeout might occur when network access to these web sites is difficult.</p>
+<p><strong>Remove Edit links in Test Page</strong></p>
+<p>The OmniPortlet and Web Clipping test pages no longer provide links to the Proxy and Repository editing screens. Administrators must manually edit the provider.xml files to change proxy and repository settings. Please see the <a href="http://download.oracle.com/docs/cd/B32110_01/webcenter.1013/b31074/toc.htm">Oracle WebCenter Framework Developer's Guide</a> for details.</p>
+<p><strong>JCA Sample Portlet Removed</strong></p>
+<p>This release of Portal Tools does not contain the JCA Sample Portlet. </p>
+<h2>Known Issues </h2>
+<p><strong> PDK-Java Portlet Event Is Not Supported in Oracle WebCenter Framework</strong></p>
+<p>Oracle WebCenter Framework does not support portlet events of portlets you consume in your WebCenter application. After you add OmniPortlet to a JSF page, do not specify events when you define the OmniPortlet layout or when you customize the OmniPortlet instance.</p>
+<p><strong>Simple Parameter Form Not Usable in a WebCenter Application</strong></p>
+<p>Since the WebCenter framework does not support PDK-Java portlet events, the Simple Parameter Form is not usable in a WebCenter application.</p>
+<p><strong>Must Render inside iFrame in JSF Page</strong></p>
+<p>iFrame is required for OmniPortlet and Web Clipping to function correctly when rendered on a JSF page. After you add OmniPortlet or Web Clipping to a JSF page, display the Property Inspector for the portlet tag, and ensure the <span class="PropertyName">RenderPortletInIFrame</span> property is set to <span class="CODE">true</span>.</p>
+<p><strong>Cannot Display Customize/Personalize UI inside View Mode</strong></p>
+<p>The Customize and Personalize user interface for OmniPortlet and Web Clipping do not work properly within the View mode of a JSF page. You must set the user interface to display as its own full page. To do so, after you add OmniPortlet or Web Clipping to a JSF page, display the Property Inspector for the portlet tag, and ensure the <span class="PropertyName">AllModesSharedScreen</span> property is set to <span class="CODE">false</span>.<br>
+  <!-- ====================================== -->
+  
+  <!-- ====== Revision History Section ====== -->
+  
+  <!-- ====================================== -->
+</p>
+<p><strong>Preview Images Not Updated in I.E. 7.0</strong></p>
+<p>If you use Internet Explorer 7.0, when you customize (i.e. edit-defaults) OmniPortlet, the preview images and some dynamic UI in View and Layout tabs cannot be updated while you select different layout type/sub-type. You need to switch to another tab and come back to View or Layout tab to see the update.</p>
+<HR>
+
+    
+
+    <TABLE width="100%" border=0>
+
+      <TBODY>
+
+        <TR vAlign=top>
+
+          <TD width="33%">
+
+            <FONT size=1>
+
+              Oracle Corporation<BR>World Headquarters<BR>
+
+              500 Oracle Parkway<BR>Redwood Shores, CA 94065, USA<BR>
+
+              <A href="http://www.oracle.com/">http://www.oracle.com/</A>
+
+            </FONT>
+
+          </TD>
+
+
+
+          <TD width="33%">
+
+            <FONT size=1>
+
+              Worldwide Inquiries:<BR>1-800-ORACLE1<BR>Fax 650.506.7200
+
+            </FONT>
+
+          </TD>
+
+
+
+          <TD width="34%">
+
+            <FONT size=1>
+
+              <A href="http://www.oracle.com/html/copyright.html">
+
+                Copyright and Corporate Info
+
+              </A>
+
+            </FONT>
+
+          </TD>
+
+        </TR>
+
+      </TBODY>
+
+    </TABLE>
+
+    
+
+    <XMP></XMP>
+
+
+
+</BODY>
+
+
+
+
+
+</html>
+

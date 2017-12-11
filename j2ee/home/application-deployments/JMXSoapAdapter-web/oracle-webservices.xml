@@ -1,0 +1,83 @@
+<oracle-webservices xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://xmlns.oracle.com/oracleas/schema/oracle-webservices-10_0.xsd">
+    <webservice-description name="JMXSoapAdapterService">
+        <port-component name="HttpSoap12">
+            <operations>
+                <operation name="bulkInvoke" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}bulkInvokeElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getAttribute" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getAttributeElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getAttributes" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getAttributesElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getAttributesTable" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getAttributesTableElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getDMSTable" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getDMSTableElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getDMSTableNames" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getDMSTableNamesElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getStatistic" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getStatisticElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getStatistics" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getStatisticsElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="getStatisticsTable" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}getStatisticsTableElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="invoke" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}invokeElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="isRegistered" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}isRegisteredElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="queryDMSTable" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}queryDMSTableElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="queryNames" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}queryNamesElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="setAttribute" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}setAttributeElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+                <operation name="setAttributes" input="{http://service.soapadapter.remote.jmx.j2ee.oracle/}setAttributesElement">
+                    <runtime>
+                        <auditing request="true" response="true" fault="true"/>
+                    </runtime>
+                </operation>
+            </operations>
+        </port-component>
+    </webservice-description>
+</oracle-webservices>

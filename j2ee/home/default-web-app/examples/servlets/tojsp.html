@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF">
+<p><font color="#0000FF"><a href="../../servlet/ToJSPServlet"><img src="../images/execute.gif" align="right" border="0"></a><a href="index.html"><img src="../images/return.gif" width="24" height="24" align="right" border="0"></a></font></p>
+<h3>Source Code for ToJSPServlet Example<font color="#0000FF"><br>
+  </font> </h3>
+<font color="#0000FF"></font>
+<pre><font color="#0000FF">import</font> javax.servlet.*;
+<font color="#0000FF">import</font> javax.servlet.http.*;
+
+<font color="#0000FF">public class</font> ToJSPServlet <font color="#0000FF">extends</font> HttpServlet {
+
+    <font color="#0000FF">public void</font> doGet(HttpServletRequest request, HttpServletResponse response)
+    {
+        try
+        {
+             // Set the attribute and Forward to hello.jsp
+             request.setAttribute("servletName", "ServletToJSP");
+             getServletConfig().getServletContext().getRequestDispatcher("/examples/jsp/jsptoserv/hello.jsp").forward(request, response);
+        }
+        catch(Exception ex)
+        {
+                ex.printStackTrace();
+        }
+    }
+}</pre>
+</body>
+</html>

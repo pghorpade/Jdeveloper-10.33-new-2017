@@ -1,0 +1,85 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="overviewData">
+     <method class="oracle.ifs.admin.em.ias.uix.ChooseExtensionLovData"
+             method="getOverviewData"/>
+    </data>
+
+    <data name="extensionData">
+     <method class="oracle.ifs.admin.em.ias.uix.ChooseExtensionLovData"
+             method="getExtensionData"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout data:title="pageHeader@overviewData" >
+
+     <!-- ... Page Buttons  ... -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                onClick="top.close();" />
+        <button data:text="SELECT@strings"
+                onClick="mySelect();" />
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!--.......... Script for LOV field -->
+
+      <script>
+       <contents>
+        function mySelect()
+        {
+          var choice = document.iFSForm.lovChoice;
+          top.myData = choice.options[choice.selectedIndex].value;
+          top.close();
+        }
+       </contents>
+      </script>
+
+      <!-- .......... Entry Information .......... -->
+
+      <messageChoice name="lovChoice"
+                     data:prompt="FORMAT_EXTENSION_TEXT@strings">
+       <contents data:childData="choices@extensionData">
+        <option data:text="optionTextString" 
+                data:value="optionValueString"/>
+       </contents>
+      </messageChoice>
+     
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <null/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

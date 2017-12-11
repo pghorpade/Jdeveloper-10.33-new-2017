@@ -1,0 +1,74 @@
+<!-- For reference only:  
+sample login module configuration for an appliation callerInfo 
+associated with an Active Directory. -->
+
+<jazn-loginconfig>
+	<application>
+		<name>callerInfo</name>
+		<login-modules>
+			<login-module>
+				<class>oracle.security.jazn.login.module.LDAPLoginModule</class>
+				<control-flag>required</control-flag>
+				<options>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.url</name>
+						<value>ldap://wwssopc1.us.oracle.com:389</value>
+					</option>
+					<option>	
+						<name>oracle.security.jaas.ldap.provider.user</name>
+						<value>cn=administrator,cn=users,dc=sso2003,dc=net</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.credential</name>
+						<value>!welcome1</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.provider.type</name>
+						<value>active directory</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.name.attribute</name>
+						<value>sAMAccountName</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.object.class</name>
+						<value>inetOrgPerson</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.searchbase</name>
+						<value>cn=users,dc=sso2003,dc=net</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.user.searchscope</name>
+						<value>subtree</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.name.attribute</name>
+						<value>cn</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.object.class</name>
+						<value>group</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.searchbase</name>
+						<value>cn=users,dc=sso2003,dc=net</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.role.searchscope</name>
+						<value>subtree</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.member.attribute</name>
+						<value>member</value>
+					</option>
+					<option>
+						<name>oracle.security.jaas.ldap.membership.searchscope</name>
+						<value>direct</value>
+					</option>
+					
+				</options>
+			</login-module>
+		</login-modules>
+	</application>
+</jazn-loginconfig>

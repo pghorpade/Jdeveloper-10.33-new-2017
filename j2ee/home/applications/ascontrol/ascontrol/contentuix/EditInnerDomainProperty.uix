@@ -1,0 +1,174 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <!-- data provider for the property -->
+    <data name="pageData">
+     <method class=
+             "oracle.ifs.admin.em.ias.uix.EditInnerDomainPropertyData"
+             method="getPropertyData" />
+    </data>
+        
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout initialFocusComponentId="VALUEMSGINPUT">
+     <boundAttribute name="title">
+      <messageFormat data:format="EDIT_PROPERTY_FOR_EDIT_HEADER@strings"
+                     fast="true">
+       <dataObject select="DPNAME" source="pageData"/>
+      </messageFormat>
+     </boundAttribute>
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                data:destination="cancelDestination@pageData"/>
+        <submitButton data:text="OK@strings"
+                      ctrl:event="updateInnerProperty"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ........ Content Body ........ -->
+
+      <switcher childName="textinput"
+                data:childName="INPUTTYPE@pageData">
+
+       <!-- for String datatype -->
+
+       <case name="textinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageTextInput id="VALUEMSGINPUT" name="VALUE" columns="60"
+                            data:prompt="VALUE@strings"
+                            data:text="VALUE@pageData"/>
+
+          <formValue name="NAME" data:value="NAME@pageData"/>
+          <formValue name="TYPE" data:value="TYPE@pageData"/>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for Integer, Long, Double datatypes -->
+      
+       <case name="numberinput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <switcher data:childName="TYPENAME@pageData"
+                    defaultCase="wholenumber">
+           <case name="DOUBLE">
+            <messageTextInput id="VALUEMSGINPUT" name="VALUE" 
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="VALUE@pageData">
+             <onSubmitValidater>
+              <decimal />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+           <case name="wholenumber">
+            <messageTextInput id="VALUEMSGINPUT" name="VALUE" 
+                              columns="10"
+                              data:prompt="VALUE@strings"
+                              data:text="VALUE@pageData">
+             <onSubmitValidater>
+              <decimal maxScale="0" />
+             </onSubmitValidater>
+            </messageTextInput>
+           </case>
+          </switcher>
+          <formValue name="NAME" data:value="NAME@pageData"/>
+          <formValue name="TYPE" data:value="TYPE@pageData"/>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+
+       <!-- for Boolean datatype -->
+      
+       <case name="booleaninput">
+        <labeledFieldLayout labelWidth="20%" fieldWidth="80%">
+         <contents>
+          <messageStyledText data:prompt="NAME@strings"
+                             data:text="NAME@pageData"
+                             styleClass="OraDataText"/>
+
+          <messageStyledText data:prompt="TYPE@strings"
+                             data:text="TYPENAME@pageData"
+                             styleClass="OraDataText"/>
+ 
+          <messageChoice id="VALUEMSGINPUT" name="VALUE"
+                         data:prompt="VALUE@strings"
+                         data:selectedValue="VALUE@pageData">
+           <contents>
+            <option text="true" value="true"/>
+            <option text="false" value="false"/>
+           </contents>
+          </messageChoice>
+          <formValue name="NAME" data:value="NAME@pageData"/>
+          <formValue name="TYPE" data:value="TYPE@pageData"/>
+         </contents>
+        </labeledFieldLayout>
+       </case>
+ 
+       <!-- everything else is unsupported -->
+      
+       <case name="unsupportedinput">
+        <styledText styleClass="OraErrorText"
+                    data:text="UNSUPPORTED@strings" />
+       </case>
+
+      </switcher>
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.EditInnerDomainPropertyData"
+           method="doLoad"/>
+  </event>
+
+  <event name="updateInnerProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.EditInnerDomainPropertyData"
+           method="updateInnerProperty"/>
+  </event>
+ </ctrl:handlers>
+
+</ctrl:page>

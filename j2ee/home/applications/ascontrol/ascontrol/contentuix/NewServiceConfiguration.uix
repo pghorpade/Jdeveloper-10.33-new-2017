@@ -1,0 +1,258 @@
+<ctrl:page xmlns="http://xmlns.oracle.com/uix/ui"
+           xmlns:ui="http://xmlns.oracle.com/uix/ui"
+           xmlns:ctrl="http://xmlns.oracle.com/uix/controller"
+           xmlns:html="http://www.w3.org/TR/REC-html40"
+           xmlns:ifsemui="http://xmlns.oracle.com/ifs/emui"
+           xmlns:data="http://xmlns.oracle.com/uix/ui">
+
+ <templates>
+  <templateImport source="/contentuix/template/OemPageLayout.uit"/>
+ </templates>
+
+ <ctrl:content>
+
+  <dataScope>
+
+   <provider>
+    <data name="linkDestinationData">
+     <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+             method="getLinkDestinationData"/>
+    </data>
+
+    <data name="newSvConfigData">
+     <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+             method="getNewServiceConfigData" />
+    </data>
+
+    <data name="aclData">
+     <method class="oracle.ifs.admin.em.ias.uix.SystemAclData"
+             method="getAclData" />
+    </data>
+
+    <!-- data provider for serviceconfiguration properties table -->
+    <data name="scPropTableColumnHeaderData">
+     <inline>
+      <column data:text="NAME@strings" sort="yes" value="name"/>
+      <column data:text="TYPE@strings" sort="yes" value="type"/>
+      <column data:text="VALUE@strings" sort="no" value="value"/>
+     </inline>
+    </data>
+
+    <data name="sortColumnHeader">
+     <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+             method="getSortedColumnHeader"/>
+    </data>
+
+    <data name="strings">
+     <bundle class="oracle.ifs.admin.em.ias.resources.ContentEmResources"/>
+    </data>
+   </provider>
+
+   <contents>
+    <ifsemui:oemPageLayout data:title="pageHeader@linkDestinationData"
+                           initialFocusComponentId="NAMEMSGINPUT">
+
+     <!-- ........... Page Buttons .............. -->
+
+     <pageButtons>
+      <pageButtonBar>
+       <contents>
+        <button data:text="CANCEL@strings"
+                data:destination="cancelDestination@linkDestinationData"/>
+        <submitButton data:text="OK@strings"
+                      ctrl:event="newServiceConfig"/>
+       </contents>
+      </pageButtonBar>
+     </pageButtons>
+
+     <contents>
+
+      <!-- ...... Instruction Text ...... -->
+
+      <styledText styleClass="OraInstructionText"
+                  data:text="NEW_OBJECT_INSTRUCTION@strings"/>
+            
+      <spacer height="10" />
+   
+      <!-- .......... General .......... -->
+
+      <header data:text="GENERAL@strings">
+       <contents>
+        <labeledFieldLayout vAlign="top" width="60%">
+         <contents>
+          <messageTextInput id="NAMEMSGINPUT"
+                            name="NAME" 
+                            columns="60"
+                            required="yes"
+                            data:prompt="NAME@strings"
+                            data:text="NAME@newSvConfigData"/>
+
+          <messageTextInput name="DESCRIPTION"
+                            rows="3"
+                            columns="60"
+                            data:prompt="DESCRIPTION@strings"
+                            data:text="DESCRIPTION@newSvConfigData"/>
+
+          <messageChoice name="ACCESS_CONTROL"
+                         data:prompt="ACCESS_CONTROL@strings"
+                         data:selectedValue="ACCESS_CONTROL@newSvConfigData">
+           <contents data:childData="acls@aclData">
+            <option data:text="optionText" 
+                    data:value="optionValue"/>
+           </contents>
+          </messageChoice>
+         </contents>
+        </labeledFieldLayout>
+       </contents>
+      </header>
+
+      <!-- ....... ServiceConfiguration Properties Table ....... -->
+
+      <header data:text="PROPERTIES_HEADER@strings">
+       <contents>
+       
+       <!-- Table Filter -->
+        <dataScope>
+         <provider>
+          <data name="tableIdData">
+           <inline tableId="table_NewSvConfigPropTable"/>
+          </data>
+         </provider>
+         <contents>
+          <include ctrl:node="include/TableFilterPPR"/>
+          <formValue name="table_level" value="inner"/>
+         </contents>
+        </dataScope>
+
+        <table name="NewSvConfigPropTable"
+               id="table_NewSvConfigPropTable"
+               partialRenderMode="self"
+               width="100%"
+               data:summary="SERVICE_CONFIGURATION_TABLE_SUMMARY@strings"
+               data:alternateText="NO_ITEMS_FOUND@strings"
+               data:tableData="row@newSvConfigData"
+               data:columnHeaderData="column@scPropTableColumnHeaderData"
+               data:value="startingCount@newSvConfigData"
+               data:maxValue="totalCount@newSvConfigData"
+               data:blockSize="blockSize@newSvConfigData"
+               showAll="yes"
+               formSubmitted="true">
+
+         <columnHeaderStamp>
+          <sortableHeader data:text="text" data:value="value">
+           <boundAttribute name="sortable">
+            <defaulting>
+              <dataObject data:select="value" source="sortColumnHeader"/>
+              <dataObject data:source="(value)@sortColumnHeader"/>
+              <dataObject select="sort"/>
+            </defaulting>
+           </boundAttribute>
+          </sortableHeader>
+         </columnHeaderStamp>
+
+         <tableFormat tableBanding="rowBanding"/>
+
+         <tableSelection>
+          <singleSelection data:shortDesc="SELECT@strings">
+           <contents>
+            <submitButton data:text="REMOVE@strings"
+                          ctrl:event="removeProperty" />
+           </contents>
+          </singleSelection>
+         </tableSelection>
+                   
+       <tableActions>
+         <submitButton data:text="ADD@strings"
+                       ctrl:event="addProperty"/>
+       </tableActions>
+       
+         <contents>
+          <link data:text="propName">
+           <primaryClientAction>
+	    <fireAction event="editProperty">
+             <parameters>
+              <parameter key="PropertyName" data:value="propName"/>
+             </parameters>
+            </fireAction>
+           </primaryClientAction>
+          </link>
+         <styledText data:text="propType" />
+          <switcher childName="scalarview"
+                    data:childName="viewType">
+           <case name="scalarview">
+            <styledText data:text="propValue" />
+           </case>
+           <case name="arrayview">
+            <image data:source="detailsIcon"
+                   data:destination="detailsDestination"
+                   data:shortDesc="PROPERTYDETAILS_ICON_TOOLTIP@strings" />
+           </case>
+           <case name="unsupportedview">
+            <styledText styleClass="OraErrorText"
+                        data:text="UNSUPPORTED@strings" />
+           </case>
+          </switcher>
+          <formValue name="hiddenPropertyName"
+                     data:value="propName" />
+         </contents>
+        </table>
+
+       </contents>
+      </header>
+
+     </contents>
+    </ifsemui:oemPageLayout>
+   </contents>
+  </dataScope>
+ </ctrl:content>
+
+ <ctrl:handlers xmlns="http://xmlns.oracle.com/uix/controller">
+  <event name="doLoad">
+   <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <event name="newServiceConfig">
+   <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+           method="doNewServiceConfig"/>
+  </event>
+
+  <event name="removeProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+           method="doRemoveProperty"/>
+  </event>
+
+  <event name="addProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+           method="doAddProperty"/>
+  </event>
+
+  <event name="editProperty">
+   <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+           method="doEditProperty"/>
+  </event>
+
+  <!-- table navigator bar event -->
+  <event name="goto">
+   <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+           method="doLoad"/>
+  </event>
+
+  <!-- default -->
+  <event name="*">
+   <null/>
+  </event>
+
+  <event name="doSearch">
+   <method class="oracle.ifs.admin.em.ias.uix.NewServiceConfigurationData"
+           method="doSearch"/>
+  </event> 
+
+  <event name="sort">
+   <method class="oracle.ifs.admin.em.ias.uix.TableSortData"
+          method="doSortEvent"/>
+  </event>
+
+ </ctrl:handlers>
+
+</ctrl:page>

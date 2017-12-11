@@ -1,0 +1,65 @@
+package edu.ucla.library.digital.dlcs.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class QaStatus {
+
+	private List projectItemsCollection;
+	private Long statusidPk;
+	private String status;
+	private String description;
+
+public QaStatus() {
+	super();
+	this.projectItemsCollection = new ArrayList();
+}
+
+public void addProjectItems(int index, ProjectItems aProjectItems) {
+	this.projectItemsCollection.add(index, aProjectItems);
+	aProjectItems.setQaStatus(this);
+}
+
+public void addProjectItems(ProjectItems aProjectItems) {
+	this.projectItemsCollection.add(aProjectItems);
+	aProjectItems.setQaStatus(this);
+}
+
+public String getDescription() {
+	return this.description;
+}
+
+public List getProjectItemsCollection() {
+	return this.projectItemsCollection;
+}
+
+public String getStatus() {
+	return this.status;
+}
+
+public Long getStatusidPk() {
+	return this.statusidPk;
+}
+
+public void removeProjectItems(ProjectItems aProjectItems) {
+	this.projectItemsCollection.remove(aProjectItems);
+	aProjectItems.setQaStatus(null);
+}
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+public void setProjectItemsCollection(List projectItemsCollection) {
+	this.projectItemsCollection = projectItemsCollection;
+}
+
+public void setStatus(String status) {
+	this.status = status;
+}
+
+public void setStatusidPk(Long statusidPk) {
+	this.statusidPk = statusidPk;
+}
+
+}

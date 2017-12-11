@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<webcache>
+  <invalidation
+    host="%s_invalidation_host%"
+    port="%s_invalidation_port%"
+    authorization="invalidator:invalidator" />
+</webcache>

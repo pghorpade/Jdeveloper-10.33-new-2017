@@ -1,0 +1,18 @@
+<!-- This configuration file is for user who wants to plug in their own implementation of interface -->
+<!-- oracle.tip.tools.ide.pm.bpelgraph.editors.IVariableNameCreation to name the newly created variables -->
+<!-- By default, BPEL designer prvoides a simple implemntation where you can give the initial name for input variable -->
+<!-- output variable, regular variable and fault variable  -->
+<!-- Config -->
+<!-- attribute: class  ==> class name which implemenst IVariableNameCreation -->
+<!-- attribute: enable ==> "true" or "false"  -->
+
+<VariableNameCreation class="oracle.tip.tools.ide.pm.bpelgraph.editors.VariableNameCreationImpl" enable="false">
+	<!-- set Input  Variable Name:  InputVariable name="Input"  -->
+	<!-- set Output Variable Name:  OutputVariable name="Output"  -->
+	<!-- set Fault Variable Name:   FaultVariable name="Fault"  -->
+	<!-- set Variable Name:	     Variable name="Var"  -->
+	<InputVariable name="Input" />
+	<OutputVariable name="Output" />
+	<FaultVariable name="Fault" />
+	<Variable name="Var" />
+</VariableNameCreation>

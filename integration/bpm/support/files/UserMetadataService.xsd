@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://xmlns.oracle.com/bpel/workflow/userMetadata"
+            targetNamespace="http://xmlns.oracle.com/bpel/workflow/userMetadata"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0"
+            elementFormDefault="qualified"
+            xmlns:query="http://xmlns.oracle.com/bpel/workflow/taskQuery"
+            xmlns:user="http://xmlns.oracle.com/bpel/workflow/userMetadata"
+            xmlns:common="http://xmlns.oracle.com/bpel/workflow/common">
+
+  <xsd:annotation>
+  <xsd:appinfo>
+  <jaxb:schemaBindings>
+    <jaxb:package name="oracle.bpel.services.workflow.user.model"/>
+  </jaxb:schemaBindings>
+  </xsd:appinfo>
+  </xsd:annotation>
+
+  <xsd:import schemaLocation="WorkflowCommon.xsd"
+              namespace="http://xmlns.oracle.com/bpel/workflow/common"/>
+  <xsd:import schemaLocation="UserMetadata.xsd"
+              namespace="http://xmlns.oracle.com/bpel/workflow/userMetadata"/>
+
+  <xsd:element name="fault" type="faultType"/>
+
+  <xsd:element name="getVacationInfoRequest" type="participantRequestType"/>
+  <xsd:element name="setVacationInfoRequest" type="vacationInfoRequestType"/>
+
+  <xsd:element name="getRulesetInfoRequest" type="participantRequestType"/>
+  <xsd:element name="getRuleListRequest" type="participantRequestType"/>
+  <xsd:element name="getRuleDetailRequest" type="ruleIdRequestType"/>
+  <xsd:element name="createRuleRequest" type="ruleDetailRequestType"/>
+  <xsd:element name="updateRuleRequest" type="ruleDetailRequestType"/>
+  <xsd:element name="deleteRuleRequest" type="ruleIdRequestType"/>
+  <xsd:element name="increaseRulePriorityRequest" type="ruleIdRequestType"/>
+  <xsd:element name="decreaseRulePriorityRequest" type="ruleIdRequestType"/>
+
+  <xsd:element name="getUserViewListRequest" type="participantRequestType"/>
+  <xsd:element name="getGrantedViewListRequest" type="participantRequestType"/>
+  <xsd:element name="getStandardTaskViewListRequest" type="wfCtxRequestType"/>
+  <xsd:element name="getStandardTaskViewDetailsRequest" type="userTaskViewIdRequestType"/>
+  <xsd:element name="getInboxViewRequest" type="participantRequestType"/>
+  <xsd:element name="getUserTaskViewDetailRequest" type="userTaskViewIdRequestType"/>
+  <xsd:element name="createUserTaskViewRequest" type="userTaskViewDetailRequestType"/>
+  <xsd:element name="updateUserTaskViewRequest" type="userTaskViewDetailRequestType"/>
+  <xsd:element name="deleteUserTaskViewRequest" type="userTaskViewIdRequestType"/>
+  <xsd:element name="updateGrantedUserTaskViewRequest" type="grantedUserTaskViewRequestType"/>
+
+  <xsd:element name="getUserPreferencesRequest" type="participantRequestType"/>
+  <xsd:element name="setUserPreferencesRequest" type="userPreferencesRequestType"/>
+  <xsd:element name="getPublicPreferencesRequest" type="participantRequestType"/>
+  <xsd:element name="setPublicPreferencesRequest" type="userPreferencesRequestType"/>
+
+  <xsd:complexType name="participantRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element name="participant" type="common:principleRefType"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="faultType">
+    <xsd:sequence>
+      <xsd:element name="faultInfo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="vacationInfoRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element ref="user:vacationInfo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="userTaskViewIdRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element name="viewId" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="userTaskViewDetailRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element ref="user:userViewDetail"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="grantedUserTaskViewRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element ref="user:viewGrant"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="userPreferencesRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element ref="user:userPreferences"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ruleIdRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element name="ruleId" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ruleDetailRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+      <xsd:element ref="user:ruleDetail"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="wfCtxRequestType">
+    <xsd:sequence>
+      <xsd:element ref="common:workflowContext"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
